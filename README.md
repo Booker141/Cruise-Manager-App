@@ -2,4 +2,4 @@
 Proyecto Ingeniería Web sobre cruceros de lujo
 
 Componentes del grupo:
-Sergio García Navarro
+Sergio García Navarro, Juan Carlos Lauzara Duro, juan Manuel Moreno de la Pascua, Manuel Jesús Mateo del Pino
