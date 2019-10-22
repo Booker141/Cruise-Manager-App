@@ -12,6 +12,18 @@ public class Cliente
 	private String cDireccion;
 	private String cCiudad;
 
+	
+	public Cliente(String cNombre, String cApellidos, String cDNI, int cTelefono, LocalDate cFchNac, String cDireccion,
+			String cCiudad) {
+		this.cNombre = cNombre;
+		this.cApellidos = cApellidos;
+		this.cDNI = cDNI;
+		this.cTelefono = cTelefono;
+		this.cFchNac = cFchNac;
+		this.cDireccion = cDireccion;
+		this.cCiudad = cCiudad;
+	}
+
 	public String getcNombre() {
 		return cNombre;
 	}

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Barco 
 {
+
 	private String bNombre;
 	private String bCodigo;
 	private String bCodCamarote;
@@ -14,6 +15,20 @@ public class Barco
 	private String bOrigen;
 	private String bDestino;
 
+	public Barco(String bNombre, String bCodigo, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
+			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino) {
+		
+		this.bNombre = bNombre;
+		this.bCodigo = bCodigo;
+		this.bCodCamarote = bCodCamarote;
+		this.bAforoPasajeros = bAforoPasajeros;
+		this.bAforoTripulantes = bAforoTripulantes;
+		this.bPeso = bPeso;
+		this.bFchPuestaServicio = bFchPuestaServicio;
+		this.bOrigen = bOrigen;
+		this.bDestino = bDestino;
+	}
+	
 	public String getbNombre() {
 		return bNombre;
 	}
