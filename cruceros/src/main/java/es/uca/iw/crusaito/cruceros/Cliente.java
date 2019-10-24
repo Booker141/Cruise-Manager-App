@@ -1,4 +1,4 @@
-package es.uca.iw.crusaito.cruceros
+package es.uca.iw.crusaito.cruceros;
 
 import java.time.LocalDate;
 
