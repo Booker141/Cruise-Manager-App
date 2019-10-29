@@ -17,5 +17,4 @@ public class MainView extends VerticalLayout {
                 e -> Notification.show(bean.getMessage()));
         add(button);
     }
-
 }
