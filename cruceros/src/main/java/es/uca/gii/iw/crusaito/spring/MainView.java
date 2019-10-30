@@ -8,7 +8,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -22,50 +21,44 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @Theme(Lumo.class)
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")
 public class MainView extends VerticalLayout {
-	
-	
+	private static final long serialVersionUID = 1L; // para evitar el warning del serial
 
-    public MainView(@Autowired MessageBean bean) {
-    	Button toggleButton = new Button("Tema oscuro", click -> {
-    	      ThemeList themeList = UI.getCurrent().getElement().getThemeList(); // 
+	public MainView(@Autowired MessageBean bean) {
+		Button toggleButton = new Button("Cambiar Tema", click -> {
+			ThemeList themeList = UI.getCurrent().getElement().getThemeList(); //
 
-    	      if (themeList.contains(Lumo.DARK)) { // 
-    	        themeList.remove(Lumo.DARK);
-    	      } else {
-    	        themeList.add(Lumo.DARK);
-    	      }
-    	    });
-    	
-    	TextField Tcodigo = new TextField("Código");
-    	add(Tcodigo);
-    	
-    	MenuBar menuBar = new MenuBar();
+			if (themeList.contains(Lumo.DARK)) { //
+				themeList.remove(Lumo.DARK);
+			} else {
+				themeList.add(Lumo.DARK);
+			}
+		});
+		add(toggleButton);
 
-        menuBar.setOpenOnHover(true);
+		TextField Tcodigo = new TextField("Código"); // esto para que?
+		add(Tcodigo);
 
-        Text selected = new Text("");
-        Div message = new Div(new Text("Selected: "), selected);
+		MenuBar menuBar = new MenuBar(); // Creacion del menu
+		menuBar.setOpenOnHover(true); // desplegar submenu sin click
 
-        MenuItem info = menuBar.addItem("Info");
-        MenuItem reservas = menuBar.addItem("Reservas");
-        MenuItem cuenta = menuBar.addItem("Mi perfil");
-        menuBar.addItem("Cerrar sesión", e -> selected.setText("Cerrar sesión"));
+		Text selected = new Text(""); // esto para que ?
+		Div message = new Div(new Text("Selected: "), selected); // y esto ?
 
-        SubMenu infoSubMenu = info.getSubMenu();
-        MenuItem consejos = infoSubMenu.addItem("Consejos");
-        MenuItem instalaciones = infoSubMenu.addItem("Instalaciones");
+		MenuItem info = menuBar.addItem("Info");
+		MenuItem reservas = menuBar.addItem("Reservas");
+		MenuItem cuenta = menuBar.addItem("Mi perfil");
+		menuBar.addItem("Cerrar sesión", e -> selected.setText("Cerrar sesión"));
+		add(menuBar);
 
-        SubMenu cuentasSubMenu = cuenta.getSubMenu();
-        cuentasSubMenu.addItem("Listar", e -> selected.setText("Listar"));
-        cuentasSubMenu.addItem("Añadir", e -> selected.setText("Añadir"));
+		SubMenu infoSubMenu = info.getSubMenu(); // Creacion del submenu de info
+		MenuItem consejos = infoSubMenu.addItem("Consejos");
+		MenuItem instalaciones = infoSubMenu.addItem("Instalaciones");
 
-
-        cuenta.getSubMenu().addItem("Editar perfil",
-                e -> selected.setText("Editar perfil"));
-        cuenta.getSubMenu().addItem("Configuración de privacidad",
-                e -> selected.setText("Configuración de privacidad"));
-    }
-    
-    
+		SubMenu cuentasSubMenu = cuenta.getSubMenu(); // Creacion del submenu de perfil
+		cuentasSubMenu.addItem("Listar", e -> selected.setText("Listar"));
+		cuentasSubMenu.addItem("Añadir", e -> selected.setText("Añadir"));
+		cuenta.getSubMenu().addItem("Editar perfil", e -> selected.setText("Editar perfil"));
+		cuenta.getSubMenu().addItem("Configuración de privacidad",
+				e -> selected.setText("Configuración de privacidad"));
+	}
 }
-	
