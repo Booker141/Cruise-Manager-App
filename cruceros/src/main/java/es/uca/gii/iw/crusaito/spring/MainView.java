@@ -1,26 +1,18 @@
 package es.uca.gii.iw.crusaito.spring;
 
-import java.io.File;
-
-import org.apache.catalina.webresources.FileResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.menubar.MenuBar;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -31,6 +23,7 @@ public class MainView extends VerticalLayout {
 	private static final long serialVersionUID = 1L; // para evitar el warning del serial
 
 	public MainView(@Autowired MessageBean bean) {
+		
 		Button toggleButton = new Button("Cambiar Tema", click -> {
 			ThemeList themeList = UI.getCurrent().getElement().getThemeList(); //
 
@@ -45,58 +38,48 @@ public class MainView extends VerticalLayout {
 		TextField Tcodigo = new TextField("Código"); // esto para que?
 		add(Tcodigo);
 		
-		MenuBar menuBar = new MenuBar(); // Creacion del menu
-		menuBar.setOpenOnHover(true); // desplegar submenu sin click
-
-		Text selected = new Text(""); // esto para que ?
-		Div message = new Div(new Text("Selected: "), selected); // y esto ?
+		//Inicio cabecera
 		
-		//Cabecera de la página
-		
-		Image barcoCabecera = new Image("frontend/img/pruebaBarcoHeader.jpg","foto"); //Imagen del barco de prueba
-		
-		MenuItem info = menuBar.addItem("Info");
-		MenuItem reservas = menuBar.addItem("Reservas");
-		MenuItem cuenta = menuBar.addItem("Mi perfil");
-		menuBar.addItem("Cerrar sesión", e -> selected.setText("Cerrar sesión"));
-		
-		Div separador = new Div();	//Separador vacío de la imagen y el menu
-		separador.setWidthFull();	//Anchura máxima para separarlos a cada esquina
-		
-		HorizontalLayout cabeceraHorizontal = new HorizontalLayout(barcoCabecera,separador,menuBar); //Caja horizontal de la cabecera
-		
-		cabeceraHorizontal.setWidthFull(); //Que ocupe el ancho de toda la página
-		cabeceraHorizontal.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN); //Alineación horizontal
-		cabeceraHorizontal.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.END); //Alineación vertical
-		
-		add(cabeceraHorizontal);
-
-		SubMenu infoSubMenu = info.getSubMenu(); // Creacion del submenu de info
-		MenuItem consejos = infoSubMenu.addItem("Consejos");
-		MenuItem instalaciones = infoSubMenu.addItem("Instalaciones");
-
-		SubMenu cuentasSubMenu = cuenta.getSubMenu(); // Creacion del submenu de perfil
-		cuentasSubMenu.addItem("Listar", e -> selected.setText("Listar"));
-		cuentasSubMenu.addItem("Añadir", e -> selected.setText("Añadir"));
-		cuenta.getSubMenu().addItem("Editar perfil", e -> selected.setText("Editar perfil"));
-		cuenta.getSubMenu().addItem("Configuración de privacidad",
-				e -> selected.setText("Configuración de privacidad"));
-		
+		Header cabecera = new Header();
+		add(cabecera);
 		//Fin cabecera
 		
+		//Inicio body
+		
+		H1 titulo = new H1("Ofertas");	//Titulo
+		titulo.getStyle().set("margin-left", "40%");	//Titulo de la seccion izquierda
+		
+		Image fotoPrueba = new Image("frontend/img/pruebaBarcoHeader.jpg","fotoOferta"); //Foto de cada barco, se debe extraer de la BD más adelante
+		fotoPrueba.setMaxHeight("350px");	//Altura foto
+		fotoPrueba.setMaxWidth("450px");	//Anchura foto
+		
+		HorizontalLayout infoBarco1 = new HorizontalLayout(); //"Ficha" de cada oferta que consta de Foto, descripcion y precio.
+		Div texto = new Div();	//Texto con la descripcion
+		texto.add("Este barco parte desde Cádiz hasta Italia"
+				+ "Precio: 650€");
+		infoBarco1.add(fotoPrueba,texto);
+		
+		HorizontalLayout infoBarco2 = new HorizontalLayout();	//Este infoBarco2 no aparece en la web
+		
+		infoBarco2.add(fotoPrueba,texto);
+
+		//Bloque izquierdo centro de la web
+		VerticalLayout leftVerticalBody = new VerticalLayout(titulo,infoBarco1,infoBarco2);
+		leftVerticalBody.getStyle().set("border-style", "solid");	//Bordes para comprobar limites
+		//Bloque derecho centro de la web
+		VerticalLayout rightVerticalBody = new VerticalLayout();
+		rightVerticalBody.getStyle().set("border-style", "solid");	//Bordes para comprobar limites
+		//Bloque del cuerpo de la web que contiene los dos bloques verticales.
+		HorizontalLayout bodyHorizontal = new HorizontalLayout(leftVerticalBody,rightVerticalBody);
+		
+		bodyHorizontal.setWidthFull();
+		bodyHorizontal.getStyle().set("border-style", "solid"); //Bordes para comprobar limites.
+		add(bodyHorizontal);
+		//Fin body
+		
 		//Inicio Footer
-		Anchor linkPreguntas = new Anchor("#","Preguntas");		//Enlace
-		linkPreguntas.getStyle().set("margin-right", "10%");	//Separacion entre enlaces
-		Anchor linkContacto = new Anchor("#","Contacto");		//Enlace
-		linkContacto.getStyle().set("margin-right", "10%");		//Separacion entre enlaces
-		Anchor linkAyuda = new Anchor("#","Ayuda");				//Enlace
-		
-		HorizontalLayout footerHorizontal = new HorizontalLayout(linkPreguntas,linkContacto,linkAyuda);
-		
-		footerHorizontal.setWidthFull(); //Que ocupe el ancho de toda la página
-		footerHorizontal.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER); //Alineación horizontal
-		
-		add(footerHorizontal);
+		Footer footer = new Footer();
+		add(footer);
 		
 		//Fin Footer
 	}
