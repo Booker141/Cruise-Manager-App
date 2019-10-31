@@ -1,5 +1,8 @@
 package es.uca.gii.iw.crusaito.spring;
 
+import java.io.File;
+
+import org.apache.catalina.webresources.FileResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.Text;
@@ -8,12 +11,16 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -37,18 +44,32 @@ public class MainView extends VerticalLayout {
 
 		TextField Tcodigo = new TextField("Código"); // esto para que?
 		add(Tcodigo);
-
+		
 		MenuBar menuBar = new MenuBar(); // Creacion del menu
 		menuBar.setOpenOnHover(true); // desplegar submenu sin click
 
 		Text selected = new Text(""); // esto para que ?
 		Div message = new Div(new Text("Selected: "), selected); // y esto ?
-
+		
+		//Cabecera de la página
+		
+		Image barcoCabecera = new Image("frontend/img/pruebaBarcoHeader.jpg","foto"); //Imagen del barco de prueba
+		
 		MenuItem info = menuBar.addItem("Info");
 		MenuItem reservas = menuBar.addItem("Reservas");
 		MenuItem cuenta = menuBar.addItem("Mi perfil");
 		menuBar.addItem("Cerrar sesión", e -> selected.setText("Cerrar sesión"));
-		add(menuBar);
+		
+		Div separador = new Div();	//Separador vacío de la imagen y el menu
+		separador.setWidthFull();	//Anchura máxima para separarlos a cada esquina
+		
+		HorizontalLayout cabeceraHorizontal = new HorizontalLayout(barcoCabecera,separador,menuBar); //Caja horizontal de la cabecera
+		
+		cabeceraHorizontal.setWidthFull(); //Que ocupe el ancho de toda la página
+		cabeceraHorizontal.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN); //Alineación horizontal
+		cabeceraHorizontal.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.END); //Alineación vertical
+		
+		add(cabeceraHorizontal);
 
 		SubMenu infoSubMenu = info.getSubMenu(); // Creacion del submenu de info
 		MenuItem consejos = infoSubMenu.addItem("Consejos");
@@ -60,5 +81,7 @@ public class MainView extends VerticalLayout {
 		cuenta.getSubMenu().addItem("Editar perfil", e -> selected.setText("Editar perfil"));
 		cuenta.getSubMenu().addItem("Configuración de privacidad",
 				e -> selected.setText("Configuración de privacidad"));
+		
+		//Fin cabecera
 	}
 }
