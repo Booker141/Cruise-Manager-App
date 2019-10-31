@@ -83,5 +83,21 @@ public class MainView extends VerticalLayout {
 				e -> selected.setText("Configuración de privacidad"));
 		
 		//Fin cabecera
+		
+		//Inicio Footer
+		Anchor linkPreguntas = new Anchor("#","Preguntas");		//Enlace
+		linkPreguntas.getStyle().set("margin-right", "10%");	//Separacion entre enlaces
+		Anchor linkContacto = new Anchor("#","Contacto");		//Enlace
+		linkContacto.getStyle().set("margin-right", "10%");		//Separacion entre enlaces
+		Anchor linkAyuda = new Anchor("#","Ayuda");				//Enlace
+		
+		HorizontalLayout footerHorizontal = new HorizontalLayout(linkPreguntas,linkContacto,linkAyuda);
+		
+		footerHorizontal.setWidthFull(); //Que ocupe el ancho de toda la página
+		footerHorizontal.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER); //Alineación horizontal
+		
+		add(footerHorizontal);
+		
+		//Fin Footer
 	}
 }
