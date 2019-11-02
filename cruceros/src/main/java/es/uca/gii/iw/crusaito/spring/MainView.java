@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -55,7 +57,7 @@ public class MainView extends VerticalLayout {
 		
 		HorizontalLayout infoBarco1 = new HorizontalLayout(); //"Ficha" de cada oferta que consta de Foto, descripcion y precio.
 		Div texto = new Div();	//Texto con la descripcion
-		texto.add("Este barco parte desde Cádiz hasta Italia"
+		texto.add("Este barco parte desde Cádiz hasta Italia. "
 				+ "Precio: 650€");
 		infoBarco1.add(fotoPrueba,texto);
 		
