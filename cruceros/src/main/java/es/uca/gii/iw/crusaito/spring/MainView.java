@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
@@ -26,18 +27,36 @@ public class MainView extends VerticalLayout {
 
 	public MainView(@Autowired MessageBean bean) {
 		
-		changeTheme(); // codigo reutilizable
-
+		/* CODIGO RANDOM
 		TextField Tcodigo = new TextField("Código"); // esto para que?
 		add(Tcodigo);
+		*/
 		
-		//Inicio cabecera
+	//Inicio cabecera
+		
+		Image logo = new Image("frontend/img/logo.png","logoweb");
+		
+		Button toggleButton = changeTheme();
+		
+		//TODO barra de navegacion y añadirla al header
+		
+		MenuBar menuBar = new MenuBar();
+		MenuItem project = menuBar.addItem("Reservas");
+		MenuItem account = menuBar.addItem("Perfil");
+		menuBar.addItem("Administrar");
+		menuBar.addItem("Cerrar Sesión");
 		
 		Header cabecera = new Header();
-		add(cabecera);
-		//Fin cabecera
+		cabecera.add(logo, menuBar, toggleButton);
 		
-		//Inicio body
+		HorizontalLayout horizontalHeader = new HorizontalLayout();
+		
+		horizontalHeader.add(cabecera);
+		add(horizontalHeader);
+		
+	//Fin cabecera
+		
+	//Inicio body
 		
 		H1 titulo1 = new H1("Ofertas");	//Titulo
 		titulo1.getStyle().set("margin-left", "40%");	//Titulo de la seccion izquierda
@@ -81,16 +100,17 @@ public class MainView extends VerticalLayout {
 		
 		add(bodyHorizontal);
 		
-		//Fin body
+	//Fin body
 		
-		//Inicio Footer
+	//Inicio Footer
+		
 		Footer footer = new Footer();
 		add(footer);
 		
-		//Fin Footer
+	//Fin Footer
 	}
 	
-	public void changeTheme() {
+	public Button changeTheme() {
 		
 		Button toggleButton = new Button("Cambiar Tema", click -> {
 			ThemeList themeList = UI.getCurrent().getElement().getThemeList(); //
@@ -101,7 +121,7 @@ public class MainView extends VerticalLayout {
 				themeList.add(Lumo.DARK);
 			}
 		});
-		add(toggleButton);
+		return toggleButton;
 	}
 	
 }
