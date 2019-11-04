@@ -51,7 +51,7 @@ public class MainView extends VerticalLayout {
 		H1 titulo = new H1("Ofertas");	//Titulo
 		titulo.getStyle().set("margin-left", "40%");	//Titulo de la seccion izquierda
 		
-		Image fotoPrueba = new Image("frontend/img/pruebaBarcoHeader.jpg","fotoOferta"); //Foto de cada barco, se debe extraer de la BD más adelante
+		Image fotoPrueba = new Image("frontend/img/pruebaBarcoHeader.png","fotoOferta"); //Foto de cada barco, se debe extraer de la BD más adelante
 		fotoPrueba.setMaxHeight("350px");	//Altura foto
 		fotoPrueba.setMaxWidth("450px");	//Anchura foto
 		
