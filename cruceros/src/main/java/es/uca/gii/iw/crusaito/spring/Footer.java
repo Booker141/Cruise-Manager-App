@@ -5,12 +5,15 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 public class Footer extends HorizontalLayout{
-
+	private static final long serialVersionUID = 1L;
+	
 	private Anchor linkPreguntas = new Anchor("#","Preguntas");		//Enlace
 	private Anchor linkContacto = new Anchor("#","Contacto");		//Enlace
 	private Anchor linkAyuda = new Anchor("#","Ayuda");				//Enlace
 	
 	public Footer() {
+		
+		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
 		linkPreguntas.getStyle().set("margin-right", "10%");	//Separacion entre enlaces
 		linkContacto.getStyle().set("margin-right", "10%");		//Separacion entre enlaces

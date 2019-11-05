@@ -4,15 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.menubar.MenuBar;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.ThemeList;
@@ -21,71 +16,24 @@ import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-@Route("")
-//@Theme(Lumo.class)
+@Route("MainView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")
 public class MainView extends VerticalLayout {
 	private static final long serialVersionUID = 1L; // para evitar el warning del serial
 
 	public MainView(@Autowired MessageBean bean) {
-
-		/*
-		 * CODIGO RANDOM 
-		 * TextField Tcodigo = new TextField("Código"); // esto para que?
-		 * add(Tcodigo);
-		 * 
-		 * Button toggleButton = changeTheme(); //boton para cambiar tema
-		 * add(toggleButton);
-		 */
-
-		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
-
-		// Inicio cabecera
-
-		// Header cabecera = new Header();
-		// add(cabecera);
-
-		Image logo = new Image("frontend/img/logo.png", "logoweb");
 		
-		Notification notification = new Notification("Not implemented yet...", 3000);	// notificacion de NO implementado aun
-		notification.addThemeVariants(NotificationVariant.LUMO_ERROR);	// tema de error(rojo) de la notificacion
+		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro -> poner en todas las clases
+
+	// Inicio cabecera
 		
-		MenuBar menuBar = new MenuBar();
-		menuBar.addItem("Home", e -> notification.open()); // Esta asignacion es porque es un boton directamente, no tiene submenu desplegable
-		MenuItem info = menuBar.addItem("Información"); // y esta es porque perfil tendra un menu desplegable
-		MenuItem reservas = menuBar.addItem("Reservas");
-		MenuItem cuenta = menuBar.addItem("Perfil");
-		menuBar.addItem("Cerrar Sesion", e -> notification.open());
-		
-		SubMenu infoSubMenu = info.getSubMenu();
-		MenuItem barcos = infoSubMenu.addItem("Cruceros");
-		infoSubMenu.addItem("Destinos", e -> notification.open());
+		Header header = new Header();
+		add(header);
 
-		SubMenu crucerosSubMenu = barcos.getSubMenu();
-		crucerosSubMenu.addItem("Servicios", e -> notification.open());
-		crucerosSubMenu.addItem("Instalaciones", e -> notification.open());
+	// Fin cabecera
 
-		SubMenu reservaSubMenu = reservas.getSubMenu();
-		reservaSubMenu.addItem("Nueva reserva", e -> notification.open());
-		reservaSubMenu.addItem("Mis reservas", e -> notification.open());
-
-		SubMenu cuentaSubMenu = cuenta.getSubMenu();
-		cuentaSubMenu.addItem("Editar Perfil", e -> notification.open());
-		cuentaSubMenu.addItem("Configuración de privacidad", e -> notification.open());
-
-		HorizontalLayout horizontalHeader = new HorizontalLayout();
-
-		horizontalHeader.add(logo, menuBar);
-		// horizontalHeader.setSpacing(true); //espacio entre items del layout
-		// horizontalHeader.setWidth("auto");
-		// horizontalHeader.setHeight("auto");
-		horizontalHeader.setAlignItems(Alignment.CENTER); // alinear items del layout al centro (logo y menu)
-		add(horizontalHeader);
-
-		// Fin cabecera
-
-		// Inicio body
+	// Inicio body
 
 		H1 titulo1 = new H1("Oferta del día"); // Titulo
 		// como cambiamos el color al H1 ?????
@@ -132,7 +80,7 @@ public class MainView extends VerticalLayout {
 
 		add(bodyHorizontal);
 
-		// Fin body
+	// Fin body
 
 		// Inicio Footer
 
