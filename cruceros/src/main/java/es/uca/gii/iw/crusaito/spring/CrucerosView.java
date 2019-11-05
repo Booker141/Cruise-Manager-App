@@ -1,6 +1,5 @@
 package es.uca.gii.iw.crusaito.spring;
 
-import com.vaadin.flow.component.charts.model.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
