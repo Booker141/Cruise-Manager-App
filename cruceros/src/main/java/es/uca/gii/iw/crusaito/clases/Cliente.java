@@ -11,7 +11,6 @@ public class Cliente
 	private LocalDate cFchNac;
 	private String cDireccion;
 	private String cCiudad;
-
 	
 	public Cliente(String cNombre, String cApellidos, String cDNI, int cTelefono, LocalDate cFchNac, String cDireccion,
 			String cCiudad) {
