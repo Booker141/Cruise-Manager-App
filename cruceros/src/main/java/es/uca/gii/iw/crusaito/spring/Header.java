@@ -17,15 +17,24 @@ public class Header extends HorizontalLayout{
 		
 		Image logo = new Image("frontend/img/logo.png", "logoweb");
 		
-		Notification notification = new Notification("Not implemented yet...", 3000);	// notificacion de NO implementado aun
+		Notification notification = new Notification("Aún no está implementado", 3000);	// notificacion de NO implementado aun
 		notification.addThemeVariants(NotificationVariant.LUMO_ERROR);	// tema de error(rojo) de la notificacion
 		
 		MenuBar menuBar = new MenuBar();
-		menuBar.addItem("Home", e -> notification.open()); // Esta asignacion es porque es un boton directamente, no tiene submenu desplegable
 		MenuItem info = menuBar.addItem("Información"); // y esta es porque perfil tendra un menu desplegable
 		MenuItem reservas = menuBar.addItem("Reservas");
 		MenuItem cuenta = menuBar.addItem("Perfil");
-		menuBar.addItem("Iniciar Sesion", e -> notification.open());
+		MenuItem inicio = menuBar.addItem("Iniciar Sesion");
+		
+		//Añadir rutas
+		
+		inicio.addClickListener(e -> {
+	    	inicio.getUI().ifPresent(ui-> ui.navigate("LoginView"));
+	    });
+		
+		logo.addClickListener(e -> {
+	    	logo.getUI().ifPresent(ui-> ui.navigate("MainView"));
+	    });
 		
 		SubMenu infoSubMenu = info.getSubMenu();
 		MenuItem barcos = infoSubMenu.addItem("Cruceros");
