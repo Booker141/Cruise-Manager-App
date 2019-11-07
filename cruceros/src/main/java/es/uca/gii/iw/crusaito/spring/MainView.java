@@ -19,6 +19,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @Route("MainView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")
+
 public class MainView extends VerticalLayout {
 	private static final long serialVersionUID = 1L; // para evitar el warning del serial
 
@@ -82,13 +83,16 @@ public class MainView extends VerticalLayout {
 
 	// Fin body
 
-		// Inicio Footer
+	// Inicio Footer
 
+		VerticalLayout footerLayout = new VerticalLayout();
+		
 		Footer footer = new Footer();
-		// añadir aqui copyright
-		add(footer);
+		footerLayout.add(footer);
+		
+		this.add(footerLayout);
 
-		// Fin Footer
+	// Fin Footer
 	}
 
 	/**

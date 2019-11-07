@@ -13,7 +13,7 @@ public class CrucerosView extends VerticalLayout {
 
 	public CrucerosView() {
 		
-		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
+		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
 		Header header = new Header();
 		add(header);
