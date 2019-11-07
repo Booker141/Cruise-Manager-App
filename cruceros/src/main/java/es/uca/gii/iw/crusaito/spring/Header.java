@@ -21,29 +21,25 @@ public class Header extends HorizontalLayout{
 		notification.addThemeVariants(NotificationVariant.LUMO_ERROR);	// tema de error(rojo) de la notificacion
 		
 		MenuBar menuBar = new MenuBar();
-		MenuItem info = menuBar.addItem("Información"); // y esta es porque perfil tendra un menu desplegable
+		MenuItem cruceros = menuBar.addItem("Cruceros"); // y esta es porque perfil tendra un menu desplegable
 		MenuItem reservas = menuBar.addItem("Reservas");
 		MenuItem cuenta = menuBar.addItem("Perfil");
-		MenuItem inicio = menuBar.addItem("Iniciar Sesion");
+		MenuItem sesion = menuBar.addItem("Iniciar Sesión");
 		
 		//Añadir rutas
 		
-		inicio.addClickListener(e -> {
-	    	inicio.getUI().ifPresent(ui-> ui.navigate("LoginView"));
+		sesion.addClickListener(e -> {
+	    	sesion.getUI().ifPresent(ui-> ui.navigate("LoginView"));
 	    });
 		
 		logo.addClickListener(e -> {
 	    	logo.getUI().ifPresent(ui-> ui.navigate("MainView"));
 	    });
 		
-		SubMenu infoSubMenu = info.getSubMenu();
-		MenuItem barcos = infoSubMenu.addItem("Cruceros");
-		infoSubMenu.addItem("Destinos", e -> notification.open());
-
-		SubMenu crucerosSubMenu = barcos.getSubMenu();
-		crucerosSubMenu.addItem("Servicios", e -> notification.open());
-		crucerosSubMenu.addItem("Instalaciones", e -> notification.open());
-
+		cruceros.addClickListener(e -> {
+	    	cruceros.getUI().ifPresent(ui-> ui.navigate("CrucerosView"));
+	    });
+		
 		SubMenu reservaSubMenu = reservas.getSubMenu();
 		reservaSubMenu.addItem("Nueva reserva", e -> notification.open());
 		reservaSubMenu.addItem("Mis reservas", e -> notification.open());
@@ -57,6 +53,8 @@ public class Header extends HorizontalLayout{
 		horizontalHeader.add(logo, menuBar);
 		horizontalHeader.setAlignItems(Alignment.CENTER); // alinear items del layout al centro (logo y menu)
 		add(horizontalHeader);
+		
+		this.getStyle().set("border-style", "solid");
 		
 		/* Codigo util¿?
 		menuBar.setOpenOnHover(true); // desplegar submenu sin click
