@@ -13,8 +13,6 @@ public class Header extends HorizontalLayout{
 
 	public Header() {
 		
-		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
-		
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 		
 		Notification notification = new Notification("Aún no está implementado", 3000);	// notificacion de NO implementado aun

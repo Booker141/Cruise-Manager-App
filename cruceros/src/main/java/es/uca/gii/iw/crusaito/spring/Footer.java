@@ -13,10 +13,10 @@ public class Footer extends HorizontalLayout{
 	
 	public Footer() {
 		
-		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
-		
 		linkPreguntas.getStyle().set("margin-right", "10%");	//Separacion entre enlaces
 		linkContacto.getStyle().set("margin-right", "10%");		//Separacion entre enlaces
+		
+		linkAyuda.getStyle().set("color", "#3778A8"); // Cambiar color del link
 		
 		this.add(linkPreguntas,linkContacto,linkAyuda);
 		

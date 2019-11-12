@@ -78,6 +78,7 @@ public class MainView extends VerticalLayout {
 
 		bodyHorizontal.setWidthFull();
 		bodyHorizontal.getStyle().set("border-style", "solid"); // Bordes para comprobar limites.
+		//bodyHorizontal.getStyle().set("color", "green"); //para cambiar de color las lineas (y texto interior ¿?)
 
 		add(bodyHorizontal);
 
