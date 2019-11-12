@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -25,7 +24,7 @@ public class MainView extends VerticalLayout {
 
 	public MainView(@Autowired MessageBean bean) {
 		
-		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro -> poner en todas las clases
+		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 
 	// Inicio cabecera
 		
@@ -33,7 +32,7 @@ public class MainView extends VerticalLayout {
 		add(header);
 
 	// Fin cabecera
-
+		
 	// Inicio body
 
 		H1 titulo1 = new H1("Oferta del día"); // Titulo
@@ -85,16 +84,13 @@ public class MainView extends VerticalLayout {
 	// Fin body
 
 	// Inicio Footer
-
-		VerticalLayout footerLayout = new VerticalLayout();
 		
-		Footer footer = new Footer();
-		footerLayout.add(footer);
-		
-		this.add(footerLayout);
+		Footer footer = new Footer();	//no funciona en el mainview
+		add(footer);
 
 	// Fin Footer
-	}
+		
+	} // MainView
 
 	/**
 	 * changeTheme Crea un boton para intercambiar entre tema claro y oscuro
