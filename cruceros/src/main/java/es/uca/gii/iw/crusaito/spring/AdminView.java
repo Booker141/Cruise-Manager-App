@@ -13,6 +13,8 @@ import es.uca.gii.iw.crusaito.security.SecurityUtils;
 @Route("admin")
 @Secured("Admin")
 public class AdminView extends VerticalLayout{
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	public AdminView() {
 		H1 texto = new H1();

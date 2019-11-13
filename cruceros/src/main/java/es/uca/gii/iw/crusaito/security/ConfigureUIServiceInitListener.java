@@ -10,6 +10,7 @@ import es.uca.gii.iw.crusaito.spring.LoginView;
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void serviceInit(ServiceInitEvent event) {

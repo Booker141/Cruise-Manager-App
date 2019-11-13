@@ -69,9 +69,9 @@ public class LoginView extends VerticalLayout {
 		add(footer);
 		
     }
-    
-    // Mover mas tarde estos metodos a otra clase de comprobaciones
-	public boolean authenticate(Object e) { return true; }
+	public boolean authenticate(Object e) {
+		// implementar con las diapos
+	}
     
 }
 	
