@@ -6,16 +6,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.uca.gii.iw.crusaito.clases.Cliente;
+import es.uca.gii.iw.crusaito.clases.Usuario;
 
 @Service
-public class ClienteService implements UserDetailsService{
+public class UsuarioService implements UserDetailsService{
 	
 	
-	private ClienteRepository repo;
+	private UsuarioRepository repo;
 	private PasswordEncoder passwordEncoder;
 
-	public ClienteService(ClienteRepository repo, PasswordEncoder passwordEncoder) {
+	public UsuarioService(UsuarioRepository repo, PasswordEncoder passwordEncoder) {
 		
 		super();
 		this.repo = repo;
@@ -23,8 +23,8 @@ public class ClienteService implements UserDetailsService{
 	}
 
 	
-	public Cliente loadUserByUsername(String username) throws UsernameNotFoundException {
-		Cliente user = repo.findByUsername(username);
+	public Usuario loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario user = repo.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
 		}

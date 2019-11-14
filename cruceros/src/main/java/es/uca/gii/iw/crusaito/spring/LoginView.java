@@ -1,5 +1,14 @@
 package es.uca.gii.iw.crusaito.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -8,14 +17,24 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
+import es.uca.gii.iw.crusaito.security.CustomRequestCache;
+
+@Secured({"Cliente, Admin, Gerente"})
 @Route("LoginView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class LoginView extends VerticalLayout {
    private static final long serialVersionUID = 1L;
    public static final String ROUTE = "login";
-
-    public LoginView() {
+   LoginForm login = new LoginForm();
+   HorizontalLayout loginLayout = new HorizontalLayout();
+   private AuthenticationManager authenticationManager;
+   private CustomRequestCache requestCache;
    
+   	@Autowired
+    public LoginView(AuthenticationManager authenticationManager, CustomRequestCache requestCache) {
+   		
+   		this.authenticationManager = authenticationManager;
+   		this.requestCache = requestCache;
     	Header header = new Header();
 		add(header);
 		
@@ -49,17 +68,9 @@ public class LoginView extends VerticalLayout {
         setClassName("login-view");
         */
 		
-		LoginForm login = new LoginForm();
-		login.addLoginListener(e -> {
-		    boolean isAuthenticated = authenticate(e);
-		    if (isAuthenticated) {
-		    	getUI().ifPresent(ui-> ui.navigate("MainView"));
-		    } else {
-		        login.setError(true);
-		    }
-		});
-		
-		HorizontalLayout loginLayout = new HorizontalLayout();
+		login.addLoginListener(e -> Logear(e));
+		add(login);
+		    
 		loginLayout.add(login);
 		loginLayout.setWidthFull(); //Que ocupe el ancho de toda la página
 		loginLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER); //Alineación horizontal
@@ -69,9 +80,29 @@ public class LoginView extends VerticalLayout {
 		add(footer);
 		
     }
-	public boolean authenticate(Object e) {
-		// implementar con las diapos
+
+	private void Logear(LoginEvent e) {
+		boolean isAuthenticated = authenticate(e.getUsername(), e.getPassword());
+	    if (isAuthenticated) {
+	    	getUI().ifPresent(ui-> ui.navigate("MainView"));
+	    } else {
+	        login.setError(true);
+	    }
 	}
     
+	private boolean authenticate(String username, String password) {
+		try {
+			final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			// login.close();
+			// UI.getCurrent().navigate(requestCache.resolveRedirectUrl());
+			return true;
+		
+		} catch (AuthenticationException ex) {
+		 // login.setError(true);
+			return false;
+	}
+
+  }
 }
 	
