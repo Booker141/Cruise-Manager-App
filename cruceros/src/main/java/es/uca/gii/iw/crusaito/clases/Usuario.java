@@ -58,6 +58,10 @@ public class Usuario implements UserDetails{
 		// TODO Auto-generated method stub
 		return cUsername;
 	}
+	//Implementación métodos heredados de UserDetails
+	public String getUsername() {
+		return cUsername;
+	}
 	
 	public void setcUsername(String cUsername) {
 		this.cUsername = cUsername;
@@ -68,6 +72,10 @@ public class Usuario implements UserDetails{
 	}
 	
 	public String getcPassword() {
+		return cPassword;
+	}
+	//Implementación método heredado de UserDetails, puede que necesite mas comprobaciones.
+	public String getPassword() {
 		return cPassword;
 	}
 
