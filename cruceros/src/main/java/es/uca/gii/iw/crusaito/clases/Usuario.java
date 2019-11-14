@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import es.uca.gii.iw.crusaito.spring.UsuarioRol;
 
-@SuppressWarnings("serial")
 @EntityScan
 public class Usuario implements UserDetails{
+	private static final long serialVersionUID = 1L;
 	
 	private String cNombre;
 	private String cApellidos;
@@ -27,6 +27,9 @@ public class Usuario implements UserDetails{
 	private String cCiudad;
 	private UsuarioRol rol;
 	private boolean enabled;
+	protected Usuario() {
+		
+	}
 	
 	public Usuario(String cNombre, String cApellidos, String cUsername, String cPassword, String cDNI, int cTelefono, LocalDate cFchNac, String cDireccion,
 			String cCiudad, UsuarioRol rol) {
@@ -57,7 +60,6 @@ public class Usuario implements UserDetails{
 	//Implementación métodos heredados de UserDetails
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return cUsername;
 	}
 
@@ -162,7 +164,4 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	
-	
 }

@@ -7,7 +7,8 @@ import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class ProhibidoView extends VerticalLayout{
-	
+	private static final long serialVersionUID = 1L;
+
 	public ProhibidoView() {
 		Label content = new Label(
 		        "Tiene prohibido el acceso a esta página");
