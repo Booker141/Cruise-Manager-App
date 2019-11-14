@@ -60,6 +60,14 @@ public class Usuario implements UserDetails{
 		// TODO Auto-generated method stub
 		return cUsername;
 	}
+<<<<<<< HEAD
+=======
+	//Implementación métodos heredados de UserDetails
+	public String getUsername() {
+		return cUsername;
+	}
+	
+>>>>>>> 32b1064ee8f5408b7b73f246d2b780810ed4d611
 	public void setcUsername(String cUsername) {
 		this.cUsername = cUsername;
 	}
@@ -72,6 +80,10 @@ public class Usuario implements UserDetails{
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
+		return cPassword;
+	}
+	//Implementación método heredado de UserDetails, puede que necesite mas comprobaciones.
+	public String getPassword() {
 		return cPassword;
 	}
 
