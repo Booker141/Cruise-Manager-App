@@ -54,11 +54,12 @@ public class Usuario implements UserDetails{
 		return cApellidos;
 	}
 	
-	public String getcUsername() {
+	//getUsername porque es un método de UserDetails
+	@Override
+	public String getUsername() {
 		// TODO Auto-generated method stub
 		return cUsername;
 	}
-	
 	public void setcUsername(String cUsername) {
 		this.cUsername = cUsername;
 	}
@@ -67,7 +68,10 @@ public class Usuario implements UserDetails{
 		this.cApellidos = cApellidos;
 	}
 	
-	public String getcPassword() {
+	//getPassword() porque es un método de UserDetails
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
 		return cPassword;
 	}
 
@@ -159,5 +163,7 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	
 	
 }
