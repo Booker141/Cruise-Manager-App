@@ -23,6 +23,7 @@ import es.uca.gii.iw.crusaito.security.CustomRequestCache;
 @Route("LoginView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class LoginView extends VerticalLayout {
+	
    private static final long serialVersionUID = 1L;
    public static final String ROUTE = "login";
    LoginForm login = new LoginForm();

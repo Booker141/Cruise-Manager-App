@@ -53,16 +53,14 @@ public class Usuario implements UserDetails{
 	public String getcApellidos() {
 		return cApellidos;
 	}
-	
-	public String getcUsername() {
+
+	//Implementación métodos heredados de UserDetails
+	@Override
+	public String getUsername() {
 		// TODO Auto-generated method stub
 		return cUsername;
 	}
-	//Implementación métodos heredados de UserDetails
-	public String getUsername() {
-		return cUsername;
-	}
-	
+
 	public void setcUsername(String cUsername) {
 		this.cUsername = cUsername;
 	}
@@ -71,9 +69,6 @@ public class Usuario implements UserDetails{
 		this.cApellidos = cApellidos;
 	}
 	
-	public String getcPassword() {
-		return cPassword;
-	}
 	//Implementación método heredado de UserDetails, puede que necesite mas comprobaciones.
 	public String getPassword() {
 		return cPassword;
@@ -167,5 +162,7 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	
 	
 }
