@@ -1,6 +1,7 @@
 package es.uca.gii.iw.crusaito.spring;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ public class UsuarioService implements UserDetailsService{
 	private UsuarioRepository repo;
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
 	public UsuarioService(UsuarioRepository repo, PasswordEncoder passwordEncoder) {
 		
 		super();
