@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication
 @EnableJpaRepositories
-//EntityScan("es.uca.gii.iw.crusaito.clases")
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
