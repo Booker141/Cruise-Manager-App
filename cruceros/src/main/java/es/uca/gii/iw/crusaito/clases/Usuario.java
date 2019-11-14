@@ -19,6 +19,7 @@ import es.uca.gii.iw.crusaito.spring.UsuarioRol;
 @SuppressWarnings("serial")
 @Entity
 public class Usuario implements UserDetails{
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private long id;
@@ -33,6 +34,9 @@ public class Usuario implements UserDetails{
 	private String cCiudad;
 	private UsuarioRol rol;
 	private boolean enabled;
+	protected Usuario() {
+		
+	}
 	
 	public Usuario(String cNombre, String cApellidos, String username, String password, String dni, int cTelefono, LocalDate cFchNac, String cDireccion,
 			String cCiudad, UsuarioRol rol) {
@@ -168,7 +172,4 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	
-	
 }
