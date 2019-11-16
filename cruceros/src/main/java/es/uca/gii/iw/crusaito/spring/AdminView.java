@@ -10,7 +10,7 @@ import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 
-@Route("admin")
+@Route("AdminView")
 @Secured("Admin")
 public class AdminView extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
