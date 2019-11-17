@@ -18,7 +18,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 
 import es.uca.gii.iw.crusaito.security.CustomRequestCache;
 
-@Route("LoginView")
+@Route(value = LoginView.ROUTE)
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @PageTitle("Login")
 public class LoginView extends VerticalLayout {
