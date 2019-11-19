@@ -19,7 +19,6 @@ import es.uca.gii.iw.crusaito.spring.UsuarioRol;
 @SuppressWarnings("serial")
 @Entity
 public class Usuario implements UserDetails{
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private long id;
@@ -163,6 +162,24 @@ public class Usuario implements UserDetails{
 		return true;
 	}
 
+	/*@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	*/
+	
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
