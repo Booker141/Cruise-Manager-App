@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import es.uca.gii.iw.crusaito.spring.UsuarioRol;
 public class Usuario implements UserDetails{
 	
 	@Id
+	@GeneratedValue
 	private long id;
 	private String cNombre;
 	private String cApellidos;
@@ -161,23 +163,12 @@ public class Usuario implements UserDetails{
 		return true;
 	}
 
-	/*@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(long id) {
+		if (this.id == id)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		else return false;
 	}
-	*/
+	
 	
 	@Override
 	public boolean isEnabled() {
