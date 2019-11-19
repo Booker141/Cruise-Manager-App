@@ -8,8 +8,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +17,6 @@ import es.uca.gii.iw.crusaito.spring.UsuarioRol;
 @SuppressWarnings("serial")
 @Entity
 public class Usuario implements UserDetails{
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private long id;
@@ -34,6 +31,7 @@ public class Usuario implements UserDetails{
 	private String cCiudad;
 	private UsuarioRol rol;
 	private boolean enabled;
+	
 	protected Usuario() {
 		
 	}
