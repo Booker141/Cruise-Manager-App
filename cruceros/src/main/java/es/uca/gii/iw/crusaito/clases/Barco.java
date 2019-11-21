@@ -2,9 +2,17 @@ package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
 
-public class Barco 
-{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@SuppressWarnings("serial")
+@Entity
+public class Barco 
+{	
+	@Id
+	@GeneratedValue
+	private long id;
 	private String bNombre;
 	private String bCodigo;
 	private String bCodCamarote;
