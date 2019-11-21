@@ -84,7 +84,7 @@ public class Usuario implements UserDetails{
 		return username;
 	}
 
-	public void setcUsername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	
@@ -93,7 +93,7 @@ public class Usuario implements UserDetails{
 		return password;
 	}
 
-	public void setcPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
