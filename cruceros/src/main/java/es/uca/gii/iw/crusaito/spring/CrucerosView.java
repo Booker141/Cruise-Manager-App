@@ -6,6 +6,9 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
+import es.uca.gii.iw.crusaito.common.Footer;
+import es.uca.gii.iw.crusaito.common.Header;
+
 @Route("CrucerosView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class CrucerosView extends VerticalLayout {
