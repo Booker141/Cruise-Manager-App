@@ -15,6 +15,9 @@ import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
+import es.uca.gii.iw.crusaito.common.Footer;
+import es.uca.gii.iw.crusaito.common.Header;
+
 @Route("MainView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")

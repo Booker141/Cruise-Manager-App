@@ -26,7 +26,6 @@ public class LoginView extends VerticalLayout {
    private static final long serialVersionUID = 1L;
    public static final String ROUTE = "login";
    
-   //LoginForm login = new LoginForm();
    private LoginOverlay login = new LoginOverlay();
    HorizontalLayout loginLayout = new HorizontalLayout();
    
@@ -41,33 +40,13 @@ public class LoginView extends VerticalLayout {
    		login.setOpened(true);
    		login.setTitle("Iniciar Sesión");
    		login.setDescription("¡Organiza tus vacaciones con nosotros!");
+   		//login.setForgotPasswordButtonVisible(false);
    		
    		login.addLoginListener(e -> this.authenticate(e.getUsername(), e.getPassword()));
    		
    		add(login);
-   		
-   		/*
-		login.addLoginListener(e -> Logear(e));
-		add(login);
-		    
-		loginLayout.add(login);
-		loginLayout.setWidthFull(); //Que ocupe el ancho de toda la página
-		loginLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER); //Alineación horizontal
-		add(loginLayout);
-		*/
 		
     }
-   	
-   	/*
-	private void Logear(LoginEvent e) {
-		boolean isAuthenticated = authenticate(e.getUsername(), e.getPassword());
-	    if (isAuthenticated) {
-	    	getUI().ifPresent(ui-> ui.navigate("MainView"));
-	    } else {
-	        login.setError(true);
-	    }
-	}
-	*/
     
 	private void authenticate(String username, String password) {
 		try {
