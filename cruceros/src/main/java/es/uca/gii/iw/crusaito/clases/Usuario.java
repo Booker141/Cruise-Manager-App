@@ -22,52 +22,52 @@ public class Usuario implements UserDetails{
 	@Id
 	@GeneratedValue
 	private long id;
-	private String cNombre;
-	private String cApellidos;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String username;
 	private String password;
 	private String dni;
-	private int cTelefono;
-	private LocalDate cFchNac;
-	private String cDireccion;
-	private String cCiudad;
-	private UsuarioRol rol;
+	private int phoneNumber;
+	private LocalDate bornDate;
+	private String address;
+	private String city;
+	private UsuarioRol role;
 	private boolean enabled;
 	
 	protected Usuario() {
 		
 	}
 	
-	public Usuario(String cNombre, String cApellidos, String email, String username, String password, String dni, int cTelefono, LocalDate cFchNac, String cDireccion,
-			String cCiudad, UsuarioRol rol) {
-		this.cNombre = cNombre;
-		this.cApellidos = cApellidos;
+	public Usuario(String firstName, String lastName, String email, String username, String password, String dni, int phoneNumber, LocalDate bornDate, String address,
+			String city, UsuarioRol role) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.username = username;
 		this.dni = dni;
-		this.cTelefono = cTelefono;
-		this.cFchNac = cFchNac;
-		this.cDireccion = cDireccion;
-		this.cCiudad = cCiudad;
+		this.phoneNumber = phoneNumber;
+		this.bornDate = bornDate;
+		this.address = address;
+		this.city = city;
 		this.password = password;
-		this.rol = rol;
+		this.role = role;
 	}
 
-	public String getcNombre() {
-		return cNombre;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setcNombre(String cNombre) {
-		this.cNombre = cNombre;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getcApellidos() {
-		return cApellidos;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setcApellidos(String cApellidos) {
-		this.cApellidos = cApellidos;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public String getEmail() {
@@ -97,52 +97,52 @@ public class Usuario implements UserDetails{
 		this.password = password;
 	}
 
-	public String getcDNI() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setcDNI(String dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
-	public int getcTelefono() {
-		return cTelefono;
+	public int getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setcTelefono(int cTelefono) {
-		this.cTelefono = cTelefono;
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public LocalDate getcFchNac() {
-		return cFchNac;
+	public LocalDate getBornDate() {
+		return bornDate;
 	}
 
-	public void setcFchNac(LocalDate cFchNac) {
-		this.cFchNac = cFchNac;
+	public void setBornDate(LocalDate bornDate) {
+		this.bornDate = bornDate;
 	}
 
-	public String getcDireccion() {
-		return cDireccion;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setcDireccion(String cDireccion) {
-		this.cDireccion = cDireccion;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getcCiudad() {
-		return cCiudad;
+	public String getCity() {
+		return city;
 	}
 
-	public void setcCiudad(String cCiudad) {
-		this.cCiudad = cCiudad;
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	public UsuarioRol getRol() {
-		return rol;
+		return role;
 	}
 
-	public void setRol(UsuarioRol rol) {
-		this.rol = rol;
+	public void setRole(UsuarioRol role) {
+		this.role = role;
 	}
 
 

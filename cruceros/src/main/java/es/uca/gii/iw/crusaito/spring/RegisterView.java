@@ -13,7 +13,7 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 @Route("Registrar")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class RegisterView extends FormLayout{
-
+	private static final long serialVersionUID = 1L;
 	private TextField username = new TextField("Introduce usuario");
 	private TextField email = new TextField("Introduce correo electrónico");
 	private TextField password = new TextField("Introduce contraseña");
