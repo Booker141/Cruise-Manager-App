@@ -24,6 +24,7 @@ public class Usuario implements UserDetails{
 	private long id;
 	private String cNombre;
 	private String cApellidos;
+	private String email;
 	private String username;
 	private String password;
 	private String dni;
@@ -38,10 +39,11 @@ public class Usuario implements UserDetails{
 		
 	}
 	
-	public Usuario(String cNombre, String cApellidos, String username, String password, String dni, int cTelefono, LocalDate cFchNac, String cDireccion,
+	public Usuario(String cNombre, String cApellidos, String email, String username, String password, String dni, int cTelefono, LocalDate cFchNac, String cDireccion,
 			String cCiudad, UsuarioRol rol) {
 		this.cNombre = cNombre;
 		this.cApellidos = cApellidos;
+		this.email = email;
 		this.username = username;
 		this.dni = dni;
 		this.cTelefono = cTelefono;
@@ -64,6 +66,17 @@ public class Usuario implements UserDetails{
 		return cApellidos;
 	}
 
+	public void setcApellidos(String cApellidos) {
+		this.cApellidos = cApellidos;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email=email;
+	}
 	//Implementación métodos heredados de UserDetails
 	@Override
 	public String getUsername() {
@@ -73,10 +86,6 @@ public class Usuario implements UserDetails{
 
 	public void setcUsername(String username) {
 		this.username = username;
-	}
-
-	public void setcApellidos(String cApellidos) {
-		this.cApellidos = cApellidos;
 	}
 	
 	//Implementación método heredado de UserDetails, puede que necesite mas comprobaciones.
