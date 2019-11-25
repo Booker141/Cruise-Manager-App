@@ -37,14 +37,15 @@ public class LoginView extends VerticalLayout {
    		
    		this.authenticationManager = authenticationManager;
    		this.requestCache = requestCache;
+   		
    		login.setOpened(true);
    		login.setTitle("Iniciar Sesión");
    		login.setDescription("¡Organiza tus vacaciones con nosotros!");
    		//login.setForgotPasswordButtonVisible(false);
    		
-   		login.addLoginListener(e -> this.authenticate(e.getUsername(), e.getPassword()));
-   		
    		add(login);
+   		
+   		login.addLoginListener(e -> this.authenticate(e.getUsername(), e.getPassword()));
 		
     }
     

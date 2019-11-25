@@ -13,8 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import es.uca.gii.iw.crusaito.spring.UsuarioRol;
-
 @SuppressWarnings("serial")
 @Entity
 public class Usuario implements UserDetails{
@@ -32,15 +30,16 @@ public class Usuario implements UserDetails{
 	private LocalDate bornDate;
 	private String address;
 	private String city;
-	private UsuarioRol role;
+	private Rol role;
 	private boolean enabled;
 	
 	protected Usuario() {
 		
 	}
 	
-	public Usuario(String firstName, String lastName, String email, String username, String password, String dni, int phoneNumber, LocalDate bornDate, String address,
-			String city, UsuarioRol role) {
+	public Usuario(String firstName, String lastName, String email, String username, 
+			String password, String dni, int phoneNumber, LocalDate bornDate, String address,
+				String city) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -51,7 +50,7 @@ public class Usuario implements UserDetails{
 		this.address = address;
 		this.city = city;
 		this.password = password;
-		this.role = role;
+		this.role = Rol.Cliente;
 	}
 
 	public String getFirstName() {
@@ -137,11 +136,11 @@ public class Usuario implements UserDetails{
 		this.city = city;
 	}
 	
-	public UsuarioRol getRol() {
+	public Rol getRol() {
 		return role;
 	}
 
-	public void setRole(UsuarioRol role) {
+	public void setRole(Rol role) {
 		this.role = role;
 	}
 
