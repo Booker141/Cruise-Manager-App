@@ -16,6 +16,7 @@ import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.repositorios.BarcoRepository;
 import es.uca.gii.iw.crusaito.spring.UsuarioRepository;
+import es.uca.gii.iw.crusaito.spring.UsuarioService;
 /**
  * The entry point of the Spring Boot application.
  */
@@ -33,11 +34,11 @@ public class Application extends SpringBootServletInitializer {
      * para comprobar funcionamiento
      */
     @Bean
-    public CommandLineRunner demo(UsuarioRepository userRepo,BarcoRepository barcoRepo) {
+    public CommandLineRunner demo(UsuarioService userService,UsuarioRepository userRepo,BarcoRepository barcoRepo) {
         return (args) -> {
             // save a few users
-            userRepo.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","password","12345678Y",123456789,LocalDate.now(),"Carranza","Cadiz"));
-            userRepo.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12345678Y",123456789,LocalDate.now(),"Carranza","Cadiz"));
+            userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","password","12345678Y",123456789,LocalDate.now(),"Carranza","Cadiz"));
+            userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12345678Y",123456789,LocalDate.now(),"Carranza","Cadiz"));
 
             // save a few barcos
             barcoRepo.save(new Barco("Vaporcito", "1","15",1000,100,2000,LocalDate.now(),"Cadiz","San Fernando"));
