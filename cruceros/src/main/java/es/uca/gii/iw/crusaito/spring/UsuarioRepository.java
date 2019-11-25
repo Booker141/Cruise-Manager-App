@@ -8,7 +8,7 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-	Usuario findById(int id);
+	Usuario findById(long id);
 	Usuario findByUsername(String username);
 	Usuario findByEmailIgnoreCase(String email);
 	List<Usuario> findByDni(String dni);

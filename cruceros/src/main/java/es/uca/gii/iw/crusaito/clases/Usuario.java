@@ -33,9 +33,7 @@ public class Usuario implements UserDetails{
 	private Rol role;
 	private boolean enabled;
 	
-	protected Usuario() {
-		
-	}
+	protected Usuario(){}
 	
 	public Usuario(String firstName, String lastName, String email, String username, 
 			String password, String dni, int phoneNumber, LocalDate bornDate, String address,

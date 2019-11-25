@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@SuppressWarnings("serial")
 @Entity
 public class Barco 
 {	
@@ -23,6 +22,8 @@ public class Barco
 	private String bOrigen;
 	private String bDestino;
 
+	protected Barco() {}
+	
 	public Barco(String bNombre, String bCodigo, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino) {
 		
