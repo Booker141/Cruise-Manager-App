@@ -1,4 +1,4 @@
-package es.uca.gii.iw.crusaito.spring;
+package es.uca.gii.iw.crusaito;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +17,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 
 import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.common.Header;
+import es.uca.gii.iw.crusaito.spring.MessageBean;
 
 @Route("MainView")
 @Theme(value = Lumo.class, variant = Lumo.DARK)

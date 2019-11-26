@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import es.uca.gii.iw.crusaito.spring.LoginView;
+import es.uca.gii.iw.vistas.LoginView;
 
 /**
  * Configures spring security, doing the following:

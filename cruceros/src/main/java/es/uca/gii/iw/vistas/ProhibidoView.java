@@ -1,4 +1,4 @@
-package es.uca.gii.iw.crusaito.spring;
+package es.uca.gii.iw.vistas;
 
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.NativeButton;

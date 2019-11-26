@@ -6,8 +6,9 @@ import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
-import es.uca.gii.iw.crusaito.spring.LoginView;
+
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
+import es.uca.gii.iw.vistas.LoginView;
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {
