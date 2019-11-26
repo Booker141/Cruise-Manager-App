@@ -28,15 +28,9 @@ public class MainView extends VerticalLayout {
 	public MainView(@Autowired MessageBean bean) {
 		
 		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
-
-	// Inicio cabecera
 		
 		Header header = new Header();
 		add(header);
-
-	// Fin cabecera
-		
-	// Inicio body
 
 		H1 titulo1 = new H1("Oferta del día"); // Titulo
 		// como cambiamos el color al H1 ?????
@@ -84,16 +78,10 @@ public class MainView extends VerticalLayout {
 
 		add(bodyHorizontal);
 
-	// Fin body
-
-	// Inicio Footer
-		
 		Footer footer = new Footer();	//no funciona en el mainview
 		add(footer);
-
-	// Fin Footer
 		
-	} // MainView
+	} 
 
 	/**
 	 * changeTheme Crea un boton para intercambiar entre tema claro y oscuro

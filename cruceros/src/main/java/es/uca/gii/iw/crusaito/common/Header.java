@@ -23,6 +23,7 @@ public class Header extends HorizontalLayout{
 		MenuItem reservas = menuBar.addItem("Reservas");
 		MenuItem cuenta = menuBar.addItem("Perfil");
 		MenuItem sesion = menuBar.addItem("Iniciar Sesión");
+		MenuItem registro = menuBar.addItem("Registrarse");
 		
 		//Añadir rutas
 		
@@ -36,6 +37,10 @@ public class Header extends HorizontalLayout{
 		
 		cruceros.addClickListener(e -> {
 	    	cruceros.getUI().ifPresent(ui-> ui.navigate("CrucerosView"));
+	    });
+		
+		registro.addClickListener(e -> {
+	    	registro.getUI().ifPresent(ui-> ui.navigate("Registrar"));
 	    });
 		
 		SubMenu reservaSubMenu = reservas.getSubMenu();

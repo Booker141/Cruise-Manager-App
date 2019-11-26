@@ -15,12 +15,14 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
 import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @Route("Registrar")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class RegisterView extends FormLayout{
 	private static final long serialVersionUID = 1L;
+	
 	
 	private FormLayout formulario = new FormLayout();
 	
@@ -51,6 +53,9 @@ public class RegisterView extends FormLayout{
 	});
 	
 	public RegisterView() {
+		
+		Header header = new Header();
+		add(header);
 		
 		Binder<Usuario> binder = new Binder<>(Usuario.class);
 		binder.bindInstanceFields(this);
