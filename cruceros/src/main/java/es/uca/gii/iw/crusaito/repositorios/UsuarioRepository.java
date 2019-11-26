@@ -1,4 +1,4 @@
-package es.uca.gii.iw.crusaito.spring;
+package es.uca.gii.iw.crusaito.repositorios;
 
 import java.util.*;
 import org.springframework.data.jpa.repository.JpaRepository;

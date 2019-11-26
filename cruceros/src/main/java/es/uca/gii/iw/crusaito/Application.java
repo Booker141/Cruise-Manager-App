@@ -15,8 +15,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.repositorios.BarcoRepository;
-import es.uca.gii.iw.crusaito.spring.UsuarioRepository;
-import es.uca.gii.iw.crusaito.spring.UsuarioService;
+import es.uca.gii.iw.crusaito.repositorios.UsuarioRepository;
+import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 /**
  * The entry point of the Spring Boot application.
  */

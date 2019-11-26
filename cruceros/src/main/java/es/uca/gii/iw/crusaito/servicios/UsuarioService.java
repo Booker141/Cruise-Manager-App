@@ -1,4 +1,4 @@
-package es.uca.gii.iw.crusaito.spring;
+package es.uca.gii.iw.crusaito.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.repositorios.UsuarioRepository;
 
 @Service
 public class UsuarioService implements UserDetailsService {
