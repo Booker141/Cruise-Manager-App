@@ -1,4 +1,4 @@
-package es.uca.gii.iw.vistas;
+package es.uca.gii.iw.crusaito.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

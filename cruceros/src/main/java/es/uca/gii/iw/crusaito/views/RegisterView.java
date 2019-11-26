@@ -1,10 +1,11 @@
-package es.uca.gii.iw.vistas;
+package es.uca.gii.iw.crusaito.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -20,7 +21,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @Route("Registrar")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
-public class RegisterView extends FormLayout{
+public class RegisterView extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -55,7 +56,6 @@ public class RegisterView extends FormLayout{
 	public RegisterView() {
 		
 		Header header = new Header();
-		add(header);
 		
 		Binder<Usuario> binder = new Binder<>(Usuario.class);
 		binder.bindInstanceFields(this);
@@ -63,6 +63,6 @@ public class RegisterView extends FormLayout{
 		email.setErrorMessage("Dirreción de correo no válida");
 		formulario.add(email,username,password,rPassword,firstName,lastName,telefono,dni,address,city,bornDate,Save);
 		
-		add(formulario);
+		add(header,formulario);
 	}
 }

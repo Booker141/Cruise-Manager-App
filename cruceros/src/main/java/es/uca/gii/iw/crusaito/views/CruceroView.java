@@ -1,4 +1,4 @@
-package es.uca.gii.iw.vistas;
+package es.uca.gii.iw.crusaito.views;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;

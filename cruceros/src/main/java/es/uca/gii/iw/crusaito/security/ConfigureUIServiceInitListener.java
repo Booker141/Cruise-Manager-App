@@ -8,7 +8,7 @@ import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
 
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
-import es.uca.gii.iw.vistas.LoginView;
+import es.uca.gii.iw.crusaito.views.LoginView;
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {
