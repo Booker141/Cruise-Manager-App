@@ -1,6 +1,7 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ public class Barco
 	private LocalDate bFchPuestaServicio;
 	private String bOrigen;
 	private String bDestino;
+	private ArrayList<String> Ciudades;
 
 	protected Barco() {}
 	
@@ -83,7 +85,14 @@ public class Barco
 	public void setbDestino(String bDestino) {
 		this.bDestino = bDestino;
 	}
+	
+	public ArrayList<String> getCiudades() {
+		return Ciudades;
+	}
 
+	public void setCiudades(ArrayList<String> ciudades) {
+		Ciudades = ciudades;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
