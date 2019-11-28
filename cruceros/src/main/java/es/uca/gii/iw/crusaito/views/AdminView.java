@@ -1,6 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
 import com.vaadin.flow.component.button.Button;
@@ -15,7 +14,6 @@ import es.uca.gii.iw.crusaito.security.SecurityUtils;
 public class AdminView extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
 	public AdminView() {
 		H1 texto = new H1();
 		
@@ -32,6 +30,8 @@ public class AdminView extends VerticalLayout{
 		}else {
 			botonSoloParaElAdmin.setVisible(false);
 		}
+		
+		add(texto,botonSoloParaElAdmin);
 	}
 
 }

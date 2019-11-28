@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +31,7 @@ public class Usuario implements UserDetails{
 	private LocalDate bornDate;
 	private String address;
 	private String city;
+	@ManyToOne
 	private Rol role;
 	private boolean enabled;
 	
@@ -37,7 +39,7 @@ public class Usuario implements UserDetails{
 	
 	public Usuario(String firstName, String lastName, String email, String username, 
 			String password, String dni, int phoneNumber, LocalDate bornDate, String address,
-				String city) {
+				String city,Rol role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -48,7 +50,7 @@ public class Usuario implements UserDetails{
 		this.address = address;
 		this.city = city;
 		this.password = password;
-		this.role = Rol.Cliente;
+		this.role=role;
 	}
 
 	public String getFirstName() {
@@ -134,7 +136,7 @@ public class Usuario implements UserDetails{
 		this.city = city;
 	}
 	
-	public Rol getRol() {
+	public Rol getRole() {
 		return role;
 	}
 
@@ -146,10 +148,10 @@ public class Usuario implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list=new ArrayList<GrantedAuthority>();
-		list.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
+		list.add(new SimpleGrantedAuthority(this.role.getName()));
+
 		return list;
 	}
-
 
 	@Override
 	public boolean isAccountNonExpired() {

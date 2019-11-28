@@ -18,6 +18,8 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
+import es.uca.gii.iw.crusaito.servicios.rolService;
+
 
 @Route("Registrar")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
@@ -41,13 +43,15 @@ public class RegisterView extends VerticalLayout{
 	
 	@Autowired
 	private UsuarioService userService;
+	@Autowired
+	private rolService rolService;
 	
 	private Button Save = new Button("Guardar",click -> {
 		int phoneNumber = telefono.getValue().intValue();
 		
 		Usuario user = new Usuario(firstName.getValue(), lastName.getValue(), email.getValue(), 
 				username.getValue(), password.getValue(), dni.getValue(), phoneNumber, 
-				bornDate.getValue(),address.getValue(),city.getValue());
+				bornDate.getValue(),address.getValue(),city.getValue(),rolService.load("Cliente"));
 		//Operacion de guardado en la BD, implementada en la clase UsuarioService
 		userService.save(user);
 		
