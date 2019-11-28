@@ -1,11 +1,13 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Barco 
@@ -21,12 +23,14 @@ public class Barco
 	private LocalDate bFchPuestaServicio;
 	private String bOrigen;
 	private String bDestino;
-	private ArrayList<String> Ciudades;
+	private String bDescripcion;
+	@ManyToMany(fetch=FetchType.LAZY)
+	private List<Ciudad> Ciudad;
 
 	protected Barco() {}
 	
 	public Barco(String bNombre, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
-			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino) {
+			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino, String bDescripcion) {
 		
 		this.bNombre = bNombre;
 		this.bCodCamarote = bCodCamarote;
@@ -36,6 +40,7 @@ public class Barco
 		this.bFchPuestaServicio = bFchPuestaServicio;
 		this.bOrigen = bOrigen;
 		this.bDestino = bDestino;
+		this.bDescripcion = bDescripcion;
 	}
 	
 	public String getbNombre() {
@@ -86,13 +91,6 @@ public class Barco
 		this.bDestino = bDestino;
 	}
 	
-	public ArrayList<String> getCiudades() {
-		return Ciudades;
-	}
-
-	public void setCiudades(ArrayList<String> ciudades) {
-		Ciudades = ciudades;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,7 +112,12 @@ public class Barco
 			return false;
 		return true;
 	}
-	
-	
 
+	public String getbDescripcion() {
+		return bDescripcion;
+	}
+
+	public void setbDescripcion(String bDescripcion) {
+		this.bDescripcion = bDescripcion;
+	}
 }
