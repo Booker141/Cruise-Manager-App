@@ -59,9 +59,21 @@ public class Application extends SpringBootServletInitializer {
                 log.info(barco.toString());
             }
             log.info("");
-
+            //fetch users by DNI
+            log.info("Users found with findByDni):");
+            log.info("-------------------------------");
+            for (Usuario user : userRepo.findByDni("12345678Y")) {
+                log.info(user.toString());
+            }
+            log.info("");
+          //fetch users by DNI
+            log.info("Users found with findByEmail):");
+            log.info("-------------------------------");
+            Usuario user = userRepo.findByEmailIgnoreCase("cliente@gmail.com"); 
+            log.info(user.toString());
+            log.info("");
             // fetch an individual user by ID
-            Usuario user = userRepo.findById(1);
+            user = userRepo.findById(1);
             log.info("Users found with findById(1):");
             log.info("--------------------------------");
             log.info(user.toString());
