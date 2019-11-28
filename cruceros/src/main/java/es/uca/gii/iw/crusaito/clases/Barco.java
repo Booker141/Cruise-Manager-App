@@ -13,7 +13,6 @@ public class Barco
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	private String bCodigo;
 	private String bCodCamarote;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
@@ -24,11 +23,10 @@ public class Barco
 
 	protected Barco() {}
 	
-	public Barco(String bNombre, String bCodigo, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
+	public Barco(String bNombre, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino) {
 		
 		this.bNombre = bNombre;
-		this.bCodigo = bCodigo;
 		this.bCodCamarote = bCodCamarote;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
@@ -44,10 +42,6 @@ public class Barco
 
 	public void setbNombre(String bNombre) {
 		this.bNombre = bNombre;
-	}
-
-	public String getbCodigo() {
-		return bCodigo;
 	}
 
 	public String getbCodCamarote() {

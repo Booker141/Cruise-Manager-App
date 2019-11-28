@@ -41,8 +41,8 @@ public class Application extends SpringBootServletInitializer {
             userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12345678Y",123456789,LocalDate.now(),"Carranza","Cadiz"));
 
             // save a few barcos
-            barcoRepo.save(new Barco("Vaporcito", "1","15",1000,100,2000,LocalDate.now(),"Cadiz","San Fernando"));
-            barcoRepo.save(new Barco("Vaporcito2", "2","14",1500,150,3000,LocalDate.now(),"San Fernando","Chiclana"));
+            barcoRepo.save(new Barco("Vaporcito","15",1000,100,2000,LocalDate.now(),"Cadiz","San Fernando"));
+            barcoRepo.save(new Barco("Vaporcito2","14",1500,150,3000,LocalDate.now(),"San Fernando","Chiclana"));
 
             
             // fetch all users
