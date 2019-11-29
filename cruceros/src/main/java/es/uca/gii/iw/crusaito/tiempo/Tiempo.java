@@ -1,22 +1,27 @@
 package es.uca.gii.iw.crusaito.tiempo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown=true)
 public class Tiempo {
 	
-	private Coordenada coord;
-	private Weather weather;
-	private String base;
-	private Main main;
-	private String visibility;
-	private Wind wind;
-	private Cloud clouds;
-	private String dt;
-	private Sys sys;
-	private String id;
-	private String name;
-	private String cod;
+	private String city;
+	private double temperatureCelsius, temperatureKelvin;
 	
-
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public double getTemperatureCelsius() {
+		return temperatureCelsius;
+	}
+	public void setTemperatureCelsius(double temperatureCelsius) {
+		this.temperatureCelsius = temperatureCelsius;
+	}
+	public double getTemperatureKelvin() {
+		return temperatureKelvin;
+	}
+	public void setTemperatureKelvin(double temperatureKelvin) {
+		this.temperatureKelvin = temperatureKelvin;
+	}
+	
 }
