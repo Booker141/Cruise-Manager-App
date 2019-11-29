@@ -22,6 +22,7 @@ public class Header extends HorizontalLayout{
 		MenuItem cruceros = menuBar.addItem("Cruceros"); // y esta es porque perfil tendra un menu desplegable
 		MenuItem reservas = menuBar.addItem("Reservas");
 		MenuItem cuenta = menuBar.addItem("Perfil");
+		MenuItem tiempo = menuBar.addItem("Tiempo"); //prueba
 		MenuItem sesion = menuBar.addItem("Iniciar Sesión");
 		MenuItem registro = menuBar.addItem("Registrarse");
 		
@@ -37,6 +38,10 @@ public class Header extends HorizontalLayout{
 		
 		cruceros.addClickListener(e -> {
 	    	cruceros.getUI().ifPresent(ui-> ui.navigate("CrucerosView"));
+	    });
+		
+		tiempo.addClickListener(e -> {
+	    	tiempo.getUI().ifPresent(ui-> ui.navigate("TiempoView"));
 	    });
 		
 		registro.addClickListener(e -> {
