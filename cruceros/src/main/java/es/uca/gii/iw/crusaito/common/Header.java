@@ -25,21 +25,29 @@ public class Header extends HorizontalLayout{
 		MenuItem cerrar = menuBar.addItem("Cerrar Sesión");
 		MenuItem registro = menuBar.addItem("Registrarse");
 		
-		/*
+		MenuItem administrar = menuBar.addItem("Administrar");
+		MenuItem estadisticas = menuBar.addItem("Estadísticas");
+		
+		
+		
+		
+		//Meter accesos visibles cuando este logeado o no
+		
 		if(SecurityUtils.isUserLoggedIn()) {
-			bienvenido.setText("Bienvenid@ " + SecurityUtils.currentUsername());
-		    logout.setVisible(true);
-			login.setVisible(false);
-			registrar.setVisible(false);
-			misReservas.setVisible(true);
-			if(SecurityUtils.hasRole("Administrador") || SecurityUtils.hasRole("Gestor"))
-			{
-			    GesCliente.setVisible(true);
-			    GesReserva.setVisible(true);
-			    espacioBlancoUsu.setVisible(false);
+			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
+			sesion.setVisible(false);
+		    cerrar.setVisible(true);		
+			registro.setVisible(false);
+
+			if(SecurityUtils.hasRole("Administrador")){
+			    administrar.setVisible(true);
+			}
+			
+			if(SecurityUtils.hasRole("Gerente")) {
+				estadisticas.setVisible(true);
 			}
 		} 
-		*/
+	
 		
 		//Añadir rutas
 		
@@ -54,6 +62,10 @@ public class Header extends HorizontalLayout{
 		SubMenu reservaSubMenu = reservas.getSubMenu();
 		reservaSubMenu.addItem("Nueva reserva", e -> Funciones.notificacionError("Aún no está implementado"));
 		reservaSubMenu.addItem("Mis reservas", e -> Funciones.notificacionError("Aún no está implementado"));
+		
+		SubMenu administrarSubMenu = cuenta.getSubMenu();
+		administrarSubMenu.addItem("Administrar reservas", e -> Funciones.notificacionError("Aún no está implementado"));
+		administrarSubMenu.addItem("Administrar clientes", e -> Funciones.notificacionError("Aún no está implementado"));
 
 		SubMenu cuentaSubMenu = cuenta.getSubMenu();
 		cuentaSubMenu.addItem("Editar Perfil", e -> Funciones.notificacionError("Aún no está implementado"));
