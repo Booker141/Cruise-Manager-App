@@ -203,4 +203,16 @@ public class Usuario implements UserDetails{
 		this.enabled = enabled;
 	}
 	
+	/*
+	public String currentUsername() {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (principal instanceof UserDetails) {
+				String username = ((UserDetails)principal).getUsername();
+			} else {
+				String username = principal.toString();
+			}
+				return username;
+	}
+	*/
 }
