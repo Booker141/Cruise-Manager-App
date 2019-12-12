@@ -5,10 +5,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 
+import es.uca.gii.iw.crusaito.clases.Ciudad;
+
 public class Weather {
 	
 	final static private String token = "83829333432ed41a10b897e79ed488a7";
-	//private String city;
 
 	  	 
 	/**
@@ -17,10 +18,11 @@ public class Weather {
 	*	@return String - temperatura en caso exitoso; mensaje de error en caso contrario.
 	*/
 	
-	public Tiempo requestWeather(Tiempo weatherObject) throws Exception
+	public Tiempo requestWeather(Tiempo weatherObject, long id) throws Exception
 	{
+		Ciudad city = new Ciudad(id,weatherObject.getCity());
 		
-		String city = weatherObject.getCity();
+		//String city = weatherObject.getCity();
 		
 		String URLtext = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=xml&appid=" + token;	
 		URL url = new URL(URLtext);

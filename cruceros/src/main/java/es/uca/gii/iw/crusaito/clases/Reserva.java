@@ -52,4 +52,5 @@ public class Reserva
 
 	public void setPrecio(double precio) {
 		this.precio = precio;
-	}}
+	}
+}

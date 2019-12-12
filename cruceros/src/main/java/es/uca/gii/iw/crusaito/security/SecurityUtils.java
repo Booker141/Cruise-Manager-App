@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -52,6 +53,14 @@ public final class SecurityUtils {
 				&& authentication.isAuthenticated();
 	}
 
+	public static String currentUsername(){
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			return ((UserDetails)principal).getUsername();
+		} else {
+			return principal.toString();
+	}
+}
 	/**
 	 * Checks if access is granted for the current user for the given secured view,
 	 * defined by the view class.
