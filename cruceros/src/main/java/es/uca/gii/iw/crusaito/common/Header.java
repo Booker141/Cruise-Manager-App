@@ -34,16 +34,24 @@ public class Header extends HorizontalLayout{
 			sesion.setVisible(false);
 			cuenta.setVisible(true);
 		    cerrar.setVisible(true);		
-			registro.setVisible(false);
+			registro.setVisible(true);
 
 			if(SecurityUtils.hasRole("Administrador")){
 			    administrar.setVisible(true);
+			    estadisticas.setVisible(false);
 			}
 			
 			if(SecurityUtils.hasRole("Gerente")) {
 				estadisticas.setVisible(true);
 			}
 		} 
+		else {
+			cerrar.setVisible(false);
+			estadisticas.setVisible(false);
+			administrar.setVisible(false);
+			cuenta.setVisible(false);
+			
+		}
 	
 		
 		//Añadir rutas
