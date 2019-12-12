@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.clases;
-
+/*
 import javax.persistence.*;
 
 @Entity
@@ -55,3 +55,4 @@ public class ProblemaReserva{
 
 
 }
+*/

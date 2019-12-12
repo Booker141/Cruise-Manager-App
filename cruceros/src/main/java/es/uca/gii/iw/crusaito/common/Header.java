@@ -15,20 +15,16 @@ public class Header extends HorizontalLayout{
 		
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 		
-		Funciones.notificacionError("Aún no está implementado");
-		
 		MenuBar menuBar = new MenuBar();
 		MenuItem cruceros = menuBar.addItem("Cruceros"); // y esta es porque perfil tendra un menu desplegable
 		MenuItem reservas = menuBar.addItem("Reservas");
 		MenuItem cuenta = menuBar.addItem("Perfil");
+		MenuItem administrar = menuBar.addItem("Administrar");
+		MenuItem estadisticas = menuBar.addItem("Estadísticas");
 		MenuItem sesion = menuBar.addItem("Iniciar Sesión");
 		MenuItem cerrar = menuBar.addItem("Cerrar Sesión");
 		MenuItem registro = menuBar.addItem("Registrarse");
-		
-		MenuItem administrar = menuBar.addItem("Administrar");
-		MenuItem estadisticas = menuBar.addItem("Estadísticas");
-		
-		
+
 		
 		
 		//Meter accesos visibles cuando este logeado o no
@@ -36,6 +32,7 @@ public class Header extends HorizontalLayout{
 		if(SecurityUtils.isUserLoggedIn()) {
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			sesion.setVisible(false);
+			cuenta.setVisible(true);
 		    cerrar.setVisible(true);		
 			registro.setVisible(false);
 
@@ -51,8 +48,11 @@ public class Header extends HorizontalLayout{
 		
 		//Añadir rutas
 		
+		Funciones.clickListener(logo, "MainView");
 		Funciones.clickListener(cruceros, "CrucerosView");
 		Funciones.clickListener(reservas, "CrucerosView");
+		Funciones.clickListener(estadisticas, "CrucerosView");
+		Funciones.clickListener(administrar,"CrucerosView");
 		Funciones.clickListener(cuenta, "CrucerosView");
 		Funciones.clickListener(sesion, "Login");
 		Funciones.clickListener(cerrar, "Logout");
@@ -63,7 +63,7 @@ public class Header extends HorizontalLayout{
 		reservaSubMenu.addItem("Nueva reserva", e -> Funciones.notificacionError("Aún no está implementado"));
 		reservaSubMenu.addItem("Mis reservas", e -> Funciones.notificacionError("Aún no está implementado"));
 		
-		SubMenu administrarSubMenu = cuenta.getSubMenu();
+		SubMenu administrarSubMenu = administrar.getSubMenu();
 		administrarSubMenu.addItem("Administrar reservas", e -> Funciones.notificacionError("Aún no está implementado"));
 		administrarSubMenu.addItem("Administrar clientes", e -> Funciones.notificacionError("Aún no está implementado"));
 
