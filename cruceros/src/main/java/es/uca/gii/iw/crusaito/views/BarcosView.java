@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
 
-public class TiempoView {
-	
+public class BarcosView {
+
 }
