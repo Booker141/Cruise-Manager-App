@@ -36,7 +36,7 @@ public class Header extends HorizontalLayout{
 		    cerrar.setVisible(true);		
 			registro.setVisible(true);
 
-			if(SecurityUtils.hasRole("Administrador")){
+			if(SecurityUtils.hasRole("Admin")){
 			    administrar.setVisible(true);
 			    estadisticas.setVisible(false);
 			}
