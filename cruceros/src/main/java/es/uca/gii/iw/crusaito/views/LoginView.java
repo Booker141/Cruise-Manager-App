@@ -24,7 +24,7 @@ import es.uca.gii.iw.crusaito.security.CustomRequestCache;
 public class LoginView extends VerticalLayout {
 	
    private static final long serialVersionUID = 1L;
-   public static final String ROUTE = "login";
+   public static final String ROUTE = "Login";
    
    private LoginOverlay login = new LoginOverlay();
    HorizontalLayout loginLayout = new HorizontalLayout();

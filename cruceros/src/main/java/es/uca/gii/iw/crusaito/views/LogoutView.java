@@ -12,7 +12,7 @@ import com.vaadin.flow.router.Route;
 import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 
-@Secured({"Cliente", "Administrador", "Gestor"})
+@Secured({"Cliente", "Administrador", "Gerente"})
 @Route("Logout")
 public class LogoutView extends VerticalLayout implements BeforeEnterObserver{
 

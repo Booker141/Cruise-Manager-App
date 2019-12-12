@@ -2,6 +2,7 @@ package es.uca.gii.iw.crusaito.common;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.notification.Notification.Position;
@@ -30,6 +31,13 @@ public class Funciones {
 	}
 	
 	public static void clickListener(Button A, String s)
+	{
+		A.addClickListener(e -> {
+	    	A.getUI().ifPresent(ui-> ui.navigate(s));
+	    });
+	}
+	
+	public static void clickListener(Image A, String s)
 	{
 		A.addClickListener(e -> {
 	    	A.getUI().ifPresent(ui-> ui.navigate(s));
