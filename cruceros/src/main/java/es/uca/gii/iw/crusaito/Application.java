@@ -51,8 +51,8 @@ public class Application extends SpringBootServletInitializer {
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
 
             // save a few barcos
-            barcoRepo.save(new Barco("Vaporcito","15",1000,100,2000,LocalDate.now(),"Cadiz","San Fernando", "Buen barco"));
-            barcoRepo.save(new Barco("Vaporcito2","14",1500,150,3000,LocalDate.now(),"San Fernando","Chiclana", "Mal barco"));
+            barcoRepo.save(new Barco("Vaporcito","15","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Cadiz","San Fernando", "Buen barco"));
+            barcoRepo.save(new Barco("Vaporcito2","14","frontend/img/crucero1.jpg",1500,150,3000,LocalDate.now(),"San Fernando","Chiclana", "Mal barco"));
 
             
             // fetch all users

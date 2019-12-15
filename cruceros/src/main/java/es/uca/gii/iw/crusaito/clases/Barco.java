@@ -17,6 +17,7 @@ public class Barco
 	private long id;
 	private String bNombre;
 	private String bCodCamarote;
+	private String bImagen;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
 	private int bPeso;
@@ -29,11 +30,12 @@ public class Barco
 
 	protected Barco() {}
 	
-	public Barco(String bNombre, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
+	public Barco(String bNombre, String bCodCamarote,String bImagen, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino, String bDescripcion) {
 		
 		this.bNombre = bNombre;
 		this.bCodCamarote = bCodCamarote;
+		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
 		this.bPeso = bPeso;
@@ -43,6 +45,13 @@ public class Barco
 		this.bDescripcion = bDescripcion;
 	}
 	
+	public String getbImagen() {
+		return bImagen;
+	}
+	
+	public void setbImagen(String bImagen) {
+		this.bImagen = bImagen;
+	}
 	public String getbNombre() {
 		return bNombre;
 	}
