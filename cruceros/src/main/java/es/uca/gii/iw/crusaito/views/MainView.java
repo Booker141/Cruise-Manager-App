@@ -20,6 +20,8 @@ import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.spring.MessageBean;
 
 @Route("MainView")
+//Para establecer esta ruta por defecto
+//@Route("")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")
 
