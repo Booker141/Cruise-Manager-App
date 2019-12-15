@@ -23,6 +23,7 @@ public class Funciones {
 		notification.open();
 	}
 	
+	
 	public static void clickListener(MenuItem A, String cadena)
 	{
 		A.addClickListener(e -> {
