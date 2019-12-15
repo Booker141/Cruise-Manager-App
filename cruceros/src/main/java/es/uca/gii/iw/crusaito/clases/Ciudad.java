@@ -15,7 +15,7 @@ public class Ciudad {
 	@GeneratedValue
 	private long id;
 	private String cNombre;
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="Ciudad")
 	private List<Barco> Barco;
 	
 	public Ciudad(long id, String cNombre) {
