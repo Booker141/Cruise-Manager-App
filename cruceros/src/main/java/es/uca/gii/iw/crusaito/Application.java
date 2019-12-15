@@ -53,8 +53,7 @@ public class Application extends SpringBootServletInitializer {
             // save a few barcos
             barcoRepo.save(new Barco("Vaporcito","15","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Cadiz","San Fernando", "Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","14","frontend/img/crucero1.jpg",1500,150,3000,LocalDate.now(),"San Fernando","Chiclana", "Mal barco"));
-
-            
+          
             // fetch all users
             log.info("Users found with findAll():");
             log.info("-------------------------------");
