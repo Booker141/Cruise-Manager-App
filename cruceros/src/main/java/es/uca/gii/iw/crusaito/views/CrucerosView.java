@@ -39,13 +39,15 @@ public class CrucerosView extends VerticalLayout {
 		
 		//Cada barco
 
-		List<Barco> barcosEjemplo = barcoService.load();
-		//Barco barcoEjemplo = barcosEjemplo.get(0);
-		Iterator<Barco> iterador = barcosEjemplo.iterator();
+		List<Barco> listaBarcos = barcoService.load();
+
+		Iterator<Barco> iterador = listaBarcos.iterator();
+		VerticalLayout body = new VerticalLayout();
+		
 		//Cuerpo de dos barcos
 		HorizontalLayout subBody = new HorizontalLayout();
 		int contadorBarcos = 0;
-		VerticalLayout body = new VerticalLayout();
+		
 		
 		while(iterador.hasNext()) {
 			
