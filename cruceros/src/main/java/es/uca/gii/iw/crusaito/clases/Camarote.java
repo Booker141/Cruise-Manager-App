@@ -8,25 +8,21 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Camarote {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String tipo; //puede ser: suite, vip y externo
+	private String cTipo;
 	private String caImagen;
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Barco idBarco;
+	private Barco cBarco;
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Crucero idCrucero;
+	private Crucero cCrucero;
 	private boolean isReservada;
-	
 
-	public Camarote(Long id, String tipo, String caImagen, Barco idBarco, Crucero idCrucero, boolean isReservada) {
-		this.id = id;
-		this.tipo = tipo;
-		this.caImagen = caImagen;
-		this.idBarco = idBarco;
-		this.idCrucero = idCrucero;
+	
+	public Camarote(String cTipo, boolean isReservada) {
+		this.cTipo = cTipo;
 		this.isReservada = isReservada;
 	}
 
@@ -38,12 +34,12 @@ public class Camarote {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getcTipo() {
+		return cTipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setcTipo(String cTipo) {
+		this.cTipo = cTipo;
 	}
 
 	public boolean isReservada() {
@@ -68,7 +64,7 @@ public class Camarote {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (isReservada ? 1231 : 1237);
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((cTipo == null) ? 0 : cTipo.hashCode());
 		return result;
 	}
 
@@ -88,28 +84,28 @@ public class Camarote {
 			return false;
 		if (isReservada != other.isReservada)
 			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
+		if (cTipo == null) {
+			if (other.cTipo != null)
 				return false;
-		} else if (!tipo.equals(other.tipo))
+		} else if (!cTipo.equals(other.cTipo))
 			return false;
 		return true;
 	}
 
-	public Barco getIdBarco() {
-		return idBarco;
+	public Barco getcBarco() {
+		return cBarco;
 	}
 
-	public void setIdBarco(Barco idBarco) {
-		this.idBarco = idBarco;
+	public void setcBarco(Barco cBarco) {
+		this.cBarco = cBarco;
 	}
 
-	public Crucero getIdCrucero() {
-		return idCrucero;
+	public Crucero getcCrucero() {
+		return cCrucero;
 	}
 
-	public void setIdCrucero(Crucero idCrucero) {
-		this.idCrucero = idCrucero;
+	public void setcCrucero(Crucero cCrucero) {
+		this.cCrucero = cCrucero;
 	}
 	
 	

@@ -23,30 +23,23 @@ public class Crucero {
 	private String cDescripcion;
 	private String cImagen;
 	private double cPrecio;
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Camarote> idCamarotes;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cCrucero")
+	private List<Camarote> cCamarotes;
 	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Ciudad> Ciudad;
+	private List<Ciudad> cCiudad;
 	@OneToOne(fetch = FetchType.LAZY)
-	private Reserva idReserva;
+	private Reserva cReserva;
 	
 
-	
+	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
+			double cPrecio) {
 
-	public Crucero(Long id, String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
-			String cImagen, double cPrecio, List<Camarote> idCamarotes,
-			List<Ciudad> ciudad, Reserva idReserva) {
-		this.id = id;
 		this.cNombre = cNombre;
 		this.cOrigen = cOrigen;
 		this.cDestino = cDestino;
 		this.cDuracion = cDuracion;
 		this.cDescripcion = cDescripcion;
-		this.cImagen = cImagen;
 		this.cPrecio = cPrecio;
-		this.idCamarotes = idCamarotes;
-		Ciudad = ciudad;
-		this.idReserva = idReserva;
 	}
 
 
@@ -120,23 +113,33 @@ public class Crucero {
 	}
 
 
-	public List<Ciudad> getCiudad() {
-		return Ciudad;
+	public List<Ciudad> getcCiudad() {
+		return cCiudad;
 	}
 
 
-	public void setCiudad(List<Ciudad> ciudad) {
-		Ciudad = ciudad;
+	public void setcCiudad(List<Ciudad> cCiudad) {
+		this.cCiudad = cCiudad;
 	}
 
 
-	public List<Camarote> getIdCamarotes() {
-		return idCamarotes;
+	public List<Camarote> getcCamarotes() {
+		return cCamarotes;
 	}
 
 
-	public void setIdCamarotes(List<Camarote> idCamarotes) {
-		this.idCamarotes = idCamarotes;
+	public void setcCamarotes(List<Camarote> cCamarotes) {
+		this.cCamarotes = cCamarotes;
+	}
+
+
+	public Reserva getcReserva() {
+		return cReserva;
+	}
+
+
+	public void setcReserva(Reserva cReserva) {
+		this.cReserva = cReserva;
 	}
 
 

@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,16 +12,24 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Ciudad {
 
+	public Ciudad() {
+	}
+
 	@Id
 	@GeneratedValue
 	private long id;
 	private String cNombre;
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="Ciudad")
-	private List<Crucero> idCruceros;
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="cCiudad")
+	private List<Crucero> cCruceros;
 	
-	public Ciudad(long id, String cNombre) {
-		this.id = id;
+	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
+		this.cCruceros = new ArrayList<>();
+	}
+	
+	public Ciudad(String cNombre, List<Crucero> cCruceros) {
+		this.cNombre = cNombre;
+		this.cCruceros = cCruceros;
 	}
 
 	public long getId() {
@@ -39,11 +48,15 @@ public class Ciudad {
 		this.cNombre = cNombre;
 	}
 
-	public List<Crucero> getIdCruceros() {
-		return idCruceros;
+	public List<Crucero> getcCruceros() {
+		return cCruceros;
 	}
 
-	public void setIdCruceros(List<Crucero> idCruceros) {
-		this.idCruceros = idCruceros;
+	public void setcCruceros(List<Crucero> cCruceros) {
+		this.cCruceros = cCruceros;
+	}
+	
+	public void addcCruceros(Crucero crucero) {
+		this.cCruceros.add(crucero);
 	}
 }

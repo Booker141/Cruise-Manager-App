@@ -11,30 +11,28 @@ import javax.persistence.OneToOne;
 public class Reserva 
 {	
 	
+	public Reserva() {
+	}
+
 	@Id
 	@GeneratedValue
 	private long id;
 	@OneToOne(fetch = FetchType.LAZY)
-	private Usuario usuario;
+	private Usuario rUsuario;
 	@OneToOne(fetch = FetchType.LAZY)
-	private Crucero crucero;
+	private Crucero rCrucero;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private boolean isExpired;
 	private double precio;
 	private String estado; // Abierta, Finalizada y Cancelada
 	
-	public Reserva(long id, Usuario usuario, Crucero crucero, LocalDate fechaInicio, LocalDate fechaFin, double precio,
-			String estado) {
-		this.id = id;
-		this.usuario = usuario;
-		this.crucero = crucero;
+	public Reserva(LocalDate fechaInicio, LocalDate fechaFin, double precio, String estado) {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.precio = precio;
 		this.estado = estado;
 		this.isExpired = false;
-		
 	}
 
 	public long getId() {
@@ -45,20 +43,20 @@ public class Reserva
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getrUsuario() {
+		return rUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setrUsuario(Usuario rUsuario) {
+		this.rUsuario = rUsuario;
 	}
 
-	public Crucero getCrucero() {
-		return crucero;
+	public Crucero getrCrucero() {
+		return rCrucero;
 	}
 
-	public void setCrucero(Crucero crucero) {
-		this.crucero = crucero;
+	public void setrCrucero(Crucero rCrucero) {
+		this.rCrucero = rCrucero;
 	}
 
 	public LocalDate getFechaInicio() {
