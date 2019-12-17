@@ -16,7 +16,7 @@ import es.uca.gii.iw.crusaito.clases.*;
 import es.uca.gii.iw.crusaito.common.Funciones;
 
 
-@Route(value = "Reserva")
+@Route(value = "Reserva",layout = MainView.class)
 public class ReservaView extends VerticalLayout{
 
 		private static final long serialVersionUID = 1L;

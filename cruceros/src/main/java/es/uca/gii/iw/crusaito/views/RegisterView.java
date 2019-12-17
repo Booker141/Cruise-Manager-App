@@ -21,8 +21,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.servicios.rolService;
 
 
-@Route("Registrar")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
+@Route(value = "Registrar",layout = MainView.class)
 public class RegisterView extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	
