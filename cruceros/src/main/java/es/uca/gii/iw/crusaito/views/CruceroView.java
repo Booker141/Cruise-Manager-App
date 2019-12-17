@@ -19,6 +19,7 @@ public class CruceroView extends VerticalLayout {
 
 	HorizontalLayout infoBasicaLayout = new HorizontalLayout();
 	VerticalLayout infoBasica2Layout = new VerticalLayout();
+	
 	public CruceroView() {
 		
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
