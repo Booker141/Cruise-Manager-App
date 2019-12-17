@@ -6,9 +6,11 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,6 +36,8 @@ public class Usuario implements UserDetails{
 	@ManyToOne
 	private Rol role;
 	private boolean enabled;
+	@OneToOne(fetch = FetchType.LAZY)
+	private Reserva idReserva;
 	
 	protected Usuario(){}
 	

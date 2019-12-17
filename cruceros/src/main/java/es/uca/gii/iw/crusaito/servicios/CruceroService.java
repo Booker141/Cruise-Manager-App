@@ -20,8 +20,8 @@ private CruceroRepository repo;
 		return repo.findById(id);
 	}
 	
-	public Crucero findByNombre(String cNombre) {
-		return repo.findByNombre(cNombre);
+	public Crucero findBycNombre(String cNombre) {
+		return repo.findBycNombre(cNombre);
 	}
 	
 	public Crucero save(Crucero crucero) {

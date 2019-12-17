@@ -23,8 +23,8 @@ public class BarcoService {
 		return repo.findById(id);
 	}
 	
-	public Barco findByNombre(String bNombre) {
-		return repo.findByNombre(bNombre);
+	public Barco findBybNombre(String bNombre) {
+		return repo.findBybNombre(bNombre);
 	}
 	
 	public Barco save(Barco barco) {

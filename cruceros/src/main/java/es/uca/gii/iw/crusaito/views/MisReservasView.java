@@ -24,7 +24,7 @@ import es.uca.gii.iw.crusaito.servicios.ReservaService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @SuppressWarnings("serial")
-@Route("MisReservas")
+@Route(value = "MisReservas",layout=MainView.class)
 public class MisReservasView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private Grid<Reserva> grid = new Grid<Reserva>(Reserva.class);

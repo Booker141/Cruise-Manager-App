@@ -7,10 +7,10 @@ import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.clases.Crucero;
 
 @Repository
-public interface CruceroRepository extends JpaRepository<Barco,Long>{
+public interface CruceroRepository extends JpaRepository<Crucero,Long>{
 	
 	Crucero findById(int id);
-	Crucero findByNombre(String cNombre);
+	Crucero findBycNombre(String cNombre);
 	Crucero save(Crucero crucero);
 	void delete(Crucero data);
 

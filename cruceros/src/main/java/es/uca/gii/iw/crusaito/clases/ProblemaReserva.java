@@ -8,13 +8,13 @@ public class ProblemaReserva{
 	@Id
     @GeneratedValue
     private Long id;
-    private Reserva pReserva;
+    //private Reserva pReserva;
     private String pTipoProblema;
     private String pDescripcionProblema;
     
     public ProblemaReserva(Long id, Reserva reserva, String tipoProblema, String descripcionProblema) {
 		this.id = id;
-		this.pReserva = reserva;
+		//this.pReserva = reserva;
 		this.pTipoProblema = tipoProblema;
 		this.pDescripcionProblema = descripcionProblema;
 	}
@@ -27,13 +27,13 @@ public class ProblemaReserva{
 		this.id = id;
 	}
 
-	public Reserva getpReserva() {
+	/*public Reserva getpReserva() {
 		return pReserva;
 	}
 
 	public void setpReserva(Reserva pReserva) {
 		this.pReserva = pReserva;
-	}
+	}*/
 
 	public String getpTipoProblema() {
 		return pTipoProblema;
