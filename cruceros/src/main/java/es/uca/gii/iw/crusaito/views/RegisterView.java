@@ -12,11 +12,8 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 
 import es.uca.gii.iw.crusaito.clases.Usuario;
-import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.servicios.rolService;
 

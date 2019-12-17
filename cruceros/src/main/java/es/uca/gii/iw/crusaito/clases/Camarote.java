@@ -5,7 +5,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Camarote {
@@ -13,17 +12,21 @@ public class Camarote {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String tipo;
+	private String tipo; //puede ser: suite, vip y externo
+	private String caImagen;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Barco idBarco;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Crucero idCrucero;
 	private boolean isReservada;
 	
-	
-	public Camarote(Long id, String tipo, boolean isReservada) {
+
+	public Camarote(Long id, String tipo, String caImagen, Barco idBarco, Crucero idCrucero, boolean isReservada) {
 		this.id = id;
 		this.tipo = tipo;
+		this.caImagen = caImagen;
+		this.idBarco = idBarco;
+		this.idCrucero = idCrucero;
 		this.isReservada = isReservada;
 	}
 
@@ -49,6 +52,14 @@ public class Camarote {
 
 	public void setReservada(boolean isReservada) {
 		this.isReservada = isReservada;
+	}
+
+	public String getCaImagen() {
+		return caImagen;
+	}
+
+	public void setCaImagen(String caImagen) {
+		this.caImagen = caImagen;
 	}
 
 	@Override

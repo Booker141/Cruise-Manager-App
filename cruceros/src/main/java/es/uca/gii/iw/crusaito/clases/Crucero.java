@@ -21,6 +21,7 @@ public class Crucero {
 	private String cDestino;
 	private String cDuracion; //en dias
 	private String cDescripcion;
+	private String cImagen;
 	private double cPrecio;
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Camarote> idCamarotes;
@@ -30,16 +31,22 @@ public class Crucero {
 	private Reserva idReserva;
 	
 
+	
+
 	public Crucero(Long id, String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
-			double cPrecio, List<Ciudad> ciudad) {
+			String cImagen, double cPrecio, List<Camarote> idCamarotes,
+			List<Ciudad> ciudad, Reserva idReserva) {
 		this.id = id;
 		this.cNombre = cNombre;
 		this.cOrigen = cOrigen;
 		this.cDestino = cDestino;
 		this.cDuracion = cDuracion;
 		this.cDescripcion = cDescripcion;
+		this.cImagen = cImagen;
 		this.cPrecio = cPrecio;
+		this.idCamarotes = idCamarotes;
 		Ciudad = ciudad;
+		this.idReserva = idReserva;
 	}
 
 
@@ -130,6 +137,16 @@ public class Crucero {
 
 	public void setIdCamarotes(List<Camarote> idCamarotes) {
 		this.idCamarotes = idCamarotes;
+	}
+
+
+	public String getcImagen() {
+		return cImagen;
+	}
+
+
+	public void setcImagen(String cImagen) {
+		this.cImagen = cImagen;
 	}
 
 	

@@ -1,10 +1,6 @@
 package es.uca.gii.iw.crusaito.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-
-import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
@@ -20,7 +16,7 @@ import es.uca.gii.iw.crusaito.common.Funciones;
 public class ReservaView extends VerticalLayout{
 
 		private static final long serialVersionUID = 1L;
-		private Barco barco;
+		private Crucero crucero;
 	    private Reserva reserva;
 	    private Button volver = new Button();
 
@@ -29,11 +25,11 @@ public class ReservaView extends VerticalLayout{
 	        if(UI.getCurrent().getSession().getAttribute(Usuario.class) != null) {
 
 	            H2 titulo = new H2("Información de la reserva: ");
-	            Label crucero = new Label("El crucero reservado: " + barco.getbNombre());
+	            Label viaje = new Label("El crucero reservado: " + crucero.getcNombre());
 	            Label codigo = new Label("El codigo de la reserva es: " + reserva.getId());
-	            Label duracion = new Label("El crucero dura desde: " + reserva.getFechaInicio() + " hasta ");
+	            Label duracion = new Label("El crucero dura desde: " + reserva.getFechaInicio() + " hasta " + reserva.getFechaFin());
 	            Label precio = new Label("El precio es de: " + reserva.getPrecio() + " €");
-	            VerticalLayout layout = new VerticalLayout(titulo, crucero, codigo, duracion, precio, volver);
+	            VerticalLayout layout = new VerticalLayout(titulo, viaje, codigo, duracion, precio, volver);
 	            add(layout);
 	            Funciones.clickListener(volver, "ReservasView");
 

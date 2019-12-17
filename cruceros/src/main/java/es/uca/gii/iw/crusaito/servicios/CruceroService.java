@@ -1,5 +1,7 @@
 package es.uca.gii.iw.crusaito.servicios;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,11 @@ private CruceroRepository repo;
 	
 	public Crucero save(Crucero crucero) {
 		return repo.save(crucero);
+	}
+	
+	public List<Crucero> load(){
+		//List<Crucero> listaCruceros = repo.findAll();
+		return repo.findAll();
 	}
 	
 	public void delete (Crucero data) {
