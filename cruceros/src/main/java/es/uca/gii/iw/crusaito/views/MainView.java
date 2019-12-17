@@ -57,6 +57,9 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		addMenuTab("Main",MainView.class);
 		addMenuTab("Admin",AdminView.class);
 		addMenuTab("Cruceros",CrucerosView.class);
+		addMenuTab("Mis reservas",MisReservasView.class);
+		addMenuTab("Registrar",RegisterView.class);
+		addMenuTab("Iniciar Sesion",LoginView.class);
 		
 		tabs.setOrientation(Tabs.Orientation.VERTICAL);
 		addToDrawer(tabs);

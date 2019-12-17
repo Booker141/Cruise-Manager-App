@@ -16,7 +16,7 @@ public class Ciudad {
 	private long id;
 	private String cNombre;
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="Ciudad")
-	private List<Barco> Barco;
+	private List<Crucero> idCruceros;
 	
 	public Ciudad(long id, String cNombre) {
 		this.id = id;
@@ -37,5 +37,13 @@ public class Ciudad {
 
 	public void setcNombre(String cNombre) {
 		this.cNombre = cNombre;
+	}
+
+	public List<Crucero> getIdCruceros() {
+		return idCruceros;
+	}
+
+	public void setIdCruceros(List<Crucero> idCruceros) {
+		this.idCruceros = idCruceros;
 	}
 }

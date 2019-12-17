@@ -1,9 +1,11 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Camarote {
@@ -12,7 +14,12 @@ public class Camarote {
 	@GeneratedValue
 	private Long id;
 	private String tipo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Barco idBarco;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Crucero idCrucero;
 	private boolean isReservada;
+	
 	
 	public Camarote(Long id, String tipo, boolean isReservada) {
 		this.id = id;
@@ -76,6 +83,22 @@ public class Camarote {
 		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
+	}
+
+	public Barco getIdBarco() {
+		return idBarco;
+	}
+
+	public void setIdBarco(Barco idBarco) {
+		this.idBarco = idBarco;
+	}
+
+	public Crucero getIdCrucero() {
+		return idCrucero;
+	}
+
+	public void setIdCrucero(Crucero idCrucero) {
+		this.idCrucero = idCrucero;
 	}
 	
 	

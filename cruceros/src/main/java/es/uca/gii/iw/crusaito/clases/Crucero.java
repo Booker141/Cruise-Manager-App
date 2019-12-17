@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Crucero {
@@ -20,13 +22,16 @@ public class Crucero {
 	private String cDuracion; //en dias
 	private String cDescripcion;
 	private double cPrecio;
-	private Barco cBarco;
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Camarote> idCamarotes;
 	@ManyToMany(fetch=FetchType.LAZY)
 	private List<Ciudad> Ciudad;
+	@OneToOne(fetch = FetchType.LAZY)
+	private Reserva idReserva;
 	
 
 	public Crucero(Long id, String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
-			double cPrecio, Barco cBarco, List<es.uca.gii.iw.crusaito.clases.Ciudad> ciudad) {
+			double cPrecio, List<Ciudad> ciudad) {
 		this.id = id;
 		this.cNombre = cNombre;
 		this.cOrigen = cOrigen;
@@ -34,7 +39,6 @@ public class Crucero {
 		this.cDuracion = cDuracion;
 		this.cDescripcion = cDescripcion;
 		this.cPrecio = cPrecio;
-		this.cBarco = cBarco;
 		Ciudad = ciudad;
 	}
 
@@ -109,16 +113,6 @@ public class Crucero {
 	}
 
 
-	public Barco getcBarco() {
-		return cBarco;
-	}
-
-
-	public void setcBarco(Barco cBarco) {
-		this.cBarco = cBarco;
-	}
-
-
 	public List<Ciudad> getCiudad() {
 		return Ciudad;
 	}
@@ -126,6 +120,16 @@ public class Crucero {
 
 	public void setCiudad(List<Ciudad> ciudad) {
 		Ciudad = ciudad;
+	}
+
+
+	public List<Camarote> getIdCamarotes() {
+		return idCamarotes;
+	}
+
+
+	public void setIdCamarotes(List<Camarote> idCamarotes) {
+		this.idCamarotes = idCamarotes;
 	}
 
 	
