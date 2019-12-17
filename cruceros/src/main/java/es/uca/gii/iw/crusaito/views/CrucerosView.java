@@ -29,6 +29,7 @@ public class CrucerosView extends VerticalLayout {
 	
 	@Autowired
 	public CrucerosView(BarcoService barcoService) {
+		
 		this.barcoService=barcoService;
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
