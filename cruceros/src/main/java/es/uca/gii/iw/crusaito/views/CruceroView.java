@@ -12,8 +12,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.common.Header;
 
-@Route("CruceroView")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
+@Route(value = "CruceroView",layout = MainView.class)
 public class CruceroView extends VerticalLayout {
 	private static final long serialVersionUID = 1L;
 
