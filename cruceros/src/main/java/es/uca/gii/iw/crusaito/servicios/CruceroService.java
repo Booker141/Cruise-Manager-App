@@ -28,8 +28,8 @@ private CruceroRepository repo;
 		return repo.save(crucero);
 	}
 	
-	public void delete (Crucero data) {
-        repo.delete(data);
+	public void delete (Crucero crucero) {
+        repo.delete(crucero);
     }
 
 }

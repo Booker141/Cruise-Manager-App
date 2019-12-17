@@ -13,6 +13,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class Crucero {
 	
+	public Crucero() {
+	}
+
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -22,24 +26,22 @@ public class Crucero {
 	private String cDuracion; //en dias
 	private String cDescripcion;
 	private double cPrecio;
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Camarote> idCamarotes;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cCrucero")
+	private List<Camarote> cCamarotes;
 	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Ciudad> Ciudad;
+	private List<Ciudad> cCiudad;
 	@OneToOne(fetch = FetchType.LAZY)
-	private Reserva idReserva;
+	private Reserva cReserva;
 	
 
-	public Crucero(Long id, String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
-			double cPrecio, List<Ciudad> ciudad) {
-		this.id = id;
+	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
+			double cPrecio) {
 		this.cNombre = cNombre;
 		this.cOrigen = cOrigen;
 		this.cDestino = cDestino;
 		this.cDuracion = cDuracion;
 		this.cDescripcion = cDescripcion;
 		this.cPrecio = cPrecio;
-		Ciudad = ciudad;
 	}
 
 
@@ -113,23 +115,33 @@ public class Crucero {
 	}
 
 
-	public List<Ciudad> getCiudad() {
-		return Ciudad;
+	public List<Ciudad> getcCiudad() {
+		return cCiudad;
 	}
 
 
-	public void setCiudad(List<Ciudad> ciudad) {
-		Ciudad = ciudad;
+	public void setcCiudad(List<Ciudad> cCiudad) {
+		this.cCiudad = cCiudad;
 	}
 
 
-	public List<Camarote> getIdCamarotes() {
-		return idCamarotes;
+	public List<Camarote> getcCamarotes() {
+		return cCamarotes;
 	}
 
 
-	public void setIdCamarotes(List<Camarote> idCamarotes) {
-		this.idCamarotes = idCamarotes;
+	public void setcCamarotes(List<Camarote> cCamarotes) {
+		this.cCamarotes = cCamarotes;
+	}
+
+
+	public Reserva getcReserva() {
+		return cReserva;
+	}
+
+
+	public void setcReserva(Reserva cReserva) {
+		this.cReserva = cReserva;
 	}
 
 	

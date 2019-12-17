@@ -31,13 +31,11 @@ public class BarcoService {
 		return repo.save(barco);
 	}
 	
-
 	public List<Barco> load(){
-		//List<Barco> listaBarcos = repo.findAll();
 		return repo.findAll();
 	}
 
-	public void delete (Barco data) {
-        repo.delete(data);
+	public void delete (Barco barco) {
+        repo.delete(barco);
     }
 }

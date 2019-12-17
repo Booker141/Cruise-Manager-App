@@ -10,7 +10,7 @@ import es.uca.gii.iw.crusaito.clases.*;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long>{
-	List<Reserva> findByUsuario(Usuario usuario);
-	List<Reserva> findByCrucero(Crucero crucero);
-    Optional<Reserva> findById(Long id);
+	List<Reserva> findByrUsuario(Usuario usuario);
+	List<Reserva> findByrCrucero(Crucero crucero);
+    Reserva findById(long id);
 }
