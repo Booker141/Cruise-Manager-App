@@ -17,8 +17,8 @@ public class Barco
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Camarote> idCamarotes;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cBarco")
+	private List<Camarote> bCamarotes;
 	private String bImagen;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
@@ -28,11 +28,11 @@ public class Barco
 
 
 	protected Barco() {}
+	
 	//Añadir Lista de camarotes al constructor
 	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
 
-		
 		this.bNombre = bNombre;
 		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
@@ -57,11 +57,11 @@ public class Barco
 		this.bNombre = bNombre;
 	}
 
-	public List<Camarote> getidCamarotes() {
-		return idCamarotes;
+	public List<Camarote> getbCamarotes() {
+		return bCamarotes;
 	}
-	public void setidCamarotes(List<Camarote> idCamarotes) {
-		this.idCamarotes = idCamarotes;
+	public void setbCamarotes(List<Camarote> bCamarotes) {
+		this.bCamarotes = bCamarotes;
 	}
 
 	public int getbAforoPasajeros() {

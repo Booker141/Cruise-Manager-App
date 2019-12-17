@@ -20,7 +20,7 @@ public class Weather {
 	
 	public Tiempo requestWeather(Tiempo weatherObject, long id) throws Exception
 	{
-		Ciudad city = new Ciudad(id,weatherObject.getCity());
+		Ciudad city = new Ciudad(weatherObject.getCity());
 		
 		//String city = weatherObject.getCity();
 		

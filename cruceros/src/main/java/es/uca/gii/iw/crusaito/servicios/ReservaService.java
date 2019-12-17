@@ -21,16 +21,16 @@ public class ReservaService {
         this.repositorio = repositorio;
     }
 	
-	public Optional<Reserva> findById(Long id) {
+	public Reserva findById(long id) {
         return repositorio.findById(id);
     }
 	
 	public List<Reserva> listByUsuario(Usuario usuario) {
-        return repositorio.findByUsuario(usuario);
+        return repositorio.findByrUsuario(usuario);
     }
 	
 	public List<Reserva> listByCrucero(Crucero crucero) {
-        return repositorio.findByCrucero(crucero);
+        return repositorio.findByrCrucero(crucero);
     }
 	
 	public List<Reserva> findAll() {
@@ -38,8 +38,8 @@ public class ReservaService {
     }
 
 	
-	public void delete (Reserva data) {
-        repositorio.delete(data);
+	public void delete (Reserva reserva) {
+        repositorio.delete(reserva);
     }
 	
 

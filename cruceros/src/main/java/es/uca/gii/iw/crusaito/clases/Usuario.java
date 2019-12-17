@@ -206,6 +206,14 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	public Reserva getIdReserva() {
+		return idReserva;
+	}
+
+	public void setIdReserva(Reserva idReserva) {
+		this.idReserva = idReserva;
+	}
 	
 	/*
 	public String currentUsername() {
