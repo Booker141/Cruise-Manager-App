@@ -10,7 +10,6 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -40,13 +39,18 @@ public class CrucerosView extends VerticalLayout {
 		
 		//Cada barco
 
+		List<Barco> listaBarcos = barcoService.load();
 
-		List<Barco> barcosEjemplo = barcoService.load();
-		//Barco barcoEjemplo = barcosEjemplo.get(0);
-		Iterator<Barco> iterador = barcosEjemplo.iterator();
+		Iterator<Barco> iterador = listaBarcos.iterator();
+		VerticalLayout body = new VerticalLayout();
+		
 		//Cuerpo de dos barcos
 		HorizontalLayout subBody = new HorizontalLayout();
+		int contadorBarcos = 0;
+		
+		
 		while(iterador.hasNext()) {
+			
 			Div barco = new Div();
 			Barco barcoEjemplo = iterador.next();
 			Image fotoPrueba1 = new Image(barcoEjemplo.getbImagen(), "fotoOferta1"); // Foto de cada barco, se
@@ -61,23 +65,19 @@ public class CrucerosView extends VerticalLayout {
 			barco.getStyle().set("width","500px");
 			barco.getStyle().set("border-style", "solid"); // Bordes para comprobar limites
 
-			
 			subBody.add(barco);
+			contadorBarcos++;
+			if(contadorBarcos==2) {
+				body.add(subBody);
+				subBody = new HorizontalLayout();
+				contadorBarcos=0;
+			}
 		}
-
-		//Cuerpo entero del body
-		VerticalLayout body = new VerticalLayout();
-		body.add(subBody);
 		
 		body.getStyle().set("width", "100%");
 		body.getStyle().set("border-style", "solid");
 		
 		add(body);
-
-			// TODO obtener los barcos correspondientes de la BD y mostrarlos en el "body"
-		
-		TextField texto = new TextField("aqui van los barcos");
-		add(texto);
 		
 		//fin body
 		
