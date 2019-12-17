@@ -26,11 +26,11 @@ public class ReservaService {
     }
 	
 	public List<Reserva> listByUsuario(Usuario usuario) {
-        return repositorio.findByidUsuario(usuario);
+        return repositorio.findByUsuario(usuario);
     }
 	
 	public List<Reserva> listByBarco(Barco barco) {
-        return repositorio.findByidBarco(barco);
+        return repositorio.findByBarco(barco);
     }
 	
 	public List<Reserva> findAll() {

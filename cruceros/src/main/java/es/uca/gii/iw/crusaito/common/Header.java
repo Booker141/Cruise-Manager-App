@@ -15,6 +15,18 @@ public class Header extends HorizontalLayout{
 		
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 		
+		/*
+		Icon usuario = new Icon(VaadinIcon.USER);
+        Icon registrar = new Icon(VaadinIcon.USER_CARD);
+        Icon reserva = new Icon(VaadinIcon.SIGN_OUT_ALT);
+        Icon logout = new Icon(VaadinIcon.SIGN_OUT);
+        Icon login = new Icon(VaadinIcon.SIGN_IN);
+        Icon administracion = new Icon(VaadinIcon.WRENCH);
+        Icon crucero = new Icon(VaadinIcon.ANCHOR);
+        Icon estadistica = new Icon(VaadinIcon.SPLINE_CHART);
+        */
+        
+        
 		MenuBar menuBar = new MenuBar();
 		MenuItem cruceros = menuBar.addItem("Cruceros"); // y esta es porque perfil tendra un menu desplegable
 		MenuItem reservas = menuBar.addItem("Reservas");
@@ -58,7 +70,7 @@ public class Header extends HorizontalLayout{
 		
 		Funciones.clickListener(logo, "MainView");
 		Funciones.clickListener(cruceros, "CrucerosView");
-		Funciones.clickListener(reservas, "CrucerosView");
+		Funciones.clickListener(reservas, "MisReservas");
 		Funciones.clickListener(estadisticas, "CrucerosView");
 		Funciones.clickListener(administrar,"CrucerosView");
 		Funciones.clickListener(cuenta, "CrucerosView");
@@ -86,6 +98,8 @@ public class Header extends HorizontalLayout{
 		add(horizontalHeader);
 		
 		this.getStyle().set("border-style", "solid");
+		
+		
 		
 		/* Codigo util¿?
 		menuBar.setOpenOnHover(true); // desplegar submenu sin click

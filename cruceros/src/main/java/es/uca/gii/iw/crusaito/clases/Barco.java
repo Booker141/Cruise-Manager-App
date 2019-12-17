@@ -1,13 +1,11 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
 
 @Entity
 public class Barco 
@@ -22,16 +20,14 @@ public class Barco
 	private int bAforoTripulantes;
 	private int bPeso;
 	private LocalDate bFchPuestaServicio;
-	private String bOrigen;
-	private String bDestino;
 	private String bDescripcion;
-	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Ciudad> Ciudad;
+
 
 	protected Barco() {}
 	
-	public Barco(String bNombre, String bCodCamarote,String bImagen, int bAforoPasajeros, int bAforoTripulantes,
-			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino, String bDescripcion) {
+	public Barco(String bNombre, String bCodCamarote, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
+			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
+
 		
 		this.bNombre = bNombre;
 		this.bCodCamarote = bCodCamarote;
@@ -40,8 +36,6 @@ public class Barco
 		this.bAforoTripulantes = bAforoTripulantes;
 		this.bPeso = bPeso;
 		this.bFchPuestaServicio = bFchPuestaServicio;
-		this.bOrigen = bOrigen;
-		this.bDestino = bDestino;
 		this.bDescripcion = bDescripcion;
 	}
 	
@@ -82,22 +76,6 @@ public class Barco
 
 	public LocalDate getbFchPuestaServicio() {
 		return bFchPuestaServicio;
-	}
-
-	public String getbOrigen() {
-		return bOrigen;
-	}
-
-	public void setbOrigen(String bOrigen) {
-		this.bOrigen = bOrigen;
-	}
-
-	public String getbDestino() {
-		return bDestino;
-	}
-
-	public void setbDestino(String bDestino) {
-		this.bDestino = bDestino;
 	}
 	
 	@Override
