@@ -13,10 +13,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Crucero {
 	
-	public Crucero() {
-	}
-
-
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -25,6 +21,7 @@ public class Crucero {
 	private String cDestino;
 	private String cDuracion; //en dias
 	private String cDescripcion;
+	private String cImagen;
 	private double cPrecio;
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cCrucero")
 	private List<Camarote> cCamarotes;
@@ -36,6 +33,7 @@ public class Crucero {
 
 	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
 			double cPrecio) {
+
 		this.cNombre = cNombre;
 		this.cOrigen = cOrigen;
 		this.cDestino = cDestino;
@@ -142,6 +140,16 @@ public class Crucero {
 
 	public void setcReserva(Reserva cReserva) {
 		this.cReserva = cReserva;
+	}
+
+
+	public String getcImagen() {
+		return cImagen;
+	}
+
+
+	public void setcImagen(String cImagen) {
+		this.cImagen = cImagen;
 	}
 
 	

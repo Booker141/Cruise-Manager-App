@@ -4,10 +4,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 
 import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.common.Header;
@@ -18,6 +15,7 @@ public class CruceroView extends VerticalLayout {
 
 	HorizontalLayout infoBasicaLayout = new HorizontalLayout();
 	VerticalLayout infoBasica2Layout = new VerticalLayout();
+	
 	public CruceroView() {
 		
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
