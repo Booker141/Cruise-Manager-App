@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
 
-public class AdminListaClientesView {
+public class PerfilView {
 
 }

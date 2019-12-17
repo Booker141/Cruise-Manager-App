@@ -16,5 +16,4 @@ public interface CamaroteRepository extends JpaRepository<Camarote,Long>{
 }
 
 
-}
 

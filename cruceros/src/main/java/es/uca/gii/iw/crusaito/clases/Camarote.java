@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Camarote {
 
+	public Camarote() {}
+	
 	@Id
 	@GeneratedValue
 	private Long id;
