@@ -19,12 +19,25 @@ public class BarcoService {
 		this.repo=repo;
 	}
 	
+	public Barco findById(int id) {
+		return repo.findById(id);
+	}
+	
+	public Barco findByNombre(String bNombre) {
+		return repo.findByNombre(bNombre);
+	}
+	
 	public Barco save(Barco barco) {
 		return repo.save(barco);
 	}
 	
+
 	public List<Barco> load(){
 		//List<Barco> listaBarcos = repo.findAll();
 		return repo.findAll();
 	}
+
+	public void delete (Barco data) {
+        repo.delete(data);
+    }
 }

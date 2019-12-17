@@ -29,7 +29,7 @@ public class ReservaView extends VerticalLayout{
 	        if(UI.getCurrent().getSession().getAttribute(Usuario.class) != null) {
 
 	            H2 titulo = new H2("Información de la reserva: ");
-	            Label crucero = new Label("El crucero reservado: " + barco.getbNombre() + " " + barco.getbDestino());
+	            Label crucero = new Label("El crucero reservado: " + barco.getbNombre());
 	            Label codigo = new Label("El codigo de la reserva es: " + reserva.getId());
 	            Label duracion = new Label("El crucero dura desde: " + reserva.getFechaInicio() + " hasta ");
 	            Label precio = new Label("El precio es de: " + reserva.getPrecio() + " €");

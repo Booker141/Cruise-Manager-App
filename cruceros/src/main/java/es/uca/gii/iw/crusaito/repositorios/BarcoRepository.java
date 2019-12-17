@@ -11,5 +11,5 @@ import es.uca.gii.iw.crusaito.clases.Barco;
 public interface BarcoRepository extends JpaRepository<Barco,Long>{
 	List<Barco> findAll();
 	Barco findById(int id);
-	Barco findBybNombre(String bNombre);
+	Barco findByNombre(String bNombre);
 }
