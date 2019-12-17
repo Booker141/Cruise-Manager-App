@@ -1,10 +1,13 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -14,7 +17,8 @@ public class Barco
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	private String bCodCamarote;
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Camarote> idCamarotes;
 	private String bImagen;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
@@ -24,13 +28,12 @@ public class Barco
 
 
 	protected Barco() {}
-	
-	public Barco(String bNombre, String bCodCamarote, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
+	//Añadir Lista de camarotes al constructor
+	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
 
 		
 		this.bNombre = bNombre;
-		this.bCodCamarote = bCodCamarote;
 		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
@@ -54,8 +57,11 @@ public class Barco
 		this.bNombre = bNombre;
 	}
 
-	public String getbCodCamarote() {
-		return bCodCamarote;
+	public List<Camarote> getidCamarotes() {
+		return idCamarotes;
+	}
+	public void setidCamarotes(List<Camarote> idCamarotes) {
+		this.idCamarotes = idCamarotes;
 	}
 
 	public int getbAforoPasajeros() {

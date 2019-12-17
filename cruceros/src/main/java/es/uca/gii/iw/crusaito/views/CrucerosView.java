@@ -11,6 +11,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
@@ -19,11 +20,9 @@ import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.servicios.BarcoService;
 
-@Route("CrucerosView")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
-public class CrucerosView extends VerticalLayout {
+@Route(value = "CrucerosView",layout = MainView.class)
+public class CrucerosView extends Div {
 	private static final long serialVersionUID = 1L;
-
 
 	private BarcoService barcoService;
 	
@@ -33,8 +32,8 @@ public class CrucerosView extends VerticalLayout {
 		this.barcoService=barcoService;
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		Header header = new Header();
-		add(header);
+		//Header header = new Header();
+		//add(header);
 		
 		// inicio body
 		

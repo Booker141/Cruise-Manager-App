@@ -21,8 +21,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.servicios.rolService;
 
 
-@Route("Registrar")
-@Theme(value = Lumo.class, variant = Lumo.DARK)
+@Route(value = "Registrar",layout = MainView.class)
 public class RegisterView extends VerticalLayout{
 	private static final long serialVersionUID = 1L;
 	
@@ -59,7 +58,7 @@ public class RegisterView extends VerticalLayout{
 	
 	public RegisterView() {
 		
-		Header header = new Header();
+		//Header header = new Header();
 		
 		Binder<Usuario> binder = new Binder<>(Usuario.class);
 		binder.bindInstanceFields(this);
@@ -67,6 +66,6 @@ public class RegisterView extends VerticalLayout{
 		email.setErrorMessage("Dirreción de correo no válida");
 		formulario.add(email,username,password,rPassword,firstName,lastName,telefono,dni,address,city,bornDate,Save);
 		
-		add(header,formulario);
+		add(formulario);
 	}
 }

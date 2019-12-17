@@ -2,8 +2,10 @@ package es.uca.gii.iw.crusaito.clases;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Reserva 
@@ -12,10 +14,13 @@ public class Reserva
 	@Id
 	@GeneratedValue
 	private long id;
+	@OneToOne(fetch = FetchType.LAZY)
 	private Usuario usuario;
+	@OneToOne(fetch = FetchType.LAZY)
 	private Crucero crucero;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
+	private boolean isExpired;
 	private double precio;
 	private String estado; // Abierta, Finalizada y Cancelada
 	
@@ -28,6 +33,8 @@ public class Reserva
 		this.fechaFin = fechaFin;
 		this.precio = precio;
 		this.estado = estado;
+		this.isExpired = false;
+		
 	}
 
 	public long getId() {
@@ -84,6 +91,14 @@ public class Reserva
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public boolean isExpired() {
+		return isExpired;
+	}
+
+	public void setExpired(boolean isExpired) {
+		this.isExpired = isExpired;
 	}
 
 }
