@@ -10,11 +10,8 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
@@ -28,8 +25,8 @@ import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-import es.uca.gii.iw.crusaito.common.Footer;
-import es.uca.gii.iw.crusaito.common.Header;
+import es.uca.gii.iw.crusaito.common.Funciones;
+import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.spring.MessageBean;
 
 @Route("MainView")
@@ -50,17 +47,49 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		
 		//Header header = new Header();
 		//add(header);
+		
 		//Añade logo de la pagina
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 	    logo.setHeight("44px");
 	    addToNavbar(new DrawerToggle(), logo);
 	    //
-		addMenuTab("Main",DefaultView.class);
-		addMenuTab("Admin",AdminView.class);
-		addMenuTab("Cruceros",CrucerosView.class);
-		addMenuTab("Mis reservas",MisReservasView.class);
-		addMenuTab("Registrar",RegisterView.class);
-		addMenuTab("Iniciar Sesion",LoginView.class);
+	   
+		if(SecurityUtils.isUserLoggedIn()) {
+			
+			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
+			addMenuTab("Inicio", DefaultView.class);
+			addMenuTab("Cruceros", CrucerosView.class);
+			addMenuTab("Barcos", BarcosView.class);
+			
+			if(SecurityUtils.hasRole("Cliente")) {
+				addMenuTab("Mis reservas", MisReservasView.class);
+			}
+
+			if(SecurityUtils.hasRole("Admin")){
+				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
+				addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
+				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
+				addMenuTab("Gestionar reservas", AdminListaReservasView.class);
+			}
+			
+			if(SecurityUtils.hasRole("Gerente")) {
+				addMenuTab("Estadisticas", EstadisticasView.class);
+			}
+			
+			addMenuTab("Mi perfil", PerfilView.class);
+			addMenuTab("Cerrar sesión", LogoutView.class);
+			addMenuTab("Registrar", RegisterView.class);
+			
+		} 
+		else {
+			
+			addMenuTab("Inicio", DefaultView.class);
+			addMenuTab("Cruceros", CrucerosView.class);
+			addMenuTab("Barcos", BarcosView.class);
+			addMenuTab("Iniciar sesión", LoginView.class);
+			addMenuTab("Registrar", RegisterView.class);
+			
+		}
 		
 		tabs.setOrientation(Tabs.Orientation.VERTICAL);
 		addToDrawer(tabs);
@@ -74,7 +103,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		
 	} 
 
-	private void addMenuTab(String label,Class<? extends Component> target) {
+	private void addMenuTab(String label, Class<? extends Component> target) {
 		Tab tab = new Tab(new RouterLink(label,target));
 		navigationTargetToTab.put(target,tab);
 		tabs.add(tab);

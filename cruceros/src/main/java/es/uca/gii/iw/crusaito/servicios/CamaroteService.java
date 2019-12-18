@@ -24,8 +24,8 @@ private CamaroteRepository repo;
 		return repo.findById(id);
 	}
 	
-	public Camarote findByTipo(String tipo) {
-		return repo.findByTipo(tipo);
+	public Camarote findBycTipo(String tipo) {
+		return repo.findBycTipo(tipo);
 
 	}
 	
@@ -44,7 +44,5 @@ private CamaroteRepository repo;
 		return repo.findAll();
 	}
 
-	public void delete (Camarote data) {
-        repo.delete(data);
-    }
+
 }

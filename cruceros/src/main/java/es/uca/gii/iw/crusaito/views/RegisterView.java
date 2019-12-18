@@ -11,9 +11,11 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.validator.StringLengthValidator;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.servicios.rolService;
 
@@ -38,29 +40,84 @@ public class RegisterView extends VerticalLayout{
 	private PasswordField rPassword = new PasswordField("Repita la contraseña");
 	
 	@Autowired
-	private UsuarioService userService;
+	private UsuarioService usuarioService;
 	@Autowired
 	private rolService rolService;
 	
 	private Button Save = new Button("Guardar",click -> {
-		int phoneNumber = telefono.getValue().intValue();
+		if(!Funciones.existeEmail(usuarioService, email.getValue()) && !Funciones.existeUsuario(usuarioService, username.getValue())) {
+			int phoneNumber = telefono.getValue().intValue();
 		
-		Usuario user = new Usuario(firstName.getValue(), lastName.getValue(), email.getValue(), 
+			Usuario user = new Usuario(firstName.getValue(), lastName.getValue(), email.getValue(), 
 				username.getValue(), password.getValue(), dni.getValue(), phoneNumber, 
 				bornDate.getValue(),address.getValue(),city.getValue(),rolService.load("Cliente"));
 		//Operacion de guardado en la BD, implementada en la clase UsuarioService
-		userService.save(user);
-		
+			usuarioService.save(user);
+		}
 	});
 	
-	public RegisterView() {
+	public RegisterView(UsuarioService usuarioService) {
+		
+		this.usuarioService = usuarioService;
 		
 		//Header header = new Header();
 		
 		Binder<Usuario> binder = new Binder<>(Usuario.class);
 		binder.bindInstanceFields(this);
 		
-		email.setErrorMessage("Dirreción de correo no válida");
+		firstName.setRequiredIndicatorVisible(true);
+		lastName.setRequiredIndicatorVisible(true);
+		email.setRequiredIndicatorVisible(true);
+		username.setRequiredIndicatorVisible(true);
+		password.setRequiredIndicatorVisible(true);
+		dni.setRequiredIndicatorVisible(true);
+		address.setRequiredIndicatorVisible(true);
+		city.setRequiredIndicatorVisible(true);
+
+		//Validación campos obligatorios
+		
+		binder.forField(firstName)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 2 y 32 letras",2, 32))
+		.bind(Usuario::getFirstName,Usuario::setFirstName);
+		
+		binder.forField(lastName)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 2 y 32 letras",2, 32))
+		.bind(Usuario::getLastName,Usuario::setLastName);
+		
+		binder.forField(email)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 6 y 64 letras",6, 64))
+		.bind(Usuario::getEmail,Usuario::setEmail);
+		
+		binder.forField(username)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 4 y 16 letras",4, 16))
+		.bind(Usuario::getUsername,Usuario::setUsername);
+		
+		binder.forField(password)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 4 y 16 letras",4, 16))
+		.bind(Usuario::getPassword,Usuario::setPassword);
+		
+		binder.forField(dni)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener 7 dígitos y una letra",7, 1))
+		.bind(Usuario::getDni,Usuario::setDni);
+		
+		binder.forField(address)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 4 y 64 letras",4, 64))
+		.bind(Usuario::getAddress,Usuario::setAddress);
+		
+		binder.forField(city)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 6 y 24 letras",6, 24))
+		.bind(Usuario::getCity,Usuario::setCity);
+		
+		
+		email.setErrorMessage("Dirección de correo no válida");
 		formulario.add(email,username,password,rPassword,firstName,lastName,telefono,dni,address,city,bornDate,Save);
 		
 		add(formulario);

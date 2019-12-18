@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 @Entity
 public class Crucero {
 	
+	public Crucero() {}
+	
 	@Id
 	@GeneratedValue
 	private Long id;
