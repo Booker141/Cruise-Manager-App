@@ -1,4 +1,4 @@
-package es.uca.gii.iw.crusaito.spring;
+package es.uca.gii.iw.crusaito.forms;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;

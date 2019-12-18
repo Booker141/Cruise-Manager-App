@@ -2,7 +2,7 @@ package es.uca.gii.iw.crusaito.views;
 
 import com.vaadin.flow.router.Route;
 
-@Route("ListaReservas")
+@Route(value = "ListaReservas",layout = MainView.class)
 public class AdminListaReservasView {
 
 }
