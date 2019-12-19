@@ -8,20 +8,20 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Camarote {
-	
-	public Camarote() {
-	}
 
+	public Camarote() {}
+	
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String cTipo;
+	private String caImagen;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Barco cBarco;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Crucero cCrucero;
 	private boolean isReservada;
-	
+
 	
 	public Camarote(String cTipo, boolean isReservada) {
 		this.cTipo = cTipo;
@@ -50,6 +50,14 @@ public class Camarote {
 
 	public void setReservada(boolean isReservada) {
 		this.isReservada = isReservada;
+	}
+
+	public String getCaImagen() {
+		return caImagen;
+	}
+
+	public void setCaImagen(String caImagen) {
+		this.caImagen = caImagen;
 	}
 
 	@Override

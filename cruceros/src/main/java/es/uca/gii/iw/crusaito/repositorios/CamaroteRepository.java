@@ -9,7 +9,11 @@ import es.uca.gii.iw.crusaito.clases.Camarote;
 
 @Repository
 public interface CamaroteRepository extends JpaRepository<Camarote,Long>{
+
 	List<Camarote> findAll();
 	Camarote findById(int id);
 	Camarote findBycTipo(String cTipo);
 }
+
+
+

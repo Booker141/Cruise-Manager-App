@@ -11,25 +11,20 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
-
-import es.uca.gii.iw.crusaito.clases.Barco;
+import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.common.Footer;
-import es.uca.gii.iw.crusaito.common.Header;
-import es.uca.gii.iw.crusaito.servicios.BarcoService;
+import es.uca.gii.iw.crusaito.servicios.CruceroService;
 
+@SuppressWarnings("serial")
 @Route(value = "CrucerosView",layout = MainView.class)
 public class CrucerosView extends Div {
-	private static final long serialVersionUID = 1L;
-
-	private BarcoService barcoService;
+	
+	private CruceroService cruceroService;
 	
 	@Autowired
-	public CrucerosView(BarcoService barcoService) {
+	public CrucerosView(CruceroService cruceroService) {
 		
-		this.barcoService=barcoService;
+		this.cruceroService = cruceroService;
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
 		//Header header = new Header();
@@ -39,38 +34,57 @@ public class CrucerosView extends Div {
 		
 		//Cada barco
 
-		List<Barco> listaBarcos = barcoService.load();
+		List<Crucero> listaCruceros = cruceroService.load();
 
-		Iterator<Barco> iterador = listaBarcos.iterator();
+		Iterator<Crucero> iterador = listaCruceros.iterator();
 		VerticalLayout body = new VerticalLayout();
 		
 		//Cuerpo de dos barcos
 		HorizontalLayout subBody = new HorizontalLayout();
-		int contadorBarcos = 0;
+		int contadorCruceros = 0;
 		
 		
 		while(iterador.hasNext()) {
 			
-			Div barco = new Div();
-			Barco barcoEjemplo = iterador.next();
-			Image fotoPrueba1 = new Image(barcoEjemplo.getbImagen(), "fotoOferta1"); // Foto de cada barco, se
+			Div crucero = new Div();
+			Crucero cruceroEjemplo = iterador.next();
+			Image fotoPrueba1 = new Image(cruceroEjemplo.getcImagen(), "fotoOferta1"); 
 			
-			H1 nombre = new H1("Nombre:");
+			H1 nombre = new H1("Nombre: ");
 			Div textoNombre = new Div();
-			textoNombre.add(barcoEjemplo.getbNombre());
+			textoNombre.add(cruceroEjemplo.getcNombre());
+			H1 descripcion = new H1("Descripción: ");
+			Div textoDescripcion = new Div();
+			descripcion.add(cruceroEjemplo.getcDescripcion());
+			H1 duracion = new H1("Duracion: ");
+			Div textoDuracion = new Div();
+			textoDuracion.add(cruceroEjemplo.getcDuracion());
+			H1 origen = new H1("Salida: ");
+			Div textoOrigen = new Div();
+			textoOrigen.add(cruceroEjemplo.getcOrigen());
+			H1 barco = new H1("Barco: ");
+			Div textoBarco = new Div(); //clase crucero idCamarotes DUDAAA!
+			textoBarco.add(cruceroEjemplo.getcNombre());
+			H1 precio = new H1("Precio: ");
+			Div textoPrecio = new Div();
+			textoPrecio.add(String.valueOf(cruceroEjemplo.getcPrecio()));
+			
+			/*
 			H1 aforo = new H1("Aforo:");
 			Div textoAforo = new Div();
 			textoAforo.add(String.valueOf(barcoEjemplo.getbAforoPasajeros()));
-			barco.add(fotoPrueba1,nombre,textoNombre,aforo,textoAforo);
-			barco.getStyle().set("width","500px");
-			barco.getStyle().set("border-style", "solid"); // Bordes para comprobar limites
+			*/
+			
+			crucero.add(fotoPrueba1,nombre,textoNombre,descripcion,textoDescripcion, duracion, textoDuracion, origen, textoOrigen, barco, textoBarco, precio, textoPrecio);
+			crucero.getStyle().set("width","500px");
+			crucero.getStyle().set("border-style", "solid"); // Bordes para comprobar limites
 
-			subBody.add(barco);
-			contadorBarcos++;
-			if(contadorBarcos==2) {
+			subBody.add(crucero);
+			contadorCruceros++;
+			if(contadorCruceros==2) {
 				body.add(subBody);
 				subBody = new HorizontalLayout();
-				contadorBarcos=0;
+				contadorCruceros=0;
 			}
 		}
 		

@@ -11,8 +11,7 @@ import javax.persistence.OneToOne;
 public class Reserva 
 {	
 	
-	public Reserva() {
-	}
+	public Reserva() {}
 
 	@Id
 	@GeneratedValue
@@ -25,14 +24,16 @@ public class Reserva
 	private LocalDate fechaFin;
 	private boolean isExpired;
 	private double precio;
-	private String estado; // Abierta, Finalizada y Cancelada
+	private ReservaEstado estado; // Abierta, Finalizada y Cancelada
 	
-	public Reserva(LocalDate fechaInicio, LocalDate fechaFin, double precio, String estado) {
+	public Reserva(long id, LocalDate fechaInicio, LocalDate fechaFin, boolean isExpired, double precio,
+			ReservaEstado estado) {
+		this.id = id;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.isExpired = isExpired;
 		this.precio = precio;
 		this.estado = estado;
-		this.isExpired = false;
 	}
 
 	public long getId() {
@@ -83,11 +84,12 @@ public class Reserva
 		this.precio = precio;
 	}
 
-	public String getEstado() {
+
+	public ReservaEstado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(ReservaEstado estado) {
 		this.estado = estado;
 	}
 

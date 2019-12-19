@@ -18,13 +18,12 @@ public class Weather {
 	*	@return String - temperatura en caso exitoso; mensaje de error en caso contrario.
 	*/
 	
-	public Tiempo requestWeather(Tiempo weatherObject, long id) throws Exception
+	public double requestWeather(Ciudad ciudad) throws Exception
 	{
-		Ciudad city = new Ciudad(weatherObject.getCity());
 		
 		//String city = weatherObject.getCity();
 		
-		String URLtext = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=xml&appid=" + token;	
+		String URLtext = "http://api.openweathermap.org/data/2.5/weather?q="+ciudad.getcNombre()+"&mode=xml&appid=" + token;	
 		URL url = new URL(URLtext);
 		URLConnection conn = url.openConnection();	// establecemos conexion con la URL de la API
 		
@@ -41,19 +40,16 @@ public class Weather {
 			// Recorremos las etiquetas XML para acceder al dato tiempo actual
 			String weather = file.getElementsByTagName("temperature").item(0).getAttributes().item(0).getTextContent();
 			
-			weatherObject.setTemperatureCelsius((Double.parseDouble(weather)-273.15));
-			weatherObject.setTemperatureKelvin(Double.parseDouble(weather));
 			
-			return weatherObject;
+			return (Double.parseDouble(weather)-273.15);
 			
 		}
 		else	// error 404
 		{
-			Tiempo tiempoError = new Tiempo(); tiempoError.setCity("error");
-			return tiempoError;
+			return 99999;
 		}
 	}
-	
+	/*
 	public Tiempo requestWeatherCoordinates(Coordinates coord) throws Exception
 	{
 		
@@ -86,6 +82,6 @@ public class Weather {
 			Tiempo tiempoError = new Tiempo(); tiempoError.setCity("error");
 			return tiempoError;
 		}		
-	}
+	} */
 }
 	

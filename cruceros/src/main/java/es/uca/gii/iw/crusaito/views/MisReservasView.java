@@ -3,7 +3,7 @@ package es.uca.gii.iw.crusaito.views;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.annotation.Secured;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -11,27 +11,25 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.NativeButtonRenderer;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Reserva;
-import es.uca.gii.iw.crusaito.common.Footer;
+import es.uca.gii.iw.crusaito.clases.ReservaEstado;
 import es.uca.gii.iw.crusaito.common.Funciones;
-import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ReservaService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @SuppressWarnings("serial")
-@Route(value = "MisReservas",layout=MainView.class)
-public class MisReservasView extends VerticalLayout implements BeforeEnterObserver{
+@Route(value = "MisReservas",layout = MainView.class)
+@Secured("Cliente")
+public class MisReservasView extends PrincipalView{
 	
 	private Grid<Reserva> grid = new Grid<Reserva>(Reserva.class);
     
     
     private Reserva reserva;
-	
+	private ReservaService reservaService;
     
     private Label confirmacion = new Label("¿Seguro que desea cancelar esta reserva?");
     private Button seguro = new Button("Cancelar reserva");
@@ -41,8 +39,8 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 	@Autowired
     public MisReservasView(ReservaService ReservaService, UsuarioService UsuarioService) 
 	{
-		Header header = new Header();
-		add(header);
+		//Header header = new Header();
+		//add(header);
 		
 		add(grid);
 		
@@ -60,7 +58,7 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 		ventanaSeguro.setAlignItems(Alignment.CENTER);
 		
 		seguro.addClickListener(event ->{
-		    reserva.setEstado("Cancelada");
+		    reserva.setEstado(ReservaEstado.Cancelada);
 		    ReservaService.save(reserva);
 		    ventana.close();
 		    Funciones.notificacionAcierto("Reserva cancelada con éxito");
@@ -71,7 +69,7 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 	    	grid.asSingleSelect().clear();
 	    	LocalDate now = LocalDate.now();
 	    	
-	    	if(clickedItem.getEstado() == "Cancelada")
+	    	if(clickedItem.getEstado() == ReservaEstado.Cancelada)
 	    		Funciones.notificacionAcierto("Esta reserva ya ha sido cancelada con anterioridad");
 	    	else{
 	    		
@@ -80,27 +78,20 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 	    	else
 	    	{
 	    		reserva = clickedItem;
-	    		clickedItem.setEstado("Cancelada");
+	    		clickedItem.setEstado(ReservaEstado.Cancelada);
 	    	}
 	        ventana.open();
 	    	}
 	      }));
 	    
-	    Footer footer = new Footer();	
-		add(footer);
+	   
+	    
+	    //Footer footer = new Footer();	
+		//add(footer);
 	}
 	
-	@Override
-	public void beforeEnter(BeforeEnterEvent event) {
-		final boolean accessGranted =
-				SecurityUtils.isAccessGranted(event.getNavigationTarget());
-		if(!accessGranted) {
-			if(SecurityUtils.isUserLoggedIn()) {
-				event.rerouteToError(AccessDeniedException.class);
-			}
-			else {
-				event.rerouteTo(LoginView.class);
-			}
-		} 
-	}
+	public void actualizar(){	
+    	grid.setItems(reservaService.findAll());
+    }
+	
 }

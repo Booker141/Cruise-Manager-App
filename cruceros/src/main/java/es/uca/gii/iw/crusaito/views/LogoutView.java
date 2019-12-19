@@ -13,7 +13,7 @@ import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 
 @Secured({"Cliente", "Administrador", "Gerente"})
-@Route("Logout")
+@Route(value = "Logout",layout = MainView.class)
 public class LogoutView extends VerticalLayout implements BeforeEnterObserver{
 
 	private static final long serialVersionUID = 1L;

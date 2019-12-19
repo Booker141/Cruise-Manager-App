@@ -8,8 +8,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 
+@SuppressWarnings("serial")
 public class Header extends HorizontalLayout{
-	private static final long serialVersionUID = 1L;
 
 	public Header() {
 		

@@ -19,7 +19,6 @@ public class UsuarioService implements UserDetailsService {
 
 	@Autowired
 	public UsuarioService(UsuarioRepository repo, PasswordEncoder passwordEncoder) {
-		super();
 		this.repo = repo;
 		this.passwordEncoder = passwordEncoder;
 	}
