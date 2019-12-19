@@ -1,61 +1,111 @@
 package es.uca.gii.iw.crusaito.forms;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.validator.StringLengthValidator;
 
 import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.clases.Reserva;
+import es.uca.gii.iw.crusaito.clases.ReservaEstado;
+import es.uca.gii.iw.crusaito.clases.Tarjeta;
+import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.common.Funciones;
+import es.uca.gii.iw.crusaito.servicios.PagoService;
+import es.uca.gii.iw.crusaito.servicios.ReservaService;
+import es.uca.gii.iw.crusaito.servicios.TarjetaService;
+import es.uca.gii.iw.crusaito.servicios.UsuarioService;
+import es.uca.gii.iw.crusaito.servicios.rolService;
+import es.uca.gii.iw.crusaito.views.MisReservasView;
+import es.uca.gii.iw.crusaito.views.PagoView;
+import es.uca.gii.iw.crusaito.views.PrincipalView;
+
 
 //Modificar
 
-/*
-public class ReservaForm {
-	
+@SuppressWarnings("serial")
+@Secured("Cliente")
+public class ReservaForm extends PrincipalView{
+
+	/*
 	private Reserva reserva;
-	private Crucero crucero;
-	private ComboBox<reserva.getEstado()> estado = new ComboBox<>("Estado");
-	private DatePicker fechaIni = new DatePicker("Fecha inicio");
+	
+	VerticalLayout layout = new VerticalLayout();
+
+	private DatePicker fechaInicio = new DatePicker("Fecha inicio");
 	private DatePicker fechaFin = new DatePicker("Fecha final");
-	private NumberField precio = new NumberField("Precio");
+	private NumberField precio = new NumberField(Double.toString(UI.getCurrent().getSession().getAttribute(Reserva.class).getPrecio()) + "€");
+	private Label label = new Label("Estados");
+	ListBox<ReservaEstado> listaEstados = new ListBox<>();
 	
-	private Button guardar = new Button("Guardar");
-	private Button cancelar = new Button("Cancelar");
-	
+    private Button guardar = new Button("Hacer reserva");
+    private Button eliminar = new Button("Cancelar reserva");
+  
 	private Binder<Reserva> binder = new Binder<>(Reserva.class);
 	
-	private ReservaService serviceR;
-	private ListaReservasView reservasView;
+    private ReservaService reservaService;
+	private MisReservasView misReservasView;
 	
 	
-	public ReservaForm(ReservaService serviceR, ListaReservasView reservasView) {
+	public ReservaForm(ReservaService reservaService, MisReservasView misReservasView) {
 		
-		this.serviceR = serviceR;
-		this.reservasView = reservasView;
+		this.reservaService = reservaService;
+		this.misReservasView = misReservasView;
 
 	    HorizontalLayout buttons = new HorizontalLayout(guardar, eliminar);
-	    guardar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-	    add(fechaIni, fechaFin, precio, fianza, seguro, buttons);
+	    add(fechaInicio, fechaFin, precio, label, listaEstados, buttons);
 	    
-	   // vehiculo.setValue(binder.getBean().getNombreVehiculo());
-	   // user.setValue(binder.getBean().getUsername());
-	    
-	    estado.setItems(ReservaEstado.values());
 	    
 	    binder.bindInstanceFields(this);
 	    
-	    prepararCampos();
+	    fechaInicio.setRequiredIndicatorVisible(true);
+		fechaFin.setRequiredIndicatorVisible(true);
+		precio.setRequiredIndicatorVisible(true);
+
+		
+	    //Validación campos obligatorios
+	    
+	    binder.forField(fechaInicio)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 2 y 32 letras",2, 32))
+		.bind(Reserva::getFechaInicio, Reserva::setFechaInicio);
+		
+		binder.forField(fechaFin)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 2 y 32 letras",2, 32))
+		.bind(Reserva::getFechaFin, Reserva::setFechaFin);
+		
+		binder.forField(precio)
+		.asRequired("Este campo es obligatorio")
+		.withValidator(new StringLengthValidator("Este campo debe tener entre 6 y 64 letras",6, 64))
+		.bind(Reserva::getPrecio, Reserva::setPrecio);
+		
 	    
 	    guardar.addClickListener(e -> {
+	    	
 			if(this.binder.isValid()) 
 					save();
 			else
-				FuncionesView.notificacion("Hay campos con errores o vacíos, por favor, revíselos");
+				Funciones.notificacionError("Hay campos erróneos");
 	    });
 	    
 	    eliminar.addClickListener(event -> delete());
@@ -65,15 +115,15 @@ public class ReservaForm {
 	
 	private void save() {
 	    Reserva reserva = binder.getBean();
-	    serviceR.save(reserva);
-	    reservasView.updateList();
+	    reservaService.save(reserva);
+	    misReservasView.actualizar();
 	    setReserva(null);
 	}
 	
 	private void delete() {
 		Reserva reserva = binder.getBean();
-	    serviceR.delete(reserva);
-	    reservasView.updateList();
+	    reservaService.delete(reserva);
+	    misReservasView.actualizar();
 	    setReserva(null);
 	}
 	
@@ -85,40 +135,9 @@ public class ReservaForm {
 	        setVisible(false);
 	    } else {
 	        setVisible(true);
-	        fechaIni.focus();
+	        fechaInicio.focus();
 	    }
 	}
-	
-	private void prepararCampos()
-	{
-
-		fechaIni.setRequiredIndicatorVisible(true);
-		fechaFin.setRequiredIndicatorVisible(true);
-		precio.setRequiredIndicatorVisible(true);
-		fianza.setRequiredIndicatorVisible(true);
-		estado.setRequiredIndicatorVisible(true);
-		
-		binder.forField(fechaIni)
-		.asRequired("Este campo es obligatorio")
-		.bind(Reserva::getFechaIni, Reserva::setFechaIni);
-		
-		binder.forField(fechaFin)
-		.asRequired("Este campo es obligatorio")
-		.bind(Reserva::getFechaFin,Reserva::setFechaFin);
-		
-		binder.forField(precio)
-		.asRequired("Este campo es obligatorio")
-		.bind(Reserva::getPrecio,Reserva::setPrecio);
-		
-		binder.forField(fianza)
-		.asRequired("Este campo es obligatorio")
-		.bind(Reserva::getFianza,Reserva::setFianza);
-		
-		binder.forField(estado)
-		.asRequired("Este campo es obligatorio")
-		.bind(Reserva::getEstado,Reserva::setEstado);
-
-	}
+	*/
 
 }
-*/

@@ -18,11 +18,11 @@ import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.servicios.BarcoService;
 
+@SuppressWarnings("serial")
 @Route(value = "BarcosView",layout = MainView.class)
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 public class BarcosView extends Div{
-	
-	private static final long serialVersionUID = 1L;
+
 	private BarcoService barcoService;
 	
 	@Autowired

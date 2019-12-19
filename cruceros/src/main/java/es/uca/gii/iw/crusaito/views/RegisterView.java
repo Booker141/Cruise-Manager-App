@@ -3,6 +3,7 @@ package es.uca.gii.iw.crusaito.views;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -19,11 +20,9 @@ import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.servicios.rolService;
 
-
+@SuppressWarnings("serial")
 @Route(value = "Registrar",layout = MainView.class)
 public class RegisterView extends VerticalLayout{
-	private static final long serialVersionUID = 1L;
-	
 	
 	private FormLayout formulario = new FormLayout();
 	

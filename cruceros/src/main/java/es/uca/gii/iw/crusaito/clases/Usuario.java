@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-//
+
 @SuppressWarnings("serial")
 @Entity
 public class Usuario implements UserDetails{

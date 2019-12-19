@@ -15,10 +15,10 @@ import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.servicios.CruceroService;
 
+@SuppressWarnings("serial")
 @Route(value = "CrucerosView",layout = MainView.class)
 public class CrucerosView extends Div {
-	private static final long serialVersionUID = 1L;
-
+	
 	private CruceroService cruceroService;
 	
 	@Autowired
@@ -50,22 +50,22 @@ public class CrucerosView extends Div {
 			Crucero cruceroEjemplo = iterador.next();
 			Image fotoPrueba1 = new Image(cruceroEjemplo.getcImagen(), "fotoOferta1"); 
 			
-			H1 nombre = new H1("Nombre:");
+			H1 nombre = new H1("Nombre: ");
 			Div textoNombre = new Div();
 			textoNombre.add(cruceroEjemplo.getcNombre());
-			H1 descripcion = new H1("Descripción:");
+			H1 descripcion = new H1("Descripción: ");
 			Div textoDescripcion = new Div();
 			descripcion.add(cruceroEjemplo.getcDescripcion());
-			H1 duracion = new H1("Duracion:");
+			H1 duracion = new H1("Duracion: ");
 			Div textoDuracion = new Div();
 			textoDuracion.add(cruceroEjemplo.getcDuracion());
-			H1 origen = new H1("Salida:");
+			H1 origen = new H1("Salida: ");
 			Div textoOrigen = new Div();
 			textoOrigen.add(cruceroEjemplo.getcOrigen());
-			H1 barco = new H1("Nombre:");
-			Div textoBarco = new Div(); //clase crucero idCamarotes
+			H1 barco = new H1("Barco: ");
+			Div textoBarco = new Div(); //clase crucero idCamarotes DUDAAA!
 			textoBarco.add(cruceroEjemplo.getcNombre());
-			H1 precio = new H1("Nombre:");
+			H1 precio = new H1("Precio: ");
 			Div textoPrecio = new Div();
 			textoPrecio.add(String.valueOf(cruceroEjemplo.getcPrecio()));
 			

@@ -4,9 +4,8 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
-
+@SuppressWarnings("serial")
 public class Footer extends HorizontalLayout{
-	private static final long serialVersionUID = 1L;
 	
 	private Anchor linkPreguntas = new Anchor("#","Preguntas");		//Enlaces
 	private Anchor linkContacto = new Anchor("#","Contacto");
