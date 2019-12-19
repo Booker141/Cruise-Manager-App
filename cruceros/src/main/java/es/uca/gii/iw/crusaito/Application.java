@@ -104,7 +104,7 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(sanFernando);
             
             //Reserva ejemplo
-            reservaService.save(new Reserva(LocalDate.now(),LocalDate.now(),150,"Abierta"));
+            reservaService.save(new Reserva(0, LocalDate.now(),LocalDate.now(), false, 150, ReservaEstado.Abierta));
             Reserva reservaCliente = reservaService.findById(19);
             
             Usuario cliente = userService.findByUsername("cliente");
