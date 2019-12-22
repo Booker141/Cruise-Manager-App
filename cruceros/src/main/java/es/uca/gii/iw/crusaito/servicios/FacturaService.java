@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.servicios;
-
+/*
 import java.time.LocalDate;
 import java.util.List;
 
@@ -43,4 +43,4 @@ public class FacturaService {
 	public void delete (Factura factura) {
         repo.delete(factura);
     }
-}
+}*/

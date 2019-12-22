@@ -1,48 +1,58 @@
 package es.uca.gii.iw.crusaito.views;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
+import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.common.Footer;
 import es.uca.gii.iw.crusaito.common.Header;
+import es.uca.gii.iw.crusaito.servicios.BarcoService;
 
-@Route("BarcoView")
-public class BarcoView extends VerticalLayout {
+@Route(value = "BarcoView", layout = MainView.class)
+public class BarcoView extends VerticalLayout implements HasUrlParameter<String>{
 
 	private static final long serialVersionUID = 1L;
 	
-	HorizontalLayout infoBasicaLayout = new HorizontalLayout();
-	VerticalLayout infoBasica2Layout = new VerticalLayout();
+	private HorizontalLayout infoBasicaLayout = new HorizontalLayout();
+	private VerticalLayout infoBasica2Layout = new VerticalLayout();
 	
-	public BarcoView() {
+	private BarcoService barcoService;
+	private Barco barco;
+	private String nombreBarco;
+	
+	@Autowired
+	public BarcoView(BarcoService barcoService) {
+
+		this.barcoService = barcoService;
+		this.barco = barcoService.findBybNombre(nombreBarco);
 		
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		Header header = new Header();
-		add(header);
-		
-		// inicio body
-		
-		Image fotoBarco = new Image("frontend/img/crucero1.jpg", "fotoOferta1"); // Foto de cada barco, se
-																					// debe extraer de la BD más
-																					// adelante
-		fotoBarco.setHeight("350px"); // Altura foto
+		String rutaFoto = barco.getbImagen();
+		Image fotoBarco;
+		if(rutaFoto!=null)fotoBarco = new Image(barco.getbImagen(), "fotoOferta1"); 
+		else fotoBarco = new Image("frontend/img/pruebaBarcoHeader.png","fallo imagen");
+		/*fotoBarco.setHeight("350px"); // Altura foto
 		fotoBarco.setWidth("450px"); // Anchura foto
+		*/
 		
 		Div title = new Div(); // Texto con la descripcion
-		title.add("Barquito 1");
+		title.add(barco.getbNombre());
 		
-		Div routes = new Div(); // Texto con la descripcion
-		routes.add("Cadiz - San Fernando - Rio San Pedro");
+		Div descripcion = new Div();
+		descripcion.add(barco.getbDescripcion());
+
+		Div ruta = new Div(); // Texto con la descripcion
+		ruta.add("Cadiz - San Fernando - Rio San Pedro");
 		
-		Div price = new Div(); // Texto con la descripcion
-		price.add("50000€");
-		
-		
-		infoBasica2Layout.add(title, routes, price);
+		infoBasica2Layout.add(title, descripcion, ruta);
 		infoBasica2Layout.setAlignItems(Alignment.CENTER);
 		infoBasica2Layout.getStyle().set("border-style", "solid");
 		
@@ -66,5 +76,10 @@ public class BarcoView extends VerticalLayout {
 		
 		Footer footer = new Footer();
 		add(footer);
+	}
+	
+	@Override
+	public void setParameter(BeforeEvent evento, String bNombre) {
+		this.nombreBarco = bNombre;
 	}
 }

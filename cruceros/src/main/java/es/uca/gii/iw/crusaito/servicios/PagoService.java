@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.servicios;
-
+/*
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,3 +41,4 @@ public class PagoService {
     }
 
 }
+*/

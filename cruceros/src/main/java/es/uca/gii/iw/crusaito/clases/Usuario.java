@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -36,9 +38,9 @@ public class Usuario implements UserDetails{
 	@ManyToOne
 	private Rol role;
 	private boolean enabled;
-	@OneToOne(fetch = FetchType.LAZY)
-	private Reserva idReserva;
-	
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy="usuario")
+	private List<Reserva> reservas;
+	*/
 	protected Usuario(){}
 	
 	public Usuario(String firstName, String lastName, String email, String username, 
@@ -206,14 +208,14 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	public Reserva getIdReserva() {
-		return idReserva;
+	/*
+	public List<Reserva> getReservas() {
+		return reservas;
 	}
 
-	public void setIdReserva(Reserva idReserva) {
-		this.idReserva = idReserva;
-	}
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}*/
 	
 	/*
 	public String currentUsername() {

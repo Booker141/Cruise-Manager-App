@@ -32,15 +32,12 @@ private CamaroteRepository repo;
 	public Camarote save(Camarote camarote) {
 		return repo.save(camarote);
 	}
-	
 
 	public void delete(Camarote camarote) {
 		repo.delete(camarote);
 	}
 
-
 	public List<Camarote> load(){
-		//List<Camarote> listaCamarotes = repo.findAll();
 		return repo.findAll();
 	}
 

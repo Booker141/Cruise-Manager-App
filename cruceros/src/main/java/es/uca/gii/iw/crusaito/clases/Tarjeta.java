@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.clases;
-
+/*
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -80,3 +80,4 @@ public class Tarjeta {
 	}
 
 }
+*/

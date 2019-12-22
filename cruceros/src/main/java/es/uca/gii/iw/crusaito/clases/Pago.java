@@ -1,24 +1,30 @@
 package es.uca.gii.iw.crusaito.clases;
-
+/*
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Pago {
 	
+	public Pago() {
+	}
+
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-	
+	@OneToOne(fetch = FetchType.LAZY)
 	private Tarjeta tarjeta;
+	@OneToOne(fetch = FetchType.LAZY)
 	private Reserva reserva;
+	@OneToOne(fetch = FetchType.LAZY)
 	private Factura factura;
     private double cantidad;
     
-	public Pago(Long id, double cantidad) {
-		this.id = id;
+	public Pago(double cantidad) {
 		this.cantidad = cantidad;
 	}
 
@@ -62,4 +68,4 @@ public class Pago {
 		this.cantidad = cantidad;
 	}
 	
-}
+}*/

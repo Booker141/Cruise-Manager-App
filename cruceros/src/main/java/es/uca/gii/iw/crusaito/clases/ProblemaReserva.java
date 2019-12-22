@@ -1,14 +1,17 @@
 package es.uca.gii.iw.crusaito.clases;
-
+/*
 import javax.persistence.*;
 
 @Entity
 public class ProblemaReserva{
 
+	public ProblemaReserva() {
+	}
+
 	@Id
     @GeneratedValue
     private Long id;
-
+	@OneToOne(fetch = FetchType.LAZY)
 	private Reserva reserva;
     private String pTipoProblema;
     private String pDescripcionProblema;
@@ -53,4 +56,4 @@ public class ProblemaReserva{
 	
 	
     
-}
+}*/

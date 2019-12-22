@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.servicios;
-
+/*
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +23,11 @@ public class ReservaService {
     }
 	
 	public List<Reserva> listByUsuario(Usuario usuario) {
-        return repositorio.findByrUsuario(usuario);
+        return repositorio.findByUsuario(usuario);
     }
 	
 	public List<Reserva> listByCrucero(Crucero crucero) {
-        return repositorio.findByrCrucero(crucero);
+        return repositorio.findByCrucero(crucero);
     }
 	
 	public List<Reserva> findAll() {
@@ -46,3 +46,4 @@ public class ReservaService {
 
 
 }
+*/

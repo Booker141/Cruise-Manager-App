@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.forms;
 
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
@@ -24,19 +25,10 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.validator.StringLengthValidator;
 
-import es.uca.gii.iw.crusaito.clases.Crucero;
-import es.uca.gii.iw.crusaito.clases.Reserva;
-import es.uca.gii.iw.crusaito.clases.ReservaEstado;
-import es.uca.gii.iw.crusaito.clases.Tarjeta;
-import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.clases.*;
 import es.uca.gii.iw.crusaito.common.Funciones;
-import es.uca.gii.iw.crusaito.servicios.PagoService;
-import es.uca.gii.iw.crusaito.servicios.ReservaService;
-import es.uca.gii.iw.crusaito.servicios.TarjetaService;
-import es.uca.gii.iw.crusaito.servicios.UsuarioService;
-import es.uca.gii.iw.crusaito.servicios.rolService;
+import es.uca.gii.iw.crusaito.servicios.*;
 import es.uca.gii.iw.crusaito.views.MisReservasView;
-import es.uca.gii.iw.crusaito.views.PagoView;
 import es.uca.gii.iw.crusaito.views.PrincipalView;
 
 
@@ -138,6 +130,6 @@ public class ReservaForm extends PrincipalView{
 	        fechaInicio.focus();
 	    }
 	}
-	*/
 
 }
+*/
