@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
@@ -45,24 +46,28 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	public MainView(@Autowired MessageBean bean) {
 		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		//Header header = new Header();
-		//add(header);
-		
 		//Añade logo de la pagina
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 	    logo.setHeight("44px");
-	    addToNavbar(new DrawerToggle(), logo);
-	    //
+	    //Boton para cerrar sesion
+	    Button volver = new Button("Cerrar Sesión");
+	    volver.addClickListener(cerrar -> {
+	    	SecurityContextHolder.clearContext();
+			getUI().get().getSession().close();
+	    });
+	    addToNavbar(new DrawerToggle(), logo, volver);
 	   
+	    addMenuTab("Inicio", DefaultView.class);
+		addMenuTab("Cruceros", CrucerosView.class);
+		addMenuTab("Barcos", BarcosView.class);
+		
 		if(SecurityUtils.isUserLoggedIn()) {
 			
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
-			addMenuTab("Inicio", DefaultView.class);
-			addMenuTab("Cruceros", CrucerosView.class);
-			addMenuTab("Barcos", BarcosView.class);
+			
 			
 			if(SecurityUtils.hasRole("Cliente")) {
-				addMenuTab("Mis reservas", MisReservasView.class);
+				//addMenuTab("Mis reservas", MisReservasView.class);
 			}
 
 			if(SecurityUtils.hasRole("Admin")){
@@ -75,17 +80,21 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			if(SecurityUtils.hasRole("Gerente")) {
 				addMenuTab("Estadisticas", EstadisticasView.class);
 			}
-			
+			/*
 			addMenuTab("Mi perfil", PerfilView.class);
-			addMenuTab("Cerrar sesión", LogoutView.class);
+			Tab tab = new Tab(new RouterLink("Cerrar sesion",LogoutView.class));
+			tab.addAttachListener(e -> {
+
+			});
+			navigationTargetToTab.put(LogoutView.class,tab);
+			tabs.add(tab);*/
+			//addMenuTab("Cerrar sesión", LogoutView.class);
+			
 			addMenuTab("Registrar", RegisterView.class);
 			
 		} 
 		else {
-			
-			addMenuTab("Inicio", DefaultView.class);
-			addMenuTab("Cruceros", CrucerosView.class);
-			addMenuTab("Barcos", BarcosView.class);
+
 			addMenuTab("Iniciar sesión", LoginView.class);
 			addMenuTab("Registrar", RegisterView.class);
 			
@@ -95,7 +104,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		addToDrawer(tabs);
 		
 		H2 mensaje = new H2("Bienvenidos a la web de Crusaito");
-		VerticalLayout Bienvenida = new VerticalLayout();
+		VerticalLayout Bienvenida = new VerticalLayout(mensaje);
 
 		setContent(Bienvenida);
 		//Footer footer = new Footer();	//no funciona en el mainview

@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -37,3 +37,4 @@ public class ReservaView extends VerticalLayout{
 	            UI.getCurrent().navigate("MainView");
 	    }
 }
+*/

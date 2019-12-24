@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.servicios;
-
+/*
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class TarjetaService {
 	}
 	
 	public Tarjeta findBytNumeroTarjeta(String tNumeroTarjeta) {
-		return repo.findBytTipo(tNumeroTarjeta);
+		return repo.findBytNumeroTarjeta(tNumeroTarjeta);
 	}
 	
 	public List<Tarjeta> findByUsuario(Usuario usuario){
@@ -44,7 +44,8 @@ public class TarjetaService {
 		return repo.findAll();
 	}
 
-	public void delete (Tarjeta tarjeta) {
+	public void delete(Tarjeta tarjeta) {
         repo.delete(tarjeta);
     }
 }
+*/

@@ -26,12 +26,12 @@ public class Crucero {
 	private String cImagen;
 	private double cPrecio;
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cCrucero")
-	private List<Camarote> cCamarotes;
+	private List<Camarote> camarotes;
 	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Ciudad> cCiudad;
-	@OneToOne(fetch = FetchType.LAZY)
-	private Reserva cReserva;
-	
+	private List<Ciudad> ciudades;
+	/*@OneToMany(fetch = FetchType.LAZY,mappedBy = "crucero")
+	private List<Reserva> reservas;
+	*/
 
 	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
 			double cPrecio) {
@@ -115,35 +115,14 @@ public class Crucero {
 	}
 
 
-	public List<Ciudad> getcCiudad() {
-		return cCiudad;
+	public List<Ciudad> getCiudades() {
+		return ciudades;
 	}
 
 
-	public void setcCiudad(List<Ciudad> cCiudad) {
-		this.cCiudad = cCiudad;
+	public void setCiudades(List<Ciudad> ciudades) {
+		this.ciudades = ciudades;
 	}
-
-
-	public List<Camarote> getcCamarotes() {
-		return cCamarotes;
-	}
-
-
-	public void setcCamarotes(List<Camarote> cCamarotes) {
-		this.cCamarotes = cCamarotes;
-	}
-
-
-	public Reserva getcReserva() {
-		return cReserva;
-	}
-
-
-	public void setcReserva(Reserva cReserva) {
-		this.cReserva = cReserva;
-	}
-
 
 	public String getcImagen() {
 		return cImagen;
@@ -154,6 +133,26 @@ public class Crucero {
 		this.cImagen = cImagen;
 	}
 
+
+	public List<Camarote> getCamarotes() {
+		return camarotes;
+	}
+
+
+	public void setCamarotes(List<Camarote> camarotes) {
+		this.camarotes = camarotes;
+	}
+
+	/*
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+	*/
 	
 	
 

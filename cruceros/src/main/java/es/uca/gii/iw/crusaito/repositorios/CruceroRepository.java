@@ -11,6 +11,6 @@ public interface CruceroRepository extends JpaRepository<Crucero,Long>{
 	Crucero findById(int id);
 	Crucero findBycNombre(String cNombre);
 	Crucero save(Crucero crucero);
-	void delete(Crucero data);
+	void delete(Crucero crucero);
 
 }

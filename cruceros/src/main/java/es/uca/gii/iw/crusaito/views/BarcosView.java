@@ -20,7 +20,6 @@ import es.uca.gii.iw.crusaito.servicios.BarcoService;
 
 @SuppressWarnings("serial")
 @Route(value = "BarcosView",layout = MainView.class)
-@Theme(value = Lumo.class, variant = Lumo.DARK)
 public class BarcosView extends Div{
 
 	private BarcoService barcoService;
@@ -31,12 +30,7 @@ public class BarcosView extends Div{
 		this.barcoService=barcoService;
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 	
-		//Header header = new Header();
-		//add(header);
-	
 		// inicio body
-		
-		//Cada barco
 
 		List<Barco> listaBarcos = barcoService.load();
 
@@ -47,13 +41,21 @@ public class BarcosView extends Div{
 		HorizontalLayout subBody = new HorizontalLayout();
 		int contadorBarcos = 0;
 	
-	
 		while(iterador.hasNext()) {
 		
-			Div barco = new Div();
+			VerticalLayout barco = new VerticalLayout();
 			Barco barcoEjemplo = iterador.next();
-			Image fotoPrueba1 = new Image(barcoEjemplo.getbImagen(), "fotoOferta1"); // Foto de cada barco, se
-		
+			String rutaImagen = barcoEjemplo.getbImagen();
+			Image fotoPrueba1;
+			if(rutaImagen!=null) {
+				fotoPrueba1 = new Image(barcoEjemplo.getbImagen(), "fotoOferta1"); // Foto de cada barco, se
+			}else {
+				fotoPrueba1 = new Image("frontend/img/ejemploBarcoHeader.png","fallo imagen");
+			}
+			fotoPrueba1.setWidthFull();
+			fotoPrueba1.addClickListener(urlBarco -> {
+				getUI().ifPresent(ui-> ui.navigate(BarcoView.class,barcoEjemplo.getbNombre()));
+			});
 			H1 nombre = new H1("Nombre:");
 			Div textoNombre = new Div();
 			textoNombre.add(barcoEjemplo.getbNombre());
@@ -61,7 +63,7 @@ public class BarcosView extends Div{
 			Div textoAforo = new Div();
 			textoAforo.add(String.valueOf(barcoEjemplo.getbAforoPasajeros()));
 			barco.add(fotoPrueba1,nombre,textoNombre,aforo,textoAforo);
-			barco.getStyle().set("width","500px");
+			//barco.getStyle().set("width","500px");
 			barco.getStyle().set("border-style", "solid"); // Bordes para comprobar limites
 
 			subBody.add(barco);

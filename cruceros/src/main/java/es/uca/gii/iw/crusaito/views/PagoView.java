@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
@@ -57,5 +57,6 @@ public class PagoView extends PrincipalView{
             UI.getCurrent().getPage().reload();
         }
     }
-*/
+
 }
+*/

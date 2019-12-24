@@ -1,10 +1,13 @@
 package es.uca.gii.iw.crusaito.clases;
+/*
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -16,10 +19,10 @@ public class Reserva
 	@Id
 	@GeneratedValue
 	private long id;
-	@OneToOne(fetch = FetchType.LAZY)
-	private Usuario rUsuario;
-	@OneToOne(fetch = FetchType.LAZY)
-	private Crucero rCrucero;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Usuario usuario;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Crucero crucero;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private boolean isExpired;
@@ -44,20 +47,20 @@ public class Reserva
 		this.id = id;
 	}
 
-	public Usuario getrUsuario() {
-		return rUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setrUsuario(Usuario rUsuario) {
-		this.rUsuario = rUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Crucero getrCrucero() {
-		return rCrucero;
+	public Crucero getCrucero() {
+		return crucero;
 	}
 
-	public void setrCrucero(Crucero rCrucero) {
-		this.rCrucero = rCrucero;
+	public void setCrucero(Crucero crucero) {
+		this.crucero = crucero;
 	}
 
 	public LocalDate getFechaInicio() {
@@ -101,4 +104,4 @@ public class Reserva
 		this.isExpired = isExpired;
 	}
 
-}
+}*/
