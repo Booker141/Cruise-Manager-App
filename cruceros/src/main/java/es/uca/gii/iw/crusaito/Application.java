@@ -36,7 +36,6 @@ public class Application extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner demo(rolService rolService, UsuarioService userService,rolRepository rolRepository, 
     		CiudadService ciudadService, CruceroService cruceroService, BarcoService barcoService, CamaroteService camaroteService,
-    		ReservaService reservaService,
     		UsuarioRepository userRepo, BarcoRepository barcoRepo, CruceroRepository cruceroRepo) {
         return (args) -> {
         	
@@ -95,7 +94,7 @@ public class Application extends SpringBootServletInitializer {
             listaCiudades.add(sanFernando);
             //Relacion crucero y ciudad
             Crucero caribe = cruceroService.findBycNombre("Caribe");
-            caribe.setcCiudad(listaCiudades);
+            caribe.setCiudades(listaCiudades);
             cadiz.addcCruceros(caribe);
             sanFernando.addcCruceros(caribe);
             
@@ -103,18 +102,6 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(cadiz);
             ciudadService.save(sanFernando);
             
-            //Reserva ejemplo
-            reservaService.save(new Reserva(0, LocalDate.now(),LocalDate.now(), false, 150, ReservaEstado.Abierta));
-            Reserva reservaCliente = reservaService.findById(19);
-            
-            Usuario cliente = userService.findByUsername("cliente");
-            cliente.setIdReserva(reservaCliente);
-            reservaCliente.setrUsuario(cliente);
-            reservaCliente.setrCrucero(caribe);
-            caribe.setcReserva(reservaCliente);
-            userService.save(cliente);
-            reservaService.save(reservaCliente);
-            cruceroService.save(caribe);
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));

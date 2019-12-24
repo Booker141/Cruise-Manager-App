@@ -29,14 +29,12 @@ private CruceroRepository repo;
 	public Crucero save(Crucero crucero) {
 		return repo.save(crucero);
 	}
-	
 
 	public void delete (Crucero crucero) {
         repo.delete(crucero);
-  }
+	}
   
 	public List<Crucero> load(){
-		//List<Crucero> listaCruceros = repo.findAll();
 		return repo.findAll();
 	}
 

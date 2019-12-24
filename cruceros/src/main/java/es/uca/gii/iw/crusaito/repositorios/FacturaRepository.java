@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.repositorios;
-
+/*
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,3 +17,4 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
 	List<Factura> findByPago(Pago pago);
 	
 }
+*/

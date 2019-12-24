@@ -46,10 +46,16 @@ public class CrucerosView extends Div {
 		
 		while(iterador.hasNext()) {
 			
-			Div crucero = new Div();
+			VerticalLayout crucero = new VerticalLayout();
 			Crucero cruceroEjemplo = iterador.next();
-			Image fotoPrueba1 = new Image(cruceroEjemplo.getcImagen(), "fotoOferta1"); 
-			
+			String rutaImagen = cruceroEjemplo.getcImagen();
+			Image fotoPrueba1;
+			if(rutaImagen!=null) {
+				fotoPrueba1 = new Image(cruceroEjemplo.getcImagen(), "fotoOferta1"); 
+			}else {
+				fotoPrueba1 = new Image("frontend/img/pruebaBarcoHeader.png","Fallo imagen");
+			}
+			fotoPrueba1.setWidthFull();
 			H1 nombre = new H1("Nombre: ");
 			Div textoNombre = new Div();
 			textoNombre.add(cruceroEjemplo.getcNombre());
@@ -76,7 +82,7 @@ public class CrucerosView extends Div {
 			*/
 			
 			crucero.add(fotoPrueba1,nombre,textoNombre,descripcion,textoDescripcion, duracion, textoDuracion, origen, textoOrigen, barco, textoBarco, precio, textoPrecio);
-			crucero.getStyle().set("width","500px");
+			//crucero.getStyle().set("width","500px");
 			crucero.getStyle().set("border-style", "solid"); // Bordes para comprobar limites
 
 			subBody.add(crucero);

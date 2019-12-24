@@ -19,7 +19,7 @@ public class Ciudad {
 	@GeneratedValue
 	private long id;
 	private String cNombre;
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="cCiudad")
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="ciudades")
 	private List<Crucero> cCruceros;
 	
 	public Ciudad(String cNombre) {
