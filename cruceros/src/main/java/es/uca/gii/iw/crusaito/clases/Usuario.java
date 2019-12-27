@@ -37,6 +37,8 @@ public class Usuario implements UserDetails{
 	private String city;
 	@ManyToOne
 	private Rol role;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Servicio> servicios;
 	private boolean enabled;
 	/*@OneToMany(fetch = FetchType.LAZY, mappedBy="usuario")
 	private List<Reserva> reservas;
@@ -216,6 +218,14 @@ public class Usuario implements UserDetails{
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}*/
+
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
+	}
 	
 	/*
 	public String currentUsername() {

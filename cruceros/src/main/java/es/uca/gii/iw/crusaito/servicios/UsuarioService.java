@@ -48,5 +48,12 @@ public class UsuarioService implements UserDetailsService {
 		usuario.setEnabled(true);
 		return repo.save(usuario);
 	}
+	
+	public void delete(Usuario usuario) {
+		repo.delete(usuario);
+	}
+	public List<Usuario> load() {
+		return repo.findAll();
+	}
 
 }

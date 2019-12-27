@@ -1,6 +1,7 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,11 +14,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Barco 
 {	
-	@Id
+	@Id//
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cBarco")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "cBarco")
 	private List<Camarote> bCamarotes;
 	private String bImagen;
 	private int bAforoPasajeros;
@@ -27,13 +28,14 @@ public class Barco
 	private String bDescripcion;
 
 
-	protected Barco() {}
+	public Barco() {}
 	
 	//Añadir Lista de camarotes al constructor
 	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
 
 		this.bNombre = bNombre;
+		this.bCamarotes = new ArrayList<Camarote>();
 		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
@@ -66,6 +68,10 @@ public class Barco
 
 	public int getbAforoPasajeros() {
 		return bAforoPasajeros;
+	}
+	
+	public void setbAforoPasajeros(int bAforoPasajeros) {
+		this.bAforoPasajeros = bAforoPasajeros;
 	}
 
 	public int getbAforoTripulantes() {
@@ -112,5 +118,18 @@ public class Barco
 
 	public void setbDescripcion(String bDescripcion) {
 		this.bDescripcion = bDescripcion;
+	}
+	
+	@Override
+    public Barco clone() throws CloneNotSupportedException {
+        return (Barco) super.clone();
+    }
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }
