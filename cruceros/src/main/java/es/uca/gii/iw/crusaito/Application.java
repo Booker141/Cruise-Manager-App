@@ -36,6 +36,7 @@ public class Application extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner demo(rolService rolService, UsuarioService userService,rolRepository rolRepository, 
     		CiudadService ciudadService, CruceroService cruceroService, BarcoService barcoService, CamaroteService camaroteService,
+    		ServicioService servicioService,
     		UsuarioRepository userRepo, BarcoRepository barcoRepo, CruceroRepository cruceroRepo) {
         return (args) -> {
         	
@@ -71,8 +72,6 @@ public class Application extends SpringBootServletInitializer {
             //Barcos de ejemplo
             barcoRepo.save(new Barco("Vaporcito","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","frontend/img/crucero1.jpg",1500,150,3000,LocalDate.now(),"Mal barco"));
-            barcoRepo.save(new Barco("Vaporcito3","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
-            barcoRepo.save(new Barco("Vaporcito4","frontend/img/crucero1.jpg",1500,150,3000,LocalDate.now(),"Mal barco"));
             
             Barco barcoEjemplo1 = barcoService.findBybNombre("Vaporcito");
             //Prueba de actualizacion de datos en BD y asignacion de camarote a barco y de barco a camarote
@@ -102,6 +101,25 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(cadiz);
             ciudadService.save(sanFernando);
             
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, 0,50);
+            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0, 30, "Cadiz");
+            servicioService.save(elFaro);
+            servicioService.save(deportiva);
+            
+            List<Servicio> servicios = new ArrayList<Servicio>();
+            servicios.add(elFaro);
+            servicios.add(deportiva);
+            
+            Usuario usuarioPrueba = userService.findByUsername("cliente");
+            usuarioPrueba.setServicios(servicios);
+            List<Usuario> usuarios = new ArrayList<Usuario>();
+            usuarios.add(usuarioPrueba);
+            elFaro.setUsuarios(usuarios);
+            deportiva.setUsuarios(usuarios);
+            
+            servicioService.save(elFaro);
+            servicioService.save(deportiva);
+            userService.save(usuarioPrueba);
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));

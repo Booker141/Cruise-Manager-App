@@ -12,4 +12,5 @@ public interface BarcoRepository extends JpaRepository<Barco,Long>{
 	List<Barco> findAll();
 	Barco findById(int id);
 	Barco findBybNombre(String bNombre);
+	List<Barco> findBybNombreLike(String bNombre);
 }
