@@ -16,9 +16,9 @@ public class Camarote {
 	private Long id;
 	private String cTipo;
 	private String caImagen;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Barco cBarco;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Crucero cCrucero;
 	private boolean isReservada;
 

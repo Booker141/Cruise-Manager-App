@@ -66,7 +66,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
-			
 			if(SecurityUtils.hasRole("Cliente")) {
 				//addMenuTab("Mis reservas", MisReservasView.class);
 			}
@@ -76,6 +75,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 				addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
 				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
 				addMenuTab("Gestionar reservas", AdminListaReservasView.class);
+				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
 			}
 			
 			if(SecurityUtils.hasRole("Gerente")) {
@@ -104,7 +104,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		tabs.setOrientation(Tabs.Orientation.VERTICAL);
 		addToDrawer(tabs);
 		
-		H2 mensaje = new H2("Bienvenidos a la web de Crusaito");
+		H2 mensaje = new H2("Bienvenido a la aplicación de Crusaito");
 		VerticalLayout Bienvenida = new VerticalLayout(mensaje);
 
 		setContent(Bienvenida);
