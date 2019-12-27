@@ -55,6 +55,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    	SecurityContextHolder.clearContext();
 			getUI().get().getSession().close();
 	    });
+	    
 	    addToNavbar(new DrawerToggle(), logo, volver);
 	   
 	    addMenuTab("Inicio", DefaultView.class);
