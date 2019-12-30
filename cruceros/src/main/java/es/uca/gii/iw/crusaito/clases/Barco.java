@@ -1,48 +1,56 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Barco 
 {	
-	@Id
+	@Id//
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	private String bCodCamarote;
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "cBarco")
+	private List<Camarote> bCamarotes;
+	private String bImagen;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
 	private int bPeso;
 	private LocalDate bFchPuestaServicio;
-	private String bOrigen;
-	private String bDestino;
 	private String bDescripcion;
-	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Ciudad> Ciudad;
 
-	protected Barco() {}
+
+	public Barco() {}
 	
-	public Barco(String bNombre, String bCodCamarote, int bAforoPasajeros, int bAforoTripulantes,
-			int bPeso, LocalDate bFchPuestaServicio, String bOrigen, String bDestino, String bDescripcion) {
-		
+	//Añadir Lista de camarotes al constructor
+	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
+			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
+
 		this.bNombre = bNombre;
-		this.bCodCamarote = bCodCamarote;
+		this.bCamarotes = new ArrayList<Camarote>();
+		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
 		this.bPeso = bPeso;
 		this.bFchPuestaServicio = bFchPuestaServicio;
-		this.bOrigen = bOrigen;
-		this.bDestino = bDestino;
 		this.bDescripcion = bDescripcion;
 	}
 	
+	public String getbImagen() {
+		return bImagen;
+	}
+	
+	public void setbImagen(String bImagen) {
+		this.bImagen = bImagen;
+	}
 	public String getbNombre() {
 		return bNombre;
 	}
@@ -51,12 +59,19 @@ public class Barco
 		this.bNombre = bNombre;
 	}
 
-	public String getbCodCamarote() {
-		return bCodCamarote;
+	public List<Camarote> getbCamarotes() {
+		return bCamarotes;
+	}
+	public void setbCamarotes(List<Camarote> bCamarotes) {
+		this.bCamarotes = bCamarotes;
 	}
 
 	public int getbAforoPasajeros() {
 		return bAforoPasajeros;
+	}
+	
+	public void setbAforoPasajeros(int bAforoPasajeros) {
+		this.bAforoPasajeros = bAforoPasajeros;
 	}
 
 	public int getbAforoTripulantes() {
@@ -73,22 +88,6 @@ public class Barco
 
 	public LocalDate getbFchPuestaServicio() {
 		return bFchPuestaServicio;
-	}
-
-	public String getbOrigen() {
-		return bOrigen;
-	}
-
-	public void setbOrigen(String bOrigen) {
-		this.bOrigen = bOrigen;
-	}
-
-	public String getbDestino() {
-		return bDestino;
-	}
-
-	public void setbDestino(String bDestino) {
-		this.bDestino = bDestino;
 	}
 	
 	@Override
@@ -119,5 +118,18 @@ public class Barco
 
 	public void setbDescripcion(String bDescripcion) {
 		this.bDescripcion = bDescripcion;
+	}
+	
+	@Override
+    public Barco clone() throws CloneNotSupportedException {
+        return (Barco) super.clone();
+    }
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }
