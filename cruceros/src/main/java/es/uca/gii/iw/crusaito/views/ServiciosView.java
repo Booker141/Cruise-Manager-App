@@ -2,16 +2,13 @@ package es.uca.gii.iw.crusaito.views;
 
 import java.util.List;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.vaadin.crudui.crud.impl.GridCrud;
 
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.HeaderRow;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -19,22 +16,26 @@ import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioTipo;
-import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 
 @Route(value = "ServiciosView",layout = MainView.class)
-public class ServiciosView extends HorizontalLayout{
+public class ServiciosView extends VerticalLayout{
 
 	private ServicioService servicioService;
 	private Grid<Servicio> grid = new Grid<>(Servicio.class);
 	private List<Servicio> personList;
 	private ListDataProvider<Servicio> dataProvider;
 	
+	private HeaderRow filterRow;
+	private TextField sNombreField;
+	
+	private ComboBox<ServicioTipo> sTipoComboBox;
+	
 	@Autowired
 	public ServiciosView(ServicioService servicioService) {
 		
 		this.servicioService = servicioService;
-		personList = servicioService.load();
+		personList = this.servicioService.load();
 		dataProvider = new ListDataProvider<>(personList);
 		grid.setDataProvider(dataProvider);
 		
@@ -49,11 +50,10 @@ public class ServiciosView extends HorizontalLayout{
 		grid.getColumnByKey("eItinerario").setHeader("Itinerario");
 		//grid.getColumnByKey("sTipo").setHeader("Tipo");
 		
-		
-		HeaderRow filterRow = grid.appendHeaderRow();
+		filterRow = grid.appendHeaderRow();
 		
 		//Primer filtro
-		TextField sNombreField = new TextField();
+		sNombreField = new TextField();
 		sNombreField.addValueChangeListener(event -> dataProvider.addFilter(
 		        servicio -> StringUtils.containsIgnoreCase(servicio.getsNombre(),
 		                sNombreField.getValue())));
@@ -64,11 +64,24 @@ public class ServiciosView extends HorizontalLayout{
 		sNombreField.setSizeFull();
 		sNombreField.setPlaceholder("Filter");
 		
-		add(grid);
+		//Segundo filtro
+		sTipoComboBox = new ComboBox<>("Filtrar por tipo: ");
+		sTipoComboBox.setItems(ServicioTipo.values());
+		
+		sTipoComboBox.addValueChangeListener(event -> {
+			applyFilter(dataProvider);
+		});
+		
+		add(sTipoComboBox,grid);
 
 	}
 	
-	private void listarServicios() {
-		grid.setItems(servicioService.load());
+	private void applyFilter(ListDataProvider<Servicio> dataProvider) {
+		dataProvider.clearFilters();
+		if(sTipoComboBox.getValue() != null) {
+			dataProvider.addFilter(servicio -> 
+				sTipoComboBox.getValue() == servicio.getsTipo());
+		}
 	}
+	
 }
