@@ -58,8 +58,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    addToNavbar(new DrawerToggle(), logo, volver);
 	   
 	    addMenuTab("Inicio", DefaultView.class);
-		addMenuTab("Cruceros", CrucerosView.class);
-		addMenuTab("Barcos", BarcosView.class);
 		addMenuTab("Servicios", ServiciosView.class);
 		
 		if(SecurityUtils.isUserLoggedIn()) {
