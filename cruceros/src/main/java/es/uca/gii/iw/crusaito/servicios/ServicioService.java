@@ -26,6 +26,10 @@ public class ServicioService {
 		return this.repo.save(servicio);
 	}
 	
+	public void delete(Servicio servicio) {
+		this.repo.delete(servicio);
+	}
+	
 	public List<Servicio> load(){
 		return this.repo.findAll();
 	}

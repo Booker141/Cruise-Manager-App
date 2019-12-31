@@ -60,13 +60,14 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    addMenuTab("Inicio", DefaultView.class);
 		addMenuTab("Cruceros", CrucerosView.class);
 		addMenuTab("Barcos", BarcosView.class);
+		addMenuTab("Servicios", ServiciosView.class);
 		
 		if(SecurityUtils.isUserLoggedIn()) {
 			
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
 			if(SecurityUtils.hasRole("Cliente")) {
-				//addMenuTab("Mis reservas", MisReservasView.class);
+				
 			}
 
 			if(SecurityUtils.hasRole("Admin")){

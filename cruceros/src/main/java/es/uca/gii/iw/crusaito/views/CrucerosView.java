@@ -27,12 +27,7 @@ public class CrucerosView extends Div {
 		this.cruceroService = cruceroService;
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		//Header header = new Header();
-		//add(header);
-		
 		// inicio body
-		
-		//Cada barco
 
 		List<Crucero> listaCruceros = cruceroService.load();
 

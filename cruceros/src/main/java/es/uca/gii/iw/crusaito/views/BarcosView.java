@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.provider.CallbackDataProvider;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -24,14 +27,15 @@ public class BarcosView extends Div{
 
 	private BarcoService barcoService;
 	
+	private Grid<Barco> grid = new Grid<>();
+	
 	@Autowired
 	public BarcosView(BarcoService barcoService){
 	
 		this.barcoService=barcoService;
-		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 	
-		// inicio body
-
+		/*this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
+		
 		List<Barco> listaBarcos = barcoService.load();
 
 		Iterator<Barco> iterador = listaBarcos.iterator();
@@ -81,9 +85,9 @@ public class BarcosView extends Div{
 		add(body);
 	
 		//fin body
-	
-		Footer footer = new Footer();
-		add(footer);
+		*/
+		//Footer footer = new Footer();
+		//add(footer);
  }
 
 }

@@ -20,7 +20,7 @@ public class Servicio {
 	private ServicioTipo sTipo;
 	private int sAforoActual;
 	private int sAforoMaximo;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
 	private List<Usuario> usuarios;
 	private String eItinerario;
 	
