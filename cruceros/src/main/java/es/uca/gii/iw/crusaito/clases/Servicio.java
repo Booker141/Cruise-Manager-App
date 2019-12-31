@@ -18,6 +18,7 @@ public class Servicio {
 	private String sDescripcion;
 	private double sPrecio;
 	private ServicioTipo sTipo;
+	private String sImagen;
 	private int sAforoActual;
 	private int sAforoMaximo;
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "servicios")
@@ -25,23 +26,25 @@ public class Servicio {
 	private String eItinerario;
 	
 	//Constructor de servicio
-	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo, int sAforoActual,
-			int sAforoMaximo) {
+	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo,
+			String sImagen, int sAforoActual, int sAforoMaximo) {
 		this.sNombre = sNombre;
 		this.sDescripcion = sDescripcion;
 		this.sPrecio = sPrecio;
 		this.sTipo = sTipo;
+		this.sImagen = sImagen;
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 	}
 	
 	//Constructor de excursion
 	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo, int sAforoActual,
-			int sAforoMaximo, String eItinerario) {
+			String sImagen, int sAforoMaximo, String eItinerario) {
 		this.sNombre = sNombre;
 		this.sDescripcion = sDescripcion;
 		this.sPrecio = sPrecio;
 		this.sTipo = sTipo;
+		this.sImagen = sImagen;
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 		this.eItinerario = eItinerario;
@@ -126,6 +129,14 @@ public class Servicio {
 
 	public void seteItinerario(String eItinerario) {
 		this.eItinerario = eItinerario;
+	}
+
+	public String getsImagen() {
+		return sImagen;
+	}
+
+	public void setsImagen(String sImagen) {
+		this.sImagen = sImagen;
 	}
 	
 	
