@@ -4,32 +4,40 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.data.renderer.NumberRenderer;
-import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioTipo;
+import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
+import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @Route(value = "ServiciosView",layout = MainView.class)
 public class ServiciosView extends VerticalLayout{
 
+	private UsuarioService usuarioService;
 	private ServicioService servicioService;
+	
 	private Grid<Servicio> grid = new Grid<>(Servicio.class);
 	private List<Servicio> personList;
 	private ListDataProvider<Servicio> dataProvider;
@@ -37,14 +45,28 @@ public class ServiciosView extends VerticalLayout{
 	private HeaderRow filterRow;
 	private TextField sNombreField;
 	
+	private Div sNombreDiv;
+	private Div sTipoDiv;
+	private Image sImagenImage;
+	
+	private Dialog dialog;
+	
+	private Notification notification;
+	private Label label;
+	private Button cancelButton;
+	private Button confirmButton;
+	private Button reservaButton;
+	
 	private ComboBox<ServicioTipo> sTipoComboBox;
 	
-	private boolean clicked = false;
 	@Autowired
-	public ServiciosView(ServicioService servicioService) {
+	public ServiciosView(ServicioService servicioService, UsuarioService usuarioService) {
 		
 		this.servicioService = servicioService;
+		this.usuarioService = usuarioService;
+		
 		personList = this.servicioService.load();
+		
 		dataProvider = new ListDataProvider<>(personList);
 		grid.setDataProvider(dataProvider);
 		
@@ -61,19 +83,42 @@ public class ServiciosView extends VerticalLayout{
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 
-		Dialog dialog = new Dialog();
+		dialog = new Dialog();
 		
-		Div sNombreDiv = new Div();
+		sNombreDiv = new Div();
 		sNombreDiv.setTitle("Nombre");
-		Div sTipoDiv = new Div();
-		sTipoDiv.setTitle("Tipo");
-		Image sImagenImage = new Image();
-		sImagenImage.setTitle("Imagen");
 		
+		sTipoDiv = new Div();
+		sTipoDiv.setTitle("Tipo");
+		
+		sImagenImage = new Image();
+		sImagenImage.setTitle("Imagen");
 		sImagenImage.setHeight("100%");
 		sImagenImage.setWidth("100%");
 		
-		dialog.add(sNombreDiv,sTipoDiv,sImagenImage);
+		notification = new Notification();
+		notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+		
+		label = new Label("Confirme la reserva");
+		
+		cancelButton = new Button("Cancelar", e -> notification.close());
+
+		confirmButton = new Button("Confirmar"); 
+		confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		notification.add(label, cancelButton, confirmButton);
+
+		label.getStyle().set("margin-right", "0.5rem");
+		cancelButton.getStyle().set("margin-right", "0.5rem");
+
+		reservaButton = new Button("Reservar");
+		reservaButton.addClickListener(event -> {
+			notification.open();
+		});
+		
+		reservaButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		dialog.add(sNombreDiv,sTipoDiv,sImagenImage, reservaButton);
 		
 		grid.addItemClickListener(
 		        event -> {
@@ -82,6 +127,15 @@ public class ServiciosView extends VerticalLayout{
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
 		            dialog.open();
+		            
+		            confirmButton.addClickListener(e -> {
+		            	Servicio servicio = event.getItem();
+		            	Usuario user = buscarUsuarioLogin();
+		            	System.out.println("ID usuario " + user.getId() + " servicio " + servicio.getsNombre());
+		            	servicioService.addServicioToUsusario(servicio, user);
+		            	notification.close();
+		            });
+		    		
 		        });
 		
 		filterRow = grid.appendHeaderRow();
@@ -107,7 +161,6 @@ public class ServiciosView extends VerticalLayout{
 		});
 		
 		add(sTipoComboBox, grid);
-
 	}
 	
 	private void applyFilter(ListDataProvider<Servicio> dataProvider) {
@@ -116,6 +169,11 @@ public class ServiciosView extends VerticalLayout{
 			dataProvider.addFilter(servicio -> 
 				sTipoComboBox.getValue() == servicio.getsTipo());
 		}
+	}
+	
+	public Usuario buscarUsuarioLogin() {
+    	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return this.usuarioService.findByUsername(username);
 	}
 	
 }

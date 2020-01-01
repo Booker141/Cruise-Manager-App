@@ -2,8 +2,6 @@ package es.uca.gii.iw.crusaito.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.crudui.crud.impl.GridCrud;
-import org.vaadin.crudui.form.impl.field.provider.CheckBoxGroupProvider;
-import org.vaadin.crudui.form.impl.field.provider.ComboBoxProvider;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -25,13 +23,10 @@ public class AdminListaUsuariosView extends Div{
 	
 	@Autowired
 	public AdminListaUsuariosView(UsuarioService usuarioService, rolService rolService) {
+		
 		this.usuarioService = usuarioService;
 		this.rolService = rolService;
-		
-		/*CrudFormFactory<Usuario> formFactory = new CrudFormFactory<>(Usuario.class, 2, 2);
-		formFactory.setUseBeanValidation(true);
-		crud.setCrudFormFactory(formFactory);
-		*/
+
 		crud.getCrudFormFactory().setUseBeanValidation(true);
 
 		crud.getGrid().setColumns("firstName","lastName","email","username","dni","phoneNumber","city","role");
@@ -42,11 +37,14 @@ public class AdminListaUsuariosView extends Div{
 		crud.getGrid().getColumnByKey("city").setHeader("Ciudad");
 		crud.getGrid().removeColumnByKey("role");
 		crud.getGrid().addColumn(Usuario::getRole).setHeader("Rol");
+		
 		DefaultCrudFormFactory<Usuario> formFactory = new DefaultCrudFormFactory<>(Usuario.class);
+		
 		formFactory.setVisibleProperties("firstName","lastName","email",
 				"username","password","dni","phoneNumber","bornDate","address","city","role","enabled");
+		
 		formFactory.setFieldProvider("role", () -> {
-		    ComboBox<Rol> combobox = new ComboBox<>("Rol", rolService.findAll());
+		    ComboBox<Rol> combobox = new ComboBox<>("Rol", this.rolService.findAll());
 		    combobox.setAllowCustomValue(false);
 		    combobox.setItemLabelGenerator(Rol::getName);
 		    return combobox;

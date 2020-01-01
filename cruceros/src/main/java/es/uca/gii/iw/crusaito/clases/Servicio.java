@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -35,6 +36,7 @@ public class Servicio {
 		this.sImagen = sImagen;
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
+		this.usuarios = new ArrayList<>();
 	}
 	
 	//Constructor de excursion
@@ -48,6 +50,7 @@ public class Servicio {
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 		this.eItinerario = eItinerario;
+		this.usuarios = new ArrayList<>();
 	}
 
 	//Constructor vacio
@@ -123,6 +126,14 @@ public class Servicio {
 		this.usuarios = usuarios;
 	}
 
+	public void addUsuario(Usuario usuario) {
+		this.usuarios.add(usuario);
+	}
+	
+	public void removeUsuario(Usuario usuario) {
+		this.usuarios.remove(usuario);
+	}
+	
 	public String geteItinerario() {
 		return eItinerario;
 	}
