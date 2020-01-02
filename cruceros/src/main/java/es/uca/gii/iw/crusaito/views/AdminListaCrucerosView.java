@@ -1,9 +1,13 @@
 package es.uca.gii.iw.crusaito.views;
 
+import org.springframework.security.access.annotation.Secured;
+
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "ListaCruceros",layout = MainView.class)
+@SuppressWarnings("serial")
+@Secured("serial")
 public class AdminListaCrucerosView extends Div{
 	/*
 	private CruceroService cruceroService;

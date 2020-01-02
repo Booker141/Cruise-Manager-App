@@ -103,8 +103,8 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(cadiz);
             ciudadService.save(sanFernando);
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,50);
-            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, "Cadiz");
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,50, LocalDate.now() );
+            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now(), "Cadiz");
             servicioService.save(elFaro);
             servicioService.save(deportiva);
             
