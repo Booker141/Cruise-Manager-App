@@ -104,6 +104,7 @@ public class MisReservasView extends PrincipalView{
 				this.servicioService.removeServicioFromUsuario(servicio, user);
 				serviceList.remove(servicio);
 				grid.setItems(serviceList);
+				
 				notificacion.close();
 				
 			});

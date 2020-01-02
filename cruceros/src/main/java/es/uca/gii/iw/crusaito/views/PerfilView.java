@@ -6,5 +6,5 @@ import com.vaadin.flow.router.Route;
 @SuppressWarnings("serial")
 @Route(value = "Perfil",layout = MainView.class)
 public class PerfilView extends Div{
-
+	
 }

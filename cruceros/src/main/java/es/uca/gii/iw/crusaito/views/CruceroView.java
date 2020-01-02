@@ -20,9 +20,6 @@ public class CruceroView extends VerticalLayout {
 		
 		this.getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		Header header = new Header();
-		add(header);
-		
 		// inicio body
 		
 		Image fotoBarco = new Image("frontend/img/crucero1.jpg", "fotoOferta1"); // Foto de cada barco, se

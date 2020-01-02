@@ -35,13 +35,12 @@ public class Usuario implements UserDetails{
 	private String city;
 	@ManyToOne
 	private Rol role;
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usuarios")
+	@ManyToMany(mappedBy = "usuarios")
 	private List<Servicio> servicios;
+	@ManyToOne
+	private Crucero crucero;
 	private boolean enabled;
 	private boolean pEncoded;
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy="usuario")
-	private List<Reserva> reservas;
-	*/
 	
 	public Usuario(){}
 	
@@ -228,15 +227,6 @@ public class Usuario implements UserDetails{
 		this.servicios = servicios;
 	}
 	
-	public void addServicio(Servicio servicio) {
-		this.servicios.add(servicio);
-		servicio.getUsuarios().add(this);
-	}
-	
-	public void removeServicio(Servicio servicio) {
-		this.servicios.remove(servicio);
-		servicio.getUsuarios().remove(this);
-	}
 	public long getId() {
 		return id;
 	}
@@ -251,6 +241,20 @@ public class Usuario implements UserDetails{
 
 	public void setpEncoded(boolean pEncoded) {
 		this.pEncoded = pEncoded;
+	}
+
+	public Crucero getCrucero() {
+		return this.crucero;
+	}
+
+	public void setCrucero(Crucero crucero) {
+		this.crucero = crucero;
+		crucero.getUsuarios().add(this);
+	}
+	
+	public void unsetCrucero(Crucero crucero) {
+		this.crucero = null;
+		crucero.getUsuarios().remove(this);
 	}
 	
 	/*

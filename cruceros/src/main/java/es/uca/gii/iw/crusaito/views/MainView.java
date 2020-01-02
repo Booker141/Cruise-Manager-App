@@ -13,7 +13,9 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -49,15 +51,18 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		//Añade logo de la pagina
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 	    logo.setHeight("44px");
+	    
 	    //Boton para cerrar sesion
 	    Button volver = new Button("Cerrar Sesión");
+	    volver.getStyle().set("margin-right", "0");
 	    volver.addClickListener(cerrar -> {
 	    	SecurityContextHolder.clearContext();
 			getUI().get().getSession().close();
+			getUI().get().getPage().reload();
 	    });
 	    
 	    addToNavbar(new DrawerToggle(), logo, volver);
-	   
+	    
 	    addMenuTab("Inicio", DefaultView.class);
 		addMenuTab("Servicios", ServiciosView.class);
 		
@@ -71,9 +76,9 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 
 			if(SecurityUtils.hasRole("Admin")){
 				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
-				addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
+				//addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
 				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
-				addMenuTab("Gestionar reservas", AdminListaReservasView.class);
+				//addMenuTab("Gestionar reservas", AdminListaReservasView.class);
 				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
 			}
 			
@@ -89,7 +94,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			navigationTargetToTab.put(LogoutView.class,tab);
 			tabs.add(tab);*/
 			//addMenuTab("Cerrar sesión", LogoutView.class);
-			
 			addMenuTab("Registrar", RegisterView.class);
 			
 		} 
@@ -122,6 +126,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
     public void beforeEnter(BeforeEnterEvent event) {
         tabs.setSelectedTab(navigationTargetToTab.get(event.getNavigationTarget()));
     }
+	
 	/**
 	 * changeTheme Crea un boton para intercambiar entre tema claro y oscuro
 	 */

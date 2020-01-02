@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.vaadin.crudui.crud.impl.GridCrud;
@@ -14,7 +14,7 @@ import es.uca.gii.iw.crusaito.servicios.CamaroteService;
 @SuppressWarnings("serial")
 @Secured("Admin")
 public class AdminListaReservasView extends Div{
-	/*
+	
 	private ReservaService reservaService;
 
 	private GridCrud<Reserva> crud = new GridCrud<>(Reserva.class);
@@ -33,5 +33,6 @@ public class AdminListaReservasView extends Div{
 		crud.setDeleteOperation(this.reservaService::delete);
 		
 	}
-	*/
+	
 }
+*/

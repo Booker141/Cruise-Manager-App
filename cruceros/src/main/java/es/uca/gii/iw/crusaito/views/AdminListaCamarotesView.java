@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.vaadin.crudui.crud.impl.GridCrud;
@@ -34,3 +34,4 @@ public class AdminListaCamarotesView extends Div{
 		
 	}
 }
+*/
