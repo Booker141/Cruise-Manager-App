@@ -46,7 +46,7 @@ public class Application extends SpringBootServletInitializer {
         	rolService.save(new Rol("Admin"));
         	
             // Usuarios de ejemplo
-            userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","password","12345678Y",
+            userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12345678Y",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
@@ -108,7 +108,6 @@ public class Application extends SpringBootServletInitializer {
             
             List<Servicio> servicios = new ArrayList<Servicio>();
             servicios.add(elFaro);
-            servicios.add(deportiva);
             
             Usuario usuarioPrueba = userService.findByUsername("cliente");
             usuarioPrueba.setServicios(servicios);

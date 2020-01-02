@@ -40,6 +40,7 @@ public class Usuario implements UserDetails{
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Servicio> servicios;
 	private boolean enabled;
+	private boolean pEncoded;
 	/*@OneToMany(fetch = FetchType.LAZY, mappedBy="usuario")
 	private List<Reserva> reservas;
 	*/
@@ -60,6 +61,7 @@ public class Usuario implements UserDetails{
 		this.city = city;
 		this.password = password;
 		this.role=role;
+		this.pEncoded = false;
 		this.servicios = new ArrayList<>();
 	}
 
@@ -241,6 +243,14 @@ public class Usuario implements UserDetails{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public boolean ispEncoded() {
+		return pEncoded;
+	}
+
+	public void setpEncoded(boolean pEncoded) {
+		this.pEncoded = pEncoded;
 	}
 	
 	/*

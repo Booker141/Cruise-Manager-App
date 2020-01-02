@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class ServicioService {
 	
 	public List<Servicio> load(){
 		return this.repo.findAll();
+	}
+	
+	public List<Servicio> findByUsername(String username){
+		Usuario usuario = this.userRepo.findByUsername(username);
+		return this.repo.findByUsuarios(usuario);
 	}
 	
 	public void addServicioToUsusario(Servicio servicio, Usuario usuario) {
