@@ -92,8 +92,6 @@ public class Application extends SpringBootServletInitializer {
             Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now(), "Cadiz");
             servicioService.save(elFaro);
             
-            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, "Cadiz");
-            
             //servicioService.addServicioToUsuario(elFaro, usuarioEjemplo);
             servicioService.save(deportiva);
             elFaro.addUsuario(usuarioEjemplo);
