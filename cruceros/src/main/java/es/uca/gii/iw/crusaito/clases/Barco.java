@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -18,8 +19,10 @@ public class Barco
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "cBarco")
-	private List<Camarote> bCamarotes;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "barco")
+	private Crucero crucero;
+	
 	private String bImagen;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
@@ -35,7 +38,6 @@ public class Barco
 			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
 
 		this.bNombre = bNombre;
-		this.bCamarotes = new ArrayList<Camarote>();
 		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
@@ -58,14 +60,7 @@ public class Barco
 	public void setbNombre(String bNombre) {
 		this.bNombre = bNombre;
 	}
-
-	public List<Camarote> getbCamarotes() {
-		return bCamarotes;
-	}
-	public void setbCamarotes(List<Camarote> bCamarotes) {
-		this.bCamarotes = bCamarotes;
-	}
-
+	
 	public int getbAforoPasajeros() {
 		return bAforoPasajeros;
 	}
@@ -131,5 +126,21 @@ public class Barco
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Crucero getCrucero() {
+		return crucero;
+	}
+
+	public void setCrucero(Crucero crucero) {
+		this.crucero = crucero;
+	}
+
+	public void setbPeso(int bPeso) {
+		this.bPeso = bPeso;
+	}
+
+	public void setbFchPuestaServicio(LocalDate bFchPuestaServicio) {
+		this.bFchPuestaServicio = bFchPuestaServicio;
 	}
 }
