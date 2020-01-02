@@ -48,9 +48,11 @@ public class Application extends SpringBootServletInitializer {
             // Usuarios de ejemplo
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
-            userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12345678Y",
+            userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12348678A",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
-
+            userService.save(new Usuario("Bill", "Harrinson","gerente@gmail.com","gerente","gerente","12365678G",
+            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Gerente")));
+          
             // Generamos ciudades de ejemplo
             Ciudad cadiz = new Ciudad("Cadiz");
             Ciudad sanFernando = new Ciudad("San Fernando");
@@ -109,6 +111,11 @@ public class Application extends SpringBootServletInitializer {
             Usuario usuarioPrueba = userService.findByUsername("cliente");
             elFaro.addUsuario(usuarioPrueba);
             servicioService.save(elFaro);
+
+            servicioService.save(deportiva);
+            userService.save(usuarioPrueba);
+            
+
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));
