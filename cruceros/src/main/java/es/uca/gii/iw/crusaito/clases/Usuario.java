@@ -3,7 +3,9 @@ package es.uca.gii.iw.crusaito.clases;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +38,7 @@ public class Usuario implements UserDetails{
 	@ManyToOne
 	private Rol role;
 	@ManyToMany(mappedBy = "usuarios")
-	private List<Servicio> servicios;
+	private Set<Servicio> servicios;
 	@ManyToOne
 	private Crucero crucero;
 	private boolean enabled;
@@ -59,7 +61,7 @@ public class Usuario implements UserDetails{
 		this.password = password;
 		this.role=role;
 		this.pEncoded = false;
-		this.servicios = new ArrayList<>();
+		this.servicios = new HashSet<Servicio>();
 	}
 
 	public String getFirstName() {
@@ -219,11 +221,11 @@ public class Usuario implements UserDetails{
 		this.reservas = reservas;
 	}*/
 
-	public List<Servicio> getServicios() {
+	public Set<Servicio> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(List<Servicio> servicios) {
+	public void setServicios(Set<Servicio> servicios) {
 		this.servicios = servicios;
 	}
 	
@@ -255,6 +257,11 @@ public class Usuario implements UserDetails{
 	public void unsetCrucero(Crucero crucero) {
 		this.crucero = null;
 		crucero.getUsuarios().remove(this);
+	}
+
+	@Override
+	public String toString() {
+		return username;
 	}
 	
 	/*

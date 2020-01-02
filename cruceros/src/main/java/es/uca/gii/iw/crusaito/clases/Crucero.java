@@ -1,6 +1,9 @@
 package es.uca.gii.iw.crusaito.clases;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,17 +37,17 @@ public class Crucero {
 	private Barco barco;
 	
 	@OneToMany(mappedBy = "crucero")
-	private List<Usuario> usuarios;
+	private Set<Usuario> usuarios;
 	
 	@ManyToMany(mappedBy = "cruceros")
-	private List<Ciudad> ciudades;
+	private Set<Ciudad> ciudades;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "crucero_servicio",
     	joinColumns = {@JoinColumn(name = "crucero_id", referencedColumnName = "id")},
     	inverseJoinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")}
 	)
-	private List<Servicio> servicios;
+	private Set<Servicio> servicios;
 
 	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
 			double cPrecio) {
@@ -55,6 +58,10 @@ public class Crucero {
 		this.cDuracion = cDuracion;
 		this.cDescripcion = cDescripcion;
 		this.cPrecio = cPrecio;
+		this.barco = null;
+		this.usuarios = new HashSet<Usuario>();
+		this.ciudades = new HashSet<Ciudad>();
+		this.servicios = new HashSet<Servicio>();
 	}
 
 
@@ -128,12 +135,12 @@ public class Crucero {
 	}
 
 
-	public List<Ciudad> getCiudades() {
+	public Set<Ciudad> getCiudades() {
 		return ciudades;
 	}
 
 
-	public void setCiudades(List<Ciudad> ciudades) {
+	public void setCiudades(Set<Ciudad> ciudades) {
 		this.ciudades = ciudades;
 	}
 
@@ -146,11 +153,11 @@ public class Crucero {
 		this.cImagen = cImagen;
 	}
 
-	public List<Servicio> getServicios() {
+	public Set<Servicio> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(List<Servicio> servicios) {
+	public void setServicios(Set<Servicio> servicios) {
 		this.servicios = servicios;
 	}
 	
@@ -181,13 +188,18 @@ public class Crucero {
 	}
 
 
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+
+	@Override
+	public String toString() {
+		return cNombre;
 	}
 
 	/*

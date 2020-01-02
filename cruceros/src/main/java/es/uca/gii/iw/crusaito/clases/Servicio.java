@@ -2,7 +2,9 @@ package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,14 +31,14 @@ public class Servicio {
 	private LocalDate sFecha;
 	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
-	private List<Crucero> cruceros;
+	private Set<Crucero> cruceros;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "servicio_usuario",
     	joinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")},
     	inverseJoinColumns = {@JoinColumn(name = "usuario_id", referencedColumnName = "id")}
 	)
-	private List<Usuario> usuarios;
+	private Set<Usuario> usuarios;
 	
 	private String eItinerario;
 	
@@ -51,8 +53,8 @@ public class Servicio {
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
-		this.usuarios = new ArrayList<>();
-		this.cruceros = new ArrayList<>();
+		this.usuarios = new HashSet<Usuario>();
+		this.cruceros = new HashSet<Crucero>();
 	}
 	
 	//Constructor de excursion
@@ -67,7 +69,8 @@ public class Servicio {
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
 		this.eItinerario = eItinerario;
-		this.usuarios = new ArrayList<>();
+		this.usuarios = new HashSet<Usuario>();
+		this.cruceros = new HashSet<Crucero>();
 	}
 
 	//Constructor vacio
@@ -144,11 +147,11 @@ public class Servicio {
 		this.sFecha = sFecha;
 	}
 
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
@@ -244,11 +247,11 @@ public class Servicio {
 		return true;
 	}
 
-	public List<Crucero> getCruceros() {
+	public Set<Crucero> getCruceros() {
 		return cruceros;
 	}
 
-	public void setCruceros(List<Crucero> cruceros) {
+	public void setCruceros(Set<Crucero> cruceros) {
 		this.cruceros = cruceros;
 	}
 	

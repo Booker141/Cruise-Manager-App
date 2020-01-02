@@ -64,7 +64,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    addToNavbar(new DrawerToggle(), logo, volver);
 	    
 	    addMenuTab("Inicio", DefaultView.class);
-		addMenuTab("Servicios", ServiciosView.class);
 		
 		if(SecurityUtils.isUserLoggedIn()) {
 			
@@ -72,11 +71,12 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			
 			if(SecurityUtils.hasRole("Cliente")) {
 				addMenuTab("Gestionar mis Reservas", MisReservasView.class);
+				addMenuTab("Servicios", ServiciosView.class);
 			}
 
 			if(SecurityUtils.hasRole("Admin")){
 				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
-				//addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
+				addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
 				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
 				//addMenuTab("Gestionar reservas", AdminListaReservasView.class);
 				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);

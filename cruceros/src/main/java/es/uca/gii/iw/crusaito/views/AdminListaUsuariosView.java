@@ -1,6 +1,7 @@
 package es.uca.gii.iw.crusaito.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 
@@ -15,6 +16,7 @@ import es.uca.gii.iw.crusaito.servicios.rolService;
 
 @SuppressWarnings("serial")
 @Route(value = "ListaUsuarios",layout = MainView.class)
+@Secured("Admin")
 public class AdminListaUsuariosView extends Div{
 	
 	private UsuarioService usuarioService;
@@ -28,19 +30,17 @@ public class AdminListaUsuariosView extends Div{
 		this.usuarioService = usuarioService;
 		this.rolService = rolService;
 
-		crud.getCrudFormFactory().setUseBeanValidation(true);
-
-		crud.getGrid().setColumns("firstName","lastName","email","username","dni","phoneNumber","city","role");
+		crud.getGrid().setColumns("firstName","lastName","email","username","dni","phoneNumber","city");
 		crud.getGrid().getColumnByKey("firstName").setHeader("Nombre");
 		crud.getGrid().getColumnByKey("lastName").setHeader("Apellidos");
 		crud.getGrid().getColumnByKey("email").setHeader("Email");
 		crud.getGrid().getColumnByKey("phoneNumber").setHeader("Telefono");
 		crud.getGrid().getColumnByKey("city").setHeader("Ciudad");
-		crud.getGrid().removeColumnByKey("role");
 		crud.getGrid().addColumn(Usuario::getRole).setHeader("Rol");
 		
 		DefaultCrudFormFactory<Usuario> formFactory = new DefaultCrudFormFactory<>(Usuario.class);
 		
+		formFactory.setUseBeanValidation(true);
 		formFactory.setVisibleProperties("firstName","lastName","email",
 				"username","password","dni","phoneNumber","bornDate","address","city","role","enabled");
 		
