@@ -15,8 +15,7 @@ public class DefaultView extends Div{
 		// como cambiamos el color al H1 ?????
 		titulo1.getStyle().set("margin-left", "30%"); // Titulo de la seccion izquierda
 
-		Image fotoPrueba1 = new Image("frontend/img/crucero1.jpg", "fotoOferta1"); // Foto de cada barco, se
-																					// debe extraer de la BD más
+		Image fotoPrueba1 = new Image("frontend/img/crucero1.jpg", "fotoOferta1"); // Foto de cada barco, se														// debe extraer de la BD más
 																					// adelante
 		fotoPrueba1.setMaxHeight("350px"); // Altura foto
 		fotoPrueba1.setMaxWidth("450px"); // Anchura foto

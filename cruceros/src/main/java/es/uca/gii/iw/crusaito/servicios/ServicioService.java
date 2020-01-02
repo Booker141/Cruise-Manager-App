@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,18 @@ public class ServicioService {
 		return this.repo.findAll();
 	}
 	
-	public void addServicioToUsusario(Servicio servicio, Usuario usuario) {
-		Servicio service = this.repo.findById(servicio.getId());
-		service.addUsuario(usuario);
-		this.repo.save(service);
-
-		Usuario user = this.userRepo.findById(usuario.getId());
-		user.addServicio(service);
-		this.userRepo.save(user);
+	public List<Servicio> findByUsername(String username){
+		Usuario usuario = this.userRepo.findByUsername(username);
+		return this.repo.findByUsuarios(usuario);
+	}
+	
+	public void addServicioToUsuario(Servicio servicio, Usuario usuario) {
+		servicio.addUsuario(usuario);
+		this.repo.save(servicio);
+	}
+	
+	public void removeServicioFromUsuario(Servicio servicio, Usuario usuario) {
+		servicio.removeUsuario(usuario);
+		this.repo.save(servicio);
 	}
 }
