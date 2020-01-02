@@ -43,7 +43,8 @@ public class Usuario implements UserDetails{
 	/*@OneToMany(fetch = FetchType.LAZY, mappedBy="usuario")
 	private List<Reserva> reservas;
 	*/
-	protected Usuario(){}
+	
+	public Usuario(){}
 	
 	public Usuario(String firstName, String lastName, String email, String username, 
 			String password, String dni, int phoneNumber, LocalDate bornDate, String address,
@@ -59,6 +60,7 @@ public class Usuario implements UserDetails{
 		this.city = city;
 		this.password = password;
 		this.role=role;
+		this.servicios = new ArrayList<>();
 	}
 
 	public String getFirstName() {
@@ -203,7 +205,6 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return enabled;
 	}
 	
@@ -225,6 +226,21 @@ public class Usuario implements UserDetails{
 
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
+	}
+	
+	public void addServicio(Servicio servicio) {
+		this.servicios.add(servicio);
+	}
+	
+	public void removeServicio(Servicio servicio) {
+		this.servicios.remove(servicio);
+	}
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	/*

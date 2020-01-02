@@ -1,18 +1,179 @@
 package es.uca.gii.iw.crusaito.views;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Locale;
 
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.HeaderRow;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.renderer.NumberRenderer;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
+import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.clases.ServicioTipo;
+import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
+import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @Route(value = "ServiciosView",layout = MainView.class)
-public class ServiciosView extends HorizontalLayout{
+public class ServiciosView extends VerticalLayout{
 
+	private UsuarioService usuarioService;
+	private ServicioService servicioService;
+	
+	private Grid<Servicio> grid = new Grid<>(Servicio.class);
+	private List<Servicio> personList;
+	private ListDataProvider<Servicio> dataProvider;
+	
+	private HeaderRow filterRow;
+	private TextField sNombreField;
+	
+	private Div sNombreDiv;
+	private Div sTipoDiv;
+	private Image sImagenImage;
+	
+	private Dialog dialog;
+	
+	private Notification notification;
+	private Label label;
+	private Button cancelButton;
+	private Button confirmButton;
+	private Button reservaButton;
+	
+	private ComboBox<ServicioTipo> sTipoComboBox;
 	
 	@Autowired
-	public ServiciosView(ServicioService servicioService) {
+	public ServiciosView(ServicioService servicioService, UsuarioService usuarioService) {
 		
+		this.servicioService = servicioService;
+		this.usuarioService = usuarioService;
+		
+		personList = this.servicioService.load();
+		
+		dataProvider = new ListDataProvider<>(personList);
+		grid.setDataProvider(dataProvider);
+		
+		grid.removeColumnByKey("id"); grid.removeColumnByKey("sTipo"); grid.removeColumnByKey("sAforoActual"); grid.removeColumnByKey("sAforoMaximo");
+		grid.removeColumnByKey("usuarios"); grid.removeColumnByKey("sPrecio"); grid.removeColumnByKey("sImagen");
+
+		grid.setColumns("sNombre","sDescripcion","eItinerario");
+
+		grid.getColumnByKey("sNombre").setHeader("Nombre");
+		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
+		grid.addColumn(new NumberRenderer<>(Servicio::getsPrecio,"%(,.2f €",new Locale("es"),"0.00 €")).setHeader("Precio");
+		grid.getColumnByKey("eItinerario").setHeader("Itinerario");
+		//grid.getColumnByKey("sTipo").setHeader("Tipo");
+		
+		grid.setSelectionMode(Grid.SelectionMode.NONE);
+
+		dialog = new Dialog();
+		
+		sNombreDiv = new Div();
+		sNombreDiv.setTitle("Nombre");
+		
+		sTipoDiv = new Div();
+		sTipoDiv.setTitle("Tipo");
+		
+		sImagenImage = new Image();
+		sImagenImage.setTitle("Imagen");
+		sImagenImage.setHeight("100%");
+		sImagenImage.setWidth("100%");
+		
+		notification = new Notification();
+		notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+		
+		label = new Label("Confirme la reserva");
+		
+		cancelButton = new Button("Cancelar", e -> notification.close());
+
+		confirmButton = new Button("Confirmar"); 
+		confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		notification.add(label, cancelButton, confirmButton);
+
+		label.getStyle().set("margin-right", "0.5rem");
+		cancelButton.getStyle().set("margin-right", "0.5rem");
+
+		reservaButton = new Button("Reservar");
+		reservaButton.addClickListener(event -> {
+			notification.open();
+		});
+		
+		reservaButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		dialog.add(sNombreDiv,sTipoDiv,sImagenImage, reservaButton);
+		
+		grid.addItemClickListener(
+		        event -> {
+		        	sNombreDiv.setText("Nombre: " + event.getItem().getsNombre());
+		            sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
+		            sImagenImage.setSrc(event.getItem().getsImagen());
+		            
+		            dialog.open();
+		            
+		            confirmButton.addClickListener(e -> {
+		            	Servicio servicio = event.getItem();
+		            	Usuario user = buscarUsuarioLogin();
+		            	System.out.println("ID usuario " + user.getId() + " servicio " + servicio.getsNombre());
+		            	servicioService.addServicioToUsusario(servicio, user);
+		            	notification.close();
+		            });
+		    		
+		        });
+		
+		filterRow = grid.appendHeaderRow();
+		
+		//Primer filtro
+		sNombreField = new TextField();
+		sNombreField.addValueChangeListener(event -> dataProvider.addFilter(
+		        servicio -> StringUtils.containsIgnoreCase(servicio.getsNombre(),
+		                sNombreField.getValue())));
+
+		sNombreField.setValueChangeMode(ValueChangeMode.EAGER);
+
+		filterRow.getCell(grid.getColumnByKey("sNombre")).setComponent(sNombreField);;
+		sNombreField.setSizeFull();
+		sNombreField.setPlaceholder("Filtrar");
+		
+		//Segundo filtro
+		sTipoComboBox = new ComboBox<>("Filtrar por tipo: ");
+		sTipoComboBox.setItems(ServicioTipo.values());
+		
+		sTipoComboBox.addValueChangeListener(event -> {
+			applyFilter(dataProvider);
+		});
+		
+		add(sTipoComboBox, grid);
 	}
+	
+	private void applyFilter(ListDataProvider<Servicio> dataProvider) {
+		dataProvider.clearFilters();
+		if(sTipoComboBox.getValue() != null) {
+			dataProvider.addFilter(servicio -> 
+				sTipoComboBox.getValue() == servicio.getsTipo());
+		}
+	}
+	
+	public Usuario buscarUsuarioLogin() {
+    	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return this.usuarioService.findByUsername(username);
+	}
+	
 }

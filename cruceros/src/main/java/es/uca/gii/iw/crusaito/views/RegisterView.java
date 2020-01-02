@@ -49,7 +49,7 @@ public class RegisterView extends VerticalLayout{
 		
 			Usuario user = new Usuario(firstName.getValue(), lastName.getValue(), email.getValue(), 
 				username.getValue(), password.getValue(), dni.getValue(), phoneNumber, 
-				bornDate.getValue(),address.getValue(),city.getValue(),rolService.load("Cliente"));
+				bornDate.getValue(),address.getValue(),city.getValue(),rolService.findByName("Cliente"));
 		//Operacion de guardado en la BD, implementada en la clase UsuarioService
 			usuarioService.save(user);
 		}
