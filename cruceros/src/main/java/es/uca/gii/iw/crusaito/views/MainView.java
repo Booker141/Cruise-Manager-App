@@ -75,9 +75,9 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 
 			if(SecurityUtils.hasRole("Admin")){
 				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
-				addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
+				//addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
 				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
-				addMenuTab("Gestionar reservas", AdminListaReservasView.class);
+				//addMenuTab("Gestionar reservas", AdminListaReservasView.class);
 				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
 			}
 			

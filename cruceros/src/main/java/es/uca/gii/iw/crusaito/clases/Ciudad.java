@@ -3,10 +3,13 @@ package es.uca.gii.iw.crusaito.clases;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -16,19 +19,23 @@ public class Ciudad {
 	@GeneratedValue
 	private long id;
 	private String cNombre;
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="ciudades")
-	private List<Crucero> cCruceros;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "ciudad_crucero",
+    	joinColumns = {@JoinColumn(name = "ciudad_id", referencedColumnName = "id")},
+    	inverseJoinColumns = {@JoinColumn(name = "crucero_id", referencedColumnName = "id")}
+	)
+	private List<Crucero> cruceros;
 	
 	public Ciudad() {}
 	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
-		this.cCruceros = new ArrayList<>();
+		this.cruceros = new ArrayList<>();
 	}
 	
 	public Ciudad(String cNombre, List<Crucero> cCruceros) {
 		this.cNombre = cNombre;
-		this.cCruceros = cCruceros;
+		this.cruceros = cCruceros;
 	}
 
 	public long getId() {
@@ -47,15 +54,21 @@ public class Ciudad {
 		this.cNombre = cNombre;
 	}
 
-	public List<Crucero> getcCruceros() {
-		return cCruceros;
+	public List<Crucero> getCruceros() {
+		return cruceros;
 	}
 
-	public void setcCruceros(List<Crucero> cCruceros) {
-		this.cCruceros = cCruceros;
+	public void setCruceros(List<Crucero> cruceros) {
+		this.cruceros = cruceros;
 	}
 	
-	public void addcCruceros(Crucero crucero) {
-		this.cCruceros.add(crucero);
+	public void addCruceros(Crucero crucero) {
+		this.cruceros.add(crucero);
+		crucero.getCiudades().add(this);
+	}
+	
+	public void removeCrucero(Crucero crucero) {
+		this.cruceros.remove(crucero);
+		crucero.getCiudades().remove(this);
 	}
 }

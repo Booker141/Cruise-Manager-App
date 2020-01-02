@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.clases;
-
+/*
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -112,3 +112,4 @@ public class Camarote {
 	
 	
 }
+*/

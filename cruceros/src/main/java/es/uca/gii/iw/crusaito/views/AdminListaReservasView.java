@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.crudui.crud.impl.GridCrud;
 
@@ -11,7 +11,7 @@ import es.uca.gii.iw.crusaito.servicios.CamaroteService;
 
 @Route(value = "ListaReservas",layout = MainView.class)
 public class AdminListaReservasView extends Div{
-	/*
+	
 	private ReservaService reservaService;
 
 	private GridCrud<Reserva> crud = new GridCrud<>(Reserva.class);
@@ -30,5 +30,6 @@ public class AdminListaReservasView extends Div{
 		crud.setDeleteOperation(this.reservaService::delete);
 		
 	}
-	*/
+	
 }
+*/

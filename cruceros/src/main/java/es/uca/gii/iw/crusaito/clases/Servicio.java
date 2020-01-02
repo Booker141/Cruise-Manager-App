@@ -25,12 +25,17 @@ public class Servicio {
 	private String sImagen;
 	private int sAforoActual;
 	private int sAforoMaximo;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
+	private List<Crucero> cruceros;
+	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "servicio_usuario",
     	joinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")},
     	inverseJoinColumns = {@JoinColumn(name = "usuario_id", referencedColumnName = "id")}
 	)
 	private List<Usuario> usuarios;
+	
 	private String eItinerario;
 	
 	//Constructor de servicio
@@ -44,6 +49,7 @@ public class Servicio {
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 		this.usuarios = new ArrayList<>();
+		this.cruceros = new ArrayList<>();
 	}
 	
 	//Constructor de excursion
@@ -223,6 +229,14 @@ public class Servicio {
 		} else if (!usuarios.equals(other.usuarios))
 			return false;
 		return true;
+	}
+
+	public List<Crucero> getCruceros() {
+		return cruceros;
+	}
+
+	public void setCruceros(List<Crucero> cruceros) {
+		this.cruceros = cruceros;
 	}
 	
 	
