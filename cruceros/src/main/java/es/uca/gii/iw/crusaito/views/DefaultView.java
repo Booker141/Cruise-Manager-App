@@ -7,6 +7,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
+@SuppressWarnings("serial")
 @Route(value = "Index",layout = MainView.class)
 public class DefaultView extends Div{
 

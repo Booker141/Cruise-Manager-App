@@ -13,6 +13,7 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.servicios.rolService;
 
+@SuppressWarnings("serial")
 @Route(value = "ListaUsuarios",layout = MainView.class)
 public class AdminListaUsuariosView extends Div{
 	

@@ -1,6 +1,7 @@
 package es.uca.gii.iw.crusaito.views;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.vaadin.crudui.crud.impl.GridCrud;
 
 import com.vaadin.flow.component.html.Div;
@@ -10,6 +11,8 @@ import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.servicios.BarcoService;
 
 @Route(value = "ListaBarcos",layout = MainView.class)
+@Secured("Admin")
+@SuppressWarnings("serial")
 public class AdminListaBarcosView extends Div{
 
 	private BarcoService barcoService;

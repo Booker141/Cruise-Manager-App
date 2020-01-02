@@ -48,9 +48,11 @@ public class Application extends SpringBootServletInitializer {
             // Usuarios de ejemplo
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
-            userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12345678Y",
+            userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12348678A",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
-
+            userService.save(new Usuario("Bill", "Harrinson","gerente@gmail.com","gerente","gerente","12365678G",
+            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Gerente")));
+          
             // Generamos ciudades de ejemplo
             Ciudad cadiz = new Ciudad("Cadiz");
             Ciudad sanFernando = new Ciudad("San Fernando");
@@ -86,7 +88,8 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(sanFernando);
             ciudadService.save(chiclana);
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,50);
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,50, LocalDate.now() );
+            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now(), "Cadiz");
             servicioService.save(elFaro);
             
             Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, "Cadiz");
