@@ -1,23 +1,31 @@
 package es.uca.gii.iw.crusaito.views;
-/*
+
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.provider.DataProvider;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.Route;
 
-import es.uca.gii.iw.crusaito.clases.Reserva;
-import es.uca.gii.iw.crusaito.clases.ReservaEstado;
+import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
-import es.uca.gii.iw.crusaito.servicios.ReservaService;
+import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @SuppressWarnings("serial")
@@ -25,38 +33,89 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @Secured("Cliente")
 public class MisReservasView extends PrincipalView{
 	
-	private Grid<Reserva> grid = new Grid<Reserva>(Reserva.class);
+	private ServicioService servicioService;
+    private UsuarioService usuarioService;
     
-    
-    private Reserva reserva;
-	private ReservaService reservaService;
-    
+	private Grid<Servicio> grid = new Grid<>(Servicio.class);
+    private List<Servicio> serviceList;
+	
+    private  Dialog ventana = new Dialog();
+
+    private Div sNombreDiv = new Div();
+	private Div sTipoDiv = new Div();
+	private Image sImagenImage = new Image();
+	
+    private Notification notificacion = new Notification();
     private Label confirmacion = new Label("¿Seguro que desea cancelar esta reserva?");
-    private Button seguro = new Button("Cancelar reserva");
-    private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
-    private  Dialog ventana = new Dialog(ventanaSeguro);
+    private Button cancelButton = new Button("Cancelar");
+    private Button confirmButton = new Button("Confirmar");
+    private Button deleteButton = new Button("Cancelar reserva");
+    
+    //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
     
 	@Autowired
-    public MisReservasView(ReservaService ReservaService, UsuarioService UsuarioService) 
+    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService) 
 	{
-		//Header header = new Header();
-		//add(header);
+		this.servicioService = servicioService;
+		this.usuarioService = usuarioService;
 		
-		add(grid);
+		serviceList = this.servicioService.findByUsername(SecurityUtils.currentUsername());
 		
-		grid.setItems(ReservaService.listByUsuario(UsuarioService.findByUsername(SecurityUtils.currentUsername())));
+		grid.setItems(serviceList);
 
-		grid.setColumns("Crucero","fechaInicio","fechaFin", "Precio", "Estado");
-		grid.getColumnByKey("crucero").setHeader("Crucero");
-		grid.getColumnByKey("fechaInicio").setHeader("Fecha inicial");
-		grid.getColumnByKey("fechaFin").setHeader("Fecha final");
+		grid.setColumns("sNombre","sDescripcion","sPrecio");
+		grid.getColumnByKey("sNombre").setHeader("Nombre");
+		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
+		grid.getColumnByKey("sPrecio").setHeader("Precio");
 	
+		grid.setSelectionMode(Grid.SelectionMode.NONE);
+
 		grid.setSizeFull();
-		grid.setColumnReorderingAllowed(true);
+		//grid.setColumnReorderingAllowed(true);
 		this.setSizeFull();
 		
-		ventanaSeguro.setAlignItems(Alignment.CENTER);
+		sNombreDiv.setTitle("Nombre");
+		sTipoDiv.setTitle("Tipo");
 		
+		sImagenImage.setTitle("Imagen");
+		sImagenImage.setHeight("100%");
+		sImagenImage.setWidth("100%");
+		
+		notificacion.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+
+		cancelButton.addClickListener(e -> notificacion.close());
+		confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		notificacion.add(confirmacion,cancelButton,confirmButton);
+		
+		confirmacion.getStyle().set("margin-right", "0.5rem");
+		cancelButton.getStyle().set("margin-right", "0.5rem");
+		
+		deleteButton.addClickListener(event -> notificacion.open());
+		deleteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		ventana.add(sNombreDiv,sTipoDiv,sImagenImage,deleteButton);
+		
+		grid.addItemClickListener(event -> {
+			sNombreDiv.setText("Nombre: " + event.getItem().getsNombre());
+			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
+			sImagenImage.setSrc(event.getItem().getsImagen());
+			
+			ventana.open();
+		            
+			confirmButton.addClickListener(e -> {
+				Servicio servicio = event.getItem();
+				Usuario user = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
+				this.servicioService.removeServicioFromUsuario(servicio, user);
+				serviceList.remove(servicio);
+				grid.setItems(serviceList);
+				notificacion.close();
+				
+			});
+		});
+		
+		//ventanaSeguro.setAlignItems(Alignment.CENTER);
+		/*
 		seguro.addClickListener(event ->{
 		    reserva.setEstado(ReservaEstado.Cancelada);
 		    ReservaService.save(reserva);
@@ -64,7 +123,8 @@ public class MisReservasView extends PrincipalView{
 		    Funciones.notificacionAcierto("Reserva cancelada con éxito");
 		    grid.setItems(ReservaService.listByUsuario(UsuarioService.findByUsername(SecurityUtils.currentUsername())));
 		    });
-		
+		*/
+		/*
 	    grid.addColumn(new NativeButtonRenderer<>("Cancelar", clickedItem -> {
 	    	grid.asSingleSelect().clear();
 	    	LocalDate now = LocalDate.now();
@@ -83,16 +143,8 @@ public class MisReservasView extends PrincipalView{
 	        ventana.open();
 	    	}
 	      }));
-	    
-	   
-	    
-	    //Footer footer = new Footer();	
-		//add(footer);
+	*/
+	    add(grid);
 	}
 	
-	public void actualizar(){	
-    	grid.setItems(reservaService.findAll());
-    }
-	
 }
-*/

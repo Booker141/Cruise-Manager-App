@@ -131,8 +131,7 @@ public class ServiciosView extends VerticalLayout{
 		            confirmButton.addClickListener(e -> {
 		            	Servicio servicio = event.getItem();
 		            	Usuario user = buscarUsuarioLogin();
-		            	System.out.println("ID usuario " + user.getId() + " servicio " + servicio.getsNombre());
-		            	servicioService.addServicioToUsusario(servicio, user);
+		            	servicioService.addServicioToUsuario(servicio, user);
 		            	notification.close();
 		            });
 		    		

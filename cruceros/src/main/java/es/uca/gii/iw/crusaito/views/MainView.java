@@ -66,7 +66,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
 			if(SecurityUtils.hasRole("Cliente")) {
-				
+				addMenuTab("Gestionar mis Reservas", MisReservasView.class);
 			}
 
 			if(SecurityUtils.hasRole("Admin")){

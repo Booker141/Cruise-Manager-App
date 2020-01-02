@@ -46,7 +46,7 @@ public class Application extends SpringBootServletInitializer {
         	rolService.save(new Rol("Admin"));
         	
             // Usuarios de ejemplo
-            userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","password","12345678Y",
+            userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12348678A",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
@@ -108,21 +108,14 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(elFaro);
             servicioService.save(deportiva);
             
-            List<Servicio> servicios = new ArrayList<Servicio>();
-            servicios.add(elFaro);
-            servicios.add(deportiva);
-            
             Usuario usuarioPrueba = userService.findByUsername("cliente");
-            usuarioPrueba.setServicios(servicios);
-            List<Usuario> usuarios = new ArrayList<Usuario>();
-            usuarios.add(usuarioPrueba);
-            elFaro.setUsuarios(usuarios);
-            deportiva.setUsuarios(usuarios);
-            
+            elFaro.addUsuario(usuarioPrueba);
             servicioService.save(elFaro);
+
             servicioService.save(deportiva);
             userService.save(usuarioPrueba);
             
+
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));
