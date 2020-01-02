@@ -106,19 +106,9 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(elFaro);
             servicioService.save(deportiva);
             
-            List<Servicio> servicios = new ArrayList<Servicio>();
-            servicios.add(elFaro);
-            
             Usuario usuarioPrueba = userService.findByUsername("cliente");
-            usuarioPrueba.setServicios(servicios);
-            List<Usuario> usuarios = new ArrayList<Usuario>();
-            usuarios.add(usuarioPrueba);
-            elFaro.setUsuarios(usuarios);
-            deportiva.setUsuarios(usuarios);
-            
+            elFaro.addUsuario(usuarioPrueba);
             servicioService.save(elFaro);
-            servicioService.save(deportiva);
-            userService.save(usuarioPrueba);
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));

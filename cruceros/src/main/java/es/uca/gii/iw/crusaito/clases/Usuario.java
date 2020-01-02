@@ -37,7 +37,7 @@ public class Usuario implements UserDetails{
 	private String city;
 	@ManyToOne
 	private Rol role;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usuarios")
 	private List<Servicio> servicios;
 	private boolean enabled;
 	private boolean pEncoded;
@@ -232,10 +232,12 @@ public class Usuario implements UserDetails{
 	
 	public void addServicio(Servicio servicio) {
 		this.servicios.add(servicio);
+		servicio.getUsuarios().add(this);
 	}
 	
 	public void removeServicio(Servicio servicio) {
 		this.servicios.remove(servicio);
+		servicio.getUsuarios().remove(this);
 	}
 	public long getId() {
 		return id;
