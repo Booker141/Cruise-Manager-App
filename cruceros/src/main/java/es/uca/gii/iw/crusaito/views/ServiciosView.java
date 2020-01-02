@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -32,6 +31,7 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
+@SuppressWarnings("serial")
 @Route(value = "ServiciosView",layout = MainView.class)
 public class ServiciosView extends VerticalLayout{
 

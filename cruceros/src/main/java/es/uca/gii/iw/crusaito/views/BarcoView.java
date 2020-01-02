@@ -12,7 +12,6 @@ import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.common.Footer;
-import es.uca.gii.iw.crusaito.common.Header;
 import es.uca.gii.iw.crusaito.servicios.BarcoService;
 
 @Route(value = "BarcoView", layout = MainView.class)

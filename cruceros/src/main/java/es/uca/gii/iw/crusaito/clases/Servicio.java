@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.clases;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class Servicio {
 	private String sImagen;
 	private int sAforoActual;
 	private int sAforoMaximo;
+	private LocalDate sFecha;
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "servicio_usuario",
     	joinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")},
@@ -35,7 +37,7 @@ public class Servicio {
 	
 	//Constructor de servicio
 	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo,
-			String sImagen, int sAforoActual, int sAforoMaximo) {
+			String sImagen, int sAforoActual, int sAforoMaximo, LocalDate sFecha) {
 		this.sNombre = sNombre;
 		this.sDescripcion = sDescripcion;
 		this.sPrecio = sPrecio;
@@ -43,12 +45,13 @@ public class Servicio {
 		this.sImagen = sImagen;
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
+		this.sFecha = sFecha;
 		this.usuarios = new ArrayList<>();
 	}
 	
 	//Constructor de excursion
 	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo, int sAforoActual,
-			String sImagen, int sAforoMaximo, String eItinerario) {
+			String sImagen, int sAforoMaximo, LocalDate sFecha, String eItinerario) {
 		this.sNombre = sNombre;
 		this.sDescripcion = sDescripcion;
 		this.sPrecio = sPrecio;
@@ -56,6 +59,7 @@ public class Servicio {
 		this.sImagen = sImagen;
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
+		this.sFecha = sFecha;
 		this.eItinerario = eItinerario;
 		this.usuarios = new ArrayList<>();
 	}
@@ -123,6 +127,15 @@ public class Servicio {
 
 	public void setsAforoMaximo(int sAforoMaximo) {
 		this.sAforoMaximo = sAforoMaximo;
+	}
+
+	
+	public LocalDate getsFecha() {
+		return sFecha;
+	}
+
+	public void setsFecha(LocalDate sFecha) {
+		this.sFecha = sFecha;
 	}
 
 	public List<Usuario> getUsuarios() {
