@@ -44,7 +44,10 @@ public class UsuarioService implements UserDetailsService {
 	}
 	
 	public Usuario save(Usuario usuario) {
-		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		if(!usuario.ispEncoded()) {
+			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+			usuario.setpEncoded(true);
+		}
 		usuario.setEnabled(true);
 		return repo.save(usuario);
 	}

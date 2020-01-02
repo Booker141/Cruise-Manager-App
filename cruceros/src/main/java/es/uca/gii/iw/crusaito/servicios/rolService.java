@@ -1,5 +1,7 @@
 package es.uca.gii.iw.crusaito.servicios;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,11 @@ public class rolService {
 		return repo.save(role);
 	}
 	
-	public Rol load(String name) {
+	public Rol findByName(String name) {
 		return repo.findByName(name);
+	}
+	
+	public List<Rol> findAll(){
+		return repo.findAll();
 	}
 }

@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.common;
 
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.html.Image;
@@ -25,7 +26,7 @@ public class Funciones {
 		notification.open();
 	}
 	
-	
+
 	public static void clickListener(MenuItem A, String cadena)
 	{
 		A.addClickListener(e -> {

@@ -55,18 +55,18 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    	SecurityContextHolder.clearContext();
 			getUI().get().getSession().close();
 	    });
+	    
 	    addToNavbar(new DrawerToggle(), logo, volver);
 	   
 	    addMenuTab("Inicio", DefaultView.class);
-		addMenuTab("Cruceros", CrucerosView.class);
-		addMenuTab("Barcos", BarcosView.class);
+		addMenuTab("Servicios", ServiciosView.class);
 		
 		if(SecurityUtils.isUserLoggedIn()) {
 			
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
 			if(SecurityUtils.hasRole("Cliente")) {
-				//addMenuTab("Mis reservas", MisReservasView.class);
+				addMenuTab("Gestionar mis Reservas", MisReservasView.class);
 			}
 
 			if(SecurityUtils.hasRole("Admin")){

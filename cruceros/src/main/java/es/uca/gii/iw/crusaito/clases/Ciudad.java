@@ -12,15 +12,14 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Ciudad {
 
-	public Ciudad() {
-	}
-
 	@Id
 	@GeneratedValue
 	private long id;
 	private String cNombre;
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="ciudades")
 	private List<Crucero> cCruceros;
+	
+	public Ciudad() {}
 	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
