@@ -1,7 +1,5 @@
 package es.uca.gii.iw.crusaito.common;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
@@ -10,7 +8,6 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.notification.Notification.Position;
 
-import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 public class Funciones {

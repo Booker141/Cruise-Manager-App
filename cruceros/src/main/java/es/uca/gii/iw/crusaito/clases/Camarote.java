@@ -20,12 +20,12 @@ public class Camarote {
 	private Barco cBarco;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Crucero cCrucero;
-	private boolean isReservada;
+	private boolean isReservado;
 
 	
 	public Camarote(String cTipo, boolean isReservada) {
 		this.cTipo = cTipo;
-		this.isReservada = isReservada;
+		this.isReservado = isReservada;
 	}
 
 	public Long getId() {
@@ -44,12 +44,12 @@ public class Camarote {
 		this.cTipo = cTipo;
 	}
 
-	public boolean isReservada() {
-		return isReservada;
+	public boolean isReservado() {
+		return isReservado;
 	}
 
-	public void setReservada(boolean isReservada) {
-		this.isReservada = isReservada;
+	public void setReservado(boolean isReservado) {
+		this.isReservado = isReservado;
 	}
 
 	public String getCaImagen() {
@@ -65,7 +65,7 @@ public class Camarote {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isReservada ? 1231 : 1237);
+		result = prime * result + (isReservado ? 1231 : 1237);
 		result = prime * result + ((cTipo == null) ? 0 : cTipo.hashCode());
 		return result;
 	}
@@ -84,7 +84,7 @@ public class Camarote {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isReservada != other.isReservada)
+		if (isReservado != other.isReservado)
 			return false;
 		if (cTipo == null) {
 			if (other.cTipo != null)
