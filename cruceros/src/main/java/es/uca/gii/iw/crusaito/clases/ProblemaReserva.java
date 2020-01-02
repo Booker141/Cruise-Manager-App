@@ -5,16 +5,19 @@ import javax.persistence.*;
 @Entity
 public class ProblemaReserva{
 
+	public ProblemaReserva() {
+	}
+
 	@Id
     @GeneratedValue
     private Long id;
-    private Reserva pReserva;
+	@OneToOne(fetch = FetchType.LAZY)
+	private Reserva reserva;
     private String pTipoProblema;
     private String pDescripcionProblema;
     
     public ProblemaReserva(Long id, Reserva reserva, String tipoProblema, String descripcionProblema) {
 		this.id = id;
-		this.pReserva = reserva;
 		this.pTipoProblema = tipoProblema;
 		this.pDescripcionProblema = descripcionProblema;
 	}
@@ -25,14 +28,6 @@ public class ProblemaReserva{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Reserva getpReserva() {
-		return pReserva;
-	}
-
-	public void setpReserva(Reserva pReserva) {
-		this.pReserva = pReserva;
 	}
 
 	public String getpTipoProblema() {
@@ -50,9 +45,15 @@ public class ProblemaReserva{
 	public void setpDescripcionProblema(String pDescripcionProblema) {
 		this.pDescripcionProblema = pDescripcionProblema;
 	}
+
+	public Reserva getReserva() {
+		return reserva;
+	}
+
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
+	}
+	
+	
     
-
-
-
-}
-*/
+}*/

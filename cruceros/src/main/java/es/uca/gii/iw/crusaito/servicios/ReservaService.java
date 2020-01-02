@@ -1,15 +1,12 @@
 package es.uca.gii.iw.crusaito.servicios;
-
+/*
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.uca.gii.iw.crusaito.clases.*;
 import es.uca.gii.iw.crusaito.repositorios.ReservaRepository;
-
-
 
 @Service
 public class ReservaService {
@@ -21,16 +18,16 @@ public class ReservaService {
         this.repositorio = repositorio;
     }
 	
-	public Optional<Reserva> findById(Long id) {
+	public Reserva findById(long id) {
         return repositorio.findById(id);
     }
 	
 	public List<Reserva> listByUsuario(Usuario usuario) {
-        return repositorio.findByidUsuario(usuario);
+        return repositorio.findByUsuario(usuario);
     }
 	
-	public List<Reserva> listByBarco(Barco barco) {
-        return repositorio.findByidBarco(barco);
+	public List<Reserva> listByCrucero(Crucero crucero) {
+        return repositorio.findByCrucero(crucero);
     }
 	
 	public List<Reserva> findAll() {
@@ -38,8 +35,8 @@ public class ReservaService {
     }
 
 	
-	public void delete (Reserva data) {
-        repositorio.delete(data);
+	public void delete (Reserva reserva) {
+        repositorio.delete(reserva);
     }
 	
 
@@ -49,3 +46,4 @@ public class ReservaService {
 
 
 }
+*/

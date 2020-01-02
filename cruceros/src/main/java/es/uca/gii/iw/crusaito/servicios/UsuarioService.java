@@ -1,5 +1,7 @@
 package es.uca.gii.iw.crusaito.servicios;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +19,6 @@ public class UsuarioService implements UserDetailsService {
 
 	@Autowired
 	public UsuarioService(UsuarioRepository repo, PasswordEncoder passwordEncoder) {
-		super();
 		this.repo = repo;
 		this.passwordEncoder = passwordEncoder;
 	}
@@ -30,10 +31,32 @@ public class UsuarioService implements UserDetailsService {
 		return user;
 	}
 	
+	public Usuario findByUsername(String s) {
+		return repo.findByUsername(s);
+	}
+	
+	public Usuario findByEmail(String s) {
+		return repo.findByEmail(s);
+	}
+	
+	public List<Usuario> findByDni(String dni){
+		return repo.findByDni(dni);
+	}
+	
 	public Usuario save(Usuario usuario) {
-		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		if(!usuario.ispEncoded()) {
+			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+			usuario.setpEncoded(true);
+		}
 		usuario.setEnabled(true);
 		return repo.save(usuario);
+	}
+	
+	public void delete(Usuario usuario) {
+		repo.delete(usuario);
+	}
+	public List<Usuario> load() {
+		return repo.findAll();
 	}
 
 }

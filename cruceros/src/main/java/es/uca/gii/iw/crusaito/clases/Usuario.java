@@ -6,14 +6,16 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-//
+
 @SuppressWarnings("serial")
 @Entity
 public class Usuario implements UserDetails{
@@ -33,9 +35,14 @@ public class Usuario implements UserDetails{
 	private String city;
 	@ManyToOne
 	private Rol role;
+	@ManyToMany(mappedBy = "usuarios")
+	private List<Servicio> servicios;
+	@ManyToOne
+	private Crucero crucero;
 	private boolean enabled;
+	private boolean pEncoded;
 	
-	protected Usuario(){}
+	public Usuario(){}
 	
 	public Usuario(String firstName, String lastName, String email, String username, 
 			String password, String dni, int phoneNumber, LocalDate bornDate, String address,
@@ -51,6 +58,8 @@ public class Usuario implements UserDetails{
 		this.city = city;
 		this.password = password;
 		this.role=role;
+		this.pEncoded = false;
+		this.servicios = new ArrayList<>();
 	}
 
 	public String getFirstName() {
@@ -195,12 +204,57 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return enabled;
 	}
 	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	/*
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}*/
+
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public boolean ispEncoded() {
+		return pEncoded;
+	}
+
+	public void setpEncoded(boolean pEncoded) {
+		this.pEncoded = pEncoded;
+	}
+
+	public Crucero getCrucero() {
+		return this.crucero;
+	}
+
+	public void setCrucero(Crucero crucero) {
+		this.crucero = crucero;
+		crucero.getUsuarios().add(this);
+	}
+	
+	public void unsetCrucero(Crucero crucero) {
+		this.crucero = null;
+		crucero.getUsuarios().remove(this);
 	}
 	
 	/*

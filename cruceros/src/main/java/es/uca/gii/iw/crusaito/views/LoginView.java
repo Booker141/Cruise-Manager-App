@@ -13,17 +13,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 
 import es.uca.gii.iw.crusaito.security.CustomRequestCache;
 
-@Route(value = LoginView.ROUTE)
-@Theme(value = Lumo.class, variant = Lumo.DARK)
+@SuppressWarnings("serial")
 @PageTitle("Login")
+@Route(value = LoginView.ROUTE, layout = MainView.class)
 public class LoginView extends VerticalLayout {
 	
-   private static final long serialVersionUID = 1L;
    public static final String ROUTE = "Login";
    
    private LoginOverlay login = new LoginOverlay();

@@ -9,16 +9,17 @@ import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 
-@Route("AdminView")
+@SuppressWarnings("serial")
+@Route(value = "AdminView",layout = MainView.class)
 @Secured("Admin")
 public class AdminView extends VerticalLayout{
-	private static final long serialVersionUID = 1L;
 
 	public AdminView() {
+		
 		H1 texto = new H1();
 		
 		if(SecurityUtils.isUserLoggedIn()) {
-			texto.setText("Estoy conectado");
+			texto.setText("Estoy conectado como " + SecurityUtils.currentUsername());
 		}else {
 			texto.setText("No estoy conectado");
 		}
