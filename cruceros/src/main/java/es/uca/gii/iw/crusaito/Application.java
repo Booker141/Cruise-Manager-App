@@ -79,6 +79,7 @@ public class Application extends SpringBootServletInitializer {
             Usuario usuarioEjemplo = userService.findByUsername("cliente");
             usuarioEjemplo.setCrucero(caribe);
             
+            userRepo.save(usuarioEjemplo);
             barcoService.save(barcoEjemplo);
             cruceroService.save(caribe);
             ciudadService.save(cadiz);

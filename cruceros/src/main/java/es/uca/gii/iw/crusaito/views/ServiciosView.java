@@ -29,6 +29,7 @@ import com.vaadin.flow.router.Route;
 import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioTipo;
 import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
@@ -39,7 +40,7 @@ public class ServiciosView extends VerticalLayout{
 	private ServicioService servicioService;
 	
 	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-	private List<Servicio> personList;
+	private List<Servicio> serviceList;
 	private ListDataProvider<Servicio> dataProvider;
 	
 	private HeaderRow filterRow;
@@ -65,9 +66,9 @@ public class ServiciosView extends VerticalLayout{
 		this.servicioService = servicioService;
 		this.usuarioService = usuarioService;
 		
-		personList = this.servicioService.load();
+		serviceList = this.servicioService.findCruceroByUsername(SecurityUtils.currentUsername());
 		
-		dataProvider = new ListDataProvider<>(personList);
+		dataProvider = new ListDataProvider<>(serviceList);
 		grid.setDataProvider(dataProvider);
 		
 		grid.removeColumnByKey("id"); grid.removeColumnByKey("sTipo"); grid.removeColumnByKey("sAforoActual"); grid.removeColumnByKey("sAforoMaximo");
