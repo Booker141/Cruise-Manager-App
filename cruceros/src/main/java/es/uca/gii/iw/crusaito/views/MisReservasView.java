@@ -1,6 +1,7 @@
 package es.uca.gii.iw.crusaito.views;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
+import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @SuppressWarnings("serial")
@@ -30,9 +33,10 @@ public class MisReservasView extends PrincipalView{
 	
 	private ServicioService servicioService;
     private UsuarioService usuarioService;
+    private ServicioUsuarioService servicioUsuarioService;
     
 	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    private List<Servicio> serviceList;
+    private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
     private  Dialog ventana = new Dialog();
 
@@ -49,12 +53,16 @@ public class MisReservasView extends PrincipalView{
     //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
     
 	@Autowired
-    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService) 
+    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, ServicioUsuarioService servicioUsuarioService) 
 	{
 		this.servicioService = servicioService;
+		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
-		
-		serviceList = this.servicioService.findByUsername(SecurityUtils.currentUsername());
+
+		List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
+		servUser.forEach(serviUsuar -> {
+			serviceList.add(serviUsuar.getServicio());
+		});
 		
 		grid.setItems(serviceList);
 

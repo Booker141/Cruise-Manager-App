@@ -181,12 +181,6 @@ public class Crucero {
 		this.barco = barco;
 		barco.setCrucero(this);
 	}
-	
-	public void unsetBarco(Barco barco) {
-		this.barco = null;
-		barco.setCrucero(null);
-	}
-
 
 	public Set<Usuario> getUsuarios() {
 		return usuarios;

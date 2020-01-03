@@ -36,7 +36,7 @@ public class Application extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner demo(rolService rolService, UsuarioService userService,rolRepository rolRepository, 
     		CiudadService ciudadService, CruceroService cruceroService, BarcoService barcoService,
-    		ServicioService servicioService,
+    		ServicioService servicioService, ServicioUsuarioService servicioUsuarioService,
     		UsuarioRepository userRepo, BarcoRepository barcoRepo, CruceroRepository cruceroRepo) {
         return (args) -> {
         	
@@ -88,17 +88,33 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(sanFernando);
             ciudadService.save(chiclana);
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,50, LocalDate.now() );
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 2,5, LocalDate.now() );
             Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now(), "Cadiz");
             servicioService.save(elFaro);
             
             //servicioService.addServicioToUsuario(elFaro, usuarioEjemplo);
             servicioService.save(deportiva);
-            elFaro.addUsuario(usuarioEjemplo);
+            
+            ServicioUsuario servUsu = new ServicioUsuario();
+            servUsu.setServicio(elFaro);
+            servUsu.setUsuario(usuarioEjemplo);
+            servUsu.setParticipantes(2);
+            
+            elFaro.getServiciosUsuarios().add(servUsu);
+            usuarioEjemplo.getUsuariosServicios().add(servUsu);
+            servicioService.save(elFaro);
+            userService.save(usuarioEjemplo);
+            
+            //elFaro.getUsuarios().add(usuarioEjemplo);
+            //usuarioEjemplo.getServicios().add(elFaro);
+            
+            
             //Servicio con crucero
             caribe.addServicio(elFaro);
             servicioService.save(elFaro);
+            //userService.save(usuarioEjemplo);
             cruceroService.save(caribe);
+            
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));
@@ -124,34 +140,7 @@ public class Application extends SpringBootServletInitializer {
             cruceroRepo.save(new Crucero("Adriatico","El Pireo","El Pireo","8 dias",3400,LocalDate.now(),"Mal barco"));
             */
             
-            // fetch all users
-            log.info("Users found with findAll():");
-            log.info("-------------------------------");
-            for (Usuario user : userRepo.findAll()) {
-                log.info(user.toString());
-            }
-            log.info("");
-         // fetch all barcos
-            log.info("Barcos found with findAll():");
-            log.info("-------------------------------");
-            for (Barco barco : barcoRepo.findAll()) {
-                log.info(barco.toString());
-            }
-            log.info("");
-            //fetch users by DNI
-            log.info("Users found with findByDni):");
-            log.info("-------------------------------");
-            for (Usuario user : userRepo.findByDni("12345678Y")) {
-                log.info(user.toString());
-            }
-            log.info("");
-          //fetch users by DNI
-            log.info("Users found with findByEmail):");
-            log.info("-------------------------------");
-            Usuario user = userRepo.findByEmail("cliente@gmail.com"); 
-            log.info(user.toString());
-            log.info("");
-
+            
             // fetch user by dni
             log.info("Users found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
@@ -159,7 +148,10 @@ public class Application extends SpringBootServletInitializer {
                 log.info(bauer.toString());
             });
 
-            log.info("");
+            log.info("Usuarios con findByUsuario");
+            servicioUsuarioService.findByUsuario(usuarioEjemplo).forEach(prueba -> {
+            	log.info(prueba.getServicio().getsNombre());
+            });            
         };
     }
 }

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Servicio {
@@ -33,12 +34,17 @@ public class Servicio {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
 	private Set<Crucero> cruceros;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	/*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "servicio_usuario",
     	joinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")},
     	inverseJoinColumns = {@JoinColumn(name = "usuario_id", referencedColumnName = "id")}
 	)
 	private Set<Usuario> usuarios;
+	*/
+	
+	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
+	private Set<ServicioUsuario> serviciosUsuarios;
+	
 	
 	private String eItinerario;
 	
@@ -53,7 +59,8 @@ public class Servicio {
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
-		this.usuarios = new HashSet<Usuario>();
+		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
+		//this.usuarios = new HashSet<Usuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 	
@@ -69,7 +76,8 @@ public class Servicio {
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
 		this.eItinerario = eItinerario;
-		this.usuarios = new HashSet<Usuario>();
+		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
+		//this.usuarios = new HashSet<Usuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 
@@ -77,8 +85,8 @@ public class Servicio {
 	public Servicio() {}
 
 	//Regla de negocio que comprueba si se puede realizar una reserva dejando hueco a los que van sin reserva
-	public boolean AforoHuecoLibre(int AforoReserva) {
-		if((this.getsAforoActual()+AforoReserva) >= (this.getsAforoMaximo() * 0.70)) return false;
+	public boolean AforoHuecoLibre() {
+		if((this.getsAforoActual()+1) >= (this.getsAforoMaximo() * 0.70)) return false;
 		else return true;
 	}
 	
@@ -129,6 +137,14 @@ public class Servicio {
 	public void setsAforoActual(int sAforoActual) {
 		this.sAforoActual = sAforoActual;
 	}
+	
+	public void addAforoActual(int participantes) {
+		this.sAforoActual += participantes;
+	}
+	
+	public void removeAforoActual(int participantes) {
+		this.sAforoActual -= participantes;
+	}
 
 	public int getsAforoMaximo() {
 		return sAforoMaximo;
@@ -147,15 +163,15 @@ public class Servicio {
 		this.sFecha = sFecha;
 	}
 
-	public Set<Usuario> getUsuarios() {
+	/*public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
-	}
+	}*/
 
-	public void addUsuario(Usuario usuario) {
+	/*public void addUsuario(Usuario usuario) {
 		this.usuarios.add(usuario);
 		usuario.getServicios().add(this);
 	}
@@ -163,7 +179,7 @@ public class Servicio {
 	public void removeUsuario(Usuario usuario) {
 		this.usuarios.remove(usuario);
 		usuario.getServicios().remove(this);
-	}
+	}*/
 	
 	public String geteItinerario() {
 		return eItinerario;
@@ -181,72 +197,6 @@ public class Servicio {
 		this.sImagen = sImagen;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((eItinerario == null) ? 0 : eItinerario.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + sAforoActual;
-		result = prime * result + sAforoMaximo;
-		result = prime * result + ((sDescripcion == null) ? 0 : sDescripcion.hashCode());
-		result = prime * result + ((sImagen == null) ? 0 : sImagen.hashCode());
-		result = prime * result + ((sNombre == null) ? 0 : sNombre.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(sPrecio);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((sTipo == null) ? 0 : sTipo.hashCode());
-		result = prime * result + ((usuarios == null) ? 0 : usuarios.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Servicio other = (Servicio) obj;
-		if (eItinerario == null) {
-			if (other.eItinerario != null)
-				return false;
-		} else if (!eItinerario.equals(other.eItinerario))
-			return false;
-		if (id != other.id)
-			return false;
-		if (sAforoActual != other.sAforoActual)
-			return false;
-		if (sAforoMaximo != other.sAforoMaximo)
-			return false;
-		if (sDescripcion == null) {
-			if (other.sDescripcion != null)
-				return false;
-		} else if (!sDescripcion.equals(other.sDescripcion))
-			return false;
-		if (sImagen == null) {
-			if (other.sImagen != null)
-				return false;
-		} else if (!sImagen.equals(other.sImagen))
-			return false;
-		if (sNombre == null) {
-			if (other.sNombre != null)
-				return false;
-		} else if (!sNombre.equals(other.sNombre))
-			return false;
-		if (Double.doubleToLongBits(sPrecio) != Double.doubleToLongBits(other.sPrecio))
-			return false;
-		if (sTipo != other.sTipo)
-			return false;
-		if (usuarios == null) {
-			if (other.usuarios != null)
-				return false;
-		} else if (!usuarios.equals(other.usuarios))
-			return false;
-		return true;
-	}
-
 	public Set<Crucero> getCruceros() {
 		return cruceros;
 	}
@@ -254,6 +204,14 @@ public class Servicio {
 	public void setCruceros(Set<Crucero> cruceros) {
 		this.cruceros = cruceros;
 	}
-	
+
+	public Set<ServicioUsuario> getServiciosUsuarios() {
+		return serviciosUsuarios;
+	}
+
+	public void setServiciosUsuarios(Set<ServicioUsuario> serviciosUsuarios) {
+		this.serviciosUsuarios = serviciosUsuarios;
+	}
+
 	
 }

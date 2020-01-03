@@ -49,8 +49,6 @@ public class AdminListaCrucerosView extends Div{
 		crud.getGrid().addColumn(Crucero::getServicios).setHeader("Servicios");
 		
 		DefaultCrudFormFactory<Crucero> formFactory = new DefaultCrudFormFactory<>(Crucero.class);
-		
-		
 
 		formFactory.setVisibleProperties("cNombre","cDescripcion","cPrecio","cOrigen","cDestino","cDuracion","cImagen","barco","servicios");
 
