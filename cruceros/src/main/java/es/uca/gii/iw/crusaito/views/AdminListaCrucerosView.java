@@ -1,14 +1,20 @@
 package es.uca.gii.iw.crusaito.views;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.vaadin.crudui.crud.CrudOperation;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.impl.field.provider.CheckBoxGroupProvider;
+import org.vaadin.crudui.form.impl.field.provider.ComboBoxProvider;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
+import org.vaadin.gatanaso.MultiselectComboBox;
 
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.combobox.ComboBox.ItemFilter;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Crucero;
@@ -21,7 +27,7 @@ import es.uca.gii.iw.crusaito.servicios.ServicioService;
 @Route(value = "ListaCruceros",layout = MainView.class)
 @SuppressWarnings("serial")
 @Secured("Admin")
-public class AdminListaCrucerosView extends Div{
+public class AdminListaCrucerosView extends VerticalLayout{
 	
 	private CruceroService cruceroService;
 	private BarcoService barcoService;
@@ -35,7 +41,7 @@ public class AdminListaCrucerosView extends Div{
 		this.barcoService = barcoService;
 		this.servicioService = servicioService;
 		
-		crud.getGrid().setColumns("id","cNombre","cOrigen","cDestino","cDuracion","cDescripcion","cImagen","cPrecio");
+		crud.getGrid().setColumns("cNombre","cOrigen","cDestino","cDuracion","cDescripcion","cImagen","cPrecio");
 		crud.getGrid().getColumnByKey("cNombre").setHeader("Nombre");
 		crud.getGrid().getColumnByKey("cDescripcion").setHeader("Descripcion");
 		crud.getGrid().getColumnByKey("cPrecio").setHeader("Precio");
@@ -53,16 +59,31 @@ public class AdminListaCrucerosView extends Div{
 		formFactory.setVisibleProperties("cNombre","cDescripcion","cPrecio","cOrigen","cDestino","cDuracion","cImagen","barco","servicios");
 
 		formFactory.setFieldProvider("barco", () -> {
-		    ComboBox<Barco> combobox = new ComboBox<>("Barco", this.barcoService.load());
-		    combobox.setAllowCustomValue(false);
+			
+			List<Barco> barcoList = this.barcoService.load();
+			ItemFilter<Barco> filter = (barco, filterString) -> barco.getbNombre().startsWith(filterString);
+		    //ComboBox<Barco> combobox = new ComboBox<>("Barco", this.barcoService.load());
+		    ComboBox<Barco> combobox = new ComboBox<>();
+		    combobox.setItems(filter,barcoList);
+			//combobox.setAllowCustomValue(false);
 		    combobox.setItemLabelGenerator(Barco::getbNombre);
+		    combobox.setClearButtonVisible(true);
 		    return combobox;
 		});
 		
-		CheckBoxGroupProvider<Servicio> checkboxes = new CheckBoxGroupProvider<>("servicios", this.servicioService.load(), Servicio::getsNombre);
+		//CheckBoxGroupProvider<Servicio> checkboxes = new CheckBoxGroupProvider<>("servicios", this.servicioService.load(), Servicio::getsNombre);
 		
-		formFactory.setFieldProvider(CrudOperation.ADD,"servicios", checkboxes);
-		formFactory.setFieldProvider(CrudOperation.UPDATE,"servicios", checkboxes);
+		formFactory.setFieldProvider("servicios", ()->{
+			MultiselectComboBox<Servicio> multibox = new MultiselectComboBox<>();
+			
+			multibox.setLabel("Selecciona servicios");
+			multibox.setItems(this.servicioService.load());
+			multibox.setItemLabelGenerator(Servicio::getsNombre);
+			return multibox;
+		}); 
+		
+		//formFactory.setFieldProvider(CrudOperation.ADD,"servicios", checkboxes);
+		//formFactory.setFieldProvider(CrudOperation.UPDATE,"servicios", checkboxes);
 		
 		crud.setCrudFormFactory(formFactory);
 		

@@ -73,4 +73,9 @@ public class Ciudad {
 		this.cruceros.remove(crucero);
 		crucero.getCiudades().remove(this);
 	}
+
+	@Override
+	public String toString() {
+		return this.cNombre;
+	}
 }

@@ -8,6 +8,7 @@ import org.vaadin.crudui.form.impl.field.provider.CheckBoxGroupProvider;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Crucero;
@@ -18,7 +19,7 @@ import es.uca.gii.iw.crusaito.servicios.ServicioService;
 @Route(value = "ListaServicios",layout = MainView.class)
 @Secured("Admin")
 @SuppressWarnings("serial")
-public class AdminListaServiciosView extends Div{
+public class AdminListaServiciosView extends VerticalLayout{
 
 	private ServicioService servicioService;
 	private CruceroService cruceroService;

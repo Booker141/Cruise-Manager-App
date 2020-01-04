@@ -60,6 +60,7 @@ public class ServicioService {
 		Crucero crucero = this.cruceroRepo.findByUsuarios(usuario);
 		return this.repo.findByCruceros(crucero);
 	}
+	
 	public void addServicioToUsuario(Servicio servicio, Usuario usuario, int participantes) {
 		try {
 		ServicioUsuario servUser = new ServicioUsuario();
@@ -76,6 +77,7 @@ public class ServicioService {
 			Funciones.notificacionError("Error al realizar la reserva");
 		}
 	}
+	
 	public void removeServicioFromUsuario(Servicio servicio, Usuario usuario) {
 		try {
 		ServicioUsuario servUser = this.servUserRepo.findByServicioAndUsuario(servicio, usuario);

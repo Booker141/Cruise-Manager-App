@@ -70,15 +70,15 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
 			if(SecurityUtils.hasRole("Cliente")) {
-				addMenuTab("Gestionar mis Reservas", MisReservasView.class);
+				addMenuTab("Gestionar mis reservas", MisReservasView.class);
 				addMenuTab("Servicios", ServiciosView.class);
 			}
 
 			if(SecurityUtils.hasRole("Admin")){
 				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
-				addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
+				addMenuTab("Gestionar ciudades", AdminListaCiudadesView.class);
 				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
-				//addMenuTab("Gestionar reservas", AdminListaReservasView.class);
+				addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
 				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
 			}
 			

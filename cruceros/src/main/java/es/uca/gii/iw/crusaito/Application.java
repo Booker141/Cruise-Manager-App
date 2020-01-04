@@ -148,10 +148,10 @@ public class Application extends SpringBootServletInitializer {
                 log.info(bauer.toString());
             });
 
-            log.info("Usuarios con findByUsuario");
+            log.info("Servicios con findByUsuario");
             servicioUsuarioService.findByUsuario(usuarioEjemplo).forEach(prueba -> {
             	log.info(prueba.getServicio().getsNombre());
-            });            
+            });      
         };
     }
 }

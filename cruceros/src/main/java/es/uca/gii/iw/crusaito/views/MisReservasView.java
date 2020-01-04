@@ -1,6 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
@@ -29,7 +29,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @SuppressWarnings("serial")
 @Route(value = "MisReservas",layout = MainView.class)
 @Secured("Cliente")
-public class MisReservasView extends PrincipalView{
+public class MisReservasView extends VerticalLayout{
 	
 	private ServicioService servicioService;
     private UsuarioService usuarioService;

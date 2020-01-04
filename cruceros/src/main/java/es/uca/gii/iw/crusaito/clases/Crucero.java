@@ -69,7 +69,6 @@ public class Crucero {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -178,8 +177,12 @@ public class Crucero {
 
 
 	public void setBarco(Barco barco) {
-		this.barco = barco;
-		barco.setCrucero(this);
+		if(barco==null) {
+			this.barco = null;
+		}else {
+			this.barco = barco;
+			barco.setCrucero(this);
+		}
 	}
 
 	public Set<Usuario> getUsuarios() {

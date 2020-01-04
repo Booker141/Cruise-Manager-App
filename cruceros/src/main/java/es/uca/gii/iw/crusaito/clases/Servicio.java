@@ -213,5 +213,10 @@ public class Servicio {
 		this.serviciosUsuarios = serviciosUsuarios;
 	}
 
+	@Override
+	public String toString() {
+		return this.sNombre;
+	}
+
 	
 }

@@ -229,18 +229,17 @@ public class Usuario implements UserDetails{
 	}
 
 	public void setCrucero(Crucero crucero) {
-		this.crucero = crucero;
-		crucero.getUsuarios().add(this);
-	}
-	
-	public void unsetCrucero(Crucero crucero) {
-		this.crucero = null;
-		crucero.getUsuarios().remove(this);
+		if(crucero==null) {
+			this.crucero = null;
+		}else {
+			this.crucero = crucero;
+			crucero.getUsuarios().add(this);
+		}
 	}
 
 	@Override
 	public String toString() {
-		return username;
+		return lastName;
 	}
 
 	public Set<ServicioUsuario> getUsuariosServicios() {

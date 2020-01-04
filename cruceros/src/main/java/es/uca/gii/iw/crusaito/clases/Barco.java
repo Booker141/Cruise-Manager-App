@@ -1,16 +1,8 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
+import javax.persistence.*;
 
 @Entity
 public class Barco 
@@ -120,5 +112,10 @@ public class Barco
 
 	public void setbFchPuestaServicio(LocalDate bFchPuestaServicio) {
 		this.bFchPuestaServicio = bFchPuestaServicio;
+	}
+
+	@Override
+	public String toString() {
+		return this.bNombre;
 	}
 }
