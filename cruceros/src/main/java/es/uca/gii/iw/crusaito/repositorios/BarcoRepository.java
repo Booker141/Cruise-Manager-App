@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import es.uca.gii.iw.crusaito.clases.Barco;
+import es.uca.gii.iw.crusaito.clases.Crucero;
 
 @Repository
 public interface BarcoRepository extends JpaRepository<Barco,Long>{
@@ -13,4 +14,5 @@ public interface BarcoRepository extends JpaRepository<Barco,Long>{
 	Barco findById(int id);
 	Barco findBybNombre(String bNombre);
 	List<Barco> findBybNombreLike(String bNombre);
+	List<Barco> findByCruceroIsNull();
 }
