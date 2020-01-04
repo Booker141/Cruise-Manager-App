@@ -54,11 +54,24 @@ public class Application extends SpringBootServletInitializer {
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Gerente")));
           
             // Generamos ciudades de ejemplo
+            
             Ciudad cadiz = new Ciudad("Cadiz");
             Ciudad sanFernando = new Ciudad("San Fernando");
             Ciudad chiclana = new Ciudad("Chiclana");
+            Ciudad bergen = new Ciudad("Bergen");
+            Ciudad southampton = new Ciudad("Southampton");
+            Ciudad sanJuan = new Ciudad("San Juan");
+            Ciudad kotor = new Ciudad("Kotor");
+            Ciudad galapagos = new Ciudad("Galapagos");
+            Ciudad miami = new Ciudad("Miami");
+            Ciudad barcelona = new Ciudad("Barcelona");
+            Ciudad venecia = new Ciudad("Venecia");
+            Ciudad laHabana = new Ciudad("La Habana");
             
             ciudadService.save(cadiz); ciudadService.save(sanFernando); ciudadService.save(chiclana);
+            ciudadService.save(bergen); ciudadService.save(southampton); ciudadService.save(sanJuan);
+            ciudadService.save(kotor); ciudadService.save(galapagos); ciudadService.save(miami);
+            ciudadService.save(barcelona); ciudadService.save(venecia); ciudadService.save(laHabana);
             
             //Barcos de ejemplo
             Barco barcoEjemplo = barcoRepo.save(new Barco("Vaporcito","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
