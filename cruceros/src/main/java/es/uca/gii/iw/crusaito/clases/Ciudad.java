@@ -1,7 +1,9 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,16 +26,16 @@ public class Ciudad {
     	joinColumns = {@JoinColumn(name = "ciudad_id", referencedColumnName = "id")},
     	inverseJoinColumns = {@JoinColumn(name = "crucero_id", referencedColumnName = "id")}
 	)
-	private List<Crucero> cruceros;
+	private Set<Crucero> cruceros;
 	
 	public Ciudad() {}
 	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
-		this.cruceros = new ArrayList<>();
+		this.cruceros = new HashSet<Crucero>();
 	}
 	
-	public Ciudad(String cNombre, List<Crucero> cCruceros) {
+	public Ciudad(String cNombre, Set<Crucero> cCruceros) {
 		this.cNombre = cNombre;
 		this.cruceros = cCruceros;
 	}
@@ -54,11 +56,11 @@ public class Ciudad {
 		this.cNombre = cNombre;
 	}
 
-	public List<Crucero> getCruceros() {
+	public Set<Crucero> getCruceros() {
 		return cruceros;
 	}
 
-	public void setCruceros(List<Crucero> cruceros) {
+	public void setCruceros(Set<Crucero> cruceros) {
 		this.cruceros = cruceros;
 	}
 	
@@ -70,5 +72,10 @@ public class Ciudad {
 	public void removeCrucero(Crucero crucero) {
 		this.cruceros.remove(crucero);
 		crucero.getCiudades().remove(this);
+	}
+
+	@Override
+	public String toString() {
+		return this.cNombre;
 	}
 }

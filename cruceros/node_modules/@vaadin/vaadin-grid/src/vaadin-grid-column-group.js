@@ -124,7 +124,13 @@ class GridColumnGroupElement extends ColumnBaseMixin(PolymerElement) {
   }
 
   _groupOrderChanged(order, rootColumns) {
-    if (order && rootColumns) {
+    if (rootColumns) {
+      const _rootColumns = rootColumns.slice(0);
+
+      if (!order) {
+        _rootColumns.forEach(column => column._order = 0);
+        return;
+      }
       // The parent column order number cascades downwards to it's children
       // so that the resulting order numbering constructs as follows:
       // [             1000              ]
@@ -141,7 +147,7 @@ class GridColumnGroupElement extends ColumnBaseMixin(PolymerElement) {
       // Final scope for the child columns needs to mind both factors.
       const scope = Math.pow(10, trailingZeros - childCountDigits);
 
-      const _rootColumns = rootColumns.slice(0);
+
       if (_rootColumns[0] && _rootColumns[0]._order) {
         _rootColumns.sort((a, b) => a._order - b._order);
       }

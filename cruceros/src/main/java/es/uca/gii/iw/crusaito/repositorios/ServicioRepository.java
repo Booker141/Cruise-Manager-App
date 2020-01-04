@@ -12,6 +12,6 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 @Repository
 public interface ServicioRepository extends JpaRepository<Servicio,Long>{
 	Servicio findById(long id);
-	List<Servicio> findByUsuarios(Usuario usuarios);
+	//List<Servicio> findByUsuario(Usuario usuarios);
 	List<Servicio> findByCruceros(Crucero crucero);
 }

@@ -5,6 +5,8 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.vaadin.flow.component.button.Button;
@@ -19,6 +21,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NumberRenderer;
@@ -31,9 +34,11 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
+import es.uca.gii.iw.crusaito.common.*;
 
 @SuppressWarnings("serial")
 @Route(value = "ServiciosView",layout = MainView.class)
+@Secured("Cliente")
 public class ServiciosView extends VerticalLayout{
 
 	private UsuarioService usuarioService;
@@ -45,7 +50,7 @@ public class ServiciosView extends VerticalLayout{
 	
 	private HeaderRow filterRow;
 	private TextField sNombreField;
-	
+	private NumberField participantesField = new NumberField("Numero de personas");
 	private Div sNombreDiv;
 	private Div sTipoDiv;
 	private Image sImagenImage;
@@ -53,6 +58,8 @@ public class ServiciosView extends VerticalLayout{
 	private Dialog dialog;
 	
 	private Notification notification;
+	private Notification servicioLleno;
+	
 	private Label label;
 	private Button cancelButton;
 	private Button confirmButton;
@@ -72,7 +79,7 @@ public class ServiciosView extends VerticalLayout{
 		grid.setDataProvider(dataProvider);
 		
 		grid.removeColumnByKey("id"); grid.removeColumnByKey("sTipo"); grid.removeColumnByKey("sAforoActual"); grid.removeColumnByKey("sAforoMaximo");
-		grid.removeColumnByKey("usuarios"); grid.removeColumnByKey("sPrecio"); grid.removeColumnByKey("sImagen");
+		grid.removeColumnByKey("serviciosUsuarios"); grid.removeColumnByKey("sPrecio"); grid.removeColumnByKey("sImagen");
 
 		grid.setColumns("sNombre","sDescripcion","eItinerario");
 
@@ -118,8 +125,15 @@ public class ServiciosView extends VerticalLayout{
 		});
 		
 		reservaButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
-		dialog.add(sNombreDiv,sTipoDiv,sImagenImage, reservaButton);
+		
+		servicioLleno = new Notification();
+		Label labelLleno = new Label("El servicio esta lleno, lo sentimos.");
+		Button llenoButton = new Button("Aceptar", e -> servicioLleno.close());
+		
+		servicioLleno.add(labelLleno,llenoButton);
+		
+		
+		dialog.add(sNombreDiv,sTipoDiv,sImagenImage, reservaButton, participantesField);
 		
 		grid.addItemClickListener(
 		        event -> {
@@ -127,13 +141,29 @@ public class ServiciosView extends VerticalLayout{
 		            sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
+		            participantesField.setValue(1d);
+		    		participantesField.setHasControls(true);
+		    		participantesField.setMin(1);
+		    		participantesField.setMax(event.getItem().getsAforoMaximo());
+		    		
 		            dialog.open();
 		            
 		            confirmButton.addClickListener(e -> {
+		            	try {
 		            	Servicio servicio = event.getItem();
-		            	Usuario user = buscarUsuarioLogin();
-		            	servicioService.addServicioToUsuario(servicio, user);
-		            	notification.close();
+		            	if(servicio.AforoHuecoLibre()) {
+		            		Usuario user = buscarUsuarioLogin();
+		            		servicio.addAforoActual(participantesField.getValue().intValue());
+		            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
+		            		notification.close();
+		            	}else {
+		            		servicioLleno.open();
+		            		notification.close();
+		            	}
+		            	}catch(DataIntegrityViolationException error) {
+		            		Funciones.notificacionError("Ya tiene una reserva anterior");
+		            		notification.close();
+		            	}
 		            });
 		    		
 		        });

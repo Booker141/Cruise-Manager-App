@@ -126,6 +126,17 @@ export const ScrollMixin = superClass => class ScrollMixin extends superClass {
     this.$.items.addEventListener('focusout', () => this._rowWithFocusedElement = undefined);
   }
 
+  /**
+   * Scroll to a specific row index in the virtual list. Note that the row index is
+   * not always the same for any particular item. For example, sorting/filtering/expanding
+   * or collapsing hierarchical items can affect the row index related to an item.
+   *
+   * @param {number} index Row index to scroll to
+   */
+  scrollToIndex(index) {
+    this._accessIronListAPI(() => super.scrollToIndex(index));
+  }
+
   _onWheel(e) {
     if (e.ctrlKey || this._hasScrolledAncestor(e.target, e.deltaX, e.deltaY)) {
       return;
