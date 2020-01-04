@@ -20,6 +20,7 @@ import com.vaadin.flow.router.Route;
 import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.servicios.BarcoService;
 import es.uca.gii.iw.crusaito.servicios.CruceroService;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
@@ -60,7 +61,7 @@ public class AdminListaCrucerosView extends VerticalLayout{
 
 		formFactory.setFieldProvider("barco", () -> {
 			
-			List<Barco> barcoList = this.barcoService.load();
+			List<Barco> barcoList = this.barcoService.findByCruceroIsNull();
 			ItemFilter<Barco> filter = (barco, filterString) -> barco.getbNombre().startsWith(filterString);
 		    //ComboBox<Barco> combobox = new ComboBox<>("Barco", this.barcoService.load());
 		    ComboBox<Barco> combobox = new ComboBox<>();
@@ -68,6 +69,12 @@ public class AdminListaCrucerosView extends VerticalLayout{
 			//combobox.setAllowCustomValue(false);
 		    combobox.setItemLabelGenerator(Barco::getbNombre);
 		    combobox.setClearButtonVisible(true);
+		    /*combobox.addValueChangeListener(valor -> {
+		    	if(valor.getValue().getCrucero()!=null) {
+		    		Funciones.notificacionError("Barco asignado a otro crucero");
+		    		combobox.setValue(null);
+		    	}
+		    });*/
 		    return combobox;
 		});
 		
