@@ -99,6 +99,7 @@ public class Application extends SpringBootServletInitializer {
             servUsu.setServicio(elFaro);
             servUsu.setUsuario(usuarioEjemplo);
             servUsu.setParticipantes(2);
+            servUsu.setPrecio(60);
             
             elFaro.getServiciosUsuarios().add(servUsu);
             usuarioEjemplo.getUsuariosServicios().add(servUsu);

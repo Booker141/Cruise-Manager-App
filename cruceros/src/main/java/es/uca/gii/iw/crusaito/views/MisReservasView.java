@@ -35,9 +35,12 @@ public class MisReservasView extends VerticalLayout{
     private UsuarioService usuarioService;
     private ServicioUsuarioService servicioUsuarioService;
     
-	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    private List<Servicio> serviceList = new ArrayList<Servicio>();
+	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
+    //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
+    private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
+    private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
+    
     private  Dialog ventana = new Dialog();
 
     private Div sNombreDiv = new Div();
@@ -59,22 +62,21 @@ public class MisReservasView extends VerticalLayout{
 		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
 
-		List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
-		servUser.forEach(serviUsuar -> {
+		//Lista de servicios a partir de servUser
+		/*List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
+			servUser.forEach(serviUsuar -> {
 			serviceList.add(serviUsuar.getServicio());
-		});
-		
+		});*/
+		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		grid.setItems(serviceList);
 
-		grid.setColumns("sNombre","sDescripcion","sPrecio");
-		grid.getColumnByKey("sNombre").setHeader("Nombre");
-		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
-		grid.getColumnByKey("sPrecio").setHeader("Precio");
-	
+		grid.setColumns("servicio","participantes","precio");
+		grid.getColumnByKey("servicio").setHeader("Nombre");
+		grid.getColumnByKey("participantes").setHeader("Participantes");
+		grid.getColumnByKey("precio").setHeader("Precio");
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
-
+		
 		grid.setSizeFull();
-		//grid.setColumnReorderingAllowed(true);
 		this.setSizeFull();
 		
 		sNombreDiv.setTitle("Nombre");
@@ -100,17 +102,18 @@ public class MisReservasView extends VerticalLayout{
 		ventana.add(sNombreDiv,sTipoDiv,sImagenImage,deleteButton);
 		
 		grid.addItemClickListener(event -> {
-			sNombreDiv.setText("Nombre: " + event.getItem().getsNombre());
-			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
-			sImagenImage.setSrc(event.getItem().getsImagen());
+			
+			sNombreDiv.setText("Nombre: " + event.getItem().getServicio().getsNombre());
+			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
+			sImagenImage.setSrc(event.getItem().getServicio().getsImagen());
 			
 			ventana.open();
 		            
 			confirmButton.addClickListener(e -> {
-				Servicio servicio = event.getItem();
+				Servicio servicio = event.getItem().getServicio();
 				Usuario user = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
 				this.servicioService.removeServicioFromUsuario(servicio, user);
-				serviceList.remove(servicio);
+				serviceList.remove(event.getItem());
 				grid.setItems(serviceList);
 				
 				notificacion.close();
