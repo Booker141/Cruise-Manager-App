@@ -35,8 +35,8 @@ public class Application extends SpringBootServletInitializer {
      */
     @Bean
     public CommandLineRunner demo(rolService rolService, UsuarioService userService,rolRepository rolRepository, 
-    		CiudadService ciudadService, CruceroService cruceroService, BarcoService barcoService, CamaroteService camaroteService,
-    		ServicioService servicioService,
+    		CiudadService ciudadService, CruceroService cruceroService, BarcoService barcoService,
+    		ServicioService servicioService, ServicioUsuarioService servicioUsuarioService,
     		UsuarioRepository userRepo, BarcoRepository barcoRepo, CruceroRepository cruceroRepo) {
         return (args) -> {
         	
@@ -60,62 +60,61 @@ public class Application extends SpringBootServletInitializer {
             
             ciudadService.save(cadiz); ciudadService.save(sanFernando); ciudadService.save(chiclana);
             
-            //Camarotes
-            Camarote cam1 = new Camarote("Exterior", false);
-            Camarote cam2 = new Camarote("Vip", false);
-            Camarote cam3 = new Camarote("Interior",true);
-            
-            camaroteService.save(cam1); camaroteService.save(cam2); camaroteService.save(cam3);
-            
-            List<Camarote> lCamarotes = new ArrayList<>();
-            lCamarotes.add(cam1);
-            lCamarotes.add(cam2);
-            
             //Barcos de ejemplo
-            barcoRepo.save(new Barco("Vaporcito","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
+            Barco barcoEjemplo = barcoRepo.save(new Barco("Vaporcito","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","frontend/img/crucero1.jpg",1500,150,3000,LocalDate.now(),"Mal barco"));
-            
-            Barco barcoEjemplo1 = barcoService.findBybNombre("Vaporcito");
-            //Prueba de actualizacion de datos en BD y asignacion de camarote a barco y de barco a camarote
-            barcoEjemplo1.setbCamarotes(lCamarotes);
-            cam1.setcBarco(barcoEjemplo1);
-            cam2.setcBarco(barcoEjemplo1);
-            
-            barcoService.save(barcoEjemplo1);
-            camaroteService.save(cam1);
-            camaroteService.save(cam2);
             
             //Cruceros ejemplo
             cruceroService.save(new Crucero("Caribe","Cadiz","Cadiz","5 dias","Crucero por el Caribe",300));
             cruceroService.save(new Crucero("Caribe1","Cadiz","Chiclana","5 dias","Crucero por el Caribe",300));
             cruceroService.save(new Crucero("Caribe2","Cadiz","San Fernando","5 dias","Crucero por el Caribe",300));
             
-            List<Ciudad> listaCiudades = new ArrayList<>();
-            listaCiudades.add(cadiz);
-            listaCiudades.add(sanFernando);
-            //Relacion crucero y ciudad
+            //Relaciones
             Crucero caribe = cruceroService.findBycNombre("Caribe");
-            caribe.setCiudades(listaCiudades);
-            cadiz.addcCruceros(caribe);
-            sanFernando.addcCruceros(caribe);
+            //Ciudades con crucero
+            cadiz.addCruceros(caribe);
+            sanFernando.addCruceros(caribe);
+            chiclana.addCruceros(caribe);
+            //BARCO con crucero
+            caribe.setBarco(barcoEjemplo);
+            //USUARIO con crucero
+            Usuario usuarioEjemplo = userService.findByUsername("cliente");
+            usuarioEjemplo.setCrucero(caribe);
             
+            userRepo.save(usuarioEjemplo);
+            barcoService.save(barcoEjemplo);
             cruceroService.save(caribe);
             ciudadService.save(cadiz);
             ciudadService.save(sanFernando);
+            ciudadService.save(chiclana);
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,50);
-            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, "Cadiz");
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 2,5, LocalDate.now() );
+            Servicio deportiva = new Servicio("Visita el faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now(), "Cadiz");
             servicioService.save(elFaro);
+            
+            //servicioService.addServicioToUsuario(elFaro, usuarioEjemplo);
             servicioService.save(deportiva);
             
-            Usuario usuarioPrueba = userService.findByUsername("cliente");
-            elFaro.addUsuario(usuarioPrueba);
-            servicioService.save(elFaro);
-
-            servicioService.save(deportiva);
-            userService.save(usuarioPrueba);
+            ServicioUsuario servUsu = new ServicioUsuario();
+            servUsu.setServicio(elFaro);
+            servUsu.setUsuario(usuarioEjemplo);
+            servUsu.setParticipantes(2);
             
-
+            elFaro.getServiciosUsuarios().add(servUsu);
+            usuarioEjemplo.getUsuariosServicios().add(servUsu);
+            servicioService.save(elFaro);
+            userService.save(usuarioEjemplo);
+            
+            //elFaro.getUsuarios().add(usuarioEjemplo);
+            //usuarioEjemplo.getServicios().add(elFaro);
+            
+            
+            //Servicio con crucero
+            caribe.addServicio(elFaro);
+            servicioService.save(elFaro);
+            //userService.save(usuarioEjemplo);
+            cruceroService.save(caribe);
+            
             /*
             barcoRepo.save(new Barco("Vaporcito","14","frontend/img/crucero1.jpg",1000,100,2000,LocalDate.now(),"Buen barco"));
             barcoRepo.save(new Barco("Vaporcito2","15","frontend/img/crucero1.jpg",1510,150,3000,LocalDate.now(),"Mal barco"));
@@ -141,34 +140,7 @@ public class Application extends SpringBootServletInitializer {
             cruceroRepo.save(new Crucero("Adriatico","El Pireo","El Pireo","8 dias",3400,LocalDate.now(),"Mal barco"));
             */
             
-            // fetch all users
-            log.info("Users found with findAll():");
-            log.info("-------------------------------");
-            for (Usuario user : userRepo.findAll()) {
-                log.info(user.toString());
-            }
-            log.info("");
-         // fetch all barcos
-            log.info("Barcos found with findAll():");
-            log.info("-------------------------------");
-            for (Barco barco : barcoRepo.findAll()) {
-                log.info(barco.toString());
-            }
-            log.info("");
-            //fetch users by DNI
-            log.info("Users found with findByDni):");
-            log.info("-------------------------------");
-            for (Usuario user : userRepo.findByDni("12345678Y")) {
-                log.info(user.toString());
-            }
-            log.info("");
-          //fetch users by DNI
-            log.info("Users found with findByEmail):");
-            log.info("-------------------------------");
-            Usuario user = userRepo.findByEmail("cliente@gmail.com"); 
-            log.info(user.toString());
-            log.info("");
-
+            
             // fetch user by dni
             log.info("Users found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
@@ -176,7 +148,10 @@ public class Application extends SpringBootServletInitializer {
                 log.info(bauer.toString());
             });
 
-            log.info("");
+            log.info("Servicios con findByUsuario");
+            servicioUsuarioService.findByUsuario(usuarioEjemplo).forEach(prueba -> {
+            	log.info(prueba.getServicio().getsNombre());
+            });      
         };
     }
 }

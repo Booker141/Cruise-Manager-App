@@ -1,5 +1,5 @@
 package es.uca.gii.iw.crusaito.repositorios;
-
+/*
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +13,6 @@ public interface CamaroteRepository extends JpaRepository<Camarote,Long>{
 	Camarote findById(int id);
 	Camarote findBycTipo(String cTipo);
 }
-
+*/
 
 

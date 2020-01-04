@@ -11,6 +11,7 @@ import com.vaadin.flow.component.charts.model.DataSeriesItem;
 import com.vaadin.flow.component.charts.model.PlotOptionsPie;
 import com.vaadin.flow.component.charts.model.Tooltip;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.common.Funciones;
@@ -18,7 +19,7 @@ import es.uca.gii.iw.crusaito.common.Funciones;
 @Secured("Gerente")
 @SuppressWarnings("serial")
 @Route(value = "Estadisticas",layout = MainView.class)
-public class EstadisticasView extends Div{
+public class EstadisticasView extends VerticalLayout{
 	
 	 protected Chart chart;
 

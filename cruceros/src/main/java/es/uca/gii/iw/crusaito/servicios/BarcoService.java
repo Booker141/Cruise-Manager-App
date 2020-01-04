@@ -1,14 +1,12 @@
 package es.uca.gii.iw.crusaito.servicios;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.uca.gii.iw.crusaito.clases.Barco;
+import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.repositorios.BarcoRepository;
 
 @Service
@@ -45,5 +43,9 @@ public class BarcoService {
 	public void delete (Barco barco) {
         repo.delete(barco);
     }
+	
+	public List<Barco> findByCruceroIsNull(){
+		return repo.findByCruceroIsNull();
+	}
 
 }

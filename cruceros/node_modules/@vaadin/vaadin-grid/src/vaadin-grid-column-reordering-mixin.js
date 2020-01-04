@@ -253,6 +253,8 @@ export const ColumnReorderingMixin = superClass => class ColumnReorderingMixin e
       return;
     }
 
+    // Reset all column orders
+    columnTree[0].forEach((column, index) => column._order = 0);
     // Set order numbers to top-level columns
     columnTree[0].forEach((column, index) => column._order = (index + 1) * this._orderBaseScope);
   }

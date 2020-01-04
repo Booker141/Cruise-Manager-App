@@ -1,13 +1,20 @@
 package es.uca.gii.iw.crusaito.clases;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -25,13 +32,22 @@ public class Crucero {
 	private String cDescripcion;
 	private String cImagen;
 	private double cPrecio;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cCrucero")
-	private List<Camarote> camarotes;
-	@ManyToMany(fetch=FetchType.LAZY)
-	private List<Ciudad> ciudades;
-	/*@OneToMany(fetch = FetchType.LAZY,mappedBy = "crucero")
-	private List<Reserva> reservas;
-	*/
+	
+	@OneToOne
+	private Barco barco;
+	
+	@OneToMany(mappedBy = "crucero")
+	private Set<Usuario> usuarios;
+	
+	@ManyToMany(mappedBy = "cruceros")
+	private Set<Ciudad> ciudades;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "crucero_servicio",
+    	joinColumns = {@JoinColumn(name = "crucero_id", referencedColumnName = "id")},
+    	inverseJoinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")}
+	)
+	private Set<Servicio> servicios;
 
 	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
 			double cPrecio) {
@@ -42,13 +58,16 @@ public class Crucero {
 		this.cDuracion = cDuracion;
 		this.cDescripcion = cDescripcion;
 		this.cPrecio = cPrecio;
+		this.barco = null;
+		this.usuarios = new HashSet<Usuario>();
+		this.ciudades = new HashSet<Ciudad>();
+		this.servicios = new HashSet<Servicio>();
 	}
 
 
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
@@ -115,12 +134,12 @@ public class Crucero {
 	}
 
 
-	public List<Ciudad> getCiudades() {
+	public Set<Ciudad> getCiudades() {
 		return ciudades;
 	}
 
 
-	public void setCiudades(List<Ciudad> ciudades) {
+	public void setCiudades(Set<Ciudad> ciudades) {
 		this.ciudades = ciudades;
 	}
 
@@ -133,14 +152,51 @@ public class Crucero {
 		this.cImagen = cImagen;
 	}
 
+	public Set<Servicio> getServicios() {
+		return servicios;
+	}
 
-	public List<Camarote> getCamarotes() {
-		return camarotes;
+	public void setServicios(Set<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+	
+	public void addServicio(Servicio servicio) {
+		this.servicios.add(servicio);
+		servicio.getCruceros().add(this);
+	}
+	
+	public void removeServicio(Servicio servicio) {
+		this.servicios.remove(servicio);
+		servicio.getCruceros().remove(servicio);
 	}
 
 
-	public void setCamarotes(List<Camarote> camarotes) {
-		this.camarotes = camarotes;
+	public Barco getBarco() {
+		return barco;
+	}
+
+
+	public void setBarco(Barco barco) {
+		if(barco==null) {
+			this.barco = null;
+		}else {
+			this.barco = barco;
+			barco.setCrucero(this);
+		}
+	}
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	@Override
+	public String toString() {
+		return cNombre;
 	}
 
 	/*

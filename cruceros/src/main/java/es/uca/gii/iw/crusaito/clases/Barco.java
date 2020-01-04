@@ -1,15 +1,8 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
+import javax.persistence.*;
 
 @Entity
 public class Barco 
@@ -18,8 +11,10 @@ public class Barco
 	@GeneratedValue
 	private long id;
 	private String bNombre;
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "cBarco")
-	private List<Camarote> bCamarotes;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "barco")
+	private Crucero crucero;
+	
 	private String bImagen;
 	private int bAforoPasajeros;
 	private int bAforoTripulantes;
@@ -35,7 +30,6 @@ public class Barco
 			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
 
 		this.bNombre = bNombre;
-		this.bCamarotes = new ArrayList<Camarote>();
 		this.bImagen = bImagen;
 		this.bAforoPasajeros = bAforoPasajeros;
 		this.bAforoTripulantes = bAforoTripulantes;
@@ -58,14 +52,7 @@ public class Barco
 	public void setbNombre(String bNombre) {
 		this.bNombre = bNombre;
 	}
-
-	public List<Camarote> getbCamarotes() {
-		return bCamarotes;
-	}
-	public void setbCamarotes(List<Camarote> bCamarotes) {
-		this.bCamarotes = bCamarotes;
-	}
-
+	
 	public int getbAforoPasajeros() {
 		return bAforoPasajeros;
 	}
@@ -89,28 +76,6 @@ public class Barco
 	public LocalDate getbFchPuestaServicio() {
 		return bFchPuestaServicio;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Barco other = (Barco) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
 
 	public String getbDescripcion() {
 		return bDescripcion;
@@ -131,5 +96,26 @@ public class Barco
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Crucero getCrucero() {
+		return crucero;
+	}
+
+	public void setCrucero(Crucero crucero) {
+		this.crucero = crucero;
+	}
+
+	public void setbPeso(int bPeso) {
+		this.bPeso = bPeso;
+	}
+
+	public void setbFchPuestaServicio(LocalDate bFchPuestaServicio) {
+		this.bFchPuestaServicio = bFchPuestaServicio;
+	}
+
+	@Override
+	public String toString() {
+		return this.bNombre;
 	}
 }
