@@ -2,8 +2,6 @@ package es.uca.gii.iw.crusaito.servicios;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,11 +53,28 @@ public class ServicioService {
 		return this.repo.findByUsuario(usuario);
 	}*/
 	
+	/**
+
+     * Método busca un crucero a partir del nombre de usuario de un cliente dado.
+
+     * @param username El parámetro username define la cadena que contiene el nombre de usuario del cliente.
+     * @return Devuelve el crucero que buscamos a partir del nombre de usuario.
+
+     */
+	
 	public List<Servicio> findCruceroByUsername(String username){
 		Usuario usuario = this.userRepo.findByUsername(username);
 		Crucero crucero = this.cruceroRepo.findByUsuarios(usuario);
 		return this.repo.findByCruceros(crucero);
 	}
+	
+	/**
+
+     * Método que crea una notificación de aviso de un error y que es mostrada al usuario.
+
+     * @param cadena El parámetro cadena define la cadena que mostrará el mensaje de error.
+
+     */
 	
 	public void addServicioToUsuario(Servicio servicio, Usuario usuario, int participantes) {
 		try {
@@ -77,6 +92,14 @@ public class ServicioService {
 			Funciones.notificacionError("Error al realizar la reserva");
 		}
 	}
+	
+	/**
+
+     * Método que crea una notificación de aviso de un error y que es mostrada al usuario.
+
+     * @param cadena El parámetro cadena define la cadena que mostrará el mensaje de error.
+
+     */
 	
 	public void removeServicioFromUsuario(Servicio servicio, Usuario usuario) {
 		try {

@@ -7,7 +7,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.common.Footer;
-import es.uca.gii.iw.crusaito.common.Header;
 
 @Route(value = "CruceroView",layout = MainView.class)
 public class CruceroView extends VerticalLayout {

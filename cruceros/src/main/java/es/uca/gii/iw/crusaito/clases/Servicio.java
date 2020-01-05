@@ -1,9 +1,7 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -84,7 +80,16 @@ public class Servicio {
 	//Constructor vacio
 	public Servicio() {}
 
-	//Regla de negocio que comprueba si se puede realizar una reserva dejando hueco a los que van sin reserva
+	/**
+
+     * Método de tipo booleano que comprueba si se puede realizar una reserva dejando hueco
+     * los que no tienen reserva
+
+     * @return true/false si hay o no hueco libre.
+     * 
+
+     */
+
 	public boolean AforoHuecoLibre() {
 		if((this.getsAforoActual()+1) >= (this.getsAforoMaximo() * 0.70)) return false;
 		else return true;
