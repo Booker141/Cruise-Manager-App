@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Servicio {
@@ -19,6 +20,7 @@ public class Servicio {
 	@GeneratedValue
 	private long id;
 	private String sNombre;
+	@Size(max= 1000)
 	private String sDescripcion;
 	private double sPrecio;
 	private ServicioTipo sTipo;

@@ -3,6 +3,7 @@ package es.uca.gii.iw.crusaito.clases;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Barco 
@@ -20,6 +21,7 @@ public class Barco
 	private int bAforoTripulantes;
 	private int bPeso;
 	private LocalDate bFchPuestaServicio;
+	@Size(max= 12000)
 	private String bDescripcion;
 
 
