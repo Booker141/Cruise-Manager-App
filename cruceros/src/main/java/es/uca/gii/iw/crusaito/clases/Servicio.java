@@ -80,7 +80,16 @@ public class Servicio {
 	//Constructor vacio
 	public Servicio() {}
 
-	//Regla de negocio que comprueba si se puede realizar una reserva dejando hueco a los que van sin reserva
+	/**
+
+     * Método de tipo booleano que comprueba si se puede realizar una reserva dejando hueco
+     * los que no tienen reserva
+
+     * @return true/false si hay o no hueco libre.
+     * 
+
+     */
+
 	public boolean AforoHuecoLibre() {
 		if((this.getsAforoActual()+1) >= (this.getsAforoMaximo() * 0.70)) return false;
 		else return true;
