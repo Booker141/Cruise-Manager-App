@@ -28,6 +28,10 @@ public class ServicioUsuarioService {
 		this.repo.delete(servicioUsuario);
 	}
 	
+	public List<ServicioUsuario> findAll(){
+		return this.repo.findAll();
+	}
+	
 	public List<ServicioUsuario> load(){
 		return this.repo.findAll();
 	}

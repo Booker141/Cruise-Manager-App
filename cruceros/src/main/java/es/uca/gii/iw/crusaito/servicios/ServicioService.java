@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.clases.ServicioTipo;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.repositorios.CruceroRepository;
@@ -36,12 +37,25 @@ public class ServicioService {
 		return this.repo.findById(id);
 	}
 	
+
+	public List<Servicio> findBysTipo(ServicioTipo tipo){
+		return this.repo.findBysTipo(tipo);
+	}
+	
+	public List<Servicio> findByCruceros(Crucero crucero){
+		return this.repo.findByCruceros(crucero);
+	}
+	
 	public Servicio save(Servicio servicio) {
 		return this.repo.save(servicio);
 	}
 	
 	public void delete(Servicio servicio) {
 		this.repo.delete(servicio);
+	}
+	
+	public List<Servicio> findAll(){
+		return this.repo.findAll();
 	}
 	
 	public List<Servicio> load(){

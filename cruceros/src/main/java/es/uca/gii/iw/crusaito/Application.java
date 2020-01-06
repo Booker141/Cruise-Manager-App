@@ -115,37 +115,37 @@ public class Application extends SpringBootServletInitializer {
             		+ " zonas de restauración, con restaurantes variados, buffets, bares y cafés. "
             		+ "Su oferta de ocio se completa con un gran teatro y un completo casino. "
             		+ "Para el descanso y el deporte también dispone de spa, piscinas, centro "
-            		+ "de belleza y gimnasio, pudiendo completar cada jornada con compras en sus tiendas duty free."));
+            		+ "de belleza y gimnasio, pudiendo completar cada jornada con compras en sus tiendas duty free.", "frontend/img/plano1.jpg"));
             Barco titanic =barcoRepo.save(new Barco("Titanic","frontend/img/titanic.jpg",1000,100,2150,LocalDate.now(),"Con una capacidad total para 1000 pasajeros, este barco es el más grande "
             		+ "de los tres que navegan con Crusaito. Cuenta con todo tipo de "
             		+ "instalaciones, repartidas a lo largo de 12 cubiertas, entre las que destacan "
             		+ "restaurantes buffet y a la carta para disfrutar de una agradable velada, bares, "
             		+ "un completo y moderno casino, salón de espectáculos, salón de juegos, gimnasio, "
-            		+ "spa y un amplio salón de belleza."));
+            		+ "spa y un amplio salón de belleza.", "frontend/img/plano2.jpg"));
             Barco neptuno = barcoRepo.save(new Barco("Neptuno","frontend/img/neptuno.jpg",1530,150,3400,LocalDate.now(),"Este barco con capacidad para 1530 pasajeros, "
             		+ "fue remodelado en el año 2014. Cuenta con 12 cubiertas, así como multitud de "
             		+ "instalaciones y ofertas de ocio para disfrutar de una diversión plena a bordo: grandes salones, "
             		+ "bares, restaurantes, casino y zona de juegos, teatro para la representación de espectáculos, "
-            		+ "solarium, biblioteca, discoteca, rocódromo, pista de pádel, spa, gimnasio y salón de belleza."));
+            		+ "solarium, biblioteca, discoteca, rocódromo, pista de pádel, spa, gimnasio y salón de belleza.", "frontend/img/plano3.jpg"));
             Barco poseidon =barcoRepo.save(new Barco("Poseidon","frontend/img/poseidon.jpg",1600,140,2010,LocalDate.now(),"Con una capacidad total para 1600 pasajeros, "
             		+ "este barco es el más grande de los tres que navegan con Crusaito. "
             		+ "Cuenta con todo tipo de instalaciones, repartidas a lo largo de 17 cubiertas, "
             		+ "entre las que destacan restaurantes buffet y a la carta para disfrutar de una agradable velada, "
             		+ "bares, un completo y moderno casino, salón de espectáculos, salón de juegos, gimnasio, "
-            		+ "spa y un amplio salón de belleza."));
+            		+ "spa y un amplio salón de belleza.", "frontend/img/plano4.jpg"));
             Barco siren =barcoRepo.save(new Barco("Siren","frontend/img/siren.jpg",1700,170,3100,LocalDate.now(),"Este barco, que fue remodelado en el año 2010, "
             		+ "ofrece la posibilidad de viajar a un total de 1700 pasajeros. "
             		+ "Cuenta con 10 cubiertas, entre las que se distribuyen agradables zonas de "
             		+ "restauración, con restaurantes variados, buffets, bares y cafés. "
             		+ "Su oferta de ocio se completa con un gran teatro y un completo casino. "
             		+ "Para el descanso y el deporte también dispone de spa, piscinas, centro de belleza y gimnasio, "
-            		+ "pudiendo completar cada jornada con compras en sus tiendas duty free."));
+            		+ "pudiendo completar cada jornada con compras en sus tiendas duty free.", "frontend/img/plano5.jpg"));
             Barco spirit =barcoRepo.save(new Barco("Spirit","frontend/img/spirit.jpg",1440,150,3200,LocalDate.now(),"Este barco con capacidad para 1440 pasajeros, "
             		+ "fue remodelado en el año 20009. Cuenta con 13 cubiertas, así como multitud de "
             		+ "instalaciones y ofertas de ocio para disfrutar de una diversión plena a bordo: "
             		+ "grandes salones, bares, restaurantes, casino y zona de juegos, teatro para la "
             		+ "representación de espectáculos, solarium, biblioteca, discoteca, rocódromo, "
-            		+ "pista de pádel, spa, gimnasio y salón de belleza."));
+            		+ "pista de pádel, spa, gimnasio y salón de belleza.", "frontend/img/plano6.jpg"));
             
             //Cruceros ejemplo
             
@@ -171,7 +171,7 @@ public class Application extends SpringBootServletInitializer {
             		+ "increíble color azul turquesa de las aguas del mar Adriático y un clima "
             		+ "inmejorable que hará que te plantees quedarte a vivir en sus costas para "
             		+ "toda la vida.", 3400));
-            cruceroService.save(new Crucero("Fiordos noruegos ","Copenhague","Trondheim","8 dias", "Viajar a otro mundo sin salir de Europa es completamente posible. "
+            cruceroService.save(new Crucero("Fiordos noruegos","Copenhague","Trondheim","8 dias", "Viajar a otro mundo sin salir de Europa es completamente posible. "
             		+ "Si te aventuras a embarcar en alguno de nuestros cruceros por los impresionantes "
             		+ "Fiordos Noruegos, serás testigo de primera mano de las espectaculares montañas "
             		+ "que los rodean y disfrutarás de las singulares excursiones que cada ciudad te "
