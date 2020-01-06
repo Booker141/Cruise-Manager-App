@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -27,6 +28,7 @@ public class Crucero {
 	private String cOrigen;
 	private String cDestino;
 	private String cDuracion; //en dias
+	@Size(max= 12000)
 	private String cDescripcion;
 	private String cImagen;
 	private double cPrecio;
@@ -196,18 +198,5 @@ public class Crucero {
 	public String toString() {
 		return cNombre;
 	}
-
-	/*
-	public List<Reserva> getReservas() {
-		return reservas;
-	}
-
-
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
-	}
-	*/
 	
-	
-
 }

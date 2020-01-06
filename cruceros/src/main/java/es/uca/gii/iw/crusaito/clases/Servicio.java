@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Servicio {
@@ -19,6 +20,7 @@ public class Servicio {
 	@GeneratedValue
 	private long id;
 	private String sNombre;
+	@Size(max= 1000)
 	private String sDescripcion;
 	private double sPrecio;
 	private ServicioTipo sTipo;
@@ -221,6 +223,31 @@ public class Servicio {
 	@Override
 	public String toString() {
 		return this.sNombre;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((sNombre == null) ? 0 : sNombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Servicio other = (Servicio) obj;
+		if (sNombre == null) {
+			if (other.sNombre != null)
+				return false;
+		} else if (!sNombre.equals(other.sNombre))
+			return false;
+		return true;
 	}
 
 	

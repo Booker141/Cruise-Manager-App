@@ -64,15 +64,17 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    	
 	    	addToNavbar(new DrawerToggle(), logo);
 	    }
-	    	addMenuTab("Inicio", DefaultView.class);
+	    
 		
 	    	if(SecurityUtils.isUserLoggedIn()) {
 			
 	    		Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
 	    		if(SecurityUtils.hasRole("Cliente")) {
+	    			addMenuTab("Inicio", InicioClienteView.class);
 	    			addMenuTab("Gestionar mis reservas", MisReservasView.class);
 	    			addMenuTab("Servicios", ServiciosView.class);
+	    			addMenuTab("Ciudades", CiudadesView.class);
 	    		}
 
 	    		if(SecurityUtils.hasRole("Admin")){
@@ -99,7 +101,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			
 	    	} 
 	    	else {
-
+	    		addMenuTab("Inicio", DefaultView.class);
 	    		addMenuTab("Iniciar sesión", LoginView.class);
 	    		addMenuTab("Registrar", RegisterView.class);
 			
