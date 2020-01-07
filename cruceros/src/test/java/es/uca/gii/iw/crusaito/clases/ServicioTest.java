@@ -1,4 +1,4 @@
-/*package es.uca.gii.iw.crusaito.clases;
+package es.uca.gii.iw.crusaito.clases;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,20 +8,20 @@ import org.junit.Test;
 
 public class ServicioTest {
 
-	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo,
-			String sImagen, int sAforoActual, int sAforoMaximo, LocalDate sFecha) 
-	
+	@SuppressWarnings("deprecation")
 	@Test
     public void Test(){
 		
-        Usuario u = new Usuario("Carlos","Perez", "carlos@gmail.com", "carlos.perez", 
-        "1111", "12345678T", 435678909, LocalDate.now(), "Calle Perez", "Cadiz", "Cliente");
+        Servicio s = new Servicio("Nadar","piscina", 10.0, ServicioTipo.Excursion, 
+        "frontend/img/golf.jpg", 30, 40, LocalDate.now());
 
-        assertEquals("Carlos", u.getFirstName());
-        assertEquals("Perez", u.getLastName());
-        assertEquals("12345678T", u.getDni());
-        assertEquals("Cadiz", u.getCity());
-        assertEquals("Cliente", u.getRole());
+        assertEquals("Nadar", s.getsNombre());
+        assertEquals("piscina", s.getsDescripcion());
+        assertEquals(10.0, s.getsPrecio());
+        assertEquals(ServicioTipo.Excursion, s.getsTipo());
+        assertEquals(30, s.getsAforoActual());
+        assertEquals(40, s.getsAforoMaximo());
+        
     }
 	
-}*/
+}

@@ -30,7 +30,6 @@ public class InicioClienteView extends VerticalLayout{
 	private CruceroService cruceroService;
 	private ServicioService servicioService;
 	
-	private Image cImagen;
 	private Image bImagen;
 	private Image b2Imagen;
 	
@@ -56,9 +55,7 @@ public class InicioClienteView extends VerticalLayout{
         Label Origen = new Label("Origen: " + crucero.getcOrigen());
         Label Destino = new Label("Destino: " + crucero.getcDestino());
         Label Duracion = new Label("Duracion: " + crucero.getcDuracion() + " dias");
-        cImagen = new Image(crucero.getcImagen(), "Imagen no encontrada");
-        cImagen.setHeight("100%");
-		cImagen.setWidth("100%");
+       
         
         /**
          * Información barco
@@ -110,7 +107,7 @@ public class InicioClienteView extends VerticalLayout{
 		H3 Consejo5 = new H3("5.- Recuerda apagar los datos de tu teléfono móvil para evitar sorpresas en tu factura. También, regula la hora del mismo y activa la alarma despertador para viajar acorde a los cambios de huso horario. "
 				+ "Procura llevar un adaptador universal para enchufes.");
 		
-        VerticalLayout layout = new VerticalLayout(nombreCrucero, Titulo, Origen, Destino, Duracion, cImagen, 
+        VerticalLayout layout = new VerticalLayout(nombreCrucero, Titulo, Origen, Destino, Duracion, 
         		nombreBarco, Titulo2, bImagen, Descripcion, Aforo, Peso, FchaServicio, Instalaciones, Instalacion, Plano, b2Imagen, 
         		Consejos, Consejo1, Consejo2, Consejo3, Consejo4, Consejo5);
         add(layout);

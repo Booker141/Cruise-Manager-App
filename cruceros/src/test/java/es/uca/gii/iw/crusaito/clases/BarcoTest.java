@@ -1,4 +1,4 @@
-/*package es.uca.gii.iw.crusaito.clases;
+package es.uca.gii.iw.crusaito.clases;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,20 +8,17 @@ import org.junit.Test;
 
 public class BarcoTest {
 
-	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
-			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion)
 	@Test
     public void Test(){
 		
-        Usuario u = new Usuario("Carlos","Perez", "carlos@gmail.com", "carlos.perez", 
-        "1111", "12345678T", 435678909, LocalDate.now(), "Calle Perez", "Cadiz", "Cliente");
+        Barco b = new Barco("Titania","frontend/img/barcoTest.jpg",1000, 600, 
+        4000, LocalDate.now(), "Barco para test de clase", "frontend/img/planoTest.jpg");
 
-        assertEquals("Carlos", u.getFirstName());
-        assertEquals("Perez", u.getLastName());
-        assertEquals("12345678T", u.getDni());
-        assertEquals("Cadiz", u.getCity());
-        assertEquals("Cliente", u.getRole());
-    }
+        assertEquals("Titania", b.getbNombre());
+        assertEquals(1000, b.getbAforoPasajeros());
+        assertEquals(600, b.getbAforoTripulantes());
+        assertEquals(4000, b.getbPeso());
+        assertEquals("Barco para test de clase", b.getbDescripcion());
 	
+ }
 }
-*/
