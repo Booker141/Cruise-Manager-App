@@ -1,4 +1,4 @@
-/*package es.uca.gii.iw.crusaito.clases;
+package es.uca.gii.iw.crusaito.clases;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,20 +6,18 @@ import org.junit.Test;
 
 public class CruceroTest {
 
-	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
-			double cPrecio)
-	
+	@SuppressWarnings("deprecation")
 	@Test
     public void Test(){
 		
-        Usuario u = new Usuario("Carlos","Perez", "carlos@gmail.com", "carlos.perez", 
-        "1111", "12345678T", 435678909, LocalDate.now(), "Calle Perez", "Cadiz", "Cliente");
+        Crucero c = new Crucero("Mar Negro","Cadiz", "Portugal", "5 dias", 
+        "Muy buen crucero", 50.0);
 
-        assertEquals("Carlos", u.getFirstName());
-        assertEquals("Perez", u.getLastName());
-        assertEquals("12345678T", u.getDni());
-        assertEquals("Cadiz", u.getCity());
-        assertEquals("Cliente", u.getRole());
+        assertEquals("Mar Negro", c.getcNombre());
+        assertEquals("Cadiz", c.getcOrigen());
+        assertEquals("Portugal", c.getcDestino());
+        assertEquals("5 dias", c.getcDuracion());
+        assertEquals("Muy buen crucero", c.getcDescripcion());
+        assertEquals(50.0, c.getcPrecio());
     }
 }
-*/
