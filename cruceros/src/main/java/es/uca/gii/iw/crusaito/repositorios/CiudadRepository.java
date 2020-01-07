@@ -13,6 +13,6 @@ public interface CiudadRepository extends JpaRepository<Ciudad,Long>{
 	List<Ciudad> findAll();
 	Ciudad findById(int id);
 	Ciudad findBycNombre(String cNombre);
-	List<Ciudad> findByCruceros(Crucero crucero);
+	//List<Ciudad> findByCruceros(Crucero crucero);
 
 }

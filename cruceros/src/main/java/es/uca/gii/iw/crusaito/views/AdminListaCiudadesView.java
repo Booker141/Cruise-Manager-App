@@ -32,20 +32,19 @@ public class AdminListaCiudadesView extends VerticalLayout{
 		
 		crud.getGrid().setColumns("cNombre");
 		crud.getGrid().getColumnByKey("cNombre").setHeader("Nombre");
-		crud.getGrid().addColumn(Ciudad::getCruceros).setHeader("Cruceros");
 		
 		DefaultCrudFormFactory<Ciudad> formFactory = new DefaultCrudFormFactory<>(Ciudad.class);
 
-		formFactory.setVisibleProperties("cNombre","cruceros");
+		formFactory.setVisibleProperties("cNombre");
 		
-		formFactory.setFieldProvider("cruceros", ()->{
+		/*formFactory.setFieldProvider("cruceros", ()->{
 			MultiselectComboBox<Crucero> multibox = new MultiselectComboBox<>();
 			
 			multibox.setLabel("Selecciona cruceros");
 			multibox.setItems(this.cruceroService.load());
 			multibox.setItemLabelGenerator(Crucero::getcNombre);
 			return multibox;
-		}); 
+		}); */
 		
 		crud.setCrudFormFactory(formFactory);
 		

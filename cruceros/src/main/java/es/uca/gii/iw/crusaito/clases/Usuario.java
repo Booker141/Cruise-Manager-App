@@ -30,10 +30,6 @@ public class Usuario implements UserDetails{
 	@ManyToOne
 	private Rol role;
 	
-	/*@ManyToMany(mappedBy = "usuarios")
-	private Set<Servicio> servicios;
-	*/
-	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Set<ServicioUsuario> usuariosServicios;
 	

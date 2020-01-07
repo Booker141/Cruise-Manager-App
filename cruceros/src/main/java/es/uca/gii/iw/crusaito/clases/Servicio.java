@@ -32,14 +32,6 @@ public class Servicio {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
 	private Set<Crucero> cruceros;
 	
-	/*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "servicio_usuario",
-    	joinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")},
-    	inverseJoinColumns = {@JoinColumn(name = "usuario_id", referencedColumnName = "id")}
-	)
-	private Set<Usuario> usuarios;
-	*/
-	
 	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
 	private Set<ServicioUsuario> serviciosUsuarios;
 	
@@ -58,7 +50,6 @@ public class Servicio {
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
 		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
-		//this.usuarios = new HashSet<Usuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 	
@@ -75,7 +66,6 @@ public class Servicio {
 		this.sFecha = sFecha;
 		this.eItinerario = eItinerario;
 		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
-		//this.usuarios = new HashSet<Usuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 
