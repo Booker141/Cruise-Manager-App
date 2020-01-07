@@ -1,8 +1,6 @@
 package es.uca.gii.iw.crusaito.clases;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -29,6 +28,7 @@ public class Crucero {
 	private String cOrigen;
 	private String cDestino;
 	private String cDuracion; //en dias
+	@Size(max= 12000)
 	private String cDescripcion;
 	private String cImagen;
 	private double cPrecio;
@@ -39,8 +39,11 @@ public class Crucero {
 	@OneToMany(mappedBy = "crucero")
 	private Set<Usuario> usuarios;
 	
-	@ManyToMany(mappedBy = "cruceros")
-	private Set<Ciudad> ciudades;
+	/*@ManyToMany(mappedBy = "cruceros")
+	private Set<Ciudad> ciudades;*/
+	
+	@OneToMany(mappedBy = "crucero", cascade = CascadeType.ALL)
+	private Set<CiudadCrucero> crucerosCiudades;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "crucero_servicio",
@@ -60,8 +63,9 @@ public class Crucero {
 		this.cPrecio = cPrecio;
 		this.barco = null;
 		this.usuarios = new HashSet<Usuario>();
-		this.ciudades = new HashSet<Ciudad>();
+		//this.ciudades = new HashSet<Ciudad>();
 		this.servicios = new HashSet<Servicio>();
+		this.crucerosCiudades = new HashSet<CiudadCrucero>();
 	}
 
 
@@ -134,14 +138,14 @@ public class Crucero {
 	}
 
 
-	public Set<Ciudad> getCiudades() {
+	/*public Set<Ciudad> getCiudades() {
 		return ciudades;
 	}
 
 
 	public void setCiudades(Set<Ciudad> ciudades) {
 		this.ciudades = ciudades;
-	}
+	}*/
 
 	public String getcImagen() {
 		return cImagen;
@@ -199,17 +203,14 @@ public class Crucero {
 		return cNombre;
 	}
 
-	/*
-	public List<Reserva> getReservas() {
-		return reservas;
+
+	public Set<CiudadCrucero> getCrucerosCiudades() {
+		return crucerosCiudades;
 	}
 
 
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
+	public void setCrucerosCiudades(Set<CiudadCrucero> crucerosCiudades) {
+		this.crucerosCiudades = crucerosCiudades;
 	}
-	*/
 	
-	
-
 }

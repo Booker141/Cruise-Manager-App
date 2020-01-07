@@ -3,6 +3,7 @@ package es.uca.gii.iw.crusaito.clases;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Barco 
@@ -20,14 +21,15 @@ public class Barco
 	private int bAforoTripulantes;
 	private int bPeso;
 	private LocalDate bFchPuestaServicio;
+	@Size(max= 12000)
 	private String bDescripcion;
-
+	private String bPlano;
 
 	public Barco() {}
 	
 	//Añadir Lista de camarotes al constructor
 	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
-			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion) {
+			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion, String bPlano) {
 
 		this.bNombre = bNombre;
 		this.bImagen = bImagen;
@@ -36,6 +38,7 @@ public class Barco
 		this.bPeso = bPeso;
 		this.bFchPuestaServicio = bFchPuestaServicio;
 		this.bDescripcion = bDescripcion;
+		this.bPlano = bPlano;
 	}
 	
 	public String getbImagen() {
@@ -112,6 +115,14 @@ public class Barco
 
 	public void setbFchPuestaServicio(LocalDate bFchPuestaServicio) {
 		this.bFchPuestaServicio = bFchPuestaServicio;
+	}
+
+	public String getbPlano() {
+		return bPlano;
+	}
+
+	public void setbPlano(String bPlano) {
+		this.bPlano = bPlano;
 	}
 
 	@Override

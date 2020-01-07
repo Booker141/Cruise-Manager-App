@@ -1,6 +1,5 @@
 package es.uca.gii.iw.crusaito.clases;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;

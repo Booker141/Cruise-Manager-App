@@ -1,9 +1,7 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,10 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Servicio {
@@ -23,6 +20,7 @@ public class Servicio {
 	@GeneratedValue
 	private long id;
 	private String sNombre;
+	@Size(max= 1000)
 	private String sDescripcion;
 	private double sPrecio;
 	private ServicioTipo sTipo;
@@ -33,14 +31,6 @@ public class Servicio {
 	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
 	private Set<Crucero> cruceros;
-	
-	/*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "servicio_usuario",
-    	joinColumns = {@JoinColumn(name = "servicio_id", referencedColumnName = "id")},
-    	inverseJoinColumns = {@JoinColumn(name = "usuario_id", referencedColumnName = "id")}
-	)
-	private Set<Usuario> usuarios;
-	*/
 	
 	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
 	private Set<ServicioUsuario> serviciosUsuarios;
@@ -60,7 +50,6 @@ public class Servicio {
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
 		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
-		//this.usuarios = new HashSet<Usuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 	
@@ -77,14 +66,22 @@ public class Servicio {
 		this.sFecha = sFecha;
 		this.eItinerario = eItinerario;
 		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
-		//this.usuarios = new HashSet<Usuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 
 	//Constructor vacio
 	public Servicio() {}
 
-	//Regla de negocio que comprueba si se puede realizar una reserva dejando hueco a los que van sin reserva
+	/**
+
+     * Método de tipo booleano que comprueba si se puede realizar una reserva dejando hueco
+     * los que no tienen reserva
+
+     * @return true/false si hay o no hueco libre.
+     * 
+
+     */
+
 	public boolean AforoHuecoLibre() {
 		if((this.getsAforoActual()+1) >= (this.getsAforoMaximo() * 0.70)) return false;
 		else return true;
@@ -216,6 +213,31 @@ public class Servicio {
 	@Override
 	public String toString() {
 		return this.sNombre;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((sNombre == null) ? 0 : sNombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Servicio other = (Servicio) obj;
+		if (sNombre == null) {
+			if (other.sNombre != null)
+				return false;
+		} else if (!sNombre.equals(other.sNombre))
+			return false;
+		return true;
 	}
 
 	
