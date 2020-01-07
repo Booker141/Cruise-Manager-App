@@ -1,6 +1,9 @@
 
 package es.uca.gii.iw.crusaito;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -189,7 +192,20 @@ public class Application extends SpringBootServletInitializer {
             
             //Ciudades con crucero
             
-            cadiz.addCruceros(caribe);
+            CiudadCrucero ciudadCrucero = new CiudadCrucero();
+            ciudadCrucero.setCiudad(cadiz);
+            ciudadCrucero.setCrucero(caribe);
+            ciudadCrucero.setFechaLlegada(LocalDate.now());
+            ciudadCrucero.setFechaSalida(LocalDate.now());
+            ciudadCrucero.setHoraLlegada(11);
+            ciudadCrucero.setHoraSalida(12);
+            
+            cadiz.getCiudadesCruceros().add(ciudadCrucero);
+            caribe.getCrucerosCiudades().add(ciudadCrucero);
+            ciudadService.save(cadiz);
+            cruceroService.save(caribe);
+            
+            /*cadiz.addCruceros(caribe);
             sanFernando.addCruceros(caribe);
             chiclana.addCruceros(caribe);
             colon.addCruceros(caribe);
@@ -218,7 +234,7 @@ public class Application extends SpringBootServletInitializer {
             molde.addCruceros(noruego);
             alesund.addCruceros(noruego);
             trondheim.addCruceros(noruego);
-            
+            */
     
             
             //BARCO con crucero
@@ -290,20 +306,18 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(profumeria);
             servicioService.save(joyeria);
             
+            //Usuario con servicio
          
             ServicioUsuario servUsu = new ServicioUsuario();
             servUsu.setServicio(elFaro);
             servUsu.setUsuario(usuarioEjemplo);
             servUsu.setParticipantes(2);
+            servUsu.setPrecio(60);
             
             elFaro.getServiciosUsuarios().add(servUsu);
             usuarioEjemplo.getUsuariosServicios().add(servUsu);
             servicioService.save(elFaro);
             userService.save(usuarioEjemplo);
-            
-            //elFaro.getUsuarios().add(usuarioEjemplo);
-            //usuarioEjemplo.getServicios().add(elFaro);
-            
             
             //Servicio con crucero
             
@@ -374,7 +388,7 @@ public class Application extends SpringBootServletInitializer {
             
             
             // fetch user by dni
-            log.info("Users found with findByLastName('Bauer'):");
+            /*log.info("Users found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
             userRepo.findByDni("12345678Y").forEach(bauer -> {
                 log.info(bauer.toString());
@@ -383,7 +397,7 @@ public class Application extends SpringBootServletInitializer {
             log.info("Servicios con findByUsuario");
             servicioUsuarioService.findByUsuario(usuarioEjemplo).forEach(prueba -> {
             	log.info(prueba.getServicio().getsNombre());
-            });      
+            });  */    
         };
     }
 }

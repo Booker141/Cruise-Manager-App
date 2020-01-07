@@ -34,9 +34,9 @@ public class CiudadService {
 		return repo.findAll();
 	}
 	
-	public List<Ciudad> findByCruceros(Crucero crucero){
+	/*public List<Ciudad> findByCruceros(Crucero crucero){
 		return repo.findByCruceros(crucero);
-	}
+	}*/
 	
 	public void delete(Ciudad ciudad) {
         repo.delete(ciudad);

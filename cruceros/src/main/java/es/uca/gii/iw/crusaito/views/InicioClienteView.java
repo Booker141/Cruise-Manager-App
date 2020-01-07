@@ -41,9 +41,9 @@ public class InicioClienteView extends VerticalLayout{
 		this.servicioService = servicioService;
 		
 		
-		Crucero crucero = this.cruceroService.findByUsuarios(usuarioService.findByUsername(SecurityUtils.currentUsername()));
+		Crucero crucero = this.cruceroService.findByUsuarios(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		Barco barco = crucero.getBarco();
-		List<Servicio> serviceList = servicioService.findByCruceros(crucero);
+		List<Servicio> serviceList = this.servicioService.findByCruceros(crucero);
 		
 
 		/**
@@ -54,7 +54,7 @@ public class InicioClienteView extends VerticalLayout{
         H2 Titulo = new H2("Informacion: ");
         Label Origen = new Label("Origen: " + crucero.getcOrigen());
         Label Destino = new Label("Destino: " + crucero.getcDestino());
-        Label Duracion = new Label("Duracion: " + crucero.getcDuracion() + " dias");
+        Label Duracion = new Label("Duracion: " + crucero.getcDuracion());
        
         
         /**

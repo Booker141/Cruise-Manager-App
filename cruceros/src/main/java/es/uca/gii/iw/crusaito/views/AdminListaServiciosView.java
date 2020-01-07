@@ -6,6 +6,7 @@ import org.vaadin.crudui.crud.CrudOperation;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.impl.field.provider.CheckBoxGroupProvider;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
+import org.vaadin.gatanaso.MultiselectComboBox;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -46,13 +47,7 @@ public class AdminListaServiciosView extends VerticalLayout{
 		DefaultCrudFormFactory<Servicio> formFactory = new DefaultCrudFormFactory<>(Servicio.class);
 		
 		formFactory.setUseBeanValidation(true);
-
-		formFactory.setVisibleProperties("sNombre","sDescripcion","sPrecio","sTipo","sAforoActual","sAforoMaximo","sFecha","eItinerario","cruceros");
-
-		CheckBoxGroupProvider<Crucero> checkboxes = new CheckBoxGroupProvider<>("cruceros", this.cruceroService.load(),Crucero::getcNombre);
-		
-		formFactory.setFieldProvider(CrudOperation.ADD,"cruceros", checkboxes);
-		formFactory.setFieldProvider(CrudOperation.UPDATE,"cruceros", checkboxes);
+		formFactory.setVisibleProperties("sNombre","sDescripcion","sPrecio","sTipo","sAforoActual","sAforoMaximo","sFecha","eItinerario");
 		
 		crud.setCrudFormFactory(formFactory);
 		

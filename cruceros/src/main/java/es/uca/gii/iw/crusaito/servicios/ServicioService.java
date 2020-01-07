@@ -96,6 +96,7 @@ public class ServicioService {
 		servUser.setServicio(servicio);
 		servUser.setUsuario(usuario);
 		servUser.setParticipantes(participantes);
+		servUser.setPrecio(((double)participantes)*servicio.getsPrecio());
 		
 		servicio.getServiciosUsuarios().add(servUser);
 		usuario.getUsuariosServicios().add(servUser);

@@ -39,8 +39,11 @@ public class Crucero {
 	@OneToMany(mappedBy = "crucero")
 	private Set<Usuario> usuarios;
 	
-	@ManyToMany(mappedBy = "cruceros")
-	private Set<Ciudad> ciudades;
+	/*@ManyToMany(mappedBy = "cruceros")
+	private Set<Ciudad> ciudades;*/
+	
+	@OneToMany(mappedBy = "crucero", cascade = CascadeType.ALL)
+	private Set<CiudadCrucero> crucerosCiudades;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "crucero_servicio",
@@ -60,8 +63,9 @@ public class Crucero {
 		this.cPrecio = cPrecio;
 		this.barco = null;
 		this.usuarios = new HashSet<Usuario>();
-		this.ciudades = new HashSet<Ciudad>();
+		//this.ciudades = new HashSet<Ciudad>();
 		this.servicios = new HashSet<Servicio>();
+		this.crucerosCiudades = new HashSet<CiudadCrucero>();
 	}
 
 
@@ -134,14 +138,14 @@ public class Crucero {
 	}
 
 
-	public Set<Ciudad> getCiudades() {
+	/*public Set<Ciudad> getCiudades() {
 		return ciudades;
 	}
 
 
 	public void setCiudades(Set<Ciudad> ciudades) {
 		this.ciudades = ciudades;
-	}
+	}*/
 
 	public String getcImagen() {
 		return cImagen;
@@ -197,6 +201,16 @@ public class Crucero {
 	@Override
 	public String toString() {
 		return cNombre;
+	}
+
+
+	public Set<CiudadCrucero> getCrucerosCiudades() {
+		return crucerosCiudades;
+	}
+
+
+	public void setCrucerosCiudades(Set<CiudadCrucero> crucerosCiudades) {
+		this.crucerosCiudades = crucerosCiudades;
 	}
 	
 }
