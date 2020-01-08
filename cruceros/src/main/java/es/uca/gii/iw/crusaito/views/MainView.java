@@ -99,13 +99,11 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 				navigationTargetToTab.put(LogoutView.class,tab);
 				tabs.add(tab);*/
 	    		//addMenuTab("Cerrar sesión", LogoutView.class);
-	    		addMenuTab("Registrar", RegisterView.class);
 			
 	    	} 
 	    	else {
 	    		addMenuTab("Inicio", DefaultView.class);
 	    		addMenuTab("Iniciar sesión", LoginView.class);
-	    		addMenuTab("Registrar", RegisterView.class);
 			
 	    	}
 		
