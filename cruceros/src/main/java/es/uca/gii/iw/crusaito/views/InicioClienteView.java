@@ -55,7 +55,7 @@ public class InicioClienteView extends VerticalLayout{
         H2 Titulo = new H2("Información: ");
         Label Origen = new Label("Origen: " + crucero.getcOrigen());
         Label Destino = new Label("Destino: " + crucero.getcDestino());
-        Label Duracion = new Label("Duracion: " + crucero.getcDuracion());
+        Label Duracion = new Label("Duración: " + crucero.getcDuracion());
        
         
         /**

@@ -6,8 +6,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-import es.uca.gii.iw.crusaito.common.Footer;
-
 @Route(value = "CruceroView",layout = MainView.class)
 public class CruceroView extends VerticalLayout {
 	private static final long serialVersionUID = 1L;
@@ -58,9 +56,7 @@ public class CruceroView extends VerticalLayout {
 		this.add(infoBasicaLayout);
 		
 		//fin body
-		
-		Footer footer = new Footer();
-		add(footer);
+
 	}
 
 }

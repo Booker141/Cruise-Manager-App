@@ -336,7 +336,7 @@ public class Application extends SpringBootServletInitializer {
             		+ "instalaciones y ofertas de ocio para disfrutar de una diversión plena a bordo: grandes salones, "
             		+ "bares, restaurantes, casino y zona de juegos, teatro para la representación de espectáculos, "
             		+ "solarium, biblioteca, discoteca, rocódromo, pista de pádel, spa, gimnasio y salón de belleza.", "frontend/img/plano3.jpg"));
-            Barco poseidon =barcoRepo.save(new Barco("Poseidon","frontend/img/poseidon.jpg",1600,140,2010,LocalDate.now(),"Con una capacidad total para 1600 pasajeros, "
+            Barco poseidon =barcoRepo.save(new Barco("Poseidón","frontend/img/poseidon.jpg",1600,140,2010,LocalDate.now(),"Con una capacidad total para 1600 pasajeros, "
             		+ "este barco es el más grande de los tres que navegan con Crusaito. "
             		+ "Cuenta con todo tipo de instalaciones, repartidas a lo largo de 17 cubiertas, "
             		+ "entre las que destacan restaurantes buffet y a la carta para disfrutar de una agradable velada, "
@@ -374,11 +374,11 @@ public class Application extends SpringBootServletInitializer {
             		+ "con Crusaito y vive instantes de película que quedarán inmortalizados en tu "
             		+ "memoria de la mejor manera, aquella que mentalmente te haga volver a sus apasionantes destinos "
             		+ "en forma de sonrisa.", 1200));
-            cruceroService.save(new Crucero("Baltico","Helsinki","Helsinki","9 días","Conoce la riqueza y belleza cultural de las ciudades más famosas "
+            cruceroService.save(new Crucero("Báltico","Helsinki","Helsinki","9 días","Conoce la riqueza y belleza cultural de las ciudades más famosas "
             		+ "y emblemáticas que viven a orillas del Báltico, "
             		+ "un mar lleno de historia donde se encuentran las mayores reservas de ámbar "
             		+ "del mundo y que comunica con el mar del Norte y el océano Atlántico.", 2150));
-            cruceroService.save(new Crucero("Adriatico","El Pireo","El Pireo","8 días", "A bordo de tu crucero Crusaito, tendrás la oportunidad de disfrutar del "
+            cruceroService.save(new Crucero("Adriático","El Pireo","El Pireo","8 días", "A bordo de tu crucero Crusaito, tendrás la oportunidad de disfrutar del "
             		+ "increíble color azul turquesa de las aguas del mar Adriático y un clima "
             		+ "inmejorable que hará que te plantees quedarte a vivir en sus costas para "
             		+ "toda la vida.", 3400));
