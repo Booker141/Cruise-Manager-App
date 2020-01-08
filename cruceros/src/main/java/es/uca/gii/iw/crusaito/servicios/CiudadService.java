@@ -17,9 +17,23 @@ public class CiudadService {
 		this.repo = repo;
 	}
 	
+	/**
+	 * Método para buscar una ciudad a través de su número de identificación
+	 * 
+	 * @param id - id define el numero de identificación de la ciudad a buscar.
+	 * @return la ciudad cuyo id es el pasado como parámetro.
+	 */
+	
 	public Ciudad findById(int id) {
 		return repo.findById(id);
 	}
+	
+	/**
+	 * Método para buscar una ciudad a través de su nombre
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad a buscar.
+	 * @return la ciudad cuyo nombre es el pasado como parámetro.
+	 */
 	
 	public Ciudad findBycNombre(String cNombre) {
 		return repo.findBycNombre(cNombre);
@@ -28,6 +42,12 @@ public class CiudadService {
 	public Ciudad save(Ciudad ciudad) {
 		return repo.save(ciudad);
 	}
+	
+	/**
+	 * Método para buscar todas las ciudades
+	 * 
+	 * @return todas las ciudades en forma de lista.
+	 */
 	
 	public List<Ciudad> load(){
 		return repo.findAll();

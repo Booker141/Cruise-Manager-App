@@ -38,7 +38,19 @@ public class Servicio {
 	
 	private String eItinerario;
 	
-	//Constructor de servicio
+	/**
+	 * Constructor de la entidad Servicio
+	 * 
+	 * @param sNombre - sNombre define el nombre del servicio.
+	 * @param sDescripcion - sDescripcion define una descripción del servicio a reservar.
+	 * @param sPrecio - sPrecio define el precio que cuesta el servicio al reservar el mismo.
+	 * @param sTipo - sTipo define el tipo de servicio que se va a reservar [Restaurante, Excursion, Tienda]
+	 * @param sImagen - sImagen define una imagen del servicio.
+	 * @param sAforoActual - sAforoActual define el número de personas que han reservado actualmente el servicio.
+	 * @param sAforoMaximo - sAforoMaximo define el número de personas máximo que pueden disfrutar del servicio al mismo tiempo.
+	 * @param sFecha - sFecha define la fecha del servicio.
+	 */
+	
 	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo,
 			String sImagen, int sAforoActual, int sAforoMaximo, LocalDate sFecha) {
 		this.sNombre = sNombre;
@@ -53,7 +65,21 @@ public class Servicio {
 		this.cruceros = new HashSet<Crucero>();
 	}
 	
-	//Constructor de excursion
+	
+	/**
+	 * Constructor de la entidad Servicio, en su variante Excursión
+	 * 
+	 * @param sNombre - sNombre define el nombre del servicio.
+	 * @param sDescripcion - sDescripcion define una descripción del servicio a reservar.
+	 * @param sPrecio - sPrecio define el precio que cuesta el servicio al reservar el mismo.
+	 * @param sTipo - sTipo define el tipo de servicio que se va a reservar [Restaurante, Excursion, Tienda]
+	 * @param sImagen - sImagen define una imagen del servicio.
+	 * @param sAforoActual - sAforoActual define el número de personas que han reservado actualmente el servicio.
+	 * @param sAforoMaximo - sAforoMaximo define el número de personas máximo que pueden disfrutar del servicio al mismo tiempo.
+	 * @param sFecha - sFecha define la fecha del servicio.
+	 * @param eItinerario- eItinerario define la ciudad en la que transcurre la excursión.
+	 */
+	
 	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo, int sAforoActual,
 			String sImagen, int sAforoMaximo, LocalDate sFecha, String eItinerario) {
 		this.sNombre = sNombre;

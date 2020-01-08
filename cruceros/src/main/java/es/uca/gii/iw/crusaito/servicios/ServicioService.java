@@ -33,14 +33,34 @@ public class ServicioService {
 		this.servUserRepo = servUserRepo;
 	}
 	
+	/**
+	 * Método para buscar un servicio según su número de identificación
+	 * 
+	 * @param id - id define el numero de identificación del servicio.
+	 * @return devuelve el servicio cuya id haya sido pasada como parámetro.
+	 */
+	
 	public Servicio findById(long id) {
 		return this.repo.findById(id);
 	}
 	
-
+	/**
+	 * Método para buscar los servicios segú su tipo [Restaurante, Tienda, Excursión]
+	 * 
+	 * @param tipo - tipo define el tipo de los servicios a buscar.
+	 * @return devuelve los servicios en forma de lista cuyo tipo haya sido pasado como parámetro .
+	 */
+	
 	public List<Servicio> findBysTipo(ServicioTipo tipo){
 		return this.repo.findBysTipo(tipo);
 	}
+	
+	/**
+	 * Método para buscar los servicios según el crucero
+	 * 
+	 * @param crucero - crucero define el crucero cuyos servicios queremos buscar.
+	 * @return devuelve los servicios cuyo crucero haya sido pasado como parámetro.
+	 */
 	
 	public List<Servicio> findByCruceros(Crucero crucero){
 		return this.repo.findByCruceros(crucero);
@@ -54,9 +74,21 @@ public class ServicioService {
 		this.repo.delete(servicio);
 	}
 	
+	/**
+	 * Método para buscar todos los servicios
+	 * 
+	 * @return devuelve todos los servicios en forma de lista.
+	 */
+	
 	public List<Servicio> findAll(){
 		return this.repo.findAll();
 	}
+	
+	/**
+	 * Método para buscar todos los servicios
+	 * 
+	 * @return devuelve todos los servicios en forma de lista.
+	 */
 	
 	public List<Servicio> load(){
 		return this.repo.findAll();
@@ -69,10 +101,10 @@ public class ServicioService {
 	
 	/**
 
-     * Método busca un crucero a partir del nombre de usuario de un cliente dado.
+     * Método busca los servicios de un crucero a partir del nombre de usuario de un cliente dado.
 
-     * @param username El parámetro username define la cadena que contiene el nombre de usuario del cliente.
-     * @return Devuelve el crucero que buscamos a partir del nombre de usuario.
+     * @param username - username define la cadena que contiene el nombre de usuario del cliente.
+     * @return Devuelve los servicios del crucero que buscamos a partir del nombre de usuario que lo ha reservado.
 
      */
 	
@@ -82,13 +114,15 @@ public class ServicioService {
 		return this.repo.findByCruceros(crucero);
 	}
 	
+
+	
 	/**
-
-     * Método que crea una notificación de aviso de un error y que es mostrada al usuario.
-
-     * @param cadena El parámetro cadena define la cadena que mostrará el mensaje de error.
-
-     */
+	 * Métodos que asocia un servicio con el usuario que lo ha reservado
+	 * 
+	 * @param servicio - servicio define el servicio reservado por el usuario.
+	 * @param usuario - usuario define el usuario que ha reservado el servicio.
+	 * @param participantes - participantes define el número de usuarios que disfrutarán del servicio reservado.
+	 */
 	
 	public void addServicioToUsuario(Servicio servicio, Usuario usuario, int participantes) {
 		try {
@@ -109,12 +143,11 @@ public class ServicioService {
 	}
 	
 	/**
-
-     * Método que crea una notificación de aviso de un error y que es mostrada al usuario.
-
-     * @param cadena El parámetro cadena define la cadena que mostrará el mensaje de error.
-
-     */
+	 * Método que elimina la reserva de un servicio realizada por un usuario
+	 * 
+	 * @param servicio - servicio define el servicio reservado por el usuario.
+	 * @param usuario - usuario define el usuario que ha reservado el servicio.
+	 */
 	
 	public void removeServicioFromUsuario(Servicio servicio, Usuario usuario) {
 		try {

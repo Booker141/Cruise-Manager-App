@@ -52,6 +52,17 @@ public class Crucero {
 	)
 	private Set<Servicio> servicios;
 
+	/**
+	 * Contructor de la entidad Crucero
+	 * 
+	 * @param cNombre - cNombre define el nombre que recibe el crucero.
+	 * @param cOrigen - cOrigen define el origen del que parte el barco perteneciente al crucero.
+	 * @param cDestino - cDestino define el destino al que debe llegar el barco perteneciente al crucero.
+	 * @param cDuracion - cDuracion define la duración del trayecto del barco perteneciente al crucero.
+	 * @param cDescripcion - cDescripcion define una descripción breve del crucero.
+	 * @param cPrecio - cPrecio define el precio que hay que pagar para disfrutar del crucero.
+	 */
+	
 	public Crucero(String cNombre, String cOrigen, String cDestino, String cDuracion, String cDescripcion,
 			double cPrecio) {
 

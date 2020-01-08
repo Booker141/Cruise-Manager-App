@@ -28,6 +28,12 @@ public class CiudadCruceroService {
 		this.repo.delete(ciudadCrucero);
 	}
 	
+	/**
+	 * Método que carga todas las ciudades asociadas a un crucero
+	 * 
+	 * @return
+	 */
+	
 	public List<CiudadCrucero> load(){
 		return this.repo.findAll();
 	}
@@ -43,6 +49,7 @@ public class CiudadCruceroService {
 	public List<CiudadCrucero> findByCrucero(Crucero crucero){
 		return this.repo.findByCrucero(crucero);
 	}
+	
 	
 	public List<CiudadCrucero> findByServicio(Crucero crucero){
 		return this.repo.findByCrucero(crucero);

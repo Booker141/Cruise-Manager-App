@@ -22,7 +22,9 @@ public class Weather extends VerticalLayout{
 
 	  	 
 	/**
-	*	Funcion encargada de establecer una conexion con la API meteorologica y procesar la informacion recibida en formato XML.
+	*Función encargada de establecer una conexión con la API meteorológica y procesar la información recibida en formato XML.
+	*
+	*@param ciudad - ciudad define la ciudad de la que presentaremos su información meteorológica.
 	*/
 	
 	@Autowired
@@ -71,39 +73,5 @@ public class Weather extends VerticalLayout{
 		}
 		
 	}
-	/*
-	public Tiempo requestWeatherCoordinates(Coordinates coord) throws Exception
-	{
-		
-		String URLtext = "http://api.openweathermap.org/data/2.5/weather?lat="+coord.getLat()+"&lon="+coord.getLon()+"&mode=xml&appid=" + token;	
-		URL url = new URL(URLtext);
-		URLConnection conn = url.openConnection();	// establecemos conexion con la URL de la API
-		
-		HttpURLConnection conn2 = (HttpURLConnection) conn;
-		int statusCode = conn2.getResponseCode();	// obtenemos el codigo de respuesta de la API
-		
-		if(statusCode != 404)	// peticion exitosa
-		{
-			//Obtenemos el documento XML
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document file = builder.parse(url.openStream());
-			
-			// Recorremos las etiquetas XML para acceder al dato tiempo actual
-			String weather = file.getElementsByTagName("temperature").item(0).getAttributes().item(0).getTextContent();
-			
-			Tiempo weatherObject = new Tiempo();
-			weatherObject.setTemperatureCelsius((Double.parseDouble(weather)-273.15));
-			weatherObject.setTemperatureKelvin(Double.parseDouble(weather));
-			
-			return weatherObject;
-			
-		}
-		else	// error 404
-		{
-			Tiempo tiempoError = new Tiempo(); tiempoError.setCity("error");
-			return tiempoError;
-		}		
-	} */
 }
 	

@@ -14,6 +14,13 @@ public class ServicioUsuarioId implements Serializable{
 	
 	public ServicioUsuarioId() {}
 	
+	/**
+	 * Constructor de la entidad ServicioUsuarioId
+	 * 
+	 * @param servicioId - servicioId define la ID del servicio que pertenece a la relación.
+	 * @param usuarioId - usuarioId define la ID del usuario que pertenece a la relación.
+	 */
+	
 	public ServicioUsuarioId(long servicioId, long usuarioId) {
 		super();
 		this.servicioId = servicioId;
@@ -35,7 +42,5 @@ public class ServicioUsuarioId implements Serializable{
 	public void setUsuarioId(int usuarioId) {
 		this.usuarioId = usuarioId;
 	}
-
-
 	
 }

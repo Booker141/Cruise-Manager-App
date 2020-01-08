@@ -75,6 +75,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    			addMenuTab("Gestionar mis reservas", MisReservasView.class);
 	    			addMenuTab("Servicios", ServiciosView.class);
 	    			addMenuTab("Ciudades", CiudadesView.class);
+	    			addMenuTab("Mi perfil", PerfilView.class);
 	    		}
 
 	    		if(SecurityUtils.hasRole("Admin")){
