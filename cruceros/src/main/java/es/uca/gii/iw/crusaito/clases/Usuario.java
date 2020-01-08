@@ -42,6 +42,22 @@ public class Usuario implements UserDetails{
 	
 	public Usuario(){}
 	
+	/**
+	 * Constructor de la entidad Usuario
+	 * 
+	 * @param firstName - firstName define el nombre real del usuario.
+	 * @param lastName - lastName define los apellidos del usuario.
+	 * @param email - email define la dirección de correo electrónico del usuario.
+	 * @param username - username define el nombre de usuario (ficticio) que usará para acceder al sistema.
+	 * @param password - password define la contraseña que usará el usuario para acceder al sistema.
+	 * @param dni - dni define el DNI del usuario.
+	 * @param phoneNumber - phoneNumbre define el número de teléfono del usuario.
+	 * @param bornDate - bornDate define la fecha de nacimiento del usuario.
+	 * @param address - address define la dirección del usuario.
+	 * @param city - city define la ciudad en la que reside el usuario.
+	 * @param role - role define el rol que tendrá el usuario en el sistema [Cliente, Admin, Gerente].
+	 */
+	
 	public Usuario(String firstName, String lastName, String email, String username, 
 			String password, String dni, int phoneNumber, LocalDate bornDate, String address,
 				String city,Rol role) {

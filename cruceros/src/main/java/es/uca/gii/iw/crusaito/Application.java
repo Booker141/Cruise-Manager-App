@@ -30,18 +30,18 @@ public class Application extends SpringBootServletInitializer {
 
     /**
      * Codigo de prueba que guarda usuarios y barcos en la BD
-     * @param rolService
-     * @param userService
-     * @param rolRepository
-     * @param ciudadService
-     * @param cruceroService
-     * @param barcoService
-     * @param servicioService
-     * @param servicioUsuarioService
-     * @param userRepo
-     * @param barcoRepo
-     * @param cruceroRepo
-     * @return
+     * @param rolService - rolService define el servicio del rol del usuario.
+     * @param userService - userService define el servicio del usuario.
+     * @param rolRepository - rolRepository define el repositorio del usuario.
+     * @param ciudadService - ciudadService define el servicio de la ciudad.
+     * @param cruceroService - cruceroService define el servicio del crucero.
+     * @param barcoService - barcoService define el servicio del barco.
+     * @param servicioService - servicioService define el servicio de los servicios disponibles.
+     * @param servicioUsuarioService - servicioUsuarioService define el servicio de los servicios reservados por el usuario.
+     * @param userRepo - userRepo define el repositorio del usuario.
+     * @param barcoRepo - barcoRepo define el repositorio del barco.
+     * @param cruceroRepo - cruceroRepo define el repositorio del crucero.
+     * @return args.
      */
     
     @Bean
@@ -65,6 +65,10 @@ public class Application extends SpringBootServletInitializer {
         	
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
+            userService.save(new Usuario("Ben", "Smith","cliente2@gmail.com","cliente2","cliente2","12345638B",
+            		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
+            userService.save(new Usuario("Harry", "Smith","cliente3@gmail.com","cliente3","cliente3","12345638B",
+            		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12348678A",
             		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
             userService.save(new Usuario("Bill", "Harrinson","gerente@gmail.com","gerente","gerente","12365678G",
@@ -748,7 +752,9 @@ public class Application extends SpringBootServletInitializer {
             noruego.setBarco(siren);
             
             
-            //USUARIO con crucero
+            /**
+             * Usuario 1 con crucero en el caribe
+             */
             
             Usuario usuarioEjemplo = userService.findByUsername("cliente");
             usuarioEjemplo.setCrucero(caribe);
@@ -760,6 +766,40 @@ public class Application extends SpringBootServletInitializer {
             ciudadService.save(sanFernando);
             ciudadService.save(chiclana);
             ciudadService.save(colon);
+            
+            /**
+             * Usuario2 con crucero en el adriatico
+             */
+            
+            Usuario usuarioEjemplo2 = userService.findByUsername("cliente2");
+            usuarioEjemplo2.setCrucero(adriatico);
+            
+            userRepo.save(usuarioEjemplo2);
+            barcoService.save(poseidon);
+            cruceroService.save(adriatico);
+            ciudadService.save(dubrovnik);
+            ciudadService.save(split);
+            ciudadService.save(venecia);
+            ciudadService.save(zadar);
+            
+            /**
+             * Usuario2 con crucero en el baltico
+             */
+            
+            Usuario usuarioEjemplo3 = userService.findByUsername("cliente3");
+            usuarioEjemplo3.setCrucero(baltico);
+            
+            userRepo.save(usuarioEjemplo3);
+            barcoService.save(neptuno);
+            cruceroService.save(baltico);
+            ciudadService.save(tallin);
+            ciudadService.save(rostock);
+            ciudadService.save(helsinki);
+            ciudadService.save(petersburgo);
+            
+            /**
+             * Definición de los servicios
+             */
             
             Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 2,5, LocalDate.now() );
             Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 2,5, LocalDate.now() );
@@ -807,7 +847,9 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(profumeria);
             servicioService.save(joyeria);
             
-            //Usuario con servicio
+            /**
+             * Usuario 1 con servicio
+             */
          
             ServicioUsuario servUsu = new ServicioUsuario();
             servUsu.setServicio(elFaro);
@@ -820,7 +862,50 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(elFaro);
             userService.save(usuarioEjemplo);
             
-            //Servicio con crucero
+            /**
+             * Usuario 2 con servicio
+             */
+         
+            ServicioUsuario servUsu2 = new ServicioUsuario();
+            servUsu2.setServicio(excursion5);
+            servUsu2.setUsuario(usuarioEjemplo2);
+            servUsu2.setParticipantes(3);
+            servUsu2.setPrecio(120);
+            
+            excursion5.getServiciosUsuarios().add(servUsu2);
+            usuarioEjemplo2.getUsuariosServicios().add(servUsu2);
+            servicioService.save(excursion5);
+            userService.save(usuarioEjemplo2);
+            
+            /**
+             * Usuario 3 con servicio
+             */
+         
+            ServicioUsuario servUsu3 = new ServicioUsuario();
+            servUsu3.setServicio(padel);
+            servUsu3.setUsuario(usuarioEjemplo3);
+            servUsu3.setParticipantes(1);
+            servUsu3.setPrecio(20);
+            
+            ServicioUsuario servUsu4 = new ServicioUsuario();
+            servUsu4.setServicio(excursion4);
+            servUsu4.setUsuario(usuarioEjemplo3);
+            servUsu4.setParticipantes(1);
+            servUsu4.setPrecio(55);
+            
+            padel.getServiciosUsuarios().add(servUsu3);
+            usuarioEjemplo3.getUsuariosServicios().add(servUsu3);
+            servicioService.save(padel);
+            userService.save(usuarioEjemplo3);
+            
+            excursion4.getServiciosUsuarios().add(servUsu4);
+            usuarioEjemplo3.getUsuariosServicios().add(servUsu4);
+            servicioService.save(excursion4);
+            userService.save(usuarioEjemplo3);
+            
+            /**
+             * Servicio con crucero
+             */
             
             caribe.addServicio(excursion1);
             servicioService.save(excursion1);

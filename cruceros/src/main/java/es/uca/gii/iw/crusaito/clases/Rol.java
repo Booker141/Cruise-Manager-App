@@ -20,6 +20,12 @@ public class Rol {
 	
 	public Rol() {}
 	
+	/**
+	 * Constructor de la entidad Rol
+	 * 
+	 * @param name - name define el nombre del rol [Cliente, Admin, Gerente]
+	 */
+	
 	public Rol(String name) {
 		this.name=name;
 	}

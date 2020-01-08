@@ -34,11 +34,24 @@ public class Ciudad {
 	
 	public Ciudad() {}
 	
+	/**
+	 * Constructor de la entidad Ciudad
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad.
+	 */
+	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
 		//this.cruceros = new HashSet<Crucero>();
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
 	}
+	
+	/**
+	 * Constructor de la entidad Ciudad
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad.
+	 * @param cDescripcion - cDescripcion define una breve descripción de la historia y ubicación de la ciudad.
+	 */
 	
 	public Ciudad(String cNombre, String cDescripcion) {
 		this.cNombre = cNombre;
@@ -47,7 +60,14 @@ public class Ciudad {
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
 	}
 	
-	public Ciudad(String cNombre, Set<Crucero> cCruceros) {
+	/**
+	 * Constructor de la entidad Ciudad
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad.
+	 * @param cCiudadCruceros - cCiudadCruceros define el conjunto de cruceros que pasarán por los puertos de la ciudad.
+	 */
+	
+	public Ciudad(String cNombre, Set<CiudadCrucero> cCiudadCrucero) {
 		this.cNombre = cNombre;
 		//this.cruceros = cCruceros;
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
@@ -68,25 +88,6 @@ public class Ciudad {
 	public void setcNombre(String cNombre) {
 		this.cNombre = cNombre;
 	}
-
-	
-	/*public Set<Crucero> getCruceros() {
-		return cruceros;
-	}
-
-	public void setCruceros(Set<Crucero> cruceros) {
-		this.cruceros = cruceros;
-	}*/
-	
-	/*public void addCruceros(Crucero crucero) {
-		this.cruceros.add(crucero);
-		crucero.getCiudades().add(this);
-	}
-	
-	public void removeCrucero(Crucero crucero) {
-		this.cruceros.remove(crucero);
-		crucero.getCiudades().remove(this);
-	}*/
 
 	public String getcDescripcion() {
 		return cDescripcion;
