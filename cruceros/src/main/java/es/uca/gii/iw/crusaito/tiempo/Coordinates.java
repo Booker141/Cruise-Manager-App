@@ -1,6 +1,15 @@
 package es.uca.gii.iw.crusaito.tiempo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Coordinates {
+	
+	@Id
+	@GeneratedValue
+	private long id;
 	
 	private int lon, lat;
 

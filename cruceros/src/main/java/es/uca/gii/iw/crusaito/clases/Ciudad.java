@@ -5,14 +5,14 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 public class Ciudad {
 
@@ -20,6 +20,8 @@ public class Ciudad {
 	@GeneratedValue
 	private long id;
 	private String cNombre;
+	@Size(max = 10000)
+	private String cDescripcion;
 	/*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "ciudad_crucero",
     	joinColumns = {@JoinColumn(name = "ciudad_id", referencedColumnName = "id")},
@@ -34,6 +36,13 @@ public class Ciudad {
 	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
+		//this.cruceros = new HashSet<Crucero>();
+		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
+	}
+	
+	public Ciudad(String cNombre, String cDescripcion) {
+		this.cNombre = cNombre;
+		this.cDescripcion = cDescripcion;
 		//this.cruceros = new HashSet<Crucero>();
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
 	}
@@ -60,6 +69,7 @@ public class Ciudad {
 		this.cNombre = cNombre;
 	}
 
+	
 	/*public Set<Crucero> getCruceros() {
 		return cruceros;
 	}
@@ -77,6 +87,14 @@ public class Ciudad {
 		this.cruceros.remove(crucero);
 		crucero.getCiudades().remove(this);
 	}*/
+
+	public String getcDescripcion() {
+		return cDescripcion;
+	}
+
+	public void setcDescripcion(String cDescripcion) {
+		this.cDescripcion = cDescripcion;
+	}
 
 	@Override
 	public String toString() {

@@ -16,7 +16,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<vaadin.version>14.1.3</vaadin.version>
-
+		<start-class>es.uca.gii.iw.crusaito.Application</start-class>
 		<drivers.dir>${project.basedir}/drivers</drivers.dir>
 		<drivers.downloader.phase>pre-integration-test</drivers.downloader.phase>
 	</properties>

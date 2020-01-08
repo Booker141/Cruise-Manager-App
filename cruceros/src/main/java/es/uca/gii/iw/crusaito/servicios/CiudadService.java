@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.uca.gii.iw.crusaito.clases.Ciudad;
-import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.repositorios.CiudadRepository;
 
 @Service

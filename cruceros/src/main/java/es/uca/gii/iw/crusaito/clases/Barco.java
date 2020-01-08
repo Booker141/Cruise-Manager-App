@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Barco 
 {	
-	@Id//
+	@Id
 	@GeneratedValue
 	private long id;
 	private String bNombre;
