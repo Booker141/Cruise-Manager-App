@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 import es.uca.gii.iw.crusaito.clases.Ciudad;
 import es.uca.gii.iw.crusaito.clases.CiudadCrucero;
 import es.uca.gii.iw.crusaito.clases.Crucero;
-import es.uca.gii.iw.crusaito.clases.Servicio;
-import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
-import es.uca.gii.iw.crusaito.clases.Usuario;
 
 @Repository
 public interface CiudadCruceroRepository extends JpaRepository<CiudadCrucero,Long>{

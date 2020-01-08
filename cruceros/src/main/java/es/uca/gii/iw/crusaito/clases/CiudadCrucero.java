@@ -1,9 +1,6 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
