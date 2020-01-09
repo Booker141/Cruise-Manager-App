@@ -63,14 +63,17 @@ public class CiudadesView extends VerticalLayout{
     //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
     
 	@Autowired
-    public CiudadesView(CiudadService ciudadService, UsuarioService usuarioService, CruceroService cruceroService, CiudadCruceroService ciudadCruceroService, ServicioService servicioService, Weather w) 
+    public CiudadesView(CiudadService ciudadService, UsuarioService usuarioService, 
+    		CruceroService cruceroService, CiudadCruceroService ciudadCruceroService, 
+    		ServicioService servicioService, Weather w) 
 	{
 		this.ciudadService = ciudadService;
 		this.ciudadCruceroService = ciudadCruceroService;
 		this.cruceroService = cruceroService;
 		this.usuarioService = usuarioService;
+		this.servicioService = servicioService;
 
-		ciudadList = this.ciudadCruceroService.findByCrucero(this.cruceroService.findBycNombre(SecurityUtils.currentUsername()));;
+		ciudadList = this.ciudadCruceroService.findByCrucero(this.cruceroService.findByUsuarios(this.usuarioService.findByUsername(SecurityUtils.currentUsername())));
 		grid.setItems(ciudadList);
 
 		grid.setColumns("ciudad","crucero", "fechaLlegada", "horaLlegada", "fechaSalida", "horaSalida");
