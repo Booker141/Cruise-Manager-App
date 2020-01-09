@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Barco 
 {	
-	@Id//
+	@Id
 	@GeneratedValue
 	private long id;
 	private String bNombre;
@@ -27,7 +27,19 @@ public class Barco
 
 	public Barco() {}
 	
-	//Añadir Lista de camarotes al constructor
+	/**
+	 * Contructor de la entidad barco
+	 * 
+	 * @param bNombre - bNombre define el nombre del barco.
+	 * @param bImagen - bImagen define una imagen del barco.
+	 * @param bAforoPasajeros - bAforoPasajeros define el aforo disponible de pasajeros que posee el barco.
+	 * @param bAforoTripulantes - bAforoTripulantes define el aforo disponibles para los tripulantes del barco.
+	 * @param bPeso - bPeso define el peso que posee el barco.
+	 * @param bFchPuestaServicio - bFchaPuestaServicio define la fecha en la que el barco empezó a estar disponible.
+	 * @param bDescripcion - bDescripcion define una descripcion de las caracteristicas e historia del barco.
+	 * @param bPlano - bPlano define una imagen de los planos de las instalaciones del barco.
+	 */
+	
 	public Barco(String bNombre, String bImagen, int bAforoPasajeros, int bAforoTripulantes,
 			int bPeso, LocalDate bFchPuestaServicio, String bDescripcion, String bPlano) {
 

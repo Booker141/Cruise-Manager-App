@@ -8,11 +8,7 @@ import org.springframework.stereotype.Service;
 import es.uca.gii.iw.crusaito.clases.Ciudad;
 import es.uca.gii.iw.crusaito.clases.CiudadCrucero;
 import es.uca.gii.iw.crusaito.clases.Crucero;
-import es.uca.gii.iw.crusaito.clases.Servicio;
-import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
-import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.repositorios.CiudadCruceroRepository;
-import es.uca.gii.iw.crusaito.repositorios.ServicioUsuarioRepository;
 
 @Service
 public class CiudadCruceroService {
@@ -32,6 +28,12 @@ public class CiudadCruceroService {
 		this.repo.delete(ciudadCrucero);
 	}
 	
+	/**
+	 * Método que carga todas las ciudades asociadas a un crucero
+	 * 
+	 * @return
+	 */
+	
 	public List<CiudadCrucero> load(){
 		return this.repo.findAll();
 	}
@@ -43,6 +45,11 @@ public class CiudadCruceroService {
 	public List<CiudadCrucero> findByCiudad(Ciudad ciudad){
 		return this.repo.findByCiudad(ciudad);
 	}
+	
+	public List<CiudadCrucero> findByCrucero(Crucero crucero){
+		return this.repo.findByCrucero(crucero);
+	}
+	
 	
 	public List<CiudadCrucero> findByServicio(Crucero crucero){
 		return this.repo.findByCrucero(crucero);

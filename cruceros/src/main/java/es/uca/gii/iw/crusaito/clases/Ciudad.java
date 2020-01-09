@@ -5,14 +5,14 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 public class Ciudad {
 
@@ -20,6 +20,8 @@ public class Ciudad {
 	@GeneratedValue
 	private long id;
 	private String cNombre;
+	@Size(max = 10000)
+	private String cDescripcion;
 	/*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "ciudad_crucero",
     	joinColumns = {@JoinColumn(name = "ciudad_id", referencedColumnName = "id")},
@@ -32,13 +34,40 @@ public class Ciudad {
 	
 	public Ciudad() {}
 	
+	/**
+	 * Constructor de la entidad Ciudad
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad.
+	 */
+	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
 		//this.cruceros = new HashSet<Crucero>();
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
 	}
 	
-	public Ciudad(String cNombre, Set<Crucero> cCruceros) {
+	/**
+	 * Constructor de la entidad Ciudad
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad.
+	 * @param cDescripcion - cDescripcion define una breve descripción de la historia y ubicación de la ciudad.
+	 */
+	
+	public Ciudad(String cNombre, String cDescripcion) {
+		this.cNombre = cNombre;
+		this.cDescripcion = cDescripcion;
+		//this.cruceros = new HashSet<Crucero>();
+		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
+	}
+	
+	/**
+	 * Constructor de la entidad Ciudad
+	 * 
+	 * @param cNombre - cNombre define el nombre de la ciudad.
+	 * @param cCiudadCruceros - cCiudadCruceros define el conjunto de cruceros que pasarán por los puertos de la ciudad.
+	 */
+	
+	public Ciudad(String cNombre, Set<CiudadCrucero> cCiudadCrucero) {
 		this.cNombre = cNombre;
 		//this.cruceros = cCruceros;
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
@@ -60,23 +89,13 @@ public class Ciudad {
 		this.cNombre = cNombre;
 	}
 
-	/*public Set<Crucero> getCruceros() {
-		return cruceros;
+	public String getcDescripcion() {
+		return cDescripcion;
 	}
 
-	public void setCruceros(Set<Crucero> cruceros) {
-		this.cruceros = cruceros;
-	}*/
-	
-	/*public void addCruceros(Crucero crucero) {
-		this.cruceros.add(crucero);
-		crucero.getCiudades().add(this);
+	public void setcDescripcion(String cDescripcion) {
+		this.cDescripcion = cDescripcion;
 	}
-	
-	public void removeCrucero(Crucero crucero) {
-		this.cruceros.remove(crucero);
-		crucero.getCiudades().remove(this);
-	}*/
 
 	@Override
 	public String toString() {

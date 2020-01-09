@@ -14,6 +14,13 @@ public class CiudadCruceroId implements Serializable{
 		
 	public CiudadCruceroId() {}
 		
+	/**
+	 * Constructor de la entidad CiudadCruceroId
+	 * 
+	 * @param ciudadId - ciudadId define el ID de la ciudad que pertenece a la relación.
+	 * @param cruceroId - cruceroId define el ID del crucero que pertenece a la relación.
+	 */
+	
 	public CiudadCruceroId(long ciudadId, long cruceroId) {
 		super();
 		this.ciudadId = ciudadId;

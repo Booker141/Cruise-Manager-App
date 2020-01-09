@@ -22,9 +22,22 @@ public class rolService {
 		return repo.save(role);
 	}
 	
+	/**
+	 * Método para buscar un rol a través de su nombre
+	 * 
+	 * @param name - name define el nombre del rol.
+	 * @return el rol cuyo nombre haya sido pasado por parámetro.
+	 */
+	
 	public Rol findByName(String name) {
 		return repo.findByName(name);
 	}
+	
+	/**
+	 * Método para buscar todos los roles
+	 * 
+	 * @return todos los roles en forma de lista.
+	 */
 	
 	public List<Rol> findAll(){
 		return repo.findAll();

@@ -32,13 +32,27 @@ public class ServicioUsuarioService {
 		return this.repo.findAll();
 	}
 	
+	/**
+	 * Método para buscar todos los servicios de un usuario
+	 * 
+	 * @return todos los servicios de un usuario en forma de lista.
+	 */
+	
 	public List<ServicioUsuario> load(){
 		return this.repo.findAll();
 	}
 	
+	/**
+	 * Método para buscar los servicios reservados por un usuario
+	 * 
+	 * @param usuario - usuario define el usuario que ha reservado dichos servicios.
+	 * @return todos los servicios reservados por dicho usuario en forma de lista.
+	 */
+	
 	public List<ServicioUsuario> findByUsuario(Usuario usuario){
 		return this.repo.findByUsuario(usuario);
 	}
+	
 	public List<ServicioUsuario> findByServicio(Servicio servicio){
 		return this.repo.findByServicio(servicio);
 	}
