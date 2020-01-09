@@ -35,9 +35,7 @@ public class CiudadesView extends VerticalLayout{
     private CiudadCruceroService ciudadCruceroService;
     private ServicioService servicioService;
     private Weather weather;
-    
-    final static private String token = "83829333432ed41a10b897e79ed488a7";
-
+   
 	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
     //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	

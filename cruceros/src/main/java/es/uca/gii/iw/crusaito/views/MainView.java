@@ -46,12 +46,19 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	public MainView(@Autowired MessageBean bean) {
 		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		//Añade logo de la pagina
+		/**
+		 * Añade logo a la página
+		 */
+		
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 	    logo.setHeight("44px");
 	    
 	    if(SecurityUtils.isUserLoggedIn()) {
-	    	//Boton para cerrar sesion
+	    	
+	    	/**
+	    	 * Botón para cerrar sesión
+	    	 */
+	    	
 	    	Button volver = new Button("Cerrar Sesión");
 	    	volver.getStyle().set("margin-right", "0");
 	    	volver.addClickListener(cerrar -> {
@@ -79,6 +86,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    		}
 
 	    		if(SecurityUtils.hasRole("Admin")){
+	    			addMenuTab("Inicio", DefaultView.class);
 	    			addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
 	    			addMenuTab("Gestionar ciudades", AdminListaCiudadesView.class);
 	    			addMenuTab("Gestionar ciudad y crucero", AdminListaCiudadCruceroView.class);
@@ -88,6 +96,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    		}
 			
 	    		if(SecurityUtils.hasRole("Gerente")) {
+	    			addMenuTab("Inicio", DefaultView.class);
 	    			addMenuTab("Estadisticas", EstadisticasView.class);
 	    		}
 	    		/*
@@ -114,8 +123,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    	VerticalLayout Bienvenida = new VerticalLayout(mensaje);
 
 	    	setContent(Bienvenida);
-	    	//Footer footer = new Footer();	//no funciona en el mainview
-	    	//add(footer);
 		
 	    } 
 

@@ -170,7 +170,10 @@ public class ServiciosView extends VerticalLayout{
 		
 		filterRow = grid.appendHeaderRow();
 		
-		//Primer filtro
+		/**
+		 * Primer filtro
+		 */
+		
 		sNombreField = new TextField();
 		sNombreField.addValueChangeListener(event -> dataProvider.addFilter(
 		        servicio -> StringUtils.containsIgnoreCase(servicio.getsNombre(),
@@ -182,7 +185,10 @@ public class ServiciosView extends VerticalLayout{
 		sNombreField.setSizeFull();
 		sNombreField.setPlaceholder("Filtrar");
 		
-		//Segundo filtro
+		/**
+		 * Segundo filtro
+		 */
+		
 		sTipoComboBox = new ComboBox<>("Filtrar por tipo: ");
 		sTipoComboBox.setItems(ServicioTipo.values());
 		
