@@ -1,6 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +34,10 @@ public class CiudadesView extends VerticalLayout{
     private CruceroService cruceroService;
     private CiudadCruceroService ciudadCruceroService;
     private ServicioService servicioService;
-    private Weather w;
+    private Weather weather;
     
+    final static private String token = "83829333432ed41a10b897e79ed488a7";
+
 	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
     //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
@@ -65,7 +66,7 @@ public class CiudadesView extends VerticalLayout{
 	@Autowired
     public CiudadesView(CiudadService ciudadService, UsuarioService usuarioService, 
     		CruceroService cruceroService, CiudadCruceroService ciudadCruceroService, 
-    		ServicioService servicioService, Weather w) 
+    		ServicioService servicioService, Weather w) throws Exception
 	{
 		this.ciudadService = ciudadService;
 		this.ciudadCruceroService = ciudadCruceroService;
@@ -100,6 +101,7 @@ public class CiudadesView extends VerticalLayout{
 		cTiempoDiv.setTitle("Tiempo");
 		
 		
+		
 		notificacion.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
 
 		volver.addClickListener(e -> notificacion.close());
@@ -119,25 +121,33 @@ public class CiudadesView extends VerticalLayout{
 			cFechaSalidaDiv.setText("Fecha salida: " + event.getItem().getFechaSalida());
 			cHoraSalidaDiv.setText("Hora salida: " + event.getItem().getHoraSalida());
 			cDescripcionDiv.setText("Descripcion: " + event.getItem().getCiudad().getcDescripcion());
-			cConsejosDiv.setText("Consejos: " + "\n" + "1.- Antes de bajar del barco en las escalas de cruceros, intenta tener toda la información sobre la ciudad, lugares que deseas ver o actividades que quieras realizar. "
+			cConsejosDiv.setText("Consejos: "
+					+ "1.- Antes de bajar del barco en las escalas de cruceros, intenta tener toda la información sobre la ciudad, lugares que deseas ver o actividades que quieras realizar. "
 					+ "El propio barco te facilitará un pequeño mapa de localización del barco en el puerto y las zonas mas representativas de "
-					+ "la ciudad pero a veces tiene una información muy limitada o solo relacionada con compras." + "\n" + "2.- No intentes apurar hasta el último minuto para regresar. Calcula un tiempo de "
+					+ "la ciudad pero a veces tiene una información muy limitada o solo relacionada con compras."
+					+ "2.- No intentes apurar hasta el último minuto para regresar. Calcula un tiempo de "
 							+ "seguridad para regresar antes de la hora de salida para el caso que surja alguna "
-							+ "complicación no prevista." + "\n" + "3.- En la mayoría de las escalas de cruceros podrás encontrar oficinas de turismo locales habilitadas en lugares especiales para informar a los "
+							+ "complicación no prevista. "
+							+ "3.- En la mayoría de las escalas de cruceros podrás encontrar oficinas de turismo locales habilitadas en lugares especiales para informar a los "
 									+ "pasajeros que llegan en los diferentes barcos. Es un buen lugar donde recopilar información, mapas turísticos gratuitos, "
 									+ "y preguntar sobre cómo llegar y volver al centro. "
 									+ "Además suelen tener algunas ofertas de transporte turístico "
 									+ "disponible en la ciudad (shuttles gratuitos, pases de 24 horas, "
-									+ "autobuses panorámicos, tranvías..)." + "\n" + "4.- Como normal general de seguridad es mejor no llamar "
+									+ "autobuses panorámicos, tranvías..)."
+									+ "4.- Como normal general de seguridad es mejor no llamar "
 											+ "la atención mostrando joyas o relojes caros, ni bolsas que sean fácilmente sustraibles. "
 											+ "Los cruceros suelen llegar a puertos muy turísticos por lo general. En estos lugares es probable que haya carteristas o quienes "
-											+ "aprovechan los grupos de turistas para robar de las mochilas y bolsos." + "\n" + "5.- Antes de contratar un taxi o tour "
+											+ "aprovechan los grupos de turistas para robar de las mochilas y bolsos."
+											+ "5.- Antes de contratar un taxi o tour "
 													+ "independiente comprueba las credenciales del conductor y la empresa de tours" + "\n" + "6.- Aunque en la mayoría de puertos de cruceros y lugares turísticos "
 															+ "aceptan tarjetas de crédito es recomendable llevar un poco "
 															+ "de dinero local en efectivo para las pequeñas compras o propinas. "
 															+ "Si quieres encender una vela en una catedral o tomar algo en mercados"
 															+ " no podrás con la tarjeta por ejemplo");
-			//cExcursionesDiv.setText("Excursiones: " + String.valueOf(event.getItem().getServicio().getsTipo()));
+			/*while(String.valueOf(event.getItem().getCrucero().getServicios()) == ServicioTipo.Excursion) {
+				String excursion = String.valueOf(event.getItem().getCrucero().getServicios());
+			}
+			cExcursionesDiv.setText("Excursiones: " + String.valueOf(event.getItem().getServicio().getsTipo()));*/
 			cTiempoDiv.setText("Tiempo: ");
 			try {
 				w.requestWeather(event.getItem().getCiudad());
@@ -149,39 +159,8 @@ public class CiudadesView extends VerticalLayout{
 			
 			ventana.open();
 		            
-			
 		});
 		
-		//ventanaSeguro.setAlignItems(Alignment.CENTER);
-		/*
-		seguro.addClickListener(event ->{
-		    reserva.setEstado(ReservaEstado.Cancelada);
-		    ReservaService.save(reserva);
-		    ventana.close();
-		    Funciones.notificacionAcierto("Reserva cancelada con éxito");
-		    grid.setItems(ReservaService.listByUsuario(UsuarioService.findByUsername(SecurityUtils.currentUsername())));
-		    });
-		*/
-		/*
-	    grid.addColumn(new NativeButtonRenderer<>("Cancelar", clickedItem -> {
-	    	grid.asSingleSelect().clear();
-	    	LocalDate now = LocalDate.now();
-	    	
-	    	if(clickedItem.getEstado() == ReservaEstado.Cancelada)
-	    		Funciones.notificacionAcierto("Esta reserva ya ha sido cancelada con anterioridad");
-	    	else{
-	    		
-	    	if(clickedItem.getFechaInicio().isBefore(now.minusDays(1)))
-	    		Funciones.notificacionError("Lo sentimos, no puede cancelar la reserva debido a que es demasiado tarde");
-	    	else
-	    	{
-	    		reserva = clickedItem;
-	    		clickedItem.setEstado(ReservaEstado.Cancelada);
-	    	}
-	        ventana.open();
-	    	}
-	      }));
-	*/
 	    add(grid);
 	}
 	
