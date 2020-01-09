@@ -97,15 +97,11 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 				});
 				navigationTargetToTab.put(LogoutView.class,tab);
 				tabs.add(tab);*/
-	    		//addMenuTab("Cerrar sesión", LogoutView.class);
-	    		addMenuTab("Registrar", RegisterView.class);
-			
+	    		//addMenuTab("Cerrar sesión", LogoutView.class);			
 	    	} 
 	    	else {
 	    		addMenuTab("Inicio", DefaultView.class);
-	    		addMenuTab("Iniciar sesión", LoginView.class);
-	    		addMenuTab("Registrar", RegisterView.class);
-			
+	    		addMenuTab("Iniciar sesión", LoginView.class);			
 	    	}
 		
 	    	tabs.setOrientation(Tabs.Orientation.VERTICAL);
@@ -138,9 +134,9 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	public Button changeTheme() {
 
 		Button toggleButton = new Button("Cambiar Tema", click -> {
-			ThemeList themeList = UI.getCurrent().getElement().getThemeList(); //
+			ThemeList themeList = UI.getCurrent().getElement().getThemeList();
 
-			if (themeList.contains(Lumo.DARK)) { //
+			if (themeList.contains(Lumo.DARK)) { 
 				themeList.remove(Lumo.DARK);
 			} else {
 				themeList.add(Lumo.DARK);
