@@ -1,6 +1,5 @@
 package es.uca.gii.iw.crusaito.clases;
 
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -19,7 +18,8 @@ public class ServicioUsuario {
 	private Usuario usuario;
 	
 	private int participantes;
-
+	private double precio;
+	
 	public int getParticipantes() {
 		return participantes;
 	}
@@ -42,6 +42,14 @@ public class ServicioUsuario {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 }

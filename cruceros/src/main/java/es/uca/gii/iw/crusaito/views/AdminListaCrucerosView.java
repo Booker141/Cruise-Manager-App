@@ -52,7 +52,6 @@ public class AdminListaCrucerosView extends VerticalLayout{
 		crud.getGrid().getColumnByKey("cImagen").setHeader("Imagen");
 		
 		crud.getGrid().addColumn(Crucero::getBarco).setHeader("Barco");
-		crud.getGrid().addColumn(Crucero::getCiudades).setHeader("Ciudades");
 		crud.getGrid().addColumn(Crucero::getServicios).setHeader("Servicios");
 		
 		DefaultCrudFormFactory<Crucero> formFactory = new DefaultCrudFormFactory<>(Crucero.class);
@@ -63,23 +62,14 @@ public class AdminListaCrucerosView extends VerticalLayout{
 			
 			List<Barco> barcoList = this.barcoService.findByCruceroIsNull();
 			ItemFilter<Barco> filter = (barco, filterString) -> barco.getbNombre().startsWith(filterString);
-		    //ComboBox<Barco> combobox = new ComboBox<>("Barco", this.barcoService.load());
 		    ComboBox<Barco> combobox = new ComboBox<>();
 		    combobox.setItems(filter,barcoList);
-			//combobox.setAllowCustomValue(false);
 		    combobox.setItemLabelGenerator(Barco::getbNombre);
 		    combobox.setClearButtonVisible(true);
-		    /*combobox.addValueChangeListener(valor -> {
-		    	if(valor.getValue().getCrucero()!=null) {
-		    		Funciones.notificacionError("Barco asignado a otro crucero");
-		    		combobox.setValue(null);
-		    	}
-		    });*/
+		    
 		    return combobox;
 		});
-		
-		//CheckBoxGroupProvider<Servicio> checkboxes = new CheckBoxGroupProvider<>("servicios", this.servicioService.load(), Servicio::getsNombre);
-		
+				
 		formFactory.setFieldProvider("servicios", ()->{
 			MultiselectComboBox<Servicio> multibox = new MultiselectComboBox<>();
 			
@@ -88,9 +78,6 @@ public class AdminListaCrucerosView extends VerticalLayout{
 			multibox.setItemLabelGenerator(Servicio::getsNombre);
 			return multibox;
 		}); 
-		
-		//formFactory.setFieldProvider(CrudOperation.ADD,"servicios", checkboxes);
-		//formFactory.setFieldProvider(CrudOperation.UPDATE,"servicios", checkboxes);
 		
 		crud.setCrudFormFactory(formFactory);
 		
