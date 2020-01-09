@@ -1,6 +1,6 @@
 package es.uca.gii.iw.crusaito.views;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +15,32 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
+import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
 @SuppressWarnings("serial")
 @Route(value = "MisReservas",layout = MainView.class)
 @Secured("Cliente")
-public class MisReservasView extends PrincipalView{
+public class MisReservasView extends VerticalLayout{
 	
 	private ServicioService servicioService;
     private UsuarioService usuarioService;
+    private ServicioUsuarioService servicioUsuarioService;
     
-	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    private List<Servicio> serviceList;
+	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
+    //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
+    private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
+    private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
+    
     private  Dialog ventana = new Dialog();
 
     private Div sNombreDiv = new Div();
@@ -49,24 +56,27 @@ public class MisReservasView extends PrincipalView{
     //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
     
 	@Autowired
-    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService) 
+    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, ServicioUsuarioService servicioUsuarioService) 
 	{
 		this.servicioService = servicioService;
+		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
-		
-		serviceList = this.servicioService.findByUsername(SecurityUtils.currentUsername());
-		
+
+		//Lista de servicios a partir de servUser
+		/*List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
+			servUser.forEach(serviUsuar -> {
+			serviceList.add(serviUsuar.getServicio());
+		});*/
+		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		grid.setItems(serviceList);
 
-		grid.setColumns("sNombre","sDescripcion","sPrecio");
-		grid.getColumnByKey("sNombre").setHeader("Nombre");
-		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
-		grid.getColumnByKey("sPrecio").setHeader("Precio");
-	
+		grid.setColumns("servicio","participantes","precio");
+		grid.getColumnByKey("servicio").setHeader("Nombre");
+		grid.getColumnByKey("participantes").setHeader("Participantes");
+		grid.getColumnByKey("precio").setHeader("Precio");
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
-
+		
 		grid.setSizeFull();
-		//grid.setColumnReorderingAllowed(true);
 		this.setSizeFull();
 		
 		sNombreDiv.setTitle("Nombre");
@@ -92,17 +102,18 @@ public class MisReservasView extends PrincipalView{
 		ventana.add(sNombreDiv,sTipoDiv,sImagenImage,deleteButton);
 		
 		grid.addItemClickListener(event -> {
-			sNombreDiv.setText("Nombre: " + event.getItem().getsNombre());
-			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
-			sImagenImage.setSrc(event.getItem().getsImagen());
+			
+			sNombreDiv.setText("Nombre: " + event.getItem().getServicio().getsNombre());
+			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
+			sImagenImage.setSrc(event.getItem().getServicio().getsImagen());
 			
 			ventana.open();
 		            
 			confirmButton.addClickListener(e -> {
-				Servicio servicio = event.getItem();
+				Servicio servicio = event.getItem().getServicio();
 				Usuario user = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
 				this.servicioService.removeServicioFromUsuario(servicio, user);
-				serviceList.remove(servicio);
+				serviceList.remove(event.getItem());
 				grid.setItems(serviceList);
 				
 				notificacion.close();

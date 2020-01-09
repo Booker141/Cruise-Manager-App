@@ -9,11 +9,12 @@ import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @Route(value = "Index",layout = MainView.class)
-public class DefaultView extends Div{
+public class DefaultView extends VerticalLayout{
 
 	public DefaultView() {
+		
 		H1 titulo1 = new H1("Oferta del día"); // Titulo
-		// como cambiamos el color al H1 ?????
+
 		titulo1.getStyle().set("margin-left", "30%"); // Titulo de la seccion izquierda
 
 		Image fotoPrueba1 = new Image("frontend/img/crucero1.jpg", "fotoOferta1"); // Foto de cada barco, se														// debe extraer de la BD más

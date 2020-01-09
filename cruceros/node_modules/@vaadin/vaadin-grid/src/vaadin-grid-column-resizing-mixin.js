@@ -71,6 +71,9 @@ export const ColumnResizingMixin = superClass => class ColumnResizingMixin exten
 
       if (e.detail.state === 'end') {
         this._toggleAttribute('column-resizing', false, this.$.scroller);
+        this.dispatchEvent(new CustomEvent('column-resize', {
+          detail: {resizedColumn: column}
+        }));
       }
 
       // Notify resize
@@ -78,4 +81,11 @@ export const ColumnResizingMixin = superClass => class ColumnResizingMixin exten
     }
   }
 
+  /**
+  * Fired when a column in the grid is resized by the user.
+  *
+  * @event column-resize
+  * @param {Object} detail
+  * @param {Object} detail.resizedColumn the column that was resized
+  */
 };

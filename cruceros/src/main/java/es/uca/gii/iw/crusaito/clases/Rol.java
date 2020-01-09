@@ -1,6 +1,6 @@
 package es.uca.gii.iw.crusaito.clases;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,9 +16,15 @@ public class Rol {
 	private long id;
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	private List<Usuario> idUsuarios;
+	private Set<Usuario> idUsuarios;
 	
 	public Rol() {}
+	
+	/**
+	 * Constructor de la entidad Rol
+	 * 
+	 * @param name - name define el nombre del rol [Cliente, Admin, Gerente]
+	 */
 	
 	public Rol(String name) {
 		this.name=name;

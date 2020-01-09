@@ -326,7 +326,7 @@ class GridElement extends
   }
 
   static get version() {
-    return '5.4.11';
+    return '5.5.0';
   }
 
   static get observers() {
@@ -352,7 +352,8 @@ class GridElement extends
 
       _ios: {
         type: Boolean,
-        value: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+        value: (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+          || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       },
 
       _edge: {

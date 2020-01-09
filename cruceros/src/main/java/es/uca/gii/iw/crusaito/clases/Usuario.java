@@ -1,16 +1,9 @@
 package es.uca.gii.iw.crusaito.clases;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,16 +26,37 @@ public class Usuario implements UserDetails{
 	private LocalDate bornDate;
 	private String address;
 	private String city;
+	
 	@ManyToOne
 	private Rol role;
-	@ManyToMany(mappedBy = "usuarios")
-	private List<Servicio> servicios;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Set<ServicioUsuario> usuariosServicios;
+	
 	@ManyToOne
 	private Crucero crucero;
+	
 	private boolean enabled;
+	//Comprueba si la contraseña ya ha sido codificada la primera vez
 	private boolean pEncoded;
 	
 	public Usuario(){}
+	
+	/**
+	 * Constructor de la entidad Usuario
+	 * 
+	 * @param firstName - firstName define el nombre real del usuario.
+	 * @param lastName - lastName define los apellidos del usuario.
+	 * @param email - email define la dirección de correo electrónico del usuario.
+	 * @param username - username define el nombre de usuario (ficticio) que usará para acceder al sistema.
+	 * @param password - password define la contraseña que usará el usuario para acceder al sistema.
+	 * @param dni - dni define el DNI del usuario.
+	 * @param phoneNumber - phoneNumbre define el número de teléfono del usuario.
+	 * @param bornDate - bornDate define la fecha de nacimiento del usuario.
+	 * @param address - address define la dirección del usuario.
+	 * @param city - city define la ciudad en la que reside el usuario.
+	 * @param role - role define el rol que tendrá el usuario en el sistema [Cliente, Admin, Gerente].
+	 */
 	
 	public Usuario(String firstName, String lastName, String email, String username, 
 			String password, String dni, int phoneNumber, LocalDate bornDate, String address,
@@ -59,7 +73,8 @@ public class Usuario implements UserDetails{
 		this.password = password;
 		this.role=role;
 		this.pEncoded = false;
-		this.servicios = new ArrayList<>();
+		this.usuariosServicios = new HashSet<ServicioUsuario>();
+		//this.servicios = new HashSet<Servicio>();
 	}
 
 	public String getFirstName() {
@@ -179,28 +194,6 @@ public class Usuario implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
 
 	@Override
 	public boolean isEnabled() {
@@ -217,15 +210,15 @@ public class Usuario implements UserDetails{
 
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
-	}*/
+	}
 
-	public List<Servicio> getServicios() {
+	public Set<Servicio> getServicios() {
 		return servicios;
 	}
 
-	public void setServicios(List<Servicio> servicios) {
+	public void setServicios(Set<Servicio> servicios) {
 		this.servicios = servicios;
-	}
+	}*/
 	
 	public long getId() {
 		return id;
@@ -248,13 +241,25 @@ public class Usuario implements UserDetails{
 	}
 
 	public void setCrucero(Crucero crucero) {
-		this.crucero = crucero;
-		crucero.getUsuarios().add(this);
+		if(crucero==null) {
+			this.crucero = null;
+		}else {
+			this.crucero = crucero;
+			crucero.getUsuarios().add(this);
+		}
 	}
-	
-	public void unsetCrucero(Crucero crucero) {
-		this.crucero = null;
-		crucero.getUsuarios().remove(this);
+
+	@Override
+	public String toString() {
+		return lastName;
+	}
+
+	public Set<ServicioUsuario> getUsuariosServicios() {
+		return usuariosServicios;
+	}
+
+	public void setUsuariosServicios(Set<ServicioUsuario> usuariosServicios) {
+		this.usuariosServicios = usuariosServicios;
 	}
 	
 	/*

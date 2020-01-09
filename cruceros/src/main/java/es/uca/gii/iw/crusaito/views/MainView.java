@@ -13,9 +13,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -48,73 +46,86 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	public MainView(@Autowired MessageBean bean) {
 		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
 		
-		//Añade logo de la pagina
+		/**
+		 * Añade logo a la página
+		 */
+		
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 	    logo.setHeight("44px");
 	    
-	    //Boton para cerrar sesion
-	    Button volver = new Button("Cerrar Sesión");
-	    volver.getStyle().set("margin-right", "0");
-	    volver.addClickListener(cerrar -> {
-	    	SecurityContextHolder.clearContext();
-			getUI().get().getSession().close();
-			getUI().get().getPage().reload();
-	    });
+	    if(SecurityUtils.isUserLoggedIn()) {
+	    	
+	    	/**
+	    	 * Botón para cerrar sesión
+	    	 */
+	    	
+	    	Button volver = new Button("Cerrar Sesión");
+	    	volver.getStyle().set("margin-right", "0");
+	    	volver.addClickListener(cerrar -> {
+	    		SecurityContextHolder.clearContext();
+	    		getUI().get().getSession().close();
+	    		getUI().get().getPage().reload();
+	    	});
+	    	addToNavbar(new DrawerToggle(), logo, volver);
+	    }else {
+	    	
+	    	addToNavbar(new DrawerToggle(), logo);
+	    }
 	    
-	    addToNavbar(new DrawerToggle(), logo, volver);
-	    
-	    addMenuTab("Inicio", DefaultView.class);
-		addMenuTab("Servicios", ServiciosView.class);
 		
-		if(SecurityUtils.isUserLoggedIn()) {
+	    	if(SecurityUtils.isUserLoggedIn()) {
 			
-			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
+	    		Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
 			
-			if(SecurityUtils.hasRole("Cliente")) {
-				addMenuTab("Gestionar mis Reservas", MisReservasView.class);
-			}
+	    		if(SecurityUtils.hasRole("Cliente")) {
+	    			addMenuTab("Inicio", InicioClienteView.class);
+	    			addMenuTab("Gestionar mis reservas", MisReservasView.class);
+	    			addMenuTab("Servicios", ServiciosView.class);
+	    			addMenuTab("Ciudades", CiudadesView.class);
+	    			addMenuTab("Mi perfil", PerfilView.class);
+	    		}
 
-			if(SecurityUtils.hasRole("Admin")){
-				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
-				//addMenuTab("Gestionar camarotes", AdminListaCamarotesView.class);
-				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
-				//addMenuTab("Gestionar reservas", AdminListaReservasView.class);
-				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
-			}
+	    		if(SecurityUtils.hasRole("Admin")){
+	    			addMenuTab("Inicio", DefaultView.class);
+	    			addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
+	    			addMenuTab("Gestionar ciudades", AdminListaCiudadesView.class);
+	    			addMenuTab("Gestionar ciudad y crucero", AdminListaCiudadCruceroView.class);
+	    			addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
+	    			addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
+	    			addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
+	    		}
 			
-			if(SecurityUtils.hasRole("Gerente")) {
-				addMenuTab("Estadisticas", EstadisticasView.class);
-			}
-			/*
-			addMenuTab("Mi perfil", PerfilView.class);
-			Tab tab = new Tab(new RouterLink("Cerrar sesion",LogoutView.class));
-			tab.addAttachListener(e -> {
+	    		if(SecurityUtils.hasRole("Gerente")) {
+	    			addMenuTab("Inicio", DefaultView.class);
+	    			addMenuTab("Estadisticas", EstadisticasView.class);
+	    		}
+	    		/*
+				addMenuTab("Mi perfil", PerfilView.class);
+				Tab tab = new Tab(new RouterLink("Cerrar sesion",LogoutView.class));
+				tab.addAttachListener(e -> {
 
-			});
-			navigationTargetToTab.put(LogoutView.class,tab);
-			tabs.add(tab);*/
-			//addMenuTab("Cerrar sesión", LogoutView.class);
-			addMenuTab("Registrar", RegisterView.class);
+				});
+				navigationTargetToTab.put(LogoutView.class,tab);
+				tabs.add(tab);*/
+	    		//addMenuTab("Cerrar sesión", LogoutView.class);
 			
-		} 
-		else {
-
-			addMenuTab("Iniciar sesión", LoginView.class);
-			addMenuTab("Registrar", RegisterView.class);
+	    	} 
+	    	else {
+	    		addMenuTab("Inicio", DefaultView.class);
+	    		addMenuTab("Iniciar sesión", LoginView.class);
 			
-		}
+	    	}
 		
-		tabs.setOrientation(Tabs.Orientation.VERTICAL);
-		addToDrawer(tabs);
+	    	tabs.setOrientation(Tabs.Orientation.VERTICAL);
+	    	addToDrawer(tabs);
 		
-		H2 mensaje = new H2("Bienvenido a la aplicación de Crusaito");
-		VerticalLayout Bienvenida = new VerticalLayout(mensaje);
+	    	H2 mensaje = new H2("Bienvenido a la aplicación de Crusaito");
+	    	VerticalLayout Bienvenida = new VerticalLayout(mensaje);
 
-		setContent(Bienvenida);
-		//Footer footer = new Footer();	//no funciona en el mainview
-		//add(footer);
+	    	setContent(Bienvenida);
 		
-	} 
+	    } 
+
 
 	private void addMenuTab(String label, Class<? extends Component> target) {
 		Tab tab = new Tab(new RouterLink(label,target));
