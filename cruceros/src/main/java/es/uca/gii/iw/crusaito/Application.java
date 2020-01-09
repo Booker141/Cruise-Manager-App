@@ -972,18 +972,17 @@ public class Application extends SpringBootServletInitializer {
             //userService.save(usuarioEjemplo);
             cruceroService.save(noruego);
             
-            
             // fetch user by dni
             /*log.info("Users found with findByLastName('Bauer'):");
             log.info("--------------------------------------------");
             userRepo.findByDni("12345678Y").forEach(bauer -> {
                 log.info(bauer.toString());
-            });
+            });*/
 
             log.info("Servicios con findByUsuario");
-            servicioUsuarioService.findByUsuario(usuarioEjemplo).forEach(prueba -> {
-            	log.info(prueba.getServicio().getsNombre());
-            });  */    
+            Usuario usucliente = userService.findByUsername("cliente");
+            	log.info(usucliente.getFirstName());
+              
         };
     }
 }
