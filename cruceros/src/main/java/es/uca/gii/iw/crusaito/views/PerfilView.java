@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NumberRenderer;
 import com.vaadin.flow.router.Route;
@@ -28,9 +29,9 @@ public class PerfilView extends Div{
 	private UsuarioService usuarioService;
 	private ServicioService servicioService;
 	
-	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-	private List<Servicio> serviceList;
-	private ListDataProvider<Servicio> dataProvider;
+	private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
+	private List<ServicioUsuario> serviceList;
+	private ListDataProvider<ServicioUsuario> dataProvider;
 
 	@Autowired
 	public PerfilView(ServicioService servicioService, UsuarioService susuarioService) {
@@ -39,37 +40,44 @@ public class PerfilView extends Div{
 		this.usuarioService = usuarioService;
 		this.servicioUsuarioService = servicioUsuarioService;
 		
-		serviceList = this.servicioService.findCruceroByUsername(SecurityUtils.currentUsername());
+		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		
 		dataProvider = new ListDataProvider<>(serviceList);
 		grid.setDataProvider(dataProvider);
 		
 		double dTotal = 0;
 		
+		
+		/*
 		for(ServicioUsuario servicioUsuario: servicioUsuarioService.findAll()) {
             for (Servicio servicio : servicioService.findAll()) {
                 if (servicio.getsNombre().equals(servicioUsuario.getServicio().getsNombre())) {
                     dTotal = dTotal + servicio.getsPrecio();
                 }
             }
-        }
+        }*/
+		
+		
 		
 		grid.removeColumnByKey("id"); grid.removeColumnByKey("sTipo"); grid.removeColumnByKey("sAforoActual"); grid.removeColumnByKey("sAforoMaximo");
 		grid.removeColumnByKey("serviciosUsuarios"); grid.removeColumnByKey("sPrecio"); grid.removeColumnByKey("sImagen");
 
-		grid.setColumns("sNombre","sDescripcion","eItinerario");
+		grid.setColumns("servicio", "participantes", "precio");
 
-		//grid.addColumn(dTotal).setHeader("Total");
 		grid.getColumnByKey("sNombre").setHeader("Nombre");
 		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
-		grid.addColumn(new NumberRenderer<>(Servicio::getsPrecio,"%(,.2f €",new Locale("es"),"0.00 €")).setHeader("Precio");
+		grid.addColumn(new NumberRenderer<>(ServicioUsuario::getPrecio,"%(,.2f €",new Locale("es"),"0.00 €")).setHeader("Precio");
 		grid.getColumnByKey("eItinerario").setHeader("Itinerario");
 		grid.getColumnByKey("sTipo").setHeader("Tipo");
 		
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 
-		add(grid);
+		Label total = new Label("Factura total: " + dTotal);
+		
+		add(grid, total);
+		
+		
 	}
 	
 }
