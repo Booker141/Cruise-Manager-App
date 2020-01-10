@@ -127,7 +127,7 @@ public class ServiciosView extends VerticalLayout{
 		reservaButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		
 		servicioLleno = new Notification();
-		Label labelLleno = new Label("El servicio esta lleno, lo sentimos.");
+		Label labelLleno = new Label("No hay hueco para esos participantes.");
 		Button llenoButton = new Button("Aceptar", e -> servicioLleno.close());
 		
 		servicioLleno.add(labelLleno,llenoButton);
@@ -149,9 +149,9 @@ public class ServiciosView extends VerticalLayout{
 		            dialog.open();
 		            
 		            confirmButton.addClickListener(e -> {
-		            	try {
+		            	//try {
 		            	Servicio servicio = event.getItem();
-		            	if(servicio.AforoHuecoLibre()) {
+		            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
 		            		Usuario user = buscarUsuarioLogin();
 		            		servicio.addAforoActual(participantesField.getValue().intValue());
 		            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
@@ -160,10 +160,7 @@ public class ServiciosView extends VerticalLayout{
 		            		servicioLleno.open();
 		            		notification.close();
 		            	}
-		            	}catch(DataIntegrityViolationException error) {
-		            		Funciones.notificacionError("Ya tiene una reserva anterior");
-		            		notification.close();
-		            	}
+		            	
 		            });
 		    		
 		        });

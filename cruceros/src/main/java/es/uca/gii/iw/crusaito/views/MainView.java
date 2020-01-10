@@ -31,7 +31,6 @@ import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.spring.MessageBean;
 
 @Route("MainView")
-//Para establecer esta ruta por defecto
 //@Route("")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
@@ -64,7 +63,8 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    	volver.addClickListener(cerrar -> {
 	    		SecurityContextHolder.clearContext();
 	    		getUI().get().getSession().close();
-	    		getUI().get().getPage().reload();
+	    		getUI().get().navigate(MainView.class);
+	    		//getUI().get().getPage().reload();
 	    	});
 	    	addToNavbar(new DrawerToggle(), logo, volver);
 	    }else {
@@ -86,7 +86,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    		}
 
 	    		if(SecurityUtils.hasRole("Admin")){
-	    			addMenuTab("Inicio", DefaultView.class);
+	    			addMenuTab("Inicio", AdminView.class);
 	    			addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
 	    			addMenuTab("Gestionar ciudades", AdminListaCiudadesView.class);
 	    			addMenuTab("Gestionar ciudad y crucero", AdminListaCiudadCruceroView.class);
@@ -96,7 +96,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 	    		}
 			
 	    		if(SecurityUtils.hasRole("Gerente")) {
-	    			addMenuTab("Inicio", DefaultView.class);
+	    			//addMenuTab("Inicio", DefaultView.class);
 	    			addMenuTab("Estadisticas", EstadisticasView.class);
 	    		}
 	    		/*
@@ -111,7 +111,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			
 	    	} 
 	    	else {
-	    		addMenuTab("Inicio", DefaultView.class);
 	    		addMenuTab("Iniciar sesión", LoginView.class);
 			
 	    	}
