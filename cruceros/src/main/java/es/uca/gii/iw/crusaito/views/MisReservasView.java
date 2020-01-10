@@ -10,7 +10,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -43,8 +43,8 @@ public class MisReservasView extends VerticalLayout{
     
     private  Dialog ventana = new Dialog();
 
-    private Div sNombreDiv = new Div();
-	private Div sTipoDiv = new Div();
+    private H6 sNombre = new H6();
+	private H6 sTipo = new H6();
 	private Image sImagenImage = new Image();
 	
     private Notification notificacion = new Notification();
@@ -79,8 +79,8 @@ public class MisReservasView extends VerticalLayout{
 		grid.setSizeFull();
 		this.setSizeFull();
 		
-		sNombreDiv.setTitle("Nombre");
-		sTipoDiv.setTitle("Tipo");
+		sNombre.setTitle("Nombre");
+		sTipo.setTitle("Tipo");
 		
 		sImagenImage.setTitle("Imagen");
 		sImagenImage.setHeight("100%");
@@ -99,12 +99,12 @@ public class MisReservasView extends VerticalLayout{
 		deleteButton.addClickListener(event -> notificacion.open());
 		deleteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-		ventana.add(sNombreDiv,sTipoDiv,sImagenImage,deleteButton);
+		ventana.add(sNombre,sTipo,sImagenImage,deleteButton);
 		
 		grid.addItemClickListener(event -> {
 			
-			sNombreDiv.setText("Nombre: " + event.getItem().getServicio().getsNombre());
-			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
+			sNombre.setText("Nombre: " + event.getItem().getServicio().getsNombre());
+			sTipo.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
 			sImagenImage.setSrc(event.getItem().getServicio().getsImagen());
 			
 			ventana.open();
@@ -121,36 +121,6 @@ public class MisReservasView extends VerticalLayout{
 			});
 		});
 		
-		//ventanaSeguro.setAlignItems(Alignment.CENTER);
-		/*
-		seguro.addClickListener(event ->{
-		    reserva.setEstado(ReservaEstado.Cancelada);
-		    ReservaService.save(reserva);
-		    ventana.close();
-		    Funciones.notificacionAcierto("Reserva cancelada con éxito");
-		    grid.setItems(ReservaService.listByUsuario(UsuarioService.findByUsername(SecurityUtils.currentUsername())));
-		    });
-		*/
-		/*
-	    grid.addColumn(new NativeButtonRenderer<>("Cancelar", clickedItem -> {
-	    	grid.asSingleSelect().clear();
-	    	LocalDate now = LocalDate.now();
-	    	
-	    	if(clickedItem.getEstado() == ReservaEstado.Cancelada)
-	    		Funciones.notificacionAcierto("Esta reserva ya ha sido cancelada con anterioridad");
-	    	else{
-	    		
-	    	if(clickedItem.getFechaInicio().isBefore(now.minusDays(1)))
-	    		Funciones.notificacionError("Lo sentimos, no puede cancelar la reserva debido a que es demasiado tarde");
-	    	else
-	    	{
-	    		reserva = clickedItem;
-	    		clickedItem.setEstado(ReservaEstado.Cancelada);
-	    	}
-	        ventana.open();
-	    	}
-	      }));
-	*/
 	    add(grid);
 	}
 	

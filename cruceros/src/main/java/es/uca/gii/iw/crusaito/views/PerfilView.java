@@ -11,6 +11,7 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -46,16 +47,17 @@ public class PerfilView extends VerticalLayout{
 	
 	private VerticalLayout datos = new VerticalLayout();
 	
-	private Label firstName;
-	private Label lastName;
-	private Label telefono;
-	private Label dni;
-	private Label address;
-	private Label city;
-	private Label bornDate;
-	private Label username;
-	private Label email;
-	private Label mensaje;
+	private H6 firstName;
+	private H6 lastName;
+	private H6 telefono;
+	private H6 dni;
+	private H6 address;
+	private H6 city;
+	private H6 bornDate;
+	private H6 username;
+	private H6 email;
+	private H6 mensaje;
+	
 	@Autowired
 	public PerfilView(ServicioService servicioService, UsuarioService usuarioService,
 			ServicioUsuarioService servicioUsuarioService) {
@@ -84,20 +86,20 @@ public class PerfilView extends VerticalLayout{
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 		
-		firstName = new Label("Nombre: " + usuario.getFirstName());
-		lastName = new Label("Apellidos: " + usuario.getLastName());
-		telefono = new Label("Telefono: " + usuario.getPhoneNumber());
-		dni = new Label("DNI: " + usuario.getDni());;
-		address = new Label("Dirección: " + usuario.getAddress());;
-		city = new Label("Ciudad: " + usuario.getCity());;
-		bornDate = new Label("Fecha de nacimiento: " + usuario.getBornDate().toString());;
-		username = new Label("Nombre de usuario: " + usuario.getUsername());;
-		email = new Label("Correo electrónico: " + usuario.getEmail());
+		firstName = new H6("Nombre: " + usuario.getFirstName());
+		lastName = new H6("Apellidos: " + usuario.getLastName());
+		telefono = new H6("Telefono: " + usuario.getPhoneNumber());
+		dni = new H6("DNI: " + usuario.getDni());;
+		address = new H6("Dirección: " + usuario.getAddress());;
+		city = new H6("Ciudad: " + usuario.getCity());;
+		bornDate = new H6("Fecha de nacimiento: " + usuario.getBornDate().toString());;
+		username = new H6("Nombre de usuario: " + usuario.getUsername());;
+		email = new H6("Correo electrónico: " + usuario.getEmail());
 		
-		mensaje = new Label("Para modificar los datos contacte con un administrador.");
+		mensaje = new H6("Para modificar los datos contacte con un administrador.");
 		
 		datos.add(firstName,lastName,telefono,dni,address,city,bornDate,username,email, mensaje);
-		Label total = new Label("Factura total: " + dTotal);
+		H6 total = new H6("Factura total: " + dTotal + " €");
 		
 		add(datos, grid, total);
 		
