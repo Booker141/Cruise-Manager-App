@@ -15,13 +15,7 @@ public class AdminView extends VerticalLayout{
 
 	public AdminView() {
 		
-		H1 Aviso = new H1();
-		
-		if(SecurityUtils.isUserLoggedIn()) {
-			Aviso.setText("Estoy conectado como " + SecurityUtils.currentUsername());
-		}else {
-			Aviso.setText("No estoy conectado");
-		}
+		H1 Aviso = new H1("Bienvenido");
 
 		add(Aviso);
 	}
