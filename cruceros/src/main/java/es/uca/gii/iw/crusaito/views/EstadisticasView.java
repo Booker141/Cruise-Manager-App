@@ -15,6 +15,7 @@ import com.vaadin.flow.component.charts.model.Tooltip;
 import com.vaadin.flow.component.charts.model.VerticalAlign;
 import com.vaadin.flow.component.charts.model.XAxis;
 import com.vaadin.flow.component.charts.model.YAxis;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
@@ -29,7 +30,7 @@ import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 @Secured("Gerente")
 @SuppressWarnings("serial")
 @Route(value = "Estadisticas",layout = MainView.class)
-public class EstadisticasView extends PrincipalView{
+public class EstadisticasView extends Div{
 	
 	    private ServicioService servicioService;
 	    private ServicioUsuarioService susuarioService;

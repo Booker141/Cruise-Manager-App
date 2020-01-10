@@ -5,7 +5,6 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -15,7 +14,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.HeaderRow;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -34,7 +33,6 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
-import es.uca.gii.iw.crusaito.common.*;
 
 @SuppressWarnings("serial")
 @Route(value = "ServiciosView",layout = MainView.class)
@@ -51,8 +49,8 @@ public class ServiciosView extends VerticalLayout{
 	private HeaderRow filterRow;
 	private TextField sNombreField;
 	private NumberField participantesField = new NumberField("Numero de personas");
-	private Div sNombreDiv;
-	private Div sTipoDiv;
+	private H6 sNombre;
+	private H6 sTipo;
 	private Image sImagenImage;
 	
 	private Dialog dialog;
@@ -93,11 +91,11 @@ public class ServiciosView extends VerticalLayout{
 
 		dialog = new Dialog();
 		
-		sNombreDiv = new Div();
-		sNombreDiv.setTitle("Nombre");
+		sNombre = new H6();
+		sNombre.setTitle("Nombre");
 		
-		sTipoDiv = new Div();
-		sTipoDiv.setTitle("Tipo");
+		sTipo = new H6();
+		sTipo.setTitle("Tipo");
 		
 		sImagenImage = new Image();
 		sImagenImage.setTitle("Imagen");
@@ -133,12 +131,12 @@ public class ServiciosView extends VerticalLayout{
 		servicioLleno.add(labelLleno,llenoButton);
 		
 		
-		dialog.add(sNombreDiv,sTipoDiv,sImagenImage, reservaButton, participantesField);
+		dialog.add(sNombre,sTipo,sImagenImage, reservaButton, participantesField);
 		
 		grid.addItemClickListener(
 		        event -> {
-		        	sNombreDiv.setText("Nombre: " + event.getItem().getsNombre());
-		            sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
+		        	sNombre.setText("Nombre: " + event.getItem().getsNombre());
+		            sTipo.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
 		            participantesField.setValue(1d);
