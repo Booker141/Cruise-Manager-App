@@ -108,8 +108,8 @@ public class Servicio {
 
      */
 
-	public boolean AforoHuecoLibre() {
-		if((this.getsAforoActual()+1) >= (this.getsAforoMaximo() * 0.70)) return false;
+	public boolean AforoHuecoLibre(int participantes) {
+		if((this.getsAforoActual()+participantes) >= (this.getsAforoMaximo() * 0.70)) return false;
 		else return true;
 	}
 	
