@@ -3,6 +3,7 @@ package es.uca.gii.iw.crusaito.servicios;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import es.uca.gii.iw.crusaito.clases.Crucero;
@@ -135,8 +136,10 @@ public class ServicioService {
 		servicio.getServiciosUsuarios().add(servUser);
 		usuario.getUsuariosServicios().add(servUser);
 		
-		this.userRepo.save(usuario);
 		this.repo.save(servicio);
+		//this.userRepo.save(usuario);
+		}catch(DataIntegrityViolationException error) {
+    		Funciones.notificacionError("Ya tiene una reserva anterior");
 		}catch(Exception e) {
 			Funciones.notificacionError("Error al realizar la reserva");
 		}

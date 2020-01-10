@@ -53,7 +53,7 @@ public class LoginView extends VerticalLayout {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			login.close();
 			UI.getCurrent().navigate(requestCache.resolveRedirectUrl());
-		
+
 		} catch (AuthenticationException ex) {
 		 login.setError(true);
 	}
