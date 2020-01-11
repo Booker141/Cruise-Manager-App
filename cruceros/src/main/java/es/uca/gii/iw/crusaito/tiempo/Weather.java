@@ -25,14 +25,13 @@ public class Weather extends VerticalLayout{
 	*Función encargada de establecer una conexión con la API meteorológica y procesar la información recibida en formato XML.
 	*
 	*@param ciudad - ciudad define la ciudad de la que presentaremos su información meteorológica.
+	 * @return 
 	*/
 	
 	@Autowired
 	public void requestWeather(Ciudad ciudad) throws Exception
 	{
-		
-		//String city = weatherObject.getCity();
-		
+
 		String URLtext = "http://api.openweathermap.org/data/2.5/weather?q="+ciudad.getcNombre()+"&mode=xml&appid=" + token;	
 		URL url = new URL(URLtext);
 		URLConnection conn = url.openConnection();	// establecemos conexion con la URL de la API
@@ -53,9 +52,7 @@ public class Weather extends VerticalLayout{
 			String presion = file.getElementsByTagName("pressure").item(0).getAttributes().item(0).getTextContent();
 			String viento = file.getElementsByTagName("speed").item(0).getAttributes().item(0).getTextContent();
 			String direccion = file.getElementsByTagName("direction").item(0).getAttributes().item(0).getTextContent();
-			String icono = file.getElementsByTagName("weather").item(2).getAttributes().item(2).getTextContent();
-			
-			
+			String icono = file.getElementsByTagName("weather").item(0).getAttributes().item(0).getTextContent();
 			
 			String iconoURL = "http://openweathermap.org/img/w" + icono + ".png" ;
 			
