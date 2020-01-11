@@ -186,24 +186,6 @@ public class Servicio {
 		this.sFecha = sFecha;
 	}
 
-	/*public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}*/
-
-	/*public void addUsuario(Usuario usuario) {
-		this.usuarios.add(usuario);
-		usuario.getServicios().add(this);
-	}
-	
-	public void removeUsuario(Usuario usuario) {
-		this.usuarios.remove(usuario);
-		usuario.getServicios().remove(this);
-	}*/
-	
 	public String geteItinerario() {
 		return eItinerario;
 	}
