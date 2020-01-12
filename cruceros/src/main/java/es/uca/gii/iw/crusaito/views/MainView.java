@@ -119,7 +119,8 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		
 	    	H2 mensaje = new H2("Bienvenido a la aplicación de Crusaito");
 	    	VerticalLayout Bienvenida = new VerticalLayout(mensaje);
-
+	    	
+	    	
 	    	setContent(Bienvenida);
 		
 	    } 
