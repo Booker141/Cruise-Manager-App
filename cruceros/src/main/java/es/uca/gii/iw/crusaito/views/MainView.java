@@ -30,8 +30,8 @@ import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.spring.MessageBean;
 
-@Route("MainView")
-//@Route("")
+//@Route("MainView")
+@Route("")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")
@@ -48,7 +48,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		/**
 		 * Añade logo a la página
 		 */
-
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
 		logo.setHeight("44px");
 
@@ -68,7 +67,6 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			
 			addToNavbar(new DrawerToggle(), logo, volver);
 		} else {
-
 			addToNavbar(new DrawerToggle(), logo);
 		}
 
