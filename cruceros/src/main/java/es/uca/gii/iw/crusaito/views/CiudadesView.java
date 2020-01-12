@@ -12,19 +12,14 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.CiudadCrucero;
 import es.uca.gii.iw.crusaito.clases.Servicio;
-import es.uca.gii.iw.crusaito.clases.ServicioTipo;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.CiudadCruceroService;
-import es.uca.gii.iw.crusaito.servicios.CiudadService;
 import es.uca.gii.iw.crusaito.servicios.CruceroService;
-import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.tiempo.Weather;
 
@@ -33,16 +28,11 @@ import es.uca.gii.iw.crusaito.tiempo.Weather;
 @SuppressWarnings("serial")
 public class CiudadesView extends VerticalLayout{
 
-	private CiudadService ciudadService;
     private UsuarioService usuarioService;
     private CruceroService cruceroService;
     private CiudadCruceroService ciudadCruceroService;
-    private ServicioService servicioService;
     private Weather weather;
    
-	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    //private List<Servicio> serviceList = new ArrayList<Servicio>();
-	
     private Grid<CiudadCrucero> grid = new Grid<>(CiudadCrucero.class);
     private List<CiudadCrucero> ciudadList = new ArrayList<CiudadCrucero>();
     
@@ -65,22 +55,16 @@ public class CiudadesView extends VerticalLayout{
 	private Div cserviciosDiv = new Div();
 	private Div cTiempoDiv = new Div();
 	
-    private Notification notificacion = new Notification();
     private Button volver = new Button("Volver");
-
-    
-    //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
     
 	@Autowired
-    public CiudadesView(CiudadService ciudadService, UsuarioService usuarioService, 
+    public CiudadesView(UsuarioService usuarioService, 
     		CruceroService cruceroService, CiudadCruceroService ciudadCruceroService, 
-    		ServicioService servicioService, Weather w) throws Exception
+    		Weather w) throws Exception
 	{
-		this.ciudadService = ciudadService;
 		this.ciudadCruceroService = ciudadCruceroService;
 		this.cruceroService = cruceroService;
 		this.usuarioService = usuarioService;
-		this.servicioService = servicioService;
 
 		ciudadList = this.ciudadCruceroService.findByCrucero(this.cruceroService.findByUsuarios(this.usuarioService.findByUsername(SecurityUtils.currentUsername())));
 		grid.setItems(ciudadList);
@@ -112,12 +96,8 @@ public class CiudadesView extends VerticalLayout{
 		cConsejo5.setTitle("Consejo 5");
 		cServiciosDiv.setTitle("Servicios");
 		cTiempoDiv.setTitle("Tiempo");
-		
-		notificacion.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
 
-		volver.addClickListener(e -> notificacion.close());
-
-		notificacion.add(volver);
+		volver.addClickListener(e -> ventana.close());
 		
 		volver.getStyle().set("margin-right", "0.5rem");
 
@@ -156,9 +136,14 @@ public class CiudadesView extends VerticalLayout{
 					+ "Si quieres encender una vela en una catedral o tomar algo en mercados"
 					+ " no podrás con la tarjeta por ejemplo");
 					
-			Set<Servicio> servicios = event.getItem().getCrucero().getServicios();
-			cServiciosDiv.setText("Servicios de la ciudad y el crucero: ");
-			cserviciosDiv.setText(servicios.toString());
+			Set<Servicio> servicios = event.getItem().getCiudad().getServicios();
+			if(servicios.isEmpty()) {
+				cServiciosDiv.setText("No hay excursiones organizadas en esta ciudad.");
+			}else {
+				cServiciosDiv.setText("Excursiones organizadas en esta ciudad: ");
+				cserviciosDiv.setText(servicios.toString());
+			}
+			
 			cTiempoDiv.setText("Tiempo: ");
 			try {
 				w.requestWeather(event.getItem().getCiudad());
@@ -166,8 +151,7 @@ public class CiudadesView extends VerticalLayout{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	
-			
+
 			ventana.open();
 		            
 		});

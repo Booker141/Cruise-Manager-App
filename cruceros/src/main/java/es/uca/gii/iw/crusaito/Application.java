@@ -806,12 +806,36 @@ public class Application extends SpringBootServletInitializer {
             Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,5, LocalDate.now() );
             Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,5, LocalDate.now() );
             
-            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now(), "Cadiz");
-            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now(), "Helsinki");
-            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now(), "El Pireo");
-            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now(), "Bergen");
-            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian", 40, ServicioTipo.Excursion, 20,"frontend/img/cafe.jpg", 30, LocalDate.now(), "Venecia");
-            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now(), "Barcelona");
+            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
+            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
+            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
+            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
+            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian", 40, ServicioTipo.Excursion, 20,"frontend/img/cafe.jpg", 30, LocalDate.now());
+            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now());
+            
+            excursion1.setCiudad(cadiz);
+            cadiz.getServicios().add(excursion1);
+            servicioService.save(excursion1);
+            
+            excursion2.setCiudad(helsinki);
+            helsinki.getServicios().add(excursion2);
+            servicioService.save(excursion2);
+            
+            excursion3.setCiudad(pireo);
+            pireo.getServicios().add(excursion3);
+            servicioService.save(excursion3);
+            
+            excursion4.setCiudad(bergen);
+            bergen.getServicios().add(excursion4);
+            servicioService.save(excursion4);
+            
+            excursion5.setCiudad(venecia);
+            venecia.getServicios().add(excursion5);
+            servicioService.save(excursion5);
+            
+            excursion6.setCiudad(barcelona);
+            barcelona.getServicios().add(excursion6);
+            servicioService.save(excursion6);
             
             
             Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 2,5, LocalDate.now() );
