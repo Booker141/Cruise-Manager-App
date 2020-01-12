@@ -12,6 +12,8 @@ import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Barco;
@@ -25,7 +27,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @Route(value = "InicioCliente", layout = MainView.class)
 @Secured("Cliente")
 @SuppressWarnings("serial")
-public class InicioClienteView extends VerticalLayout{
+public class InicioClienteView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private UsuarioService usuarioService;
 	private CruceroService cruceroService;
@@ -114,5 +116,16 @@ public class InicioClienteView extends VerticalLayout{
         add(layout);
 	}
 	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
+	}
 
 }

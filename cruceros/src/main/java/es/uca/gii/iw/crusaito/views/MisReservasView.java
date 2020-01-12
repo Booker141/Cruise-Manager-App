@@ -16,6 +16,8 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
@@ -29,7 +31,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @SuppressWarnings("serial")
 @Route(value = "MisReservas",layout = MainView.class)
 @Secured("Cliente")
-public class MisReservasView extends VerticalLayout{
+public class MisReservasView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private ServicioService servicioService;
     private UsuarioService usuarioService;
@@ -122,6 +124,18 @@ public class MisReservasView extends VerticalLayout{
 		});
 		
 	    add(grid);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 	
 }

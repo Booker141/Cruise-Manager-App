@@ -7,22 +7,15 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
-import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.NumberField;
-import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NumberRenderer;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
-import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
@@ -30,10 +23,11 @@ import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
+
 @SuppressWarnings("serial")
 @Route(value = "Perfil",layout = MainView.class)
 @Secured("Cliente")
-public class PerfilView extends VerticalLayout{
+public class PerfilView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private ServicioUsuarioService servicioUsuarioService;
 	private UsuarioService usuarioService;
@@ -104,6 +98,21 @@ public class PerfilView extends VerticalLayout{
 		add(datos, grid, total);
 		
 		
+		
+		
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted =
+				SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 	
 }

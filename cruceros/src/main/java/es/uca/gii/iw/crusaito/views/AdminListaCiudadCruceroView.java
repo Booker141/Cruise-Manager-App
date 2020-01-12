@@ -7,11 +7,14 @@ import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Ciudad;
 import es.uca.gii.iw.crusaito.clases.CiudadCrucero;
 import es.uca.gii.iw.crusaito.clases.Crucero;
+import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.CiudadCruceroService;
 import es.uca.gii.iw.crusaito.servicios.CiudadService;
 import es.uca.gii.iw.crusaito.servicios.CruceroService;
@@ -19,7 +22,7 @@ import es.uca.gii.iw.crusaito.servicios.CruceroService;
 @Route(value = "ListaCiudadesCruceros",layout = MainView.class)
 @SuppressWarnings("serial")
 @Secured("Admin")
-public class AdminListaCiudadCruceroView extends VerticalLayout{
+public class AdminListaCiudadCruceroView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private CiudadService ciudadService;
 	private CruceroService cruceroService;
@@ -89,4 +92,15 @@ public class AdminListaCiudadCruceroView extends VerticalLayout{
 		this.add(crud);
 	}
 	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
+	}
 }
