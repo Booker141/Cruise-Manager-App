@@ -79,13 +79,13 @@ public class ServiciosView extends VerticalLayout{
 		grid.removeColumnByKey("id"); grid.removeColumnByKey("sTipo"); grid.removeColumnByKey("sAforoActual"); grid.removeColumnByKey("sAforoMaximo");
 		grid.removeColumnByKey("serviciosUsuarios"); grid.removeColumnByKey("sPrecio"); grid.removeColumnByKey("sImagen");
 
-		grid.setColumns("sNombre","sDescripcion","eItinerario");
+		grid.setColumns("sNombre","sDescripcion","ciudad","sTipo");
 
 		grid.getColumnByKey("sNombre").setHeader("Nombre");
 		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
 		grid.addColumn(new NumberRenderer<>(Servicio::getsPrecio,"%(,.2f €",new Locale("es"),"0.00 €")).setHeader("Precio");
-		grid.getColumnByKey("eItinerario").setHeader("Itinerario");
-		//grid.getColumnByKey("sTipo").setHeader("Tipo");
+		grid.getColumnByKey("ciudad").setHeader("Ciudad");
+		grid.getColumnByKey("sTipo").setHeader("Tipo");
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 
@@ -147,7 +147,6 @@ public class ServiciosView extends VerticalLayout{
 		            dialog.open();
 		            
 		            confirmButton.addClickListener(e -> {
-		            	//try {
 		            	Servicio servicio = event.getItem();
 		            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
 		            		Usuario user = buscarUsuarioLogin();
