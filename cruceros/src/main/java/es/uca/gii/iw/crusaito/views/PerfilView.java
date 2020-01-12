@@ -7,22 +7,15 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
-import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.NumberField;
-import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NumberRenderer;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
-import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
@@ -33,16 +26,17 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @SuppressWarnings("serial")
 @Route(value = "Perfil",layout = MainView.class)
 @Secured("Cliente")
-public class PerfilView extends VerticalLayout{
+public class PerfilView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private ServicioUsuarioService servicioUsuarioService;
 	private UsuarioService usuarioService;
-	private ServicioService servicioService;
 	
 	private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
 	private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
 	private ListDataProvider<ServicioUsuario> dataProvider;
 
+	private Usuario usuario;
+	
 	private double dTotal = 0;
 	
 	private VerticalLayout datos = new VerticalLayout();
@@ -59,22 +53,10 @@ public class PerfilView extends VerticalLayout{
 	private H6 mensaje;
 	
 	@Autowired
-	public PerfilView(ServicioService servicioService, UsuarioService usuarioService,
-			ServicioUsuarioService servicioUsuarioService) {
+	public PerfilView(UsuarioService usuarioService, ServicioUsuarioService servicioUsuarioService) {
 		
-		this.servicioService = servicioService;
 		this.usuarioService = usuarioService;
 		this.servicioUsuarioService = servicioUsuarioService;
-		
-		Usuario usuario = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
-		serviceList = this.servicioUsuarioService.findByUsuario(usuario);
-		
-		dataProvider = new ListDataProvider<>(serviceList);
-		grid.setDataProvider(dataProvider);
-		
-		serviceList.forEach(serviUsuar -> {
-			dTotal += serviUsuar.getPrecio();
-		});
 
 		grid.removeColumnByKey("usuario"); grid.removeColumnByKey("precio");
 
@@ -86,6 +68,26 @@ public class PerfilView extends VerticalLayout{
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 		
+		mensaje = new H6("Para modificar los datos contacte con un administrador.");
+
+	}
+	/**
+	 * Metodo que es llamado por el metodo beforeEnter despues de comprobar que el usuario esta
+	 * logeado en el sistema y tiene el rol adecuado para acceder a esta vista
+	 */
+	public void rellenarInformacion() {
+		
+		usuario = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
+		
+		serviceList = this.servicioUsuarioService.findByUsuario(usuario);
+		
+		dataProvider = new ListDataProvider<>(serviceList);
+		grid.setDataProvider(dataProvider);
+		
+		serviceList.forEach(serviUsuar -> {
+			dTotal += serviUsuar.getPrecio();
+		});
+		
 		firstName = new H6("Nombre: " + usuario.getFirstName());
 		lastName = new H6("Apellidos: " + usuario.getLastName());
 		telefono = new H6("Telefono: " + usuario.getPhoneNumber());
@@ -95,15 +97,28 @@ public class PerfilView extends VerticalLayout{
 		bornDate = new H6("Fecha de nacimiento: " + usuario.getBornDate().toString());;
 		username = new H6("Nombre de usuario: " + usuario.getUsername());;
 		email = new H6("Correo electrónico: " + usuario.getEmail());
-		
-		mensaje = new H6("Para modificar los datos contacte con un administrador.");
-		
+
 		datos.add(firstName,lastName,telefono,dni,address,city,bornDate,username,email, mensaje);
+
 		H6 total = new H6("Factura total: " + dTotal + " €");
 		
 		add(datos, grid, total);
-		
-		
+	}
+	
+	@Override
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted =
+				SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		}else {
+			this.rellenarInformacion();
+		}
 	}
 	
 }

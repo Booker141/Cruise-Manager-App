@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.views.LoginView;
+import es.uca.gii.iw.crusaito.views.ProhibidoView;
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {
@@ -31,7 +32,7 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
 	private void beforeEnter(BeforeEnterEvent event) {
 		if(!SecurityUtils.isAccessGranted(event.getNavigationTarget())) {
 			if(SecurityUtils.isUserLoggedIn()) {
-				event.rerouteToError(NotFoundException.class);
+				event.rerouteTo(ProhibidoView.class);
 			} else {
 				event.rerouteTo(LoginView.class);
 			}

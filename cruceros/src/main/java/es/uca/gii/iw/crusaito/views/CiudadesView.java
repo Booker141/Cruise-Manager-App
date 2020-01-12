@@ -13,6 +13,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.CiudadCrucero;
@@ -24,9 +26,9 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 import es.uca.gii.iw.crusaito.tiempo.Weather;
 
 @Route(value = "Ciudades", layout = MainView.class)
-@Secured("Cliente")
 @SuppressWarnings("serial")
-public class CiudadesView extends VerticalLayout{
+@Secured("Cliente")
+public class CiudadesView extends VerticalLayout implements BeforeEnterObserver{
 
     private UsuarioService usuarioService;
     private CruceroService cruceroService;
@@ -66,7 +68,6 @@ public class CiudadesView extends VerticalLayout{
 		this.cruceroService = cruceroService;
 		this.usuarioService = usuarioService;
 
-		ciudadList = this.ciudadCruceroService.findByCrucero(this.cruceroService.findByUsuarios(this.usuarioService.findByUsername(SecurityUtils.currentUsername())));
 		grid.setItems(ciudadList);
 
 		grid.setColumns("ciudad","crucero", "fechaLlegada", "horaLlegada", "fechaSalida", "horaSalida");
@@ -76,6 +77,7 @@ public class CiudadesView extends VerticalLayout{
 		grid.getColumnByKey("horaLlegada").setHeader("Hora llegada");
 		grid.getColumnByKey("fechaSalida").setHeader("Fecha salida");
 		grid.getColumnByKey("horaSalida").setHeader("Hora salida");
+		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 		
 		grid.setSizeFull();
@@ -139,24 +141,39 @@ public class CiudadesView extends VerticalLayout{
 			Set<Servicio> servicios = event.getItem().getCiudad().getServicios();
 			if(servicios.isEmpty()) {
 				cServiciosDiv.setText("No hay excursiones organizadas en esta ciudad.");
+				cserviciosDiv.removeAll();
 			}else {
-				cServiciosDiv.setText("Excursiones organizadas en esta ciudad: ");
+				cServiciosDiv.setText("Excursiones organizadas en esta ciudad:");
 				cserviciosDiv.setText(servicios.toString());
 			}
 			
 			cTiempoDiv.setText("Tiempo: ");
 			try {
-				w.requestWeather(event.getItem().getCiudad());
+				weather.requestWeather(event.getItem().getCiudad());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
 			ventana.open();
-		            
+			
 		});
 		
 	    add(grid);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}else {
+				event.rerouteTo(LoginView.class);
+			}
+		}else {
+			ciudadList = this.ciudadCruceroService.findByCrucero(this.cruceroService.findByUsuarios(this.usuarioService.findByUsername(SecurityUtils.currentUsername())));
+			grid.setItems(ciudadList);
+		}
 	}
 	
 }

@@ -16,6 +16,8 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
@@ -29,14 +31,11 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @SuppressWarnings("serial")
 @Route(value = "MisReservas",layout = MainView.class)
 @Secured("Cliente")
-public class MisReservasView extends VerticalLayout{
+public class MisReservasView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private ServicioService servicioService;
     private UsuarioService usuarioService;
     private ServicioUsuarioService servicioUsuarioService;
-    
-	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
     private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
     private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
@@ -52,21 +51,15 @@ public class MisReservasView extends VerticalLayout{
     private Button cancelButton = new Button("Cancelar");
     private Button confirmButton = new Button("Confirmar");
     private Button deleteButton = new Button("Cancelar reserva");
-    
-    //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
-    
+        
 	@Autowired
-    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, ServicioUsuarioService servicioUsuarioService) 
-	{
+    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, 
+    		ServicioUsuarioService servicioUsuarioService){
+		
 		this.servicioService = servicioService;
 		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
 
-		//Lista de servicios a partir de servUser
-		/*List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
-			servUser.forEach(serviUsuar -> {
-			serviceList.add(serviUsuar.getServicio());
-		});*/
 		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		grid.setItems(serviceList);
 
@@ -122,6 +115,18 @@ public class MisReservasView extends VerticalLayout{
 		});
 		
 	    add(grid);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 	
 }

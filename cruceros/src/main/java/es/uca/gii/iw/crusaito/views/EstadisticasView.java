@@ -18,20 +18,22 @@ import com.vaadin.flow.component.charts.model.YAxis;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioTipo;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.common.Funciones;
+import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 
 @Secured("Gerente")
 @SuppressWarnings("serial")
 @Route(value = "Estadisticas",layout = MainView.class)
-public class EstadisticasView extends VerticalLayout{
+public class EstadisticasView extends VerticalLayout implements BeforeEnterObserver{
 	
 	    private ServicioService servicioService;
 	    private ServicioUsuarioService susuarioService;
@@ -197,4 +199,16 @@ public class EstadisticasView extends VerticalLayout{
 	        	mensaje.setVisible(true);
 	        }
 	}
+	    
+	    public void beforeEnter(BeforeEnterEvent event) {
+			final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+			if(!accessGranted) {
+				if(SecurityUtils.isUserLoggedIn()) {
+					event.rerouteTo(ProhibidoView.class);
+				}
+				else {
+					event.rerouteTo(LoginView.class);
+				}
+			} 
+		}
 }

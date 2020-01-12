@@ -10,10 +10,13 @@ import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.ComboBox.ItemFilter;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.clases.Servicio;
+import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.clases.Ciudad;
 import es.uca.gii.iw.crusaito.servicios.CiudadService;
 import es.uca.gii.iw.crusaito.servicios.CruceroService;
@@ -22,7 +25,7 @@ import es.uca.gii.iw.crusaito.servicios.ServicioService;
 @Route(value = "ListaServicios",layout = MainView.class)
 @Secured("Admin")
 @SuppressWarnings("serial")
-public class AdminListaServiciosView extends VerticalLayout{
+public class AdminListaServiciosView extends VerticalLayout implements BeforeEnterObserver{
 
 	private ServicioService servicioService;
 	private CruceroService cruceroService;
@@ -75,5 +78,17 @@ public class AdminListaServiciosView extends VerticalLayout{
 		crud.setDeleteOperation(this.servicioService::delete);
 		
 		add(crud);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 }
