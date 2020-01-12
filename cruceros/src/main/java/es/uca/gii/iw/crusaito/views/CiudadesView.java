@@ -13,6 +13,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.CiudadCrucero;
@@ -26,7 +28,7 @@ import es.uca.gii.iw.crusaito.tiempo.Weather;
 @Route(value = "Ciudades", layout = MainView.class)
 @Secured("Cliente")
 @SuppressWarnings("serial")
-public class CiudadesView extends VerticalLayout{
+public class CiudadesView extends VerticalLayout implements BeforeEnterObserver{
 
     private UsuarioService usuarioService;
     private CruceroService cruceroService;
@@ -146,7 +148,7 @@ public class CiudadesView extends VerticalLayout{
 			
 			cTiempoDiv.setText("Tiempo: ");
 			try {
-				w.requestWeather(event.getItem().getCiudad());
+				weather.requestWeather(event.getItem().getCiudad());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -157,6 +159,18 @@ public class CiudadesView extends VerticalLayout{
 		});
 		
 	    add(grid);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 	
 }

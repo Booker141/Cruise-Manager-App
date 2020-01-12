@@ -25,6 +25,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NumberRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
@@ -37,7 +39,7 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @SuppressWarnings("serial")
 @Route(value = "ServiciosView",layout = MainView.class)
 @Secured("Cliente")
-public class ServiciosView extends VerticalLayout{
+public class ServiciosView extends VerticalLayout implements BeforeEnterObserver{
 
 	private UsuarioService usuarioService;
 	private ServicioService servicioService;
@@ -204,6 +206,18 @@ public class ServiciosView extends VerticalLayout{
 	public Usuario buscarUsuarioLogin() {
     	String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return this.usuarioService.findByUsername(username);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 	
 }
