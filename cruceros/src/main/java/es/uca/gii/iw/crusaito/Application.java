@@ -801,12 +801,12 @@ public class Application extends SpringBootServletInitializer {
              * Definición de los servicios
              */
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 2,5, LocalDate.now() );
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,5, LocalDate.now() );
             Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 2,5, LocalDate.now() );
             Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,5, LocalDate.now() );
             Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,5, LocalDate.now() );
             
-            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 0,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
+            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
             Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
             Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
             Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
@@ -876,15 +876,16 @@ public class Application extends SpringBootServletInitializer {
              */
          
             ServicioUsuario servUsu = new ServicioUsuario();
-            servUsu.setServicio(elFaro);
+            servUsu.setServicio(excursion1);
             servUsu.setUsuario(usuarioEjemplo);
             servUsu.setParticipantes(2);
             servUsu.setPrecio(60);
             
-            elFaro.getServiciosUsuarios().add(servUsu);
+            excursion1.getServiciosUsuarios().add(servUsu);
             usuarioEjemplo.getUsuariosServicios().add(servUsu);
-            servicioService.save(elFaro);
+            servicioService.save(excursion1);
             userService.save(usuarioEjemplo);
+            servicioUsuarioService.save(servUsu);
             
             /**
              * Usuario 2 con servicio

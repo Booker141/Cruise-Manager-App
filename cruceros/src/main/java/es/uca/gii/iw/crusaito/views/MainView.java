@@ -36,107 +36,93 @@ import es.uca.gii.iw.crusaito.spring.MessageBean;
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 @PWA(name = "Project Base for Crusaito with Spring", shortName = "Crusaito")
 public class MainView extends AppLayout implements BeforeEnterObserver {
-	
+
 	private static final long serialVersionUID = 1L; // para evitar el warning del serial
 
 	private Tabs tabs = new Tabs();
 	private Map<Class<? extends Component>, Tab> navigationTargetToTab = new HashMap<>();
-	
+
 	public MainView(@Autowired MessageBean bean) {
 		getElement().setAttribute("theme", "dark"); // aplicar tema oscuro
-		
+
 		/**
 		 * Añade logo a la página
 		 */
-		
+
 		Image logo = new Image("frontend/img/logo2.png", "logoweb");
-	    logo.setHeight("44px");
-	    
-	    if(SecurityUtils.isUserLoggedIn()) {
-	    	
-	    	/**
-	    	 * Botón para cerrar sesión
-	    	 */
-	    	
-	    	Button volver = new Button("Cerrar Sesión");
-	    	volver.getStyle().set("margin-right", "0");
-	    	volver.addClickListener(cerrar -> {
-	    		SecurityContextHolder.clearContext();
-	    		getUI().get().getSession().close();
-	    		getUI().get().navigate(MainView.class);
-	    		//getUI().get().getPage().reload();
-	    	});
-	    	addToNavbar(new DrawerToggle(), logo, volver);
-	    }else {
-	    	
-	    	addToNavbar(new DrawerToggle(), logo);
-	    }
-	    
-		
-	    	if(SecurityUtils.isUserLoggedIn()) {
-			
-	    		Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
-			
-	    		if(SecurityUtils.hasRole("Cliente")) {
-	    			addMenuTab("Inicio", InicioClienteView.class);
-	    			addMenuTab("Gestionar mis reservas", MisReservasView.class);
-	    			addMenuTab("Servicios", ServiciosView.class);
-	    			addMenuTab("Ciudades", CiudadesView.class);
-	    			addMenuTab("Mi perfil", PerfilView.class);
-	    		}
+		logo.setHeight("44px");
 
-	    		if(SecurityUtils.hasRole("Admin")){
-	    			addMenuTab("Inicio", AdminView.class);
-	    			addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
-	    			addMenuTab("Gestionar ciudades", AdminListaCiudadesView.class);
-	    			addMenuTab("Gestionar ciudad y crucero", AdminListaCiudadCruceroView.class);
-	    			addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
-	    			addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
-	    			addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
-	    		}
+		if (SecurityUtils.isUserLoggedIn()) {
+
+			/**
+			 * Botón para cerrar sesión
+			 */
+
+			Button volver = new Button("Cerrar Sesión");
+			volver.getStyle().set("margin-right", "0");
+			volver.addClickListener(cerrar -> {
+				SecurityContextHolder.clearContext();
+				getUI().get().getSession().close();
+				getUI().get().navigate(MainView.class);
+			});
 			
-	    		if(SecurityUtils.hasRole("Gerente")) {
-	    			//addMenuTab("Inicio", DefaultView.class);
-	    			addMenuTab("Estadisticas", EstadisticasView.class);
-	    		}
-	    		/*
+			addToNavbar(new DrawerToggle(), logo, volver);
+		} else {
+
+			addToNavbar(new DrawerToggle(), logo);
+		}
+
+		if (SecurityUtils.isUserLoggedIn()) {
+
+			Funciones.notificacionAcierto("Bienvenid@ " + SecurityUtils.currentUsername());
+
+			if (SecurityUtils.hasRole("Cliente")) {
+				addMenuTab("Inicio", InicioClienteView.class);
+				addMenuTab("Gestionar mis reservas", MisReservasView.class);
+				addMenuTab("Servicios", ServiciosView.class);
+				addMenuTab("Ciudades", CiudadesView.class);
 				addMenuTab("Mi perfil", PerfilView.class);
-				Tab tab = new Tab(new RouterLink("Cerrar sesion",LogoutView.class));
-				tab.addAttachListener(e -> {
+			}
 
-				});
-				navigationTargetToTab.put(LogoutView.class,tab);
-				tabs.add(tab);*/
-	    		//addMenuTab("Cerrar sesión", LogoutView.class);
-			
-	    	} 
-	    	else {
-	    		addMenuTab("Iniciar sesión", LoginView.class);
-			
-	    	}
-		
-	    	tabs.setOrientation(Tabs.Orientation.VERTICAL);
-	    	addToDrawer(tabs);
-		
-	    	H2 mensaje = new H2("Bienvenido a la aplicación de Crusaito");
-	    	VerticalLayout Bienvenida = new VerticalLayout(mensaje);
+			if (SecurityUtils.hasRole("Admin")) {
+				addMenuTab("Inicio", AdminView.class);
+				addMenuTab("Gestionar barcos", AdminListaBarcosView.class);
+				addMenuTab("Gestionar ciudades", AdminListaCiudadesView.class);
+				addMenuTab("Gestionar ciudad y crucero", AdminListaCiudadCruceroView.class);
+				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
+				addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
+				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
+			}
 
-	    	setContent(Bienvenida);
-		
-	    } 
+			if (SecurityUtils.hasRole("Gerente")) {
+				addMenuTab("Estadisticas", EstadisticasView.class);
+			}
 
+		} else {
+			addMenuTab("Iniciar sesión", LoginView.class);
+		}
+
+		tabs.setOrientation(Tabs.Orientation.VERTICAL);
+		addToDrawer(tabs);
+
+		H2 mensaje = new H2("Bienvenido a la aplicación de Crusaito");
+		VerticalLayout Bienvenida = new VerticalLayout(mensaje);
+
+		setContent(Bienvenida);
+
+	}
 
 	private void addMenuTab(String label, Class<? extends Component> target) {
-		Tab tab = new Tab(new RouterLink(label,target));
-		navigationTargetToTab.put(target,tab);
+		Tab tab = new Tab(new RouterLink(label, target));
+		navigationTargetToTab.put(target, tab);
 		tabs.add(tab);
 	}
 
 	@Override
-    public void beforeEnter(BeforeEnterEvent event) {
-        tabs.setSelectedTab(navigationTargetToTab.get(event.getNavigationTarget()));
-    }
-	
+	public void beforeEnter(BeforeEnterEvent event) {
+		tabs.setSelectedTab(navigationTargetToTab.get(event.getNavigationTarget()));
+	}
+
 	/**
 	 * changeTheme Crea un boton para intercambiar entre tema claro y oscuro
 	 */

@@ -96,11 +96,6 @@ public class ServicioService {
 		return this.repo.findAll();
 	}
 	
-	/*public List<Servicio> findByUsername(String username){
-		Usuario usuario = this.userRepo.findByUsername(username);
-		return this.repo.findByUsuario(usuario);
-	}*/
-	
 	/**
 
      * Método busca los servicios de un crucero a partir del nombre de usuario de un cliente dado.
@@ -116,8 +111,6 @@ public class ServicioService {
 		return this.repo.findByCruceros(crucero);
 	}
 	
-
-	
 	/**
 	 * Métodos que asocia un servicio con el usuario que lo ha reservado
 	 * 
@@ -128,21 +121,28 @@ public class ServicioService {
 	
 	public void addServicioToUsuario(Servicio servicio, Usuario usuario, int participantes) {
 		try {
-		ServicioUsuario servUser = new ServicioUsuario();
-		servUser.setServicio(servicio);
-		servUser.setUsuario(usuario);
-		servUser.setParticipantes(participantes);
-		servUser.setPrecio(((double)participantes)*servicio.getsPrecio());
-		
-		servicio.getServiciosUsuarios().add(servUser);
-		usuario.getUsuariosServicios().add(servUser);
-		
-		this.repo.save(servicio);
-		//this.userRepo.save(usuario);
+			if(this.servUserRepo.findByServicioAndUsuario(servicio, usuario)==null) {
+				ServicioUsuario servUser = new ServicioUsuario();
+				servUser.setServicio(servicio);
+				servUser.setUsuario(usuario);
+				servUser.setParticipantes(participantes);
+				servUser.setPrecio(((double)participantes)*servicio.getsPrecio());
+				
+				servicio.getServiciosUsuarios().add(servUser);
+				servicio.addAforoActual(participantes);
+				usuario.getUsuariosServicios().add(servUser);
+				
+				this.repo.save(servicio);
+				this.userRepo.save(usuario);
+				this.servUserRepo.save(servUser);
+			} else {
+				throw new DataIntegrityViolationException("Reserva ya existente");
+			}
+			
 		}catch(DataIntegrityViolationException error) {
     		Funciones.notificacionError("Ya tiene una reserva anterior");
 		}catch(Exception e) {
-			Funciones.notificacionError("Error al realizar la reserva");
+			Funciones.notificacionError("Error al realizar la reserva, contacte con el personal del barco.");
 		}
 	}
 	
@@ -165,7 +165,7 @@ public class ServicioService {
 		this.repo.save(servicio);
 		this.servUserRepo.delete(servUser);
 		}catch(Exception e) {
-			Funciones.notificacionError("Error al cancelar la reserva");
+			Funciones.notificacionError("Error al cancelar la reserva, por favor contacte con el personal del barco.");
 		}
 	}
 	

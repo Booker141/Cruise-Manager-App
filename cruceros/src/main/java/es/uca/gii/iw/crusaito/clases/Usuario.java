@@ -74,7 +74,6 @@ public class Usuario implements UserDetails{
 		this.role=role;
 		this.pEncoded = false;
 		this.usuariosServicios = new HashSet<ServicioUsuario>();
-		//this.servicios = new HashSet<Servicio>();
 	}
 
 	public String getFirstName() {
@@ -103,7 +102,6 @@ public class Usuario implements UserDetails{
 	//Implementación métodos heredados de UserDetails
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return username;
 	}
 
@@ -203,22 +201,6 @@ public class Usuario implements UserDetails{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	/*
-	public List<Reserva> getReservas() {
-		return reservas;
-	}
-
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
-	}
-
-	public Set<Servicio> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(Set<Servicio> servicios) {
-		this.servicios = servicios;
-	}*/
 	
 	public long getId() {
 		return id;
@@ -262,16 +244,4 @@ public class Usuario implements UserDetails{
 		this.usuariosServicios = usuariosServicios;
 	}
 	
-	/*
-	public String currentUsername() {
-
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			if (principal instanceof UserDetails) {
-				String username = ((UserDetails)principal).getUsername();
-			} else {
-				String username = principal.toString();
-			}
-				return username;
-	}
-	*/
 }
