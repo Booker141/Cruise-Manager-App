@@ -71,8 +71,8 @@ public class InicioClienteView extends VerticalLayout{
         Label Aforo = new Label("Aforo máximo de pasajeros: " + barco.getbAforoPasajeros());
         Label Peso = new Label("Peso: " + barco.getbPeso());
         Label FchaServicio = new Label("Fecha de puesta en servicio: " + barco.getbFchPuestaServicio());
-        Label Instalaciones = new Label("Instalaciones del barco: ");
-        Label Instalacion = new Label(serviceList.toString());
+        Label Servicios = new Label("Servicios que ofrece el barco: ");
+        Label Servicio = new Label(serviceList.toString());
         Label Plano = new Label("Planos del barco: ");
         b2Imagen = new Image(barco.getbPlano(), "Imagen no encontrada");
         b2Imagen.setHeight("100%");
@@ -109,7 +109,7 @@ public class InicioClienteView extends VerticalLayout{
 				+ "Procura llevar un adaptador universal para enchufes.");
 		
         VerticalLayout layout = new VerticalLayout(nombreCrucero, Titulo, Origen, Destino, Duracion, 
-        		nombreBarco, Titulo2, bImagen, Descripcion, Aforo, Peso, FchaServicio, Instalaciones, Instalacion, Plano, b2Imagen, 
+        		nombreBarco, Titulo2, bImagen, Descripcion, Aforo, Peso, FchaServicio, Servicios, Servicio, Plano, b2Imagen, 
         		Consejos, Consejo1, Consejo2, Consejo3, Consejo4, Consejo5);
         add(layout);
 	}

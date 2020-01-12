@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -29,15 +30,15 @@ public class Servicio {
 	private int sAforoMaximo;
 	private LocalDate sFecha;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Ciudad ciudad;
+	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "servicios")
 	private Set<Crucero> cruceros;
 	
 	@OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
 	private Set<ServicioUsuario> serviciosUsuarios;
-	
-	
-	private String eItinerario;
-	
+		
 	/**
 	 * Constructor de la entidad Servicio
 	 * 
@@ -81,7 +82,7 @@ public class Servicio {
 	 */
 	
 	public Servicio(String sNombre, String sDescripcion, double sPrecio, ServicioTipo sTipo, int sAforoActual,
-			String sImagen, int sAforoMaximo, LocalDate sFecha, String eItinerario) {
+			String sImagen, int sAforoMaximo, LocalDate sFecha) {
 		this.sNombre = sNombre;
 		this.sDescripcion = sDescripcion;
 		this.sPrecio = sPrecio;
@@ -90,12 +91,13 @@ public class Servicio {
 		this.sAforoActual = sAforoActual;
 		this.sAforoMaximo = sAforoMaximo;
 		this.sFecha = sFecha;
-		this.eItinerario = eItinerario;
 		this.serviciosUsuarios = new HashSet<ServicioUsuario>();
 		this.cruceros = new HashSet<Crucero>();
 	}
 
-	//Constructor vacio
+	/**
+	 * Constructor de clase vacio
+	 */
 	public Servicio() {}
 
 	/**
@@ -186,32 +188,6 @@ public class Servicio {
 		this.sFecha = sFecha;
 	}
 
-	/*public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}*/
-
-	/*public void addUsuario(Usuario usuario) {
-		this.usuarios.add(usuario);
-		usuario.getServicios().add(this);
-	}
-	
-	public void removeUsuario(Usuario usuario) {
-		this.usuarios.remove(usuario);
-		usuario.getServicios().remove(this);
-	}*/
-	
-	public String geteItinerario() {
-		return eItinerario;
-	}
-
-	public void seteItinerario(String eItinerario) {
-		this.eItinerario = eItinerario;
-	}
-
 	public String getsImagen() {
 		return sImagen;
 	}
@@ -264,6 +240,16 @@ public class Servicio {
 		} else if (!sNombre.equals(other.sNombre))
 			return false;
 		return true;
+	}
+
+
+	public Ciudad getCiudad() {
+		return ciudad;
+	}
+
+
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	

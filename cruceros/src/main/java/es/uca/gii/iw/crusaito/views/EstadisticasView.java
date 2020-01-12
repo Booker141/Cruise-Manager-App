@@ -3,7 +3,7 @@ package es.uca.gii.iw.crusaito.views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
-
+import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.AxisTitle;
 import com.vaadin.flow.component.charts.model.ChartType;
@@ -15,6 +15,7 @@ import com.vaadin.flow.component.charts.model.Tooltip;
 import com.vaadin.flow.component.charts.model.VerticalAlign;
 import com.vaadin.flow.component.charts.model.XAxis;
 import com.vaadin.flow.component.charts.model.YAxis;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
@@ -29,11 +30,12 @@ import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 @Secured("Gerente")
 @SuppressWarnings("serial")
 @Route(value = "Estadisticas",layout = MainView.class)
-public class EstadisticasView extends PrincipalView{
+public class EstadisticasView extends Div{
 	
 	    private ServicioService servicioService;
 	    private ServicioUsuarioService susuarioService;
-
+	    Board board = new Board();
+	    
 	    @Autowired
 	    public EstadisticasView(ServicioService servicioService, ServicioUsuarioService susuarioService) {
 	        this.servicioService = servicioService;
@@ -182,10 +184,16 @@ public class EstadisticasView extends PrincipalView{
 		                    + " : " + event.getItem().getName());
 		        });
 
+	        board.addRow(chartVolumen);
+	        board.addRow(chartMas);
+	        board.addRow(chartMenos);
+	        
 	        add(chartVolumen, chartMas, chartMenos);
 	      
-	        Notification.show("No se ha realizado ninguna reserva de los servicios en este crucero", 3000, Notification.Position.MIDDLE);
-	        Label mensaje = new Label("Vuelva mas tarde");
-	        mensaje.setVisible(true);
+	        if(susuarioService.findAll() == null) {
+	        	Notification.show("No se ha realizado ninguna reserva de los servicios en este crucero", 3000, Notification.Position.MIDDLE);
+	        	Label mensaje = new Label("Vuelva mas tarde");
+	        	mensaje.setVisible(true);
+	        }
 	}
 }
