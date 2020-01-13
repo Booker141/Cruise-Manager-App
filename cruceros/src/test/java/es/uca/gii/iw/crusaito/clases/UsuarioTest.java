@@ -19,6 +19,6 @@ public class UsuarioTest {
         assertEquals("Perez", u.getLastName());
         assertEquals("12345678T", u.getDni());
         assertEquals("Cadiz", u.getCity());
-        assertEquals("Cliente", u.getRole());
+        assertEquals("Cliente", u.getRole().getName());
     }
 }

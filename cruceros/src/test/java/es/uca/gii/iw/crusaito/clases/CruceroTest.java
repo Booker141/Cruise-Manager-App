@@ -18,6 +18,6 @@ public class CruceroTest {
         assertEquals("Portugal", c.getcDestino());
         assertEquals("5 dias", c.getcDuracion());
         assertEquals("Muy buen crucero", c.getcDescripcion());
-        assertEquals(50.0, c.getcPrecio());
+        assert(50.0 == c.getcPrecio());
     }
 }
