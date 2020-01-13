@@ -7,16 +7,19 @@ import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Ciudad;
+import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.CiudadService;
 import es.uca.gii.iw.crusaito.servicios.CruceroService;
 
 @Route(value = "ListaCiudades",layout = MainView.class)
 @SuppressWarnings("serial")
 @Secured("Admin")
-public class AdminListaCiudadesView extends VerticalLayout{
+public class AdminListaCiudadesView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private CiudadService ciudadService;
 	private CruceroService cruceroService;
@@ -35,15 +38,6 @@ public class AdminListaCiudadesView extends VerticalLayout{
 
 		formFactory.setVisibleProperties("cNombre");
 		
-		/*formFactory.setFieldProvider("cruceros", ()->{
-			MultiselectComboBox<Crucero> multibox = new MultiselectComboBox<>();
-			
-			multibox.setLabel("Selecciona cruceros");
-			multibox.setItems(this.cruceroService.load());
-			multibox.setItemLabelGenerator(Crucero::getcNombre);
-			return multibox;
-		}); */
-		
 		crud.setCrudFormFactory(formFactory);
 		
 		crud.setFindAllOperation(this.ciudadService::load); 
@@ -54,5 +48,16 @@ public class AdminListaCiudadesView extends VerticalLayout{
 		this.add(crud);
 	}
 	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
+	}
 }
 

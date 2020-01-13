@@ -10,12 +10,14 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
@@ -29,22 +31,19 @@ import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 @SuppressWarnings("serial")
 @Route(value = "MisReservas",layout = MainView.class)
 @Secured("Cliente")
-public class MisReservasView extends VerticalLayout{
+public class MisReservasView extends VerticalLayout implements BeforeEnterObserver{
 	
 	private ServicioService servicioService;
     private UsuarioService usuarioService;
     private ServicioUsuarioService servicioUsuarioService;
-    
-	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
     private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
     private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
     
     private  Dialog ventana = new Dialog();
 
-    private Div sNombreDiv = new Div();
-	private Div sTipoDiv = new Div();
+    private H6 sNombre = new H6();
+	private H6 sTipo = new H6();
 	private Image sImagenImage = new Image();
 	
     private Notification notificacion = new Notification();
@@ -52,21 +51,15 @@ public class MisReservasView extends VerticalLayout{
     private Button cancelButton = new Button("Cancelar");
     private Button confirmButton = new Button("Confirmar");
     private Button deleteButton = new Button("Cancelar reserva");
-    
-    //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
-    
+        
 	@Autowired
-    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, ServicioUsuarioService servicioUsuarioService) 
-	{
+    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, 
+    		ServicioUsuarioService servicioUsuarioService){
+		
 		this.servicioService = servicioService;
 		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
 
-		//Lista de servicios a partir de servUser
-		/*List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
-			servUser.forEach(serviUsuar -> {
-			serviceList.add(serviUsuar.getServicio());
-		});*/
 		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		grid.setItems(serviceList);
 
@@ -79,8 +72,8 @@ public class MisReservasView extends VerticalLayout{
 		grid.setSizeFull();
 		this.setSizeFull();
 		
-		sNombreDiv.setTitle("Nombre");
-		sTipoDiv.setTitle("Tipo");
+		sNombre.setTitle("Nombre");
+		sTipo.setTitle("Tipo");
 		
 		sImagenImage.setTitle("Imagen");
 		sImagenImage.setHeight("100%");
@@ -99,12 +92,12 @@ public class MisReservasView extends VerticalLayout{
 		deleteButton.addClickListener(event -> notificacion.open());
 		deleteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-		ventana.add(sNombreDiv,sTipoDiv,sImagenImage,deleteButton);
+		ventana.add(sNombre,sTipo,sImagenImage,deleteButton);
 		
 		grid.addItemClickListener(event -> {
 			
-			sNombreDiv.setText("Nombre: " + event.getItem().getServicio().getsNombre());
-			sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
+			sNombre.setText("Nombre: " + event.getItem().getServicio().getsNombre());
+			sTipo.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
 			sImagenImage.setSrc(event.getItem().getServicio().getsImagen());
 			
 			ventana.open();
@@ -121,37 +114,19 @@ public class MisReservasView extends VerticalLayout{
 			});
 		});
 		
-		//ventanaSeguro.setAlignItems(Alignment.CENTER);
-		/*
-		seguro.addClickListener(event ->{
-		    reserva.setEstado(ReservaEstado.Cancelada);
-		    ReservaService.save(reserva);
-		    ventana.close();
-		    Funciones.notificacionAcierto("Reserva cancelada con éxito");
-		    grid.setItems(ReservaService.listByUsuario(UsuarioService.findByUsername(SecurityUtils.currentUsername())));
-		    });
-		*/
-		/*
-	    grid.addColumn(new NativeButtonRenderer<>("Cancelar", clickedItem -> {
-	    	grid.asSingleSelect().clear();
-	    	LocalDate now = LocalDate.now();
-	    	
-	    	if(clickedItem.getEstado() == ReservaEstado.Cancelada)
-	    		Funciones.notificacionAcierto("Esta reserva ya ha sido cancelada con anterioridad");
-	    	else{
-	    		
-	    	if(clickedItem.getFechaInicio().isBefore(now.minusDays(1)))
-	    		Funciones.notificacionError("Lo sentimos, no puede cancelar la reserva debido a que es demasiado tarde");
-	    	else
-	    	{
-	    		reserva = clickedItem;
-	    		clickedItem.setEstado(ReservaEstado.Cancelada);
-	    	}
-	        ventana.open();
-	    	}
-	      }));
-	*/
 	    add(grid);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		} 
 	}
 	
 }

@@ -1,11 +1,11 @@
 package es.uca.gii.iw.crusaito.views;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -15,7 +15,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.HeaderRow;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -26,6 +26,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.NumberRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 
 import es.uca.gii.iw.crusaito.clases.Servicio;
@@ -34,25 +36,25 @@ import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
-import es.uca.gii.iw.crusaito.common.*;
 
 @SuppressWarnings("serial")
 @Route(value = "ServiciosView",layout = MainView.class)
 @Secured("Cliente")
-public class ServiciosView extends VerticalLayout{
+public class ServiciosView extends VerticalLayout implements BeforeEnterObserver{
 
 	private UsuarioService usuarioService;
 	private ServicioService servicioService;
 	
 	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-	private List<Servicio> serviceList;
+	private List<Servicio> serviceList = new ArrayList<Servicio>();
 	private ListDataProvider<Servicio> dataProvider;
 	
 	private HeaderRow filterRow;
 	private TextField sNombreField;
 	private NumberField participantesField = new NumberField("Numero de personas");
-	private Div sNombreDiv;
-	private Div sTipoDiv;
+	private H6 sNombre;
+	private H6 sDescripcion;
+	private H6 sTipo;
 	private Image sImagenImage;
 	
 	private Dialog dialog;
@@ -72,32 +74,33 @@ public class ServiciosView extends VerticalLayout{
 		
 		this.servicioService = servicioService;
 		this.usuarioService = usuarioService;
-		
-		serviceList = this.servicioService.findCruceroByUsername(SecurityUtils.currentUsername());
-		
+				
 		dataProvider = new ListDataProvider<>(serviceList);
 		grid.setDataProvider(dataProvider);
 		
 		grid.removeColumnByKey("id"); grid.removeColumnByKey("sTipo"); grid.removeColumnByKey("sAforoActual"); grid.removeColumnByKey("sAforoMaximo");
 		grid.removeColumnByKey("serviciosUsuarios"); grid.removeColumnByKey("sPrecio"); grid.removeColumnByKey("sImagen");
 
-		grid.setColumns("sNombre","sDescripcion","eItinerario");
+		grid.setColumns("sNombre","sDescripcion","ciudad","sTipo");
 
 		grid.getColumnByKey("sNombre").setHeader("Nombre");
 		grid.getColumnByKey("sDescripcion").setHeader("Descripcion");
 		grid.addColumn(new NumberRenderer<>(Servicio::getsPrecio,"%(,.2f €",new Locale("es"),"0.00 €")).setHeader("Precio");
-		grid.getColumnByKey("eItinerario").setHeader("Itinerario");
-		//grid.getColumnByKey("sTipo").setHeader("Tipo");
+		grid.getColumnByKey("ciudad").setHeader("Ciudad");
+		grid.getColumnByKey("sTipo").setHeader("Tipo");
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 
 		dialog = new Dialog();
 		
-		sNombreDiv = new Div();
-		sNombreDiv.setTitle("Nombre");
+		sNombre = new H6();
+		sNombre.setTitle("Nombre");
 		
-		sTipoDiv = new Div();
-		sTipoDiv.setTitle("Tipo");
+		sDescripcion = new H6();
+		sNombre.setTitle("Descripcion");
+		
+		sTipo = new H6();
+		sTipo.setTitle("Tipo");
 		
 		sImagenImage = new Image();
 		sImagenImage.setTitle("Imagen");
@@ -133,35 +136,42 @@ public class ServiciosView extends VerticalLayout{
 		servicioLleno.add(labelLleno,llenoButton);
 		
 		
-		dialog.add(sNombreDiv,sTipoDiv,sImagenImage, reservaButton, participantesField);
+		dialog.add(sNombre, sDescripcion, sTipo, sImagenImage, reservaButton, participantesField);
 		
 		grid.addItemClickListener(
 		        event -> {
-		        	sNombreDiv.setText("Nombre: " + event.getItem().getsNombre());
-		            sTipoDiv.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
+		        	sNombre.setText(event.getItem().getsNombre());
+		        	sDescripcion.setText(event.getItem().getsDescripcion());
+		            sTipo.setText(String.valueOf(event.getItem().getsTipo()));
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
-		            participantesField.setValue(1d);
-		    		participantesField.setHasControls(true);
-		    		participantesField.setMin(1);
-		    		participantesField.setMax(event.getItem().getsAforoMaximo());
-		    		
-		            dialog.open();
-		            
-		            confirmButton.addClickListener(e -> {
-		            	//try {
-		            	Servicio servicio = event.getItem();
-		            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
-		            		Usuario user = buscarUsuarioLogin();
-		            		servicio.addAforoActual(participantesField.getValue().intValue());
-		            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
-		            		notification.close();
-		            	}else {
-		            		servicioLleno.open();
-		            		notification.close();
-		            	}
-		            	
-		            });
+		            if(String.valueOf(event.getItem().getsTipo())!="Tienda") {
+			            participantesField.setVisible(true);
+			            reservaButton.setVisible(true);
+			            
+		            	participantesField.setValue(1d);
+			    		participantesField.setHasControls(true);
+			    		participantesField.setMin(1);
+			    		participantesField.setMax(event.getItem().getsAforoMaximo());
+		    				            
+			            confirmButton.addClickListener(e -> {
+			            	Servicio servicio = event.getItem();
+			            	
+			            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
+			            		Usuario user = buscarUsuarioLogin();
+			            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
+			            		notification.close();
+			            	}else {
+			            		servicioLleno.open();
+			            		notification.close();
+			            	}
+			            	
+			            });
+		            }else {
+		            	participantesField.setVisible(false);
+			            reservaButton.setVisible(false);
+		            }
+		    		dialog.open();
 		    		
 		        });
 		
@@ -207,6 +217,22 @@ public class ServiciosView extends VerticalLayout{
 	public Usuario buscarUsuarioLogin() {
     	String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		return this.usuarioService.findByUsername(username);
+	}
+	
+	public void beforeEnter(BeforeEnterEvent event) {
+		final boolean accessGranted = SecurityUtils.isAccessGranted(event.getNavigationTarget());
+		if(!accessGranted) {
+			if(SecurityUtils.isUserLoggedIn()) {
+				event.rerouteTo(ProhibidoView.class);
+			}
+			else {
+				event.rerouteTo(LoginView.class);
+			}
+		}else{
+			serviceList = this.servicioService.findCruceroByUsername(SecurityUtils.currentUsername());
+			dataProvider = new ListDataProvider<>(serviceList);
+			grid.setDataProvider(dataProvider);
+		}
 	}
 	
 }

@@ -20,7 +20,7 @@ public class ServicioUsuarioService {
 		this.repo = repo;
 	}
 	
-	public ServicioUsuario saveServicio(ServicioUsuario servicioUsuario) {
+	public ServicioUsuario save(ServicioUsuario servicioUsuario) {
 		return this.repo.save(servicioUsuario);
 	}
 	

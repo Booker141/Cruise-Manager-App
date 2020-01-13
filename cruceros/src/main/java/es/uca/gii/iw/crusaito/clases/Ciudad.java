@@ -22,16 +22,16 @@ public class Ciudad {
 	private String cNombre;
 	@Size(max = 10000)
 	private String cDescripcion;
-	/*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "ciudad_crucero",
-    	joinColumns = {@JoinColumn(name = "ciudad_id", referencedColumnName = "id")},
-    	inverseJoinColumns = {@JoinColumn(name = "crucero_id", referencedColumnName = "id")}
-	)
-	private Set<Crucero> cruceros;
-	*/
+
 	@OneToMany(mappedBy = "ciudad", cascade = CascadeType.ALL)
 	private Set<CiudadCrucero> ciudadesCruceros;
 	
+	@OneToMany(mappedBy = "ciudad")
+	private Set<Servicio> servicios;
+	
+	/**
+	 * Constructor de clase
+	 */
 	public Ciudad() {}
 	
 	/**
@@ -39,11 +39,10 @@ public class Ciudad {
 	 * 
 	 * @param cNombre - cNombre define el nombre de la ciudad.
 	 */
-	
 	public Ciudad(String cNombre) {
 		this.cNombre = cNombre;
-		//this.cruceros = new HashSet<Crucero>();
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
+		this.servicios = new HashSet<Servicio>();
 	}
 	
 	/**
@@ -56,7 +55,7 @@ public class Ciudad {
 	public Ciudad(String cNombre, String cDescripcion) {
 		this.cNombre = cNombre;
 		this.cDescripcion = cDescripcion;
-		//this.cruceros = new HashSet<Crucero>();
+		this.servicios = new HashSet<Servicio>();
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
 	}
 	
@@ -69,7 +68,7 @@ public class Ciudad {
 	
 	public Ciudad(String cNombre, Set<CiudadCrucero> cCiudadCrucero) {
 		this.cNombre = cNombre;
-		//this.cruceros = cCruceros;
+		this.servicios = new HashSet<Servicio>();
 		this.ciudadesCruceros = new HashSet<CiudadCrucero>();
 	}
 
@@ -108,5 +107,13 @@ public class Ciudad {
 
 	public void setCiudadesCruceros(Set<CiudadCrucero> ciudadesCruceros) {
 		this.ciudadesCruceros = ciudadesCruceros;
+	}
+
+	public Set<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(Set<Servicio> servicios) {
+		this.servicios = servicios;
 	}
 }

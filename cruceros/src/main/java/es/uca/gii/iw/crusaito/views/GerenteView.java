@@ -16,13 +16,7 @@ public class GerenteView extends VerticalLayout {
 	public GerenteView() {
 		
 		H1 Aviso = new H1();
-		
-		if(SecurityUtils.isUserLoggedIn()) {
-			Aviso.setText("Estoy conectado como " + SecurityUtils.currentUsername());
-		}else {
-			Aviso.setText("No estoy conectado");
-		}
-		
+		Aviso.setText("¡Bienvenido " + SecurityUtils.currentUsername() + " ! Tiene acceso a sus funciones principales.");
 		add(Aviso);
 	}
 
