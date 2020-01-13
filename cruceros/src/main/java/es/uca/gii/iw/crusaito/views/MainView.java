@@ -93,6 +93,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 			}
 
 			if (SecurityUtils.hasRole("Gerente")) {
+				addMenuTab("Inicio", GerenteView.class);
 				addMenuTab("Estadisticas", EstadisticasView.class);
 			}
 
