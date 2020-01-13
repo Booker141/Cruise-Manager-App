@@ -11,10 +11,12 @@ import es.uca.gii.iw.crusaito.clases.Barco;
 import es.uca.gii.iw.crusaito.clases.Crucero;
 import es.uca.gii.iw.crusaito.clases.Rol;
 import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.repositorios.BarcoRepository;
 
 public class BarcoServiceTest {
 	
-	private BarcoService barcoService ;
+	private BarcoRepository repo;
+	private BarcoService barcoService = new BarcoService (repo);
 	
 	@Test
 	public void Test (){

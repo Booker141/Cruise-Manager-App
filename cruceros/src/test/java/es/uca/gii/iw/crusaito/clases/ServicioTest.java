@@ -17,11 +17,10 @@ public class ServicioTest {
 
         assertEquals("Nadar", s.getsNombre());
         assertEquals("piscina", s.getsDescripcion());
-        assertEquals(10.0, s.getsPrecio());
+        assert(10.0 == s.getsPrecio());
         assertEquals(ServicioTipo.Excursion, s.getsTipo());
-        assertEquals(30, s.getsAforoActual());
-        assertEquals(40, s.getsAforoMaximo());
-        
+        assert(30 == s.getsAforoActual());
+        assert(40 == s.getsAforoMaximo());
     }
 	
 }
