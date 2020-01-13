@@ -43,7 +43,6 @@ public class LoginView extends VerticalLayout {
    		add(login);
    		
    		login.addLoginListener(e -> this.authenticate(e.getUsername(), e.getPassword()));
-		
     }
     
 	private void authenticate(String username, String password) {
@@ -53,7 +52,8 @@ public class LoginView extends VerticalLayout {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			login.close();
 			UI.getCurrent().navigate(requestCache.resolveRedirectUrl());
-
+			UI.getCurrent().getPage().reload();
+			
 		} catch (AuthenticationException ex) {
 		 login.setError(true);
 	}

@@ -36,9 +36,6 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 	private ServicioService servicioService;
     private UsuarioService usuarioService;
     private ServicioUsuarioService servicioUsuarioService;
-    
-	//private Grid<Servicio> grid = new Grid<>(Servicio.class);
-    //private List<Servicio> serviceList = new ArrayList<Servicio>();
 	
     private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
     private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
@@ -54,21 +51,15 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
     private Button cancelButton = new Button("Cancelar");
     private Button confirmButton = new Button("Confirmar");
     private Button deleteButton = new Button("Cancelar reserva");
-    
-    //private VerticalLayout ventanaSeguro = new VerticalLayout(confirmacion, seguro);
-    
+        
 	@Autowired
-    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, ServicioUsuarioService servicioUsuarioService) 
-	{
+    public MisReservasView(ServicioService servicioService, UsuarioService usuarioService, 
+    		ServicioUsuarioService servicioUsuarioService){
+		
 		this.servicioService = servicioService;
 		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
 
-		//Lista de servicios a partir de servUser
-		/*List<ServicioUsuario> servUser = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
-			servUser.forEach(serviUsuar -> {
-			serviceList.add(serviUsuar.getServicio());
-		});*/
 		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		grid.setItems(serviceList);
 

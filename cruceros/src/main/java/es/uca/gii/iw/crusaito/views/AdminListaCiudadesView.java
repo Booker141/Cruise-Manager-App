@@ -38,15 +38,6 @@ public class AdminListaCiudadesView extends VerticalLayout implements BeforeEnte
 
 		formFactory.setVisibleProperties("cNombre");
 		
-		/*formFactory.setFieldProvider("cruceros", ()->{
-			MultiselectComboBox<Crucero> multibox = new MultiselectComboBox<>();
-			
-			multibox.setLabel("Selecciona cruceros");
-			multibox.setItems(this.cruceroService.load());
-			multibox.setItemLabelGenerator(Crucero::getcNombre);
-			return multibox;
-		}); */
-		
 		crud.setCrudFormFactory(formFactory);
 		
 		crud.setFindAllOperation(this.ciudadService::load); 

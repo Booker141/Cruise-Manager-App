@@ -18,6 +18,7 @@ import com.vaadin.flow.component.charts.model.YAxis;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
@@ -33,16 +34,19 @@ import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 @Secured("Gerente")
 @SuppressWarnings("serial")
 @Route(value = "Estadisticas",layout = MainView.class)
-public class EstadisticasView extends Div implements BeforeEnterObserver{
+public class EstadisticasView extends VerticalLayout implements BeforeEnterObserver{
 	
 	    private ServicioService servicioService;
 	    private ServicioUsuarioService susuarioService;
-	    Board board = new Board();
+	    private Board board = new Board();
 	    
 	    @Autowired
 	    public EstadisticasView(ServicioService servicioService, ServicioUsuarioService susuarioService) {
 	        this.servicioService = servicioService;
 	        this.susuarioService = susuarioService;
+
+	        board.setSizeFull();
+	        this.setSizeFull();
 
 	        /**
 	         * Primera gráfica
@@ -52,10 +56,9 @@ public class EstadisticasView extends Div implements BeforeEnterObserver{
 	            Configuration configuracion1 = chartVolumen.getConfiguration();
 	            configuracion1.setTitle("Volumen total de facturación");
 
-
-	            for (ServicioUsuario servicioUsuario: susuarioService.findAll()) {
+	            for (ServicioUsuario servicioUsuario: this.susuarioService.findAll()) {
 	                double dTotal = 0;
-	                for (Servicio servicio : servicioService.findAll()) {
+	                for (Servicio servicio : this.servicioService.findAll()) {
 	                    if (servicio.getsNombre().equals(servicioUsuario.getServicio().getsNombre())) {
 	                        dTotal = dTotal + servicio.getsPrecio();
 	                    }
@@ -100,10 +103,9 @@ public class EstadisticasView extends Div implements BeforeEnterObserver{
 	            Configuration configuracion2 = chartMas.getConfiguration();
 	            configuracion2.setTitle("Servicios más solicitados");
 
-
-	            for (ServicioUsuario servicioUsuario: susuarioService.findAll()) {
+	            for (ServicioUsuario servicioUsuario: this.susuarioService.findAll()) {
 	                int iSolicitado = 0;
-	                for (Servicio servicio : servicioService.findAll()) {
+	                for (Servicio servicio : this.servicioService.findAll()) {
 	                    if (servicio.getsNombre().equals(servicioUsuario.getServicio().getsNombre())) {
 	                        iSolicitado++;
 	                    }
@@ -149,9 +151,9 @@ public class EstadisticasView extends Div implements BeforeEnterObserver{
 	            configuracion3.setTitle("Excursiones mas demandadas");
 
 
-	            for (ServicioUsuario servicioUsuario: susuarioService.findAll()) {
+	            for (ServicioUsuario servicioUsuario: this.susuarioService.findAll()) {
 	                int iDemandada = 0;
-	                for (Servicio servicio : servicioService.findBysTipo(ServicioTipo.Excursion)) {
+	                for (Servicio servicio : this.servicioService.findBysTipo(ServicioTipo.Excursion)) {
 	                    if (servicio.getsNombre().equals(servicioUsuario.getServicio().getsNombre())) {
 	                        iDemandada++;
 	                    }
@@ -188,10 +190,9 @@ public class EstadisticasView extends Div implements BeforeEnterObserver{
 		        });
 
 	        board.addRow(chartVolumen);
-	        board.addRow(chartMas);
-	        board.addRow(chartMenos);
-	        
-	        add(chartVolumen, chartMas, chartMenos);
+	        board.addRow(chartMas,chartMenos);
+	        	        
+	        add(board);
 	      
 	        if(susuarioService.findAll() == null) {
 	        	Notification.show("No se ha realizado ninguna reserva de los servicios en este crucero", 3000, Notification.Position.MIDDLE);

@@ -1,5 +1,6 @@
 package es.uca.gii.iw.crusaito.views;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,13 +46,14 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 	private ServicioService servicioService;
 	
 	private Grid<Servicio> grid = new Grid<>(Servicio.class);
-	private List<Servicio> serviceList;
+	private List<Servicio> serviceList = new ArrayList<Servicio>();
 	private ListDataProvider<Servicio> dataProvider;
 	
 	private HeaderRow filterRow;
 	private TextField sNombreField;
 	private NumberField participantesField = new NumberField("Numero de personas");
 	private H6 sNombre;
+	private H6 sDescripcion;
 	private H6 sTipo;
 	private Image sImagenImage;
 	
@@ -72,9 +74,7 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		
 		this.servicioService = servicioService;
 		this.usuarioService = usuarioService;
-		
-		serviceList = this.servicioService.findCruceroByUsername(SecurityUtils.currentUsername());
-		
+				
 		dataProvider = new ListDataProvider<>(serviceList);
 		grid.setDataProvider(dataProvider);
 		
@@ -95,6 +95,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		
 		sNombre = new H6();
 		sNombre.setTitle("Nombre");
+		
+		sDescripcion = new H6();
+		sNombre.setTitle("Descripcion");
 		
 		sTipo = new H6();
 		sTipo.setTitle("Tipo");
@@ -133,34 +136,42 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		servicioLleno.add(labelLleno,llenoButton);
 		
 		
-		dialog.add(sNombre,sTipo,sImagenImage, reservaButton, participantesField);
+		dialog.add(sNombre, sDescripcion, sTipo, sImagenImage, reservaButton, participantesField);
 		
 		grid.addItemClickListener(
 		        event -> {
-		        	sNombre.setText("Nombre: " + event.getItem().getsNombre());
-		            sTipo.setText("Tipo: " + String.valueOf(event.getItem().getsTipo()));
+		        	sNombre.setText(event.getItem().getsNombre());
+		        	sDescripcion.setText(event.getItem().getsDescripcion());
+		            sTipo.setText(String.valueOf(event.getItem().getsTipo()));
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
-		            participantesField.setValue(1d);
-		    		participantesField.setHasControls(true);
-		    		participantesField.setMin(1);
-		    		participantesField.setMax(event.getItem().getsAforoMaximo());
-		    		
-		            dialog.open();
-		            
-		            confirmButton.addClickListener(e -> {
-		            	Servicio servicio = event.getItem();
-		            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
-		            		Usuario user = buscarUsuarioLogin();
-		            		servicio.addAforoActual(participantesField.getValue().intValue());
-		            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
-		            		notification.close();
-		            	}else {
-		            		servicioLleno.open();
-		            		notification.close();
-		            	}
-		            	
-		            });
+		            if(String.valueOf(event.getItem().getsTipo())!="Tienda") {
+			            participantesField.setVisible(true);
+			            reservaButton.setVisible(true);
+			            
+		            	participantesField.setValue(1d);
+			    		participantesField.setHasControls(true);
+			    		participantesField.setMin(1);
+			    		participantesField.setMax(event.getItem().getsAforoMaximo());
+		    				            
+			            confirmButton.addClickListener(e -> {
+			            	Servicio servicio = event.getItem();
+			            	
+			            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
+			            		Usuario user = buscarUsuarioLogin();
+			            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
+			            		notification.close();
+			            	}else {
+			            		servicioLleno.open();
+			            		notification.close();
+			            	}
+			            	
+			            });
+		            }else {
+		            	participantesField.setVisible(false);
+			            reservaButton.setVisible(false);
+		            }
+		    		dialog.open();
 		    		
 		        });
 		
@@ -217,7 +228,11 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 			else {
 				event.rerouteTo(LoginView.class);
 			}
-		} 
+		}else{
+			serviceList = this.servicioService.findCruceroByUsername(SecurityUtils.currentUsername());
+			dataProvider = new ListDataProvider<>(serviceList);
+			grid.setDataProvider(dataProvider);
+		}
 	}
 	
 }
