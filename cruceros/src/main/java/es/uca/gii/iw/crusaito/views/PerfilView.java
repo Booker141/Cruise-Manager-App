@@ -1,5 +1,7 @@
 package es.uca.gii.iw.crusaito.views;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,7 +21,6 @@ import com.vaadin.flow.router.Route;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
-import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
@@ -68,7 +69,7 @@ public class PerfilView extends VerticalLayout implements BeforeEnterObserver{
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 		
-		mensaje = new H6("Para modificar los datos contacte con un administrador.");
+		mensaje = new H6("Para modificar los datos contacte con un administrador a través de la siguiente dirección: admin@gmail.com.");
 
 	}
 	/**
@@ -91,14 +92,15 @@ public class PerfilView extends VerticalLayout implements BeforeEnterObserver{
 		firstName = new H6("Nombre: " + usuario.getFirstName());
 		lastName = new H6("Apellidos: " + usuario.getLastName());
 		telefono = new H6("Telefono: " + usuario.getPhoneNumber());
-		dni = new H6("DNI: " + usuario.getDni());;
-		address = new H6("Dirección: " + usuario.getAddress());;
-		city = new H6("Ciudad: " + usuario.getCity());;
-		bornDate = new H6("Fecha de nacimiento: " + usuario.getBornDate().toString());;
-		username = new H6("Nombre de usuario: " + usuario.getUsername());;
+		dni = new H6("DNI: " + usuario.getDni());
+		address = new H6("Dirección: " + usuario.getAddress());
+		city = new H6("Ciudad: " + usuario.getCity());
+		bornDate = new H6("Fecha de nacimiento: " + usuario.getBornDate().toString());
+	
+		username = new H6("Nombre de usuario: " + usuario.getUsername());
 		email = new H6("Correo electrónico: " + usuario.getEmail());
 
-		datos.add(firstName,lastName,telefono,dni,address,city,bornDate,username,email, mensaje);
+		datos.add(firstName,lastName,telefono,dni,address,city,bornDate, username,email, mensaje);
 
 		H6 total = new H6("Factura total: " + dTotal + " €");
 		

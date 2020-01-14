@@ -16,6 +16,7 @@ import com.vaadin.flow.component.charts.model.VerticalAlign;
 import com.vaadin.flow.component.charts.model.XAxis;
 import com.vaadin.flow.component.charts.model.YAxis;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -45,7 +46,6 @@ public class EstadisticasView extends VerticalLayout implements BeforeEnterObser
 	        this.servicioService = servicioService;
 	        this.susuarioService = susuarioService;
 
-	        board.setSizeFull();
 	        this.setSizeFull();
 
 	        /**
@@ -191,9 +191,15 @@ public class EstadisticasView extends VerticalLayout implements BeforeEnterObser
 
 	        board.addRow(chartVolumen);
 	        board.addRow(chartMas,chartMenos);
-	        	        
-	        add(board);
-	      
+	        	     
+	        H1 titulo = new H1("Reglas de negocio");
+	        Label regla1 = new Label("1.- Si tienes más de 55 años tienes un 25% descuento.");
+	        Label regla2 = new Label("2.- Si van a reservar más de dos pasajeros tendrán un 20% de descuento del total.");
+	        Label regla3 = new Label("3.- Si hay hueco libre en el aforo, tienen prioridad aquellos sin reserva.");
+	        H1 estadisticas = new H1("Estadísticas");
+	        
+	        add(titulo, regla1, regla2, regla3, estadisticas, board);
+	        
 	        if(susuarioService.findAll() == null) {
 	        	Notification.show("No se ha realizado ninguna reserva de los servicios en este crucero", 3000, Notification.Position.MIDDLE);
 	        	Label mensaje = new Label("Vuelva mas tarde");

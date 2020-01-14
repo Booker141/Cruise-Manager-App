@@ -8,9 +8,6 @@ import java.util.List;
 import org.junit.Test;
 
 import es.uca.gii.iw.crusaito.clases.Barco;
-import es.uca.gii.iw.crusaito.clases.Crucero;
-import es.uca.gii.iw.crusaito.clases.Rol;
-import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.repositorios.BarcoRepository;
 
 public class BarcoServiceTest {

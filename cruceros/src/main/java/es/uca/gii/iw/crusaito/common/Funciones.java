@@ -33,7 +33,7 @@ public class Funciones {
 	
 	public static void notificacionAcierto(String cadena)
 	{
-		Notification notification = new Notification(cadena, 3000, Position.TOP_CENTER);
+		Notification notification = new Notification(cadena, 2000, Position.TOP_CENTER);
 		notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
 		notification.open();
 	}

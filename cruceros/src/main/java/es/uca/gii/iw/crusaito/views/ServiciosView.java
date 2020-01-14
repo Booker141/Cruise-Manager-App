@@ -57,6 +57,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 	private H6 sTipo;
 	private Image sImagenImage;
 	
+	private H6 descuentosField = new H6("Descuentos no acumulables");
+	private H6 descuentos1Field = new H6("1. Si eres mayor de 55 años, se le aplicará un 25% de descuento sobre el total.");
+	private H6 descuentos2Field = new H6("2. Si vas acompañado de 3 o más participantes, se le aplicará un 20% de descuento sobre el total.");
 	private Dialog dialog;
 	
 	private Notification notification;
@@ -136,7 +139,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		servicioLleno.add(labelLleno,llenoButton);
 		
 		
-		dialog.add(sNombre, sDescripcion, sTipo, sImagenImage, reservaButton, participantesField);
+		dialog.add(sNombre, sDescripcion, sTipo, sImagenImage,
+				descuentosField, descuentos1Field, descuentos2Field, 
+				reservaButton, participantesField);
 		
 		grid.addItemClickListener(
 		        event -> {
@@ -146,7 +151,10 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
 		            if(String.valueOf(event.getItem().getsTipo())!="Tienda") {
-			            participantesField.setVisible(true);
+		            	descuentosField.setVisible(true);
+		            	descuentos1Field.setVisible(true);
+		            	descuentos2Field.setVisible(true);
+		            	participantesField.setVisible(true);
 			            reservaButton.setVisible(true);
 			            
 		            	participantesField.setValue(1d);
@@ -168,6 +176,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 			            	
 			            });
 		            }else {
+		            	descuentosField.setVisible(false);
+		            	descuentos1Field.setVisible(false);
+		            	descuentos2Field.setVisible(false);
 		            	participantesField.setVisible(false);
 			            reservaButton.setVisible(false);
 		            }
@@ -203,6 +214,8 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 			applyFilter(dataProvider);
 		});
 		
+		grid.setSizeFull();
+		this.setSizeFull();
 		add(sTipoComboBox, grid);
 	}
 	
