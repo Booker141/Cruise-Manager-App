@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H6;
@@ -23,6 +24,7 @@ import com.vaadin.flow.router.Route;
 import es.uca.gii.iw.crusaito.clases.Servicio;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
+import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
@@ -37,19 +39,19 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
     private UsuarioService usuarioService;
     private ServicioUsuarioService servicioUsuarioService;
 	
+    private ServicioUsuario servicioUsuario;
+    private Usuario usuario;
+    
     private Grid<ServicioUsuario> grid = new Grid<>(ServicioUsuario.class);
     private List<ServicioUsuario> serviceList = new ArrayList<ServicioUsuario>();
     
-    private  Dialog ventana = new Dialog();
+    //Ventana emergente por cada click en un servicio
+    private Dialog ventana = new Dialog();
 
     private H6 sNombre = new H6();
 	private H6 sTipo = new H6();
 	private Image sImagenImage = new Image();
 	
-    private Notification notificacion = new Notification();
-    private Label confirmacion = new Label("¿Seguro que desea cancelar esta reserva?");
-    private Button cancelButton = new Button("Cancelar");
-    private Button confirmButton = new Button("Confirmar");
     private Button deleteButton = new Button("Cancelar reserva");
         
 	@Autowired
@@ -60,6 +62,8 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 		this.servicioUsuarioService = servicioUsuarioService;
 		this.usuarioService = usuarioService;
 
+		usuario = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
+		
 		serviceList = this.servicioUsuarioService.findByUsuario(this.usuarioService.findByUsername(SecurityUtils.currentUsername()));
 		grid.setItems(serviceList);
 
@@ -79,42 +83,63 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 		sImagenImage.setHeight("100%");
 		sImagenImage.setWidth("100%");
 		
-		notificacion.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
-
-		cancelButton.addClickListener(e -> notificacion.close());
-		confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
-		notificacion.add(confirmacion,cancelButton,confirmButton);
 		
-		confirmacion.getStyle().set("margin-right", "0.5rem");
-		cancelButton.getStyle().set("margin-right", "0.5rem");
-		
-		deleteButton.addClickListener(event -> notificacion.open());
-		deleteButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+		deleteButton.addClickListener(e -> {
+			cancelarReserva();
+		});
 
 		ventana.add(sNombre,sTipo,sImagenImage,deleteButton);
 		
 		grid.addItemClickListener(event -> {
 			
+			servicioUsuario = event.getItem();
+
 			sNombre.setText("Nombre: " + event.getItem().getServicio().getsNombre());
 			sTipo.setText("Tipo: " + String.valueOf(event.getItem().getServicio().getsTipo()));
 			sImagenImage.setSrc(event.getItem().getServicio().getsImagen());
 			
 			ventana.open();
 		            
-			confirmButton.addClickListener(e -> {
-				Servicio servicio = event.getItem().getServicio();
-				Usuario user = this.usuarioService.findByUsername(SecurityUtils.currentUsername());
-				this.servicioService.removeServicioFromUsuario(servicio, user);
-				serviceList.remove(event.getItem());
-				grid.setItems(serviceList);
-				
-				notificacion.close();
-				
-			});
 		});
 		
 	    add(grid);
+	}
+	
+	public void cancelarReserva() {
+		//Cuadro Confirmacion
+		ConfirmDialog dialogConfirmable = new ConfirmDialog();
+		dialogConfirmable.setHeader("Cancelar reserva");
+		dialogConfirmable.setText("¿Seguro que desea cancelar esta reserva?");
+				
+		//Boton cancelar ventana confirmacion
+		Button noButton = new Button("No", e -> {
+			dialogConfirmable.close();
+			ventana.close();
+		});
+				
+		//Boton confirmar ventana confirmacion
+		Button siButton = new Button("Si"); 
+		siButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+		
+		Servicio servicio = servicioUsuario.getServicio();
+		
+		siButton.addClickListener(e -> {
+			try{
+				this.servicioService.removeServicioFromUsuario(servicio, usuario);
+				serviceList.remove(servicioUsuario);
+				grid.setItems(serviceList);
+				Funciones.notificacionAcierto("Reserva cancelada.");
+			}catch(Exception error) {
+				Funciones.notificacionError("Error al cancelar la reserva, por favor contacte con el personal del barco.");
+			}
+			
+			dialogConfirmable.close();
+			ventana.close();
+		});
+				
+		dialogConfirmable.setConfirmButton(siButton);
+		dialogConfirmable.setCancelButton(noButton);
+		dialogConfirmable.open();
 	}
 	
 	public void beforeEnter(BeforeEnterEvent event) {
