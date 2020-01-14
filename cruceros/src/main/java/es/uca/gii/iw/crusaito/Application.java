@@ -64,7 +64,7 @@ public class Application extends SpringBootServletInitializer {
              */
         	
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
-            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1950, 10, 11),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Ben", "Smith","cliente2@gmail.com","cliente2","cliente2","12345638B",
             		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Harry", "Smith","cliente3@gmail.com","cliente3","cliente3","12345638B",
@@ -82,7 +82,7 @@ public class Application extends SpringBootServletInitializer {
              * Ciudades Caribe
              */
             
-            Ciudad cadiz = new Ciudad("Cádiz", "De Cádiz, el mar, su gente, su bahía, su historia y sus ganas de vivir.\n" + 
+            Ciudad cadiz = new Ciudad("Cadiz", "De Cádiz, el mar, su gente, su bahía, su historia y sus ganas de vivir.\n" + 
             		"\n" + 
             		"La provincia de Cádiz es muy diversa, con comarcas que merecen ser visitadas, desde la campiña de Jerez de la Frontera a sus pueblos del Campo de Gibraltar o un recorrido por los pueblos blancos y descansar en algún lugar de la costa entre Tarifa hasta Sanlúcar de Barrameda.\n" + 
             		"\n" + 
