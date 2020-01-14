@@ -82,7 +82,7 @@ public class Application extends SpringBootServletInitializer {
              * Ciudades Caribe
              */
             
-            Ciudad cadiz = new Ciudad("Cádiz", "De Cádiz, el mar, su gente, su bahía, su historia y sus ganas de vivir.\n" + 
+            Ciudad cadiz = new Ciudad("Cadiz", "De Cádiz, el mar, su gente, su bahía, su historia y sus ganas de vivir.\n" + 
             		"\n" + 
             		"La provincia de Cádiz es muy diversa, con comarcas que merecen ser visitadas, desde la campiña de Jerez de la Frontera a sus pueblos del Campo de Gibraltar o un recorrido por los pueblos blancos y descansar en algún lugar de la costa entre Tarifa hasta Sanlúcar de Barrameda.\n" + 
             		"\n" + 
@@ -102,7 +102,7 @@ public class Application extends SpringBootServletInitializer {
             		+ "en esta época casas señoriales como la del Conde del Pinar. La industria vinícola que ha sustentado tradicionalmente la economía "
             		+ "de la población (con excelentes vinos que pertenecen a las denominaciones de origen de Jerez-Xeres- Sherry y Manzanilla de Sanlúcar) ha ido paulatinamente dejando "
             		+ "paso al sector turístico con un auge espectacular en los últimos años.");
-            Ciudad colon = new Ciudad("Colón", "La provincia de Colón cubre un tramo casi virgen de la ribera caribeña en el norte de Panamá. "
+            Ciudad colon = new Ciudad("Colon", "La provincia de Colón cubre un tramo casi virgen de la ribera caribeña en el norte de Panamá. "
             		+ "Las localidades costeras de la provincia fueron importantes puertos comerciales para España durante la época colonial, "
             		+ "y las reliquias de esta época siguen siendo atracciones turísticas para los "
             		+ "visitantes interesados ​​en la historia. Colón igualmente atrae a los apasionados "
@@ -126,7 +126,7 @@ public class Application extends SpringBootServletInitializer {
             		"\n" + 
             		"Pero Barcelona no es sólo arte, sino que también posee soleadas playas "
             		+ "combinadas con una sugerente oferta gastronómica.");
-            Ciudad napoles = new Ciudad("Nápoles", "Capital de la región Campania posee más de un millón de habitantes siendo la tercera ciudad más grande de Italia. Linda con el Golfo de Nápoles y como vistas tiene el colosal volcan Vesubio.\n" + 
+            Ciudad napoles = new Ciudad("Napoles", "Capital de la región Campania posee más de un millón de habitantes siendo la tercera ciudad más grande de Italia. Linda con el Golfo de Nápoles y como vistas tiene el colosal volcan Vesubio.\n" + 
             		"\n" + 
             		"Nápoles hay que vivirla: hay que estar dentro de ella para saber "
             		+ "cómo es: vivaz, desorganizada, con imagen caótica, pero dentro de "
@@ -421,7 +421,7 @@ public class Application extends SpringBootServletInitializer {
             ciudadCrucero1.setFechaLlegada(LocalDate.now());
             ciudadCrucero1.setFechaSalida(LocalDate.now());
             ciudadCrucero1.setHoraLlegada(11);
-            ciudadCrucero1.setHoraSalida(12);
+            ciudadCrucero1.setHoraSalida(15);
             
             ciudadCrucero2.setFechaLlegada(LocalDate.now());
             ciudadCrucero2.setFechaSalida(LocalDate.now());
@@ -477,7 +477,7 @@ public class Application extends SpringBootServletInitializer {
             ciudadCrucero5.setFechaLlegada(LocalDate.now());
             ciudadCrucero5.setFechaSalida(LocalDate.now());
             ciudadCrucero5.setHoraLlegada(10);
-            ciudadCrucero5.setHoraSalida(11);
+            ciudadCrucero5.setHoraSalida(16);
             
             ciudadCrucero6.setFechaLlegada(LocalDate.now());
             ciudadCrucero6.setFechaSalida(LocalDate.now());
@@ -701,7 +701,7 @@ public class Application extends SpringBootServletInitializer {
             ciudadCrucero21.setFechaLlegada(LocalDate.now());
             ciudadCrucero21.setFechaSalida(LocalDate.now());
             ciudadCrucero21.setHoraLlegada(10);
-            ciudadCrucero21.setHoraSalida(12);
+            ciudadCrucero21.setHoraSalida(17);
             
             ciudadCrucero22.setFechaLlegada(LocalDate.now());
             ciudadCrucero22.setFechaSalida(LocalDate.now());
@@ -806,12 +806,12 @@ public class Application extends SpringBootServletInitializer {
             Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,5, LocalDate.now() );
             Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,5, LocalDate.now() );
             
-            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
-            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
-            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
-            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
-            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian", 40, ServicioTipo.Excursion, 20,"frontend/img/cafe.jpg", 30, LocalDate.now());
-            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now());
+            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro. Comienzo de la excursión: 12:00", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
+            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal. Comienzo de la excursión: 15:30", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
+            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego. Comienzo de la excursión: 9:00", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
+            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María. Comienzo de la excursión: 12:30", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
+            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian. Comienzo de la excursión: 17:00", 40, ServicioTipo.Excursion, 20,"frontend/img/cafe.jpg", 30, LocalDate.now());
+            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia. Comienzo de la excursión: 13:00", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now());
             
             excursion1.setCiudad(cadiz);
             cadiz.getServicios().add(excursion1);
