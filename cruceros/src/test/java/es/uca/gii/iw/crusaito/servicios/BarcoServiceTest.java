@@ -12,8 +12,7 @@ import es.uca.gii.iw.crusaito.repositorios.BarcoRepository;
 
 public class BarcoServiceTest {
 	
-	private BarcoRepository repo;
-	private BarcoService barcoService = new BarcoService (repo);
+	private BarcoService barcoService;
 	
 	@Test
 	public void Test (){
