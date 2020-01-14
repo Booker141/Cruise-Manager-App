@@ -801,17 +801,17 @@ public class Application extends SpringBootServletInitializer {
              * Definición de los servicios
              */
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,5, LocalDate.now() );
-            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 2,5, LocalDate.now() );
-            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,5, LocalDate.now() );
-            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,5, LocalDate.now() );
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,100, LocalDate.now() );
+            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 0,100, LocalDate.now() );
+            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 0,100, LocalDate.now() );
+            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 0,100, LocalDate.now() );
             
-            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
-            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
-            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
-            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
-            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian", 40, ServicioTipo.Excursion, 20,"frontend/img/cafe.jpg", 30, LocalDate.now());
-            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now());
+            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 100, LocalDate.now());
+            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 100, LocalDate.now());
+            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 100, LocalDate.now());
+            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María", 55, ServicioTipo.Excursion, 1,"frontend/img/iglesia.jpg", 100, LocalDate.now());
+            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian", 40, ServicioTipo.Excursion, 3,"frontend/img/cafe.jpg", 100, LocalDate.now());
+            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 100, LocalDate.now());
             
             excursion1.setCiudad(cadiz);
             cadiz.getServicios().add(excursion1);
@@ -838,15 +838,15 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(excursion6);
             
             
-            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 2,5, LocalDate.now() );
-            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 2,5, LocalDate.now() );
-            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 2,5, LocalDate.now() );
-            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 2,5, LocalDate.now() );
+            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 0,100, LocalDate.now() );
+            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 0,100, LocalDate.now() );
+            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 1,100, LocalDate.now() );
+            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 0,100, LocalDate.now() );
             
-            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 2,5, LocalDate.now() );
-            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 2,5, LocalDate.now() );
-            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 2,5, LocalDate.now() );
-            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 2,5, LocalDate.now() );
+            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 0,100, LocalDate.now() );
+            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 0,100, LocalDate.now() );
+            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 0,100, LocalDate.now() );
+            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 0,100, LocalDate.now() );
          
             
             servicioService.save(elFaro);
