@@ -801,10 +801,10 @@ public class Application extends SpringBootServletInitializer {
              * Definición de los servicios
              */
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,5, LocalDate.now() );
-            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 2,5, LocalDate.now() );
-            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,5, LocalDate.now() );
-            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,5, LocalDate.now() );
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,70, LocalDate.now() );
+            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 2,50, LocalDate.now() );
+            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,65, LocalDate.now() );
+            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,50, LocalDate.now() );
             
             Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro. Comienzo de la excursión: 12:00", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
             Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal. Comienzo de la excursión: 15:30", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
@@ -838,15 +838,15 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(excursion6);
             
             
-            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 2,5, LocalDate.now() );
-            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 2,5, LocalDate.now() );
-            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 2,5, LocalDate.now() );
-            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 2,5, LocalDate.now() );
+            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 2,25, LocalDate.now() );
+            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 2,35, LocalDate.now() );
+            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 2,40, LocalDate.now() );
+            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 2,30, LocalDate.now() );
             
-            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 2,5, LocalDate.now() );
-            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 2,5, LocalDate.now() );
-            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 2,5, LocalDate.now() );
-            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 2,5, LocalDate.now() );
+            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 2,20, LocalDate.now() );
+            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 2,25, LocalDate.now() );
+            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 2,25, LocalDate.now() );
+            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 2,30, LocalDate.now() );
          
             
             servicioService.save(elFaro);
@@ -907,25 +907,25 @@ public class Application extends SpringBootServletInitializer {
              */
          
             ServicioUsuario servUsu3 = new ServicioUsuario();
-            servUsu3.setServicio(padel);
+            servUsu3.setServicio(ping);
             servUsu3.setUsuario(usuarioEjemplo3);
             servUsu3.setParticipantes(1);
-            servUsu3.setPrecio(20);
+            servUsu3.setPrecio(15);
             
             ServicioUsuario servUsu4 = new ServicioUsuario();
-            servUsu4.setServicio(excursion4);
+            servUsu4.setServicio(excursion2);
             servUsu4.setUsuario(usuarioEjemplo3);
             servUsu4.setParticipantes(1);
-            servUsu4.setPrecio(55);
+            servUsu4.setPrecio(20);
             
-            padel.getServiciosUsuarios().add(servUsu3);
+            ping.getServiciosUsuarios().add(servUsu3);
             usuarioEjemplo3.getUsuariosServicios().add(servUsu3);
-            servicioService.save(padel);
+            servicioService.save(ping);
             userService.save(usuarioEjemplo3);
             
-            excursion4.getServiciosUsuarios().add(servUsu4);
+            excursion2.getServiciosUsuarios().add(servUsu4);
             usuarioEjemplo3.getUsuariosServicios().add(servUsu4);
-            servicioService.save(excursion4);
+            servicioService.save(excursion2);
             userService.save(usuarioEjemplo3);
             
             /**
