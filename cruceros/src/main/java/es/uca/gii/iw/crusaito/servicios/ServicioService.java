@@ -1,5 +1,7 @@
 package es.uca.gii.iw.crusaito.servicios;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +128,18 @@ public class ServicioService {
 				servUser.setServicio(servicio);
 				servUser.setUsuario(usuario);
 				servUser.setParticipantes(participantes);
-				servUser.setPrecio(((double)participantes)*servicio.getsPrecio());
+				
+				//Regla de negocio número 1, descuento del 25% si la persona que reserva es mayor de 55 años
+				if(Period.between(usuario.getBornDate(), LocalDate.now()).getYears() > 55) {
+					servUser.setPrecio((((double)participantes) * servicio.getsPrecio()) * 0.75);
+				}else {
+					//Regla de negocio número 2, descuento del 20% si la reserva es para más de 2 participantes
+					if(participantes>2) {
+						servUser.setPrecio((((double)participantes) * servicio.getsPrecio()) * 0.80);
+					}else {
+						servUser.setPrecio(((double)participantes)*servicio.getsPrecio());
+					}
+				}
 				
 				servicio.getServiciosUsuarios().add(servUser);
 				servicio.addAforoActual(participantes);

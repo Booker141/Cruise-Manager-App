@@ -64,7 +64,7 @@ public class Application extends SpringBootServletInitializer {
              */
         	
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
-            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1950, 10, 11),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Ben", "Smith","cliente2@gmail.com","cliente2","cliente2","12345638B",
             		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Harry", "Smith","cliente3@gmail.com","cliente3","cliente3","12345638B",

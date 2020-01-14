@@ -90,6 +90,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 				addMenuTab("Gestionar cruceros", AdminListaCrucerosView.class);
 				addMenuTab("Gestionar servicios", AdminListaServiciosView.class);
 				addMenuTab("Gestionar usuarios", AdminListaUsuariosView.class);
+				addMenuTab("Subir archivos", SubirArchivoView.class);
 			}
 
 			if (SecurityUtils.hasRole("Gerente")) {
