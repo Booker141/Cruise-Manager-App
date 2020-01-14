@@ -193,8 +193,8 @@ public class EstadisticasView extends VerticalLayout implements BeforeEnterObser
 	        board.addRow(chartMas,chartMenos);
 	        	     
 	        H1 titulo = new H1("Reglas de negocio");
-	        Label regla1 = new Label("1.- Si tienes más de 55 años tienes un 20% descuento.");
-	        Label regla2 = new Label("2.- Si van a reservar más de dos pasajeros tendrán un 25% de descuento del total.");
+	        Label regla1 = new Label("1.- Si tienes más de 55 años tienes un 25% descuento.");
+	        Label regla2 = new Label("2.- Si van a reservar más de dos pasajeros tendrán un 20% de descuento del total.");
 	        Label regla3 = new Label("3.- Si hay hueco libre en el aforo, tienen prioridad aquellos sin reserva.");
 	        H1 estadisticas = new H1("Estadísticas");
 	        
