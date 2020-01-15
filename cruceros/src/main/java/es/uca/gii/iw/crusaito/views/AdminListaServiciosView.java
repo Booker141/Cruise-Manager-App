@@ -77,6 +77,9 @@ public class AdminListaServiciosView extends VerticalLayout implements BeforeEnt
 		crud.setUpdateOperation(this.servicioService::save);
 		crud.setDeleteOperation(this.servicioService::delete);
 		
+		crud.setSizeFull();
+		this.setSizeFull();
+		
 		add(crud);
 	}
 	

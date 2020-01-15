@@ -19,8 +19,6 @@ import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -219,7 +217,6 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
         	int participantes = participantesField.getValue().intValue();
         	if(servicio.AforoHuecoLibre(participantes)) {
         		servicioService.addServicioToUsuario(servicio, usuario, participantes);
-        		Funciones.notificacionAcierto("Reserva realizada correctamente.");
         	}else {
         		servicioLlenoNotificacion();
         	}

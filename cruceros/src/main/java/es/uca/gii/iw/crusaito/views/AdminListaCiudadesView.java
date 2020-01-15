@@ -45,6 +45,9 @@ public class AdminListaCiudadesView extends VerticalLayout implements BeforeEnte
 		crud.setUpdateOperation(this.ciudadService::save);
 		crud.setDeleteOperation(this.ciudadService::delete);
 		
+		crud.setSizeFull();
+		this.setSizeFull();
+		
 		this.add(crud);
 	}
 	

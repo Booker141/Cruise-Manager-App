@@ -84,6 +84,9 @@ public class AdminListaCrucerosView extends VerticalLayout implements BeforeEnte
 		crud.setUpdateOperation(this.cruceroService::save);
 		crud.setDeleteOperation(this.cruceroService::delete);
 		
+		crud.setSizeFull();
+		this.setSizeFull();
+		
 		this.add(crud);
 	}
 	

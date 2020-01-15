@@ -148,6 +148,8 @@ public class ServicioService {
 				this.repo.save(servicio);
 				this.userRepo.save(usuario);
 				this.servUserRepo.save(servUser);
+        		Funciones.notificacionAcierto("Reserva realizada correctamente.");
+
 			} else {
 				throw new DataIntegrityViolationException("Ya tiene una reserva");
 			}
