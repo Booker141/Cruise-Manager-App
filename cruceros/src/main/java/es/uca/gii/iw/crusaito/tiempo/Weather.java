@@ -4,7 +4,6 @@ import java.net.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
@@ -34,12 +33,12 @@ public class Weather{
 	String icono;
 	String iconoURL;
 	
-	public Weather() {
-		
-	}
+	public Weather() {}
 	
 	public Weather(Ciudad ciudad) {
+		
 		try {
+			
 			URLtext = "http://api.openweathermap.org/data/2.5/weather?q="+ciudad.getcNombre()+"&units=metric&lang=es&mode=xml&appid=" + token;	
 			url = new URL(URLtext);
 			conn = url.openConnection();	// establecemos conexion con la URL de la API
@@ -65,7 +64,9 @@ public class Weather{
 				
 			}
 		}catch(Exception e) {
+			
 			Funciones.notificacionError("No se ha podido obtener el tiempo en la ciudad destino");
+			
 		}
 	}
 	
@@ -73,7 +74,7 @@ public class Weather{
 	*Función encargada de establecer una conexión con la API meteorológica y procesar la información recibida en formato XML.
 	*
 	*@param ciudad - ciudad define la ciudad de la que presentaremos su información meteorológica.
-	 * @return 
+	 * @return layout - layout define la estructura de representación de la información meteorológica.
 	*/
 	
 	public VerticalLayout requestWeather(Ciudad ciudad) throws Exception

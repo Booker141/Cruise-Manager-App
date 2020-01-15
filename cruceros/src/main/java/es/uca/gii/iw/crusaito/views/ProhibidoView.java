@@ -32,7 +32,6 @@ public class ProhibidoView extends VerticalLayout {
 
 		notification.setPosition(Position.MIDDLE);
 		
-
 		notification.open();
 	}
 
