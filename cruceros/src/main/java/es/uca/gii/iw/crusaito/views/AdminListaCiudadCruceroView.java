@@ -89,6 +89,9 @@ public class AdminListaCiudadCruceroView extends VerticalLayout implements Befor
 		crud.setUpdateOperation(this.ciudadCruceroService::save);
 		crud.setDeleteOperation(this.ciudadCruceroService::delete);
 		
+		crud.setSizeFull();
+		this.setSizeFull();
+		
 		this.add(crud);
 	}
 	
