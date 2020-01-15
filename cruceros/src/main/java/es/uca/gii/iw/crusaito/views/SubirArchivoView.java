@@ -51,7 +51,7 @@ public class SubirArchivoView extends VerticalLayout{
 		
 		upload.setMaxFiles(1);
 		upload.setDropLabel(new Label("Solo válido formato .jpg"));
-		upload.setAcceptedFileTypes(".jpg");
+		upload.setAcceptedFileTypes(".jpg",".JPG");
 		
 		upload.addSucceededListener(event -> {
             try {
