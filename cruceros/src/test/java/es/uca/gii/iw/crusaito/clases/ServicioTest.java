@@ -8,7 +8,6 @@ import org.junit.Test;
 
 public class ServicioTest {
 
-	@SuppressWarnings("deprecation")
 	@Test
     public void Test(){
 		

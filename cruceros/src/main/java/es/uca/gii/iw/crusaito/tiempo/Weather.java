@@ -101,7 +101,6 @@ public class Weather{
 			String humedad = file.getElementsByTagName("humidity").item(0).getAttributes().item(0).getTextContent();
 			String presion = file.getElementsByTagName("pressure").item(0).getAttributes().item(0).getTextContent();
 			String viento = file.getElementsByTagName("wind").item(0).getFirstChild().getAttributes().getNamedItem("value").getTextContent();
-			//String direccion = file.getElementsByTagName("wind").item(0).getLastChild().getAttributes().getNamedItem("name").getTextContent();
 			String icono = file.getElementsByTagName("weather").item(0).getAttributes().getNamedItem("icon").getTextContent();
 			
 			String iconoURL = "http://openweathermap.org/img/w" + icono + ".png" ;
@@ -109,9 +108,8 @@ public class Weather{
 			H2 Titulo = new H2("Información meteorológica: ");
 	        Label Temperatura = new Label("Temperatura: " + (Double.parseDouble(temperatura)-273.15));
 	        Label Humedad = new Label("Humedad: " + humedad);
-	        Label Presion = new Label("Presion: " + presion);
+	        Label Presion = new Label("Presión: " + presion);
 	        Label Viento = new Label("Viento: " + viento);
-	        //Label Direccion = new Label("Direccion: " + direccion);
 	        Label iconoVista = new Label(iconoURL);
 	        
 	        layout = new VerticalLayout(Titulo, Temperatura, Humedad, Presion, Viento, iconoVista);

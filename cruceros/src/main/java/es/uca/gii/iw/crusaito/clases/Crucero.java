@@ -149,15 +149,6 @@ public class Crucero {
 	}
 
 
-	/*public Set<Ciudad> getCiudades() {
-		return ciudades;
-	}
-
-
-	public void setCiudades(Set<Ciudad> ciudades) {
-		this.ciudades = ciudades;
-	}*/
-
 	public String getcImagen() {
 		return cImagen;
 	}

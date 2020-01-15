@@ -1,7 +1,5 @@
 package es.uca.gii.iw.crusaito.views;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -72,10 +70,12 @@ public class PerfilView extends VerticalLayout implements BeforeEnterObserver{
 		mensaje = new H6("Para modificar los datos contacte con un administrador a través de la siguiente dirección: admin@gmail.com.");
 
 	}
+	
 	/**
 	 * Metodo que es llamado por el metodo beforeEnter despues de comprobar que el usuario esta
 	 * logeado en el sistema y tiene el rol adecuado para acceder a esta vista
 	 */
+	
 	public void rellenarInformacion() {
 		
 		usuario = this.usuarioService.findByUsername(SecurityUtils.currentUsername());

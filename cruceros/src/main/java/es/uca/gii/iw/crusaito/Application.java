@@ -838,10 +838,10 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(excursion6);
             
             
-            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 0,25, LocalDate.now() );
-            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 0,35, LocalDate.now() );
-            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 0,40, LocalDate.now() );
-            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 1,30, LocalDate.now() );
+            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Otro, "frontend/img/spa.jpg", 0,25, LocalDate.now() );
+            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Otro, "frontend/img/golf.jpg", 0,35, LocalDate.now() );
+            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Otro, "frontend/img/padel.jpg", 0,40, LocalDate.now() );
+            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Otro, "frontend/img/ping-pong.jpg", 1,30, LocalDate.now() );
             
             Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 0,20, LocalDate.now() );
             Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 0,25, LocalDate.now() );
@@ -994,16 +994,8 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(excursion4);
             noruego.addServicio(spa);
             servicioService.save(spa);
-            //userService.save(usuarioEjemplo);
             cruceroService.save(noruego);
             
-            // fetch user by dni
-            /*log.info("Users found with findByLastName('Bauer'):");
-            log.info("--------------------------------------------");
-            userRepo.findByDni("12345678Y").forEach(bauer -> {
-                log.info(bauer.toString());
-            });*/
-
             log.info("Servicios con findByUsuario");
             Usuario usucliente = userService.findByUsername("cliente");
             	log.info(usucliente.getFirstName());

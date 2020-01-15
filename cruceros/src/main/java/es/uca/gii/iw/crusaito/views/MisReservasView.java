@@ -103,6 +103,7 @@ public class MisReservasView extends VerticalLayout implements BeforeEnterObserv
 	}
 	
 	public void cancelarReserva() {
+		
 		//Cuadro Confirmacion
 		ConfirmDialog dialogConfirmable = new ConfirmDialog();
 		dialogConfirmable.setHeader("Cancelar reserva");
