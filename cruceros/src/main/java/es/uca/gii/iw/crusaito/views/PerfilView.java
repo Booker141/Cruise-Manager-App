@@ -21,7 +21,6 @@ import com.vaadin.flow.router.Route;
 import es.uca.gii.iw.crusaito.clases.ServicioUsuario;
 import es.uca.gii.iw.crusaito.clases.Usuario;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
-import es.uca.gii.iw.crusaito.servicios.ServicioService;
 import es.uca.gii.iw.crusaito.servicios.ServicioUsuarioService;
 import es.uca.gii.iw.crusaito.servicios.UsuarioService;
 
@@ -70,7 +69,7 @@ public class PerfilView extends VerticalLayout implements BeforeEnterObserver{
 		
 		grid.setSelectionMode(Grid.SelectionMode.NONE);
 		
-		mensaje = new H6("Para modificar los datos contacte con un administrador.");
+		mensaje = new H6("Para modificar los datos contacte con un administrador a través de la siguiente dirección: admin@gmail.com.");
 
 	}
 	/**
