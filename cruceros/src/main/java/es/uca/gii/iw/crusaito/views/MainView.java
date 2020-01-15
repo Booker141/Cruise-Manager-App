@@ -30,7 +30,6 @@ import es.uca.gii.iw.crusaito.common.Funciones;
 import es.uca.gii.iw.crusaito.security.SecurityUtils;
 import es.uca.gii.iw.crusaito.spring.MessageBean;
 
-//@Route("MainView")
 @Route("")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")

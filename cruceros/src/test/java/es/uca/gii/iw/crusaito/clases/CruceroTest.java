@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class CruceroTest {
 
-	@SuppressWarnings("deprecation")
 	@Test
     public void Test(){
 		

@@ -4,7 +4,6 @@ import java.net.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
@@ -34,12 +33,12 @@ public class Weather{
 	String icono;
 	String iconoURL;
 	
-	public Weather() {
-		
-	}
+	public Weather() {}
 	
 	public Weather(Ciudad ciudad) {
+		
 		try {
+			
 			URLtext = "http://api.openweathermap.org/data/2.5/weather?q="+ciudad.getcNombre()+"&units=metric&lang=es&mode=xml&appid=" + token;	
 			url = new URL(URLtext);
 			conn = url.openConnection();	// establecemos conexion con la URL de la API
@@ -65,7 +64,9 @@ public class Weather{
 				
 			}
 		}catch(Exception e) {
+			
 			Funciones.notificacionError("No se ha podido obtener el tiempo en la ciudad destino");
+			
 		}
 	}
 	
@@ -73,7 +74,7 @@ public class Weather{
 	*Función encargada de establecer una conexión con la API meteorológica y procesar la información recibida en formato XML.
 	*
 	*@param ciudad - ciudad define la ciudad de la que presentaremos su información meteorológica.
-	 * @return 
+	 * @return layout - layout define la estructura de representación de la información meteorológica.
 	*/
 	
 	public VerticalLayout requestWeather(Ciudad ciudad) throws Exception
@@ -100,7 +101,6 @@ public class Weather{
 			String humedad = file.getElementsByTagName("humidity").item(0).getAttributes().item(0).getTextContent();
 			String presion = file.getElementsByTagName("pressure").item(0).getAttributes().item(0).getTextContent();
 			String viento = file.getElementsByTagName("wind").item(0).getFirstChild().getAttributes().getNamedItem("value").getTextContent();
-			//String direccion = file.getElementsByTagName("wind").item(0).getLastChild().getAttributes().getNamedItem("name").getTextContent();
 			String icono = file.getElementsByTagName("weather").item(0).getAttributes().getNamedItem("icon").getTextContent();
 			
 			String iconoURL = "http://openweathermap.org/img/w" + icono + ".png" ;
@@ -108,9 +108,8 @@ public class Weather{
 			H2 Titulo = new H2("Información meteorológica: ");
 	        Label Temperatura = new Label("Temperatura: " + (Double.parseDouble(temperatura)-273.15));
 	        Label Humedad = new Label("Humedad: " + humedad);
-	        Label Presion = new Label("Presion: " + presion);
+	        Label Presion = new Label("Presión: " + presion);
 	        Label Viento = new Label("Viento: " + viento);
-	        //Label Direccion = new Label("Direccion: " + direccion);
 	        Label iconoVista = new Label(iconoURL);
 	        
 	        layout = new VerticalLayout(Titulo, Temperatura, Humedad, Presion, Viento, iconoVista);

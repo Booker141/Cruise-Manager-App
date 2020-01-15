@@ -38,7 +38,6 @@ public class LoginView extends VerticalLayout {
    		login.setOpened(true);
    		login.setTitle("Iniciar Sesión");
    		login.setDescription("¡Organiza tus vacaciones con nosotros!");
-   		//login.setForgotPasswordButtonVisible(false);
    		
    		add(login);
    		
