@@ -64,15 +64,15 @@ public class Application extends SpringBootServletInitializer {
              */
         	
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
-            		123456789,LocalDate.of(1950, 10, 11),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1950, 10, 11),"Calle Sagasta","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Ben", "Smith","cliente2@gmail.com","cliente2","cliente2","12345638B",
-            		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1983, 5, 6),"Calle Tolosa Latour","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Harry", "Smith","cliente3@gmail.com","cliente3","cliente3","12345638B",
-            		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1980, 3, 10),"Calle Santa María de la Cabeza","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12348678A",
-            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
+            		123456789,LocalDate.of(1979, 9, 7),"Avenida Andalucía","Cadiz",rolRepository.findByName("Admin")));
             userService.save(new Usuario("Bill", "Harrinson","gerente@gmail.com","gerente","gerente","12365678G",
-            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Gerente")));
+            		123456789,LocalDate.of(1964, 1, 4),"Calle Brasil","Cadiz",rolRepository.findByName("Gerente")));
           
             /**
              * Generamos ciudades de ejemplo
@@ -378,11 +378,11 @@ public class Application extends SpringBootServletInitializer {
             		+ "y emblemáticas que viven a orillas del Báltico, "
             		+ "un mar lleno de historia donde se encuentran las mayores reservas de ámbar "
             		+ "del mundo y que comunica con el mar del Norte y el océano Atlántico.", 2150));
-            cruceroService.save(new Crucero("Adriático","El Pireo","El Pireo","8 días", "A bordo de tu crucero Crusaito, tendrás la oportunidad de disfrutar del "
+            cruceroService.save(new Crucero("Adriático","Dubrovnik","Dubrovnik","8 días", "A bordo de tu crucero Crusaito, tendrás la oportunidad de disfrutar del "
             		+ "increíble color azul turquesa de las aguas del mar Adriático y un clima "
             		+ "inmejorable que hará que te plantees quedarte a vivir en sus costas para "
             		+ "toda la vida.", 3400));
-            cruceroService.save(new Crucero("Fiordos noruegos","Copenhague","Trondheim","8 días", "Viajar a otro mundo sin salir de Europa es completamente posible. "
+            cruceroService.save(new Crucero("Fiordos noruegos","Trondheim","Trondheim","8 días", "Viajar a otro mundo sin salir de Europa es completamente posible. "
             		+ "Si te aventuras a embarcar en alguno de nuestros cruceros por los impresionantes "
             		+ "Fiordos Noruegos, serás testigo de primera mano de las espectaculares montañas "
             		+ "que los rodean y disfrutarás de las singulares excursiones que cada ciudad te "
@@ -801,16 +801,16 @@ public class Application extends SpringBootServletInitializer {
              * Definición de los servicios
              */
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,5, LocalDate.now() );
-            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 2,5, LocalDate.now() );
-            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 2,5, LocalDate.now() );
-            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 2,5, LocalDate.now() );
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,70, LocalDate.now() );
+            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 0,50, LocalDate.now() );
+            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 0,65, LocalDate.now() );
+            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 0,50, LocalDate.now() );
             
             Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro. Comienzo de la excursión: 12:00", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
-            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal. Comienzo de la excursión: 15:30", 20, ServicioTipo.Excursion, 0,"frontend/img/museo.jpg", 30, LocalDate.now());
+            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal. Comienzo de la excursión: 15:30", 20, ServicioTipo.Excursion, 1,"frontend/img/museo.jpg", 30, LocalDate.now());
             Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego. Comienzo de la excursión: 9:00", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
             Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María. Comienzo de la excursión: 12:30", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
-            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian. Comienzo de la excursión: 17:00", 40, ServicioTipo.Excursion, 20,"frontend/img/cafe.jpg", 30, LocalDate.now());
+            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian. Comienzo de la excursión: 17:00", 40, ServicioTipo.Excursion, 3,"frontend/img/cafe.jpg", 30, LocalDate.now());
             Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia. Comienzo de la excursión: 13:00", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now());
             
             excursion1.setCiudad(cadiz);
@@ -838,15 +838,15 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(excursion6);
             
             
-            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 2,5, LocalDate.now() );
-            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 2,5, LocalDate.now() );
-            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 2,5, LocalDate.now() );
-            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 2,5, LocalDate.now() );
+            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Excursion, "frontend/img/spa.jpg", 0,25, LocalDate.now() );
+            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Excursion, "frontend/img/golf.jpg", 0,35, LocalDate.now() );
+            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Excursion, "frontend/img/padel.jpg", 0,40, LocalDate.now() );
+            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Excursion, "frontend/img/ping-pong.jpg", 1,30, LocalDate.now() );
             
-            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 2,5, LocalDate.now() );
-            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 2,5, LocalDate.now() );
-            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 2,5, LocalDate.now() );
-            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 2,5, LocalDate.now() );
+            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 0,20, LocalDate.now() );
+            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 0,25, LocalDate.now() );
+            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 0,25, LocalDate.now() );
+            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 0,30, LocalDate.now() );
          
             
             servicioService.save(elFaro);
@@ -907,25 +907,25 @@ public class Application extends SpringBootServletInitializer {
              */
          
             ServicioUsuario servUsu3 = new ServicioUsuario();
-            servUsu3.setServicio(padel);
+            servUsu3.setServicio(ping);
             servUsu3.setUsuario(usuarioEjemplo3);
             servUsu3.setParticipantes(1);
-            servUsu3.setPrecio(20);
+            servUsu3.setPrecio(15);
             
             ServicioUsuario servUsu4 = new ServicioUsuario();
-            servUsu4.setServicio(excursion4);
+            servUsu4.setServicio(excursion2);
             servUsu4.setUsuario(usuarioEjemplo3);
             servUsu4.setParticipantes(1);
-            servUsu4.setPrecio(55);
+            servUsu4.setPrecio(20);
             
-            padel.getServiciosUsuarios().add(servUsu3);
+            ping.getServiciosUsuarios().add(servUsu3);
             usuarioEjemplo3.getUsuariosServicios().add(servUsu3);
-            servicioService.save(padel);
+            servicioService.save(ping);
             userService.save(usuarioEjemplo3);
             
-            excursion4.getServiciosUsuarios().add(servUsu4);
+            excursion2.getServiciosUsuarios().add(servUsu4);
             usuarioEjemplo3.getUsuariosServicios().add(servUsu4);
-            servicioService.save(excursion4);
+            servicioService.save(excursion2);
             userService.save(usuarioEjemplo3);
             
             /**

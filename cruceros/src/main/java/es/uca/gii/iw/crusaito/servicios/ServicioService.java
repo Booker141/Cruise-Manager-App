@@ -149,13 +149,13 @@ public class ServicioService {
 				this.userRepo.save(usuario);
 				this.servUserRepo.save(servUser);
 			} else {
-				throw new DataIntegrityViolationException("Reserva ya existente");
+				throw new DataIntegrityViolationException("Ya tiene una reserva");
 			}
 			
 		}catch(DataIntegrityViolationException error) {
-    		Funciones.notificacionError("Ya tiene una reserva anterior");
+    		Funciones.notificacionError(error.getMessage());
 		}catch(Exception e) {
-			Funciones.notificacionError("Error al realizar la reserva, contacte con el personal del barco.");
+			Funciones.notificacionError(e.getMessage());
 		}
 	}
 	
@@ -167,7 +167,7 @@ public class ServicioService {
 	 */
 	
 	public void removeServicioFromUsuario(Servicio servicio, Usuario usuario) {
-		try {
+		
 		ServicioUsuario servUser = this.servUserRepo.findByServicioAndUsuario(servicio, usuario);
 		
 		servicio.getServiciosUsuarios().remove(servUser);
@@ -177,9 +177,7 @@ public class ServicioService {
 		this.userRepo.save(usuario);
 		this.repo.save(servicio);
 		this.servUserRepo.delete(servUser);
-		}catch(Exception e) {
-			Funciones.notificacionError("Error al cancelar la reserva, por favor contacte con el personal del barco.");
-		}
+		
 	}
 	
 }
