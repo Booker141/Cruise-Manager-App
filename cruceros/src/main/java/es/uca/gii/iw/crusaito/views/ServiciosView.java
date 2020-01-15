@@ -12,14 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.H6;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -49,6 +48,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 	private List<Servicio> serviceList = new ArrayList<Servicio>();
 	private ListDataProvider<Servicio> dataProvider;
 	
+	private Servicio servicio;
+	private Usuario usuario;
+	
 	private HeaderRow filterRow;
 	private TextField sNombreField;
 	private NumberField participantesField = new NumberField("Numero de personas");
@@ -60,14 +62,10 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 	private H6 descuentosField = new H6("Descuentos no acumulables");
 	private H6 descuentos1Field = new H6("1. Si eres mayor de 55 años, se le aplicará un 25% de descuento sobre el total.");
 	private H6 descuentos2Field = new H6("2. Si vas acompañado de 3 o más participantes, se le aplicará un 20% de descuento sobre el total.");
+	
+	//Ventana emergente al hacer click en cada servicio
 	private Dialog dialog;
-	
-	private Notification notification;
-	private Notification servicioLleno;
-	
-	private Label label;
-	private Button cancelButton;
-	private Button confirmButton;
+
 	private Button reservaButton;
 	
 	private ComboBox<ServicioTipo> sTipoComboBox;
@@ -77,7 +75,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		
 		this.servicioService = servicioService;
 		this.usuarioService = usuarioService;
-				
+		
+		usuario = buscarUsuarioLogin();
+		
 		dataProvider = new ListDataProvider<>(serviceList);
 		grid.setDataProvider(dataProvider);
 		
@@ -109,35 +109,13 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		sImagenImage.setTitle("Imagen");
 		sImagenImage.setHeight("100%");
 		sImagenImage.setWidth("100%");
-		
-		notification = new Notification();
-		notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
-		
-		label = new Label("Confirme la reserva");
-		
-		cancelButton = new Button("Cancelar", e -> notification.close());
-
-		confirmButton = new Button("Confirmar"); 
-		confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
-		notification.add(label, cancelButton, confirmButton);
-
-		label.getStyle().set("margin-right", "0.5rem");
-		cancelButton.getStyle().set("margin-right", "0.5rem");
 
 		reservaButton = new Button("Reservar");
 		reservaButton.addClickListener(event -> {
-			notification.open();
+			reservarServicio();
 		});
 		
 		reservaButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		
-		servicioLleno = new Notification();
-		Label labelLleno = new Label("No hay hueco para esos participantes.");
-		Button llenoButton = new Button("Aceptar", e -> servicioLleno.close());
-		
-		servicioLleno.add(labelLleno,llenoButton);
-		
 		
 		dialog.add(sNombre, sDescripcion, sTipo, sImagenImage,
 				descuentosField, descuentos1Field, descuentos2Field, 
@@ -150,7 +128,9 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		            sTipo.setText(String.valueOf(event.getItem().getsTipo()));
 		            sImagenImage.setSrc(event.getItem().getsImagen());
 		            
-		            if(String.valueOf(event.getItem().getsTipo())!="Tienda") {
+		            servicio = event.getItem();
+		            
+		            if(String.valueOf(servicio.getsTipo())!="Tienda") {
 		            	descuentosField.setVisible(true);
 		            	descuentos1Field.setVisible(true);
 		            	descuentos2Field.setVisible(true);
@@ -161,20 +141,7 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 			    		participantesField.setHasControls(true);
 			    		participantesField.setMin(1);
 			    		participantesField.setMax(event.getItem().getsAforoMaximo());
-		    				            
-			            confirmButton.addClickListener(e -> {
-			            	Servicio servicio = event.getItem();
-			            	
-			            	if(servicio.AforoHuecoLibre(participantesField.getValue().intValue())) {
-			            		Usuario user = buscarUsuarioLogin();
-			            		servicioService.addServicioToUsuario(servicio, user, participantesField.getValue().intValue());
-			            		notification.close();
-			            	}else {
-			            		servicioLleno.open();
-			            		notification.close();
-			            	}
-			            	
-			            });
+		    			
 		            }else {
 		            	descuentosField.setVisible(false);
 		            	descuentos1Field.setVisible(false);
@@ -182,6 +149,7 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 		            	participantesField.setVisible(false);
 			            reservaButton.setVisible(false);
 		            }
+		            
 		    		dialog.open();
 		    		
 		        });
@@ -225,6 +193,50 @@ public class ServiciosView extends VerticalLayout implements BeforeEnterObserver
 			dataProvider.addFilter(servicio -> 
 				sTipoComboBox.getValue() == servicio.getsTipo());
 		}
+	}
+	
+	private void reservarServicio() {
+		
+		//Cuadro Confirmacion
+		ConfirmDialog dialogConfirmable = new ConfirmDialog();
+		dialogConfirmable.setHeader("Realizar reserva");
+		dialogConfirmable.setText("¿Desea confirmar la reserva?");
+		
+		//Boton cancelar ventana confirmacion
+		Button cancelButton = new Button("Cancelar", e -> {
+			dialogConfirmable.close();
+			dialog.close();
+		});
+		
+		//Boton confirmar ventana confirmacion
+		Button confirmButton = new Button("Confirmar"); 
+		confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		confirmButton.addClickListener(e -> {
+        	int participantes = participantesField.getValue().intValue();
+        	if(servicio.AforoHuecoLibre(participantes)) {
+        		servicioService.addServicioToUsuario(servicio, usuario, participantes);
+        	}else {
+        		servicioLlenoNotificacion();
+        	}
+        	dialogConfirmable.close();
+        	dialog.close();
+        });
+		
+		dialogConfirmable.setConfirmButton(confirmButton);
+		dialogConfirmable.setCancelButton(cancelButton);
+		dialogConfirmable.open();
+	}
+	
+	private void servicioLlenoNotificacion() {
+		Dialog servicioLleno = new Dialog();
+		
+		Label labelLleno = new Label("No hay hueco para esos participantes. Aforo disponible: " + servicio.AforoDisponible());
+		Button llenoButton = new Button("Entendido", e -> servicioLleno.close());
+		llenoButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+		servicioLleno.add(labelLleno,llenoButton);
+		servicioLleno.open();
 	}
 	
 	public Usuario buscarUsuarioLogin() {

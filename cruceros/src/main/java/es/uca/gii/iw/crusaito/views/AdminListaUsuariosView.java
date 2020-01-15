@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.vaadin.crudui.crud.CrudOperation;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.form.impl.form.factory.DefaultCrudFormFactory;
 
@@ -52,9 +53,11 @@ public class AdminListaUsuariosView extends VerticalLayout implements BeforeEnte
 		DefaultCrudFormFactory<Usuario> formFactory = new DefaultCrudFormFactory<>(Usuario.class);
 		
 		formFactory.setUseBeanValidation(true);
-		formFactory.setVisibleProperties("firstName","lastName","email",
+		formFactory.setVisibleProperties(CrudOperation.ADD,"firstName","lastName","email",
 				"username","password","dni","phoneNumber","bornDate","address","city","role","crucero","enabled");
-		
+		formFactory.setVisibleProperties(CrudOperation.UPDATE,"firstName","lastName","email",
+				"username","password","dni","phoneNumber","bornDate","address","city","role","crucero","enabled","pEncoded");
+
 		formFactory.setFieldProvider("role", () -> {
 		    ComboBox<Rol> combobox = new ComboBox<>("Rol", this.rolService.findAll());
 		    combobox.setAllowCustomValue(false);
@@ -81,6 +84,9 @@ public class AdminListaUsuariosView extends VerticalLayout implements BeforeEnte
 		crud.setAddOperation(this.usuarioService::save);
 		crud.setUpdateOperation(this.usuarioService::save);
 		crud.setDeleteOperation(this.usuarioService::delete);
+		
+		crud.setSizeFull();
+		this.setSizeFull();
 		
 		add(crud);
 	}

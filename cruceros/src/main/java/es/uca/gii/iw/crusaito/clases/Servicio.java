@@ -155,6 +155,10 @@ public class Servicio {
 		this.sTipo = sTipo;
 	}
 
+	public int AforoDisponible() {
+		int res = ((int)(this.sAforoMaximo*0.70))-this.sAforoActual;
+		return res;
+	}
 	public int getsAforoActual() {
 		return sAforoActual;
 	}

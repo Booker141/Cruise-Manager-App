@@ -45,6 +45,9 @@ public class AdminListaBarcosView extends VerticalLayout implements BeforeEnterO
 		crud.setUpdateOperation(this.barcoService::save);
 		crud.setDeleteOperation(this.barcoService::delete);
 		
+		crud.setSizeFull();
+		this.setSizeFull();
+		
 		add(crud);
 	}
 	
