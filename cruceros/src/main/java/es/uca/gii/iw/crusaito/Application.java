@@ -64,15 +64,15 @@ public class Application extends SpringBootServletInitializer {
              */
         	
             userService.save(new Usuario("Jack", "Bauer","cliente@gmail.com","cliente","cliente","12345678Y",
-            		123456789,LocalDate.of(1950, 10, 11),"Carranza","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1950, 10, 11),"Calle Sagasta","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Ben", "Smith","cliente2@gmail.com","cliente2","cliente2","12345638B",
-            		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1983, 5, 6),"Calle Tolosa Latour","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Harry", "Smith","cliente3@gmail.com","cliente3","cliente3","12345638B",
-            		123456789,LocalDate.now(),"Chiclana","Cadiz",rolRepository.findByName("Cliente")));
+            		123456789,LocalDate.of(1980, 3, 10),"Calle Santa María de la Cabeza","Cadiz",rolRepository.findByName("Cliente")));
             userService.save(new Usuario("Chloe", "O'Brian","admin@gmail.com","admin","admin","12348678A",
-            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Admin")));
+            		123456789,LocalDate.of(1979, 9, 7),"Avenida Andalucía","Cadiz",rolRepository.findByName("Admin")));
             userService.save(new Usuario("Bill", "Harrinson","gerente@gmail.com","gerente","gerente","12365678G",
-            		123456789,LocalDate.now(),"Carranza","Cadiz",rolRepository.findByName("Gerente")));
+            		123456789,LocalDate.of(1964, 1, 4),"Calle Brasil","Cadiz",rolRepository.findByName("Gerente")));
           
             /**
              * Generamos ciudades de ejemplo
@@ -378,11 +378,11 @@ public class Application extends SpringBootServletInitializer {
             		+ "y emblemáticas que viven a orillas del Báltico, "
             		+ "un mar lleno de historia donde se encuentran las mayores reservas de ámbar "
             		+ "del mundo y que comunica con el mar del Norte y el océano Atlántico.", 2150));
-            cruceroService.save(new Crucero("Adriático","El Pireo","El Pireo","8 días", "A bordo de tu crucero Crusaito, tendrás la oportunidad de disfrutar del "
+            cruceroService.save(new Crucero("Adriático","Dubrovnik","Dubrovnik","8 días", "A bordo de tu crucero Crusaito, tendrás la oportunidad de disfrutar del "
             		+ "increíble color azul turquesa de las aguas del mar Adriático y un clima "
             		+ "inmejorable que hará que te plantees quedarte a vivir en sus costas para "
             		+ "toda la vida.", 3400));
-            cruceroService.save(new Crucero("Fiordos noruegos","Copenhague","Trondheim","8 días", "Viajar a otro mundo sin salir de Europa es completamente posible. "
+            cruceroService.save(new Crucero("Fiordos noruegos","Trondheim","Trondheim","8 días", "Viajar a otro mundo sin salir de Europa es completamente posible. "
             		+ "Si te aventuras a embarcar en alguno de nuestros cruceros por los impresionantes "
             		+ "Fiordos Noruegos, serás testigo de primera mano de las espectaculares montañas "
             		+ "que los rodean y disfrutarás de las singulares excursiones que cada ciudad te "

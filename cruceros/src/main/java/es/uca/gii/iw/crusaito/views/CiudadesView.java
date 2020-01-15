@@ -113,7 +113,7 @@ public class CiudadesView extends VerticalLayout implements BeforeEnterObserver{
 		
 		grid.addItemClickListener(event -> {
 			
-			cNombreDiv.add("Nombre: " + event.getItem().getCiudad().getcNombre());
+			cNombreDiv.setText("Nombre: " + event.getItem().getCiudad().getcNombre());
 			cCruceroDiv.setText("Crucero: " + event.getItem().getCrucero());
 			cFechaLlegadaDiv.setText("Fecha llegada: " + event.getItem().getFechaLlegada());
 			cHoraLlegadaDiv.setText("Hora llegada: " + event.getItem().getHoraLlegada() + ":00");
