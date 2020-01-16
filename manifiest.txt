@@ -1,1 +1,0 @@
-Main-Class: cruceros.target.classes.es.uca.gii.iw.crusaito.Application

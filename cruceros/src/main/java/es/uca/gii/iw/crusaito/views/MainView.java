@@ -47,7 +47,7 @@ public class MainView extends AppLayout implements BeforeEnterObserver {
 		/**
 		 * Añade logo a la página
 		 */
-		Image logo = new Image("frontend/img/logo2.png", "logoweb");
+		Image logo = new Image("/img/logo2.png", "logoweb");
 		logo.setHeight("44px");
 
 		if (SecurityUtils.isUserLoggedIn()) {
