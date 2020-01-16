@@ -1,4 +1,4 @@
-package es.uca.gii.iw.crusaito.views;
+/*package es.uca.gii.iw.crusaito.views;
 
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Paragraph;
@@ -125,4 +125,4 @@ public class SubirArchivoView extends VerticalLayout{
         outputContainer.add(p);
         outputContainer.add(content);
     }
-}
+}*/
