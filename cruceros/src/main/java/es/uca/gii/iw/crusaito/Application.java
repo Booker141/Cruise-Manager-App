@@ -319,42 +319,42 @@ public class Application extends SpringBootServletInitializer {
              */
             
          
-            Barco antia =barcoRepo.save(new Barco("Antia","frontend/img/crucero1.jpg",1520,150,3200,LocalDate.now(),"Este barco, que fue remodelado en el año 2012, ofrece la posibilidad de viajar a un total "
+            Barco antia =barcoRepo.save(new Barco("Antia","/img/crucero1.jpg",1520,150,3200,LocalDate.now(),"Este barco, que fue remodelado en el año 2012, ofrece la posibilidad de viajar a un total "
             		+ "de 1520 pasajeros. Cuenta con 9 cubiertas, entre las que se distribuyen agradables"
             		+ " zonas de restauración, con restaurantes variados, buffets, bares y cafés. "
             		+ "Su oferta de ocio se completa con un gran teatro y un completo casino. "
             		+ "Para el descanso y el deporte también dispone de spa, piscinas, centro "
-            		+ "de belleza y gimnasio, pudiendo completar cada jornada con compras en sus tiendas duty free.", "frontend/img/plano1.jpg"));
-            Barco titanic =barcoRepo.save(new Barco("Titanic","frontend/img/titanic.jpg",1000,100,2150,LocalDate.now(),"Con una capacidad total para 1000 pasajeros, este barco es el más grande "
+            		+ "de belleza y gimnasio, pudiendo completar cada jornada con compras en sus tiendas duty free.", "/img/plano1.jpg"));
+            Barco titanic =barcoRepo.save(new Barco("Titanic","/img/titanic.jpg",1000,100,2150,LocalDate.now(),"Con una capacidad total para 1000 pasajeros, este barco es el más grande "
             		+ "de los tres que navegan con Crusaito. Cuenta con todo tipo de "
             		+ "instalaciones, repartidas a lo largo de 12 cubiertas, entre las que destacan "
             		+ "restaurantes buffet y a la carta para disfrutar de una agradable velada, bares, "
             		+ "un completo y moderno casino, salón de espectáculos, salón de juegos, gimnasio, "
-            		+ "spa y un amplio salón de belleza.", "frontend/img/plano2.jpg"));
-            Barco neptuno = barcoRepo.save(new Barco("Neptuno","frontend/img/neptuno.jpg",1530,150,3400,LocalDate.now(),"Este barco con capacidad para 1530 pasajeros, "
+            		+ "spa y un amplio salón de belleza.", "/img/plano2.jpg"));
+            Barco neptuno = barcoRepo.save(new Barco("Neptuno","/img/neptuno.jpg",1530,150,3400,LocalDate.now(),"Este barco con capacidad para 1530 pasajeros, "
             		+ "fue remodelado en el año 2014. Cuenta con 12 cubiertas, así como multitud de "
             		+ "instalaciones y ofertas de ocio para disfrutar de una diversión plena a bordo: grandes salones, "
             		+ "bares, restaurantes, casino y zona de juegos, teatro para la representación de espectáculos, "
-            		+ "solarium, biblioteca, discoteca, rocódromo, pista de pádel, spa, gimnasio y salón de belleza.", "frontend/img/plano3.jpg"));
-            Barco poseidon =barcoRepo.save(new Barco("Poseidón","frontend/img/poseidon.jpg",1600,140,2010,LocalDate.now(),"Con una capacidad total para 1600 pasajeros, "
+            		+ "solarium, biblioteca, discoteca, rocódromo, pista de pádel, spa, gimnasio y salón de belleza.", "/img/plano3.jpg"));
+            Barco poseidon =barcoRepo.save(new Barco("Poseidón","/img/poseidon.jpg",1600,140,2010,LocalDate.now(),"Con una capacidad total para 1600 pasajeros, "
             		+ "este barco es el más grande de los tres que navegan con Crusaito. "
             		+ "Cuenta con todo tipo de instalaciones, repartidas a lo largo de 17 cubiertas, "
             		+ "entre las que destacan restaurantes buffet y a la carta para disfrutar de una agradable velada, "
             		+ "bares, un completo y moderno casino, salón de espectáculos, salón de juegos, gimnasio, "
-            		+ "spa y un amplio salón de belleza.", "frontend/img/plano4.jpg"));
-            Barco siren =barcoRepo.save(new Barco("Siren","frontend/img/siren.jpg",1700,170,3100,LocalDate.now(),"Este barco, que fue remodelado en el año 2010, "
+            		+ "spa y un amplio salón de belleza.", "/img/plano4.jpg"));
+            Barco siren =barcoRepo.save(new Barco("Siren","/img/siren.jpg",1700,170,3100,LocalDate.now(),"Este barco, que fue remodelado en el año 2010, "
             		+ "ofrece la posibilidad de viajar a un total de 1700 pasajeros. "
             		+ "Cuenta con 10 cubiertas, entre las que se distribuyen agradables zonas de "
             		+ "restauración, con restaurantes variados, buffets, bares y cafés. "
             		+ "Su oferta de ocio se completa con un gran teatro y un completo casino. "
             		+ "Para el descanso y el deporte también dispone de spa, piscinas, centro de belleza y gimnasio, "
-            		+ "pudiendo completar cada jornada con compras en sus tiendas duty free.", "frontend/img/plano5.jpg"));
-            Barco spirit =barcoRepo.save(new Barco("Spirit","frontend/img/spirit.jpg",1440,150,3200,LocalDate.now(),"Este barco con capacidad para 1440 pasajeros, "
+            		+ "pudiendo completar cada jornada con compras en sus tiendas duty free.", "/img/plano5.jpg"));
+            Barco spirit =barcoRepo.save(new Barco("Spirit","/img/spirit.jpg",1440,150,3200,LocalDate.now(),"Este barco con capacidad para 1440 pasajeros, "
             		+ "fue remodelado en el año 2009. Cuenta con 13 cubiertas, así como multitud de "
             		+ "instalaciones y ofertas de ocio para disfrutar de una diversión plena a bordo: "
             		+ "grandes salones, bares, restaurantes, casino y zona de juegos, teatro para la "
             		+ "representación de espectáculos, solarium, biblioteca, discoteca, rocódromo, "
-            		+ "pista de pádel, spa, gimnasio y salón de belleza.", "frontend/img/plano6.jpg"));
+            		+ "pista de pádel, spa, gimnasio y salón de belleza.", "/img/plano6.jpg"));
             
             /**
              * Cruceros ejemplo
@@ -801,17 +801,17 @@ public class Application extends SpringBootServletInitializer {
              * Definición de los servicios
              */
             
-            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "frontend/img/restaurante.jpg", 0,70, LocalDate.now() );
-            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "frontend/img/Buffet.jpg", 0,50, LocalDate.now() );
-            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "frontend/img/wok.jpg", 0,65, LocalDate.now() );
-            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "frontend/img/Luxury.jpg", 0,50, LocalDate.now() );
+            Servicio elFaro = new Servicio("El faro", "Mariscadas a lo grande", 30, ServicioTipo.Restaurante, "/img/restaurante.jpg", 0,70, LocalDate.now() );
+            Servicio buffet = new Servicio("Buffet libre", "Acceso a todo tipo de comidas", 7, ServicioTipo.Restaurante, "/img/Buffet.jpg", 0,50, LocalDate.now() );
+            Servicio wok = new Servicio("Wok menu", "Disfruta de la pasión argentina", 15, ServicioTipo.Restaurante, "/img/wok.jpg", 0,65, LocalDate.now() );
+            Servicio luxury = new Servicio("Luxury", "Para los paladares más exquisitos", 100, ServicioTipo.Restaurante, "/img/Luxury.jpg", 0,50, LocalDate.now() );
             
-            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro. Comienzo de la excursión: 12:00", 40, ServicioTipo.Excursion, 2,"frontend/img/islasgriegas.jpg", 30, LocalDate.now());
-            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal. Comienzo de la excursión: 15:30", 20, ServicioTipo.Excursion, 1,"frontend/img/museo.jpg", 30, LocalDate.now());
-            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego. Comienzo de la excursión: 9:00", 30, ServicioTipo.Excursion, 0,"frontend/img/templo.jpg", 30, LocalDate.now());
-            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María. Comienzo de la excursión: 12:30", 55, ServicioTipo.Excursion, 0,"frontend/img/iglesia.jpg", 30, LocalDate.now());
-            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian. Comienzo de la excursión: 17:00", 40, ServicioTipo.Excursion, 3,"frontend/img/cafe.jpg", 30, LocalDate.now());
-            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia. Comienzo de la excursión: 13:00", 40, ServicioTipo.Excursion, 0,"frontend/img/sagrada.jpg", 30, LocalDate.now());
+            Servicio excursion1 = new Servicio("Visita al faro", "Visita guiada al faro. Comienzo de la excursión: 12:00", 40, ServicioTipo.Excursion, 2,"/img/islasgriegas.jpg", 30, LocalDate.now());
+            Servicio excursion2 = new Servicio("Visita al Museo Municipal", "Visita guiada al Museo Municipal. Comienzo de la excursión: 15:30", 20, ServicioTipo.Excursion, 1,"/img/museo.jpg", 30, LocalDate.now());
+            Servicio excursion3 = new Servicio("Visita al templo griego", "Visita guiada al templo griego. Comienzo de la excursión: 9:00", 30, ServicioTipo.Excursion, 0,"/img/templo.jpg", 30, LocalDate.now());
+            Servicio excursion4 = new Servicio("Visita a la Iglesia de Santa María", "Visita guiada a la Iglesia de Santa María. Comienzo de la excursión: 12:30", 55, ServicioTipo.Excursion, 0,"/img/iglesia.jpg", 30, LocalDate.now());
+            Servicio excursion5 = new Servicio("Visita El Florian", "Visita guiada a El Florian. Comienzo de la excursión: 17:00", 40, ServicioTipo.Excursion, 3,"/img/cafe.jpg", 30, LocalDate.now());
+            Servicio excursion6 = new Servicio("Visita Sagrada Familia", "Visita guiada al La Sagrada Familia. Comienzo de la excursión: 13:00", 40, ServicioTipo.Excursion, 0,"/img/sagrada.jpg", 30, LocalDate.now());
             
             excursion1.setCiudad(cadiz);
             cadiz.getServicios().add(excursion1);
@@ -838,15 +838,15 @@ public class Application extends SpringBootServletInitializer {
             servicioService.save(excursion6);
             
             
-            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Otro, "frontend/img/spa.jpg", 0,25, LocalDate.now() );
-            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Otro, "frontend/img/golf.jpg", 0,35, LocalDate.now() );
-            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Otro, "frontend/img/padel.jpg", 0,40, LocalDate.now() );
-            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Otro, "frontend/img/ping-pong.jpg", 1,30, LocalDate.now() );
+            Servicio spa = new Servicio("Spa fit", "Disfruta de todas las comodidades", 60, ServicioTipo.Otro, "/img/spa.jpg", 0,25, LocalDate.now() );
+            Servicio golf = new Servicio("Golf&Cut", "Practica el golf en medio del océano", 40, ServicioTipo.Otro, "/img/golf.jpg", 0,35, LocalDate.now() );
+            Servicio padel = new Servicio("Pista padel", "Practica el padel en medio del océano", 20, ServicioTipo.Otro, "/img/padel.jpg", 0,40, LocalDate.now() );
+            Servicio ping = new Servicio("Ping-pong", "Practica ping-pong en medio del océano", 15, ServicioTipo.Otro, "/img/ping-pong.jpg", 1,30, LocalDate.now() );
             
-            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "frontend/img/regalos.jpg", 0,20, LocalDate.now() );
-            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "frontend/img/temptempie.jpg", 0,25, LocalDate.now() );
-            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "frontend/img/profumeria.jpg", 0,25, LocalDate.now() );
-            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "frontend/img/joyeria.jpg", 0,30, LocalDate.now() );
+            Servicio regalo = new Servicio("Tienda de regalos", "Compra regalos y recuerdos a tus seres queridos", 0, ServicioTipo.Tienda, "/img/regalos.jpg", 0,20, LocalDate.now() );
+            Servicio temptempie = new Servicio("Carnival cherry", "Dulces que no encontrarás en otras partes", 0, ServicioTipo.Tienda, "/img/temptempie.jpg", 0,25, LocalDate.now() );
+            Servicio profumeria = new Servicio("La Profumería", "Descubre aromas que te sorprenderán", 0, ServicioTipo.Tienda, "/img/profumeria.jpg", 0,25, LocalDate.now() );
+            Servicio joyeria = new Servicio("Joyería cash", "Experto en piedras preciosas", 0, ServicioTipo.Tienda, "/img/joyeria.jpg", 0,30, LocalDate.now() );
          
             
             servicioService.save(elFaro);

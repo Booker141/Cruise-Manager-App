@@ -58,7 +58,7 @@ public class SubirArchivoView extends VerticalLayout{
                 byte[] buf = new byte[(int)event.getContentLength()];
                 InputStream is = buffer.getInputStream(event.getFileName());
                 is.read(buf);
-                File targetFile = new File("src/main/webapp/frontend/img/"+event.getFileName());
+                File targetFile = new File("src/main/resources/META-INF/resources/img/"+event.getFileName());
                 OutputStream outStream = new FileOutputStream(targetFile);
                 outStream.write(buf);
                 outStream.flush();
