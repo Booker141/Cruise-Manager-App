@@ -166,7 +166,7 @@
 		<dependency>
 			<groupId>org.webjars.bowergithub.vaadin</groupId>
 			<artifactId>vaadin-combo-box</artifactId>
-			<version>[4.2.7, 5)</version>
+			<version>5.4.12</version>
 		</dependency>
 	</dependencies>
 
