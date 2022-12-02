@@ -3,7 +3,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@polymer/polymer": "3.2.0",
-    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "@webcomponents/webcomponentsjs": "^2.7.0",
     "@vaadin/flow-deps": "./target/frontend"
   },
   "devDependencies": {
