@@ -1,4 +1,4 @@
-# iw2019-2020-Crusaito
+# Ingeniería Web 2019-2020
 Proyecto Ingeniería Web sobre cruceros de lujo.
 
 Componentes del grupo:
